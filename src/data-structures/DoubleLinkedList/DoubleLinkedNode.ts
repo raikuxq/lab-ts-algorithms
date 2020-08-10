@@ -1,19 +1,24 @@
-import AbstractNode from "./AbstractNode";
-
-export default class DoubleLinkedNode<T> extends AbstractNode<T> {
+export default class DoubleLinkedNode<T> {
   protected _prev: DoubleLinkedNode<T> | null;
   protected _next: DoubleLinkedNode<T> | null;
-  protected _data: T | null;
+  protected _data: T;
 
   public constructor(
-    data: T | null = null,
+    data: T,
     next: DoubleLinkedNode<T> | null = null,
     prev: DoubleLinkedNode<T> | null = null
   ) {
-    super();
     this._data = data;
     this._next = next;
     this._prev = prev;
+  }
+
+  public get data(): T{
+    return this._data;
+  }
+
+  public set data(value: T) {
+    this._data = value;
   }
 
   public get prev(): DoubleLinkedNode<T> | null {
