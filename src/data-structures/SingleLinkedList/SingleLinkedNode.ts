@@ -1,16 +1,21 @@
-import AbstractNode from "./AbstractNode";
-
-export default class SingleLinkedNode<T> extends AbstractNode<T> {
+export default class SingleLinkedNode<T> {
+  protected _data: T;
   protected _next: SingleLinkedNode<T> | null;
-  protected _data: T | null;
 
   public constructor(
-    data: T | null = null,
+    data: T,
     next: SingleLinkedNode<T> | null = null
   ) {
-    super();
     this._data = data;
     this._next = next;
+  }
+
+  public get data(): T {
+    return this._data;
+  }
+
+  public set data(value: T) {
+    this._data = value;
   }
 
   public get next(): SingleLinkedNode<T> | null {
