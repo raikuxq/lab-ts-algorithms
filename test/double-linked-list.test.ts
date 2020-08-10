@@ -1,79 +1,115 @@
-import DoubleLinkedList from "../src/data-structures/DoubleLinkedList";
+import DoubleLinkedList from "../src/data-structures/DoubleLinkedList/DoubleLinkedList";
+import ILinkedList from "../src/data-structures/ILinkedList";
+import IDoubleLinkedList from "../src/data-structures/DoubleLinkedList/IDoubleLinkedList";
 
+describe('Double linked list: addition', () => {
+  const list: ILinkedList<number> = new DoubleLinkedList<number>();
 
-test('Double linked list: should correct add elements', () => {
-  const testArr = [5,10,15,20,25];
+  it('should add elements from array', () => {
+    const arr = [1, 2];
+    list.pushFromArray(arr);
+    expect(list.getAsArray()).toEqual(arr);
+  });
 
-  const list = new DoubleLinkedList<number>();
-  list.createFromArray(testArr);
-  const listData = list.getAsArray();
+  it('should push to list end', () => {
+    list.push(3);
+    expect(list.getAsArray()).toEqual([1, 2, 3]);
+  });
 
-  expect(listData).toEqual(testArr);
+  it('should push to list start', () => {
+    list.unshift(0);
+    expect(list.getAsArray()).toEqual([0, 1, 2, 3]);
+  });
+
 });
 
-test('Double linked list: should correct delete elements', () => {
-  const testArr = [5,10,15,20,25,15];
-  const testArrAfterDeletions = [5,10,20,25];
 
-  const list = new DoubleLinkedList<number>();
-  list.createFromArray(testArr);
-  list.deleteNodesByValue(15);
-  const listData = list.getAsArray();
+describe('Double linked list: accession', () => {
+  const emptyList: IDoubleLinkedList<number> = new DoubleLinkedList<number>();
+  const list: ILinkedList<number> = new DoubleLinkedList<number>();
+  list.pushFromArray([10, 20, 30, 40, 50]);
 
-  expect(listData).toEqual(testArrAfterDeletions);
+  it('should get first element', () => {
+    expect(list.peekTail()).toBe(10);
+  });
+
+  it('should get last element', () => {
+    expect(list.peekHead()).toBe(50);
+  });
+
+  it('should get element by index', () => {
+    expect(list.getByIndex(0)).toBe(10);
+    expect(list.getByIndex(2)).toBe(30);
+    expect(() => {
+      list.getByIndex(1000)
+    }).toThrow('Index exceed list length');
+  });
+
+  it('should get first element (empty)', () => {
+    expect(() => {
+      emptyList.peekTail();
+    }).toThrow('Tail does not exist');
+    expect(emptyList.tail).toBe(null);
+  });
+
+  it('should get last element (empty)', () => {
+    expect(() => {
+      emptyList.peekHead();
+    }).toThrow('Head does not exist');
+    expect(emptyList.head).toBe(null);
+  });
+
+  it('should get element by index (empty)', () => {
+    expect(() => {
+      emptyList.getByIndex(0)
+    }).toThrow('List is empty');
+  });
+
 });
 
-test('Double linked list: should unshift correctly', () => {
-  const testArr = [1,2,3,4,5];
-  const testArrAfterUnshift = [0,1,2,3,4,5];
 
-  const list = new DoubleLinkedList<number>();
+describe('Double linked list: deletions', () => {
+  const list: ILinkedList<number> = new DoubleLinkedList<number>();
+  list.pushFromArray([10, 40, 20, 30, 40, 50, 20, 30]);
 
-  list.createFromArray(testArr);
-  list.unshift(0);
+  it('should delete first element', () => {
+    const shifted = list.shift();
 
-  const listData = list.getAsArray();
+    expect(shifted).toBe(10);
+    expect(list.getAsArray()).toEqual([40, 20, 30, 40, 50, 20, 30]);
+  });
 
-  expect(listData).toEqual(testArrAfterUnshift);
+  it('should delete last element', () => {
+    const popped = list.pop();
+
+    expect(popped).toBe(30);
+    expect(list.getAsArray()).toEqual([40, 20, 30, 40, 50, 20]);
+  });
 });
 
-test('Double linked list: should shift correctly', () => {
-  const testArr = [1,2,3,4,5];
-  const testArrAfterShift = [2,3,4,5];
 
-  const list = new DoubleLinkedList<number>();
-  list.createFromArray(testArr);
+describe('Double linked list: iterator', () => {
+  const list: IDoubleLinkedList<number> = new DoubleLinkedList<number>();
+  const testArray: Array<number> = [10, 20, 30, 40, 50, 60, 70, 80, 90];
 
-  const shifted = list.shift();
-  const listData = list.getAsArray();
+  list.pushFromArray(testArray);
 
-  expect(shifted).toBe(1);
-  expect(listData).toEqual(testArrAfterShift);
-});
+  const iterator1 = list.iterator(0);
+  const iterator2 = list.iterator(5);
 
-test('Double linked list: should pop correctly', () => {
-  const testArr = [0,1,2,3,4,5];
-  const testArrAfterShift = [0,1,2,3,4];
+  it('should return element data at current position', () => {
+    expect(iterator1.current()).toBe(10);
+    expect(iterator2.current()).toBe(60);
+  });
 
-  const list = new DoubleLinkedList<number>();
-  list.createFromArray(testArr);
+  it('should iterate to next', () => {
+    expect(iterator1.next()).toBe(20);
+    expect(iterator2.next()).toBe(70);
+  });
 
-  const popped = list.pop();
-  const listData = list.getAsArray();
+  it('should iterate to prev', () => {
+    expect(iterator1.prev()).toBe(10);
+    expect(iterator2.prev()).toBe(60);
+  });
 
-  expect(popped).toBe(5);
-  expect(listData).toEqual(testArrAfterShift);
-});
-
-test('Double linked list: should peek head and tail correctly', () => {
-  const testArr = [0,1,2,3,4,5];
-
-  const list = new DoubleLinkedList<number>();
-  list.createFromArray(testArr);
-
-  const head = list.peekHead();
-  const tail = list.peekTail();
-
-  expect(head).toBe(5);
-  expect(tail).toBe(0);
 });
