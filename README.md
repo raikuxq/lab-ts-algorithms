@@ -14,3 +14,4 @@ Written in Node + TypeScript, tests in Jest.
 + [Single linked list](src/data-structures/SingleLinkedList)
 + [Double linked list](src/data-structures/DoubleLinkedList)
 + [Stack](src/data-structures/Stack/Stack.ts)
++ [Queue](src/data-structures/Queue/Queue.ts)
