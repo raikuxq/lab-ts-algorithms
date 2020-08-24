@@ -1,14 +1,24 @@
-import quickSort from "../src/divide-and-conquer/quick-sort";
+import quickSort from "../src/sorts/quick-sort";
 
-test('Quick sort: should sort correctly', () => {
-  expect(quickSort([1,2,3,4,5,0,-5])).toEqual([-5,0,1,2,3,4,5]);
-  expect(quickSort([6,1,5,2,3,5,8,9,0])).toEqual([0,1,2,3,5,5,6,8,9]);
-});
+describe('Quick sort', () => {
 
-test('Quick sort: should be correct with empty array', () => {
-  expect(quickSort([])).toEqual([]);
-});
+    test('with not sorted array', () => {
+        const notSortedArr = [7,4,0,1,-1,-2,-3,6,5,8,10,9,2,3];
+        const sortedArr = [-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10];
 
-test('Quick sort: should be correct with already sorted array', () => {
-  expect(quickSort([-10,-5,0,1,2,3,4,5])).toEqual([-10,-5,0,1,2,3,4,5]);
+        expect(quickSort(notSortedArr)).toEqual(sortedArr);
+    });
+
+    test('with empty array', () => {
+        const emptyArr: Array<number> = [];
+
+        expect(quickSort(emptyArr)).toEqual(emptyArr);
+    });
+
+    test('with already sorted array', () => {
+        const sortedArr = [1,2,3,4,5,6,7,8,9,10];
+
+        expect(quickSort(sortedArr)).toEqual(sortedArr);
+    });
+
 });

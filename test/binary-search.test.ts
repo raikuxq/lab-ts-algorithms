@@ -1,21 +1,25 @@
 import binarySearch from "../src/base/binary-search";
 
-test('Binary search: find in positive 100 elements', () => {
-  const arr: Array<number> = [];
+describe('Binary search', () => {
 
-  for (let i: number = 0; i < 100; i++) arr.push(i + 1);
+  test('find in positive 100 elements', () => {
+    const arr: Array<number> = [];
 
-  const index = binarySearch(arr, 97);
+    for (let i: number = 0; i < 100; i++) arr.push(i + 1);
 
-  expect(index).toBe(96);
-});
+    const index = binarySearch(arr, 97);
 
-test('Binary search: find in negative 100 elements', () => {
-  const arr: Array<number> = [];
+    expect(index).toBe(96);
+  });
 
-  for (let i: number = 0; i < 100; i++) arr.push(-100 + i - 1);
+  test('find in negative 100 elements', () => {
+    const arr: Array<number> = [];
 
-  const foundElement = binarySearch(arr, -97);
+    for (let i: number = 0; i < 100; i++) arr.push(-100 + i - 1);
 
-  expect(foundElement).toBe(4);
+    const foundElement = binarySearch(arr, -97);
+
+    expect(foundElement).toBe(4);
+  });
+
 });
