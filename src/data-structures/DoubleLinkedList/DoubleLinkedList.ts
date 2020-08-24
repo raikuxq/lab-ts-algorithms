@@ -1,5 +1,5 @@
 import DoubleLinkedNode from "./DoubleLinkedNode";
-import IDoubleLinkedList, {DoubleLinkedListIterator} from "./IDoubleLinkedList";
+import IDoubleLinkedList, {DoubleLinkedListIterator} from "../IDoubleLinkedList";
 
 export default class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
 
