@@ -25,7 +25,7 @@ describe('Stack', () => {
   test('when is empty', () => {
     const stack: IStack<number> = new Stack(10);
 
-    expect(() => stack.peek()).toThrow('Stack is empty');
+    expect(stack.peek()).toBeNull();
     expect(() => stack.pop()).toThrow('Stack is empty');
   });
 
