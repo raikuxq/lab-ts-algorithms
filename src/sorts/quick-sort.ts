@@ -10,8 +10,17 @@ export default function quickSort(arr: Array<number>): Array<number> {
   const middleIndex: number = Math.floor(arr.length / 2);
   const basisElement: number = arr[middleIndex];
 
-  const arrSmaller: Array<number> = arr.filter((i: number) => i <= basisElement);
-  const arrBigger: Array<number> = arr.filter((i: number) => i > basisElement);
+  const arrSmaller: Array<number> = arr.filter((item, index) => {
+    const isLower = item <= basisElement;
+    const isBasis = index === middleIndex;
+
+    return isLower && !isBasis;
+  });
+  const arrBigger: Array<number> = arr.filter((item, index) => {
+    const isHigher = item > basisElement;
+
+    return isHigher;
+  });
 
   return [...quickSort(arrSmaller), basisElement, ...quickSort(arrBigger)];
 }

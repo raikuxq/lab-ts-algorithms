@@ -1,14 +1,12 @@
-import {getMinIndex} from "../utils";
+import {swapArrayItems, getMinIndexFromIndex} from "../utils";
 
-export default function selectSort(elements: Array<number>): Array<number> {
+export default function selectSort(arr: Array<number>): Array<number> {
 
-  elements.forEach((elem, index) => {
-    const minIndex: number = getMinIndex(elements);
-    const minElement: number = elements[minIndex];
+  arr.forEach((item, index) => {
+    const minIndex: number = getMinIndexFromIndex(arr, index);
 
-    elements[minIndex] = elements[index];
-    elements[index] = minElement;
+    swapArrayItems<number>(arr, minIndex, index);
   });
 
-  return elements;
+  return arr;
 }
