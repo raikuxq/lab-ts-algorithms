@@ -7,6 +7,7 @@ Written in Node + TypeScript, tests in Jest.
 + [Factorial](src/base/factorial.ts)
 
 ## Sorts
++ [Bubble sort](src/sorts/bubble-sort.ts)
 + [Selection sort](src/sorts/select-sort.ts) 
 + [Quick sort](src/sorts/quick-sort.ts)
 
