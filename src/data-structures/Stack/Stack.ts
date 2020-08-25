@@ -3,7 +3,7 @@ import ILinkedList from "../ILinkedList";
 import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
 
 /**
- * FIFO data structure
+ * LIFO data structure
  */
 export default class Stack<T> implements IStack<T> {
 

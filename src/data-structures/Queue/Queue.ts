@@ -3,7 +3,7 @@ import ILinkedList from "../ILinkedList";
 import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
 
 /**
- * LIFO data structure
+ * FIFO data structure
  */
 export default class Queue<T> implements IQueue<T>{
 
