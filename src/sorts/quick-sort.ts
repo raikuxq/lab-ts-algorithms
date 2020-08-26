@@ -7,20 +7,11 @@ export default function quickSort(arr: Array<number>): Array<number> {
   /**
    * Recursive case
    */
-  const middleIndex: number = Math.floor(arr.length / 2);
-  const basisElement: number = arr[middleIndex];
+  const pivotIndex = Math.floor(arr.length / 2);
+  const pivot = arr[pivotIndex];
 
-  const arrSmaller: Array<number> = arr.filter((item, index) => {
-    const isLower = item <= basisElement;
-    const isBasis = index === middleIndex;
+  const arrLess = arr.filter((item, index) => item < pivot);
+  const arrGreater = arr.filter((item) => item > pivot);
 
-    return isLower && !isBasis;
-  });
-  const arrBigger: Array<number> = arr.filter((item, index) => {
-    const isHigher = item > basisElement;
-
-    return isHigher;
-  });
-
-  return [...quickSort(arrSmaller), basisElement, ...quickSort(arrBigger)];
+  return [...quickSort(arrLess), pivot, ...quickSort(arrGreater)];
 }
