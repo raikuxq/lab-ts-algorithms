@@ -1,5 +1,5 @@
-import IQueue from "../src/data-structures/IQueue";
-import Queue from "../src/data-structures/Queue/Queue";
+import IQueue from "../../IQueue";
+import Queue from "../Queue";
 
 describe('Queue', () => {
 

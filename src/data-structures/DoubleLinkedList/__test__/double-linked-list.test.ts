@@ -1,6 +1,6 @@
-import DoubleLinkedList from "../src/data-structures/DoubleLinkedList/DoubleLinkedList";
-import ILinkedList from "../src/data-structures/ILinkedList";
-import IDoubleLinkedList from "../src/data-structures/IDoubleLinkedList";
+import DoubleLinkedList from "../DoubleLinkedList";
+import ILinkedList from "../../ILinkedList";
+import IDoubleLinkedList from "../../IDoubleLinkedList";
 
 
 describe('Double linked list', () => {

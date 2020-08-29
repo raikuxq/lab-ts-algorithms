@@ -1,5 +1,5 @@
-import IStack from "../src/data-structures/IStack";
-import Stack from "../src/data-structures/Stack/Stack";
+import IStack from "../../IStack";
+import Stack from "../Stack";
 
 describe('Stack', () => {
 

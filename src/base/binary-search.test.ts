@@ -1,4 +1,4 @@
-import binarySearch from "../src/base/binary-search";
+import binarySearch from "./binary-search";
 
 describe('Binary search', () => {
 

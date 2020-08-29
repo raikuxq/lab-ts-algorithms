@@ -1,4 +1,4 @@
-import selectSort from "../src/sorts/select-sort";
+import selectSort from "./select-sort";
 
 describe('Selection sort', () => {
 

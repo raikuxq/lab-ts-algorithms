@@ -1,4 +1,4 @@
-import factorial from "../src/base/factorial";
+import factorial from "./factorial";
 
 test('Factorial: should calc factorial correctly', () => {
   expect(factorial(5)).toBe(120);

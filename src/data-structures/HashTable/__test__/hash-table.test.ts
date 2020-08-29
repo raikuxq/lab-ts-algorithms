@@ -1,5 +1,5 @@
-import IHashTable from "../src/data-structures/IHashTable";
-import HashTable from "../src/data-structures/HashTable/HashTable";
+import IHashTable from "../../IHashTable";
+import HashTable from "../HashTable";
 
 describe('Hash table', () => {
 
