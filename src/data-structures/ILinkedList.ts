@@ -16,4 +16,5 @@ export default interface ILinkedList<T> {
   // deletion
   pop(): T;
   shift(): T;
+  clear(): void;
 };

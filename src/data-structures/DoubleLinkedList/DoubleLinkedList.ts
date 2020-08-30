@@ -225,6 +225,16 @@ export default class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
 
 
   /**
+   * Clear list
+   */
+  public clear(): void {
+     this._head = null;
+     this._tail = null;
+     this._length = 0;
+  }
+
+
+  /**
    * List iterator
    *
    * @param {Number} fromIndex - where iterator starts
