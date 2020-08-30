@@ -30,17 +30,19 @@ export default class Queue<T> implements IQueue<T>{
   /**
    * Add element to queue
    */
-  public add(item: T) {
+  public enqueue(item: T) {
     this._list.unshift(item);
   }
 
   /**
    * Get and delete first element in queue
    */
-  public pop(): T {
-    if (this.isEmpty()) throw new Error('Queue is empty');
-
-    return this._list.pop();
+  public dequeue(): T | null {
+    try {
+      return this._list.pop()
+    } catch {
+      return null;
+    }
   }
 
   /**
@@ -50,5 +52,12 @@ export default class Queue<T> implements IQueue<T>{
     return this._list.isEmpty();
   }
 
+
+  /**
+   * Clear queue
+   */
+  public clear(): void {
+    this._list.clear();
+  }
 
 }

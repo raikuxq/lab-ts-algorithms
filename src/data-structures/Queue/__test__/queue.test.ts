@@ -6,9 +6,9 @@ describe('Queue', () => {
   test('simple addition by add method', () => {
     const queue: IQueue<number> = new Queue();
 
-    queue.add(10);
-    queue.add(20);
-    queue.add(30);
+    queue.enqueue(10);
+    queue.enqueue(20);
+    queue.enqueue(30);
 
     const head = queue.peek();
 
@@ -18,11 +18,11 @@ describe('Queue', () => {
   test('simple deletion by pop method', () => {
     const queue: IQueue<number> = new Queue();
 
-    queue.add(10);
-    queue.add(20);
-    queue.add(30);
+    queue.enqueue(10);
+    queue.enqueue(20);
+    queue.enqueue(30);
 
-    const deleted = queue.pop();
+    const deleted = queue.dequeue();
     const head = queue.peek();
 
     expect(deleted).toBe(10);
@@ -33,7 +33,7 @@ describe('Queue', () => {
     const queue: IQueue<number> = new Queue();
 
     expect(queue.peek()).toBeNull();
-    expect(() => queue.pop()).toThrow('Queue is empty');
+    expect(() => queue.dequeue()).toThrow('Queue is empty');
   });
 
 })
