@@ -3,7 +3,7 @@ import Queue from "../Queue";
 
 describe('Queue', () => {
 
-  test('simple addition by add method', () => {
+  test('enqueue', () => {
     const queue: IQueue<number> = new Queue();
 
     queue.enqueue(10);
@@ -15,7 +15,7 @@ describe('Queue', () => {
     expect(head).toBe(10);
   });
 
-  test('simple deletion by pop method', () => {
+  test('dequeue', () => {
     const queue: IQueue<number> = new Queue();
 
     queue.enqueue(10);
@@ -33,7 +33,7 @@ describe('Queue', () => {
     const queue: IQueue<number> = new Queue();
 
     expect(queue.peek()).toBeNull();
-    expect(() => queue.dequeue()).toThrow('Queue is empty');
+    expect(queue.dequeue()).toBeNull();
   });
 
 })
