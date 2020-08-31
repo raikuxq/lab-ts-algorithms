@@ -1,6 +1,4 @@
-import GraphVertex from "./Graph/GraphVertex";
-
-export interface IGraph<V> {
+export default interface IGraph<V> {
 
   addVertex(data: V): this;
   removeVertex(data: V): this;

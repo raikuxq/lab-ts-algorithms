@@ -1,4 +1,4 @@
-import {IGraph} from "../IGraph";
+import IGraph from "../IGraph";
 import GraphVertex from "./GraphVertex";
 import GraphEdge from "./GraphEdge";
 

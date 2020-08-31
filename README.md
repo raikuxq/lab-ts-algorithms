@@ -16,3 +16,4 @@ Written in Node + TypeScript, tests in Jest.
 + [Stack](src/data-structures/Stack/Stack.ts)
 + [Queue](src/data-structures/Queue/Queue.ts)
 + [Hash table](src/data-structures/HashTable/HashTable.ts)
++ [Graph](src/data-structures/Graph/Graph.ts)

@@ -1,4 +1,4 @@
-import {IGraph} from "../../IGraph";
+import IGraph from "../../IGraph";
 import Graph from "../Graph";
 
 describe('Graph', () => {
