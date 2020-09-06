@@ -20,3 +20,4 @@ Written in Node + TypeScript, tests in Jest.
 
 ## Graph algorithms
 + [Breadth first search](src/graph/has-path-by-bfs.ts)
++ [Depth first search](src/graph/has-path-by-dfs.ts)
