@@ -184,4 +184,20 @@ export default class Graph<V> implements IGraph<V> {
 
     return this;
   }
+
+
+  /**
+   * Get vertex neighbors by vertex value
+   * @param value
+   */
+  public getVertexNeighbors(value: V): Array<V> {
+    try {
+      const vertex = this.getVertexByValue(value);
+
+      return this._vertices.get(vertex)?.map((vertex: GraphVertex<V>) => vertex.data) || []
+
+    } catch (e) {
+      return [];
+    }
+  }
 }
