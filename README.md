@@ -17,3 +17,6 @@ Written in Node + TypeScript, tests in Jest.
 + [Queue](src/data-structures/Queue/Queue.ts)
 + [Hash table](src/data-structures/HashTable/HashTable.ts)
 + [Graph](src/data-structures/Graph/Graph.ts)
+
+## Graph algorithms
++ [Breadth first search](src/graph/has-path-by-bfs.ts)
