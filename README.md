@@ -12,7 +12,7 @@ Written in Node + TypeScript, tests in Jest.
 + [Quick sort](src/sorts/quick-sort.ts)
 
 ## Data structures
-+ [Double linked list](src/data-structures/DoubleLinkedList)
++ [Linked list](src/data-structures/DoubleLinkedList)
 + [Stack](src/data-structures/Stack/Stack.ts)
 + [Queue](src/data-structures/Queue/Queue.ts)
 + [Hash table](src/data-structures/HashTable/HashTable.ts)
