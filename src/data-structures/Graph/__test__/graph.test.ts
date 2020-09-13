@@ -104,4 +104,53 @@ describe('Graph', () => {
     expect(vertices).toEqual(expectedVertices);
   });
 
+
+  test('adjacency matrix view', () => {
+    const graph: IGraph<number> = new Graph<number>();
+
+    graph
+      .addVertex(1)
+      .addVertex(2)
+      .addVertex(3)
+      .addVertex(4)
+      .addEdge(1, 2)
+      .addEdge(1, 3)
+      .addEdge(3, 4)
+
+    const matrix = graph.getAdjacencyMatrix();
+
+    expect(matrix).toEqual([
+      [0, 1, 1, 0],
+      [1, 0, 0, 0],
+      [1, 0, 0, 1],
+      [0, 0, 1, 0]
+    ])
+  });
+
+
+  test('adjacency list view', () => {
+    const graph: IGraph<number> = new Graph<number>();
+
+    graph
+      .addVertex(1)
+      .addVertex(2)
+      .addVertex(3)
+      .addVertex(4)
+      .addEdge(1, 2)
+      .addEdge(1, 3)
+      .addEdge(3, 4)
+
+    const list = graph.getAdjacencyList();
+
+    const expectedList = new Map<number, Array<number>>();
+
+    expectedList
+      .set(1, [2, 3])
+      .set(2, [1])
+      .set(3, [1, 4])
+      .set(4, [3])
+
+    expect(list).toEqual(expectedList)
+  });
+
 });

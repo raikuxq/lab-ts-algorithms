@@ -200,4 +200,81 @@ export default class Graph<V> implements IGraph<V> {
       return [];
     }
   }
+
+
+  /**
+   * Graph has vertex by its value
+   * @param value
+   */
+  public hasVertex(value: V): boolean {
+    return this.vertices.includes(value);
+  }
+
+
+  /**
+   * Get graph adjacency list
+   */
+  public getAdjacencyList(): Map<V, Array<V>> {
+    const keys = this.getVerticesArrayFormat();
+    const map = new Map<V, Array<V>>();
+
+    keys.forEach((key) => {
+
+      const vertex = key.data;
+      const neighbors = this.getVertexNeighbors(vertex);
+
+      map.set(vertex, neighbors);
+    });
+
+    return map;
+  }
+
+
+  /**
+   * Get graph adjacency list
+   */
+  public getAdjacencyMatrix(): Array<Array<number>> {
+
+    const vertices = this.getVerticesArrayFormat();
+    const matrix = new Array(this.verticesCount);
+
+    /**
+     * Matrix creating
+     */
+    vertices.forEach((graphVertexRow, i) => {
+      matrix[i] = new Array(this.verticesCount);
+    });
+
+
+    /**
+     * Matrix filling
+     */
+    vertices.forEach((graphVertexRow, i) => {
+      vertices.forEach((graphVertexColumn, j) => {
+
+        const rowElement = graphVertexRow.data;
+        const columnElement = graphVertexColumn.data;
+
+        const rowElementNeighbors = this.getVertexNeighbors(rowElement);
+        const columnElementNeighbors = this.getVertexNeighbors(columnElement);
+
+        matrix[i][j] = 0;
+        matrix[j][i] = 0;
+
+        const isRowLinkedToColumn = rowElementNeighbors.includes(columnElement);
+        const isColumnLinkedToRow = columnElementNeighbors.includes(rowElement);
+
+        if (isRowLinkedToColumn) {
+          matrix[i][j] = 1;
+        }
+
+        if (isColumnLinkedToRow) {
+          matrix[j][i] = 1;
+        }
+
+      });
+    });
+
+    return matrix;
+  }
 }

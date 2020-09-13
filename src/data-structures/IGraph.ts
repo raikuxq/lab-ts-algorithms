@@ -12,4 +12,8 @@ export default interface IGraph<V> {
   removeEdge(from: V, to: V): this;
 
   getVertexNeighbors(value: V): Array<V>;
+  hasVertex(value: V): boolean;
+
+  getAdjacencyMatrix(): Array<Array<number>>;
+  getAdjacencyList(): Map<V, Array<V>>;
 }
