@@ -4,7 +4,7 @@ Written in Node + TypeScript, tests in Jest.
 
 ## Basic
 + [Binary search](src/base/binary-search.ts)
-+ [Factorial](src/base/factorial.ts)
++ [Factorial (+ memoized version)](src/base/factorial.ts)
 
 ## Sorts
 + [Bubble sort](src/sorts/bubble-sort.ts)
@@ -19,5 +19,7 @@ Written in Node + TypeScript, tests in Jest.
 + [Graph](src/data-structures/Graph/Graph.ts)
 
 ## Graph algorithms
-+ [Breadth first search](src/graph/has-path-by-bfs.ts)
-+ [Depth first search](src/graph/has-path-by-dfs.ts)
++ [Breadth first search Iterator](src/graph/iterator/GraphIteratorBFS.ts)
++ [Depth first search Iterator](src/graph/iterator/GraphIteratorDFS.ts)
++ [Has path (BFS/DFS)](src/graph/has-path.ts)
++ [Shortest path (BFS/DFS)](src/graph/shortest-path.ts)
