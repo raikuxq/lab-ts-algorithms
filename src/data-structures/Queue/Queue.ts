@@ -20,17 +20,13 @@ export default class Queue<T> implements IQueue<T>{
    * Get first element in queue (without deleting)
    */
   public peek(): T | null {
-    try {
-      return this._list.peekHead()
-    } catch {
-      return null;
-    }
+    return this.isEmpty() ? null : this._list.peekHead();
   }
 
   /**
    * Add element to queue
    */
-  public enqueue(item: T) {
+  public enqueue(item: T): void {
     this._list.unshift(item);
   }
 
@@ -38,11 +34,7 @@ export default class Queue<T> implements IQueue<T>{
    * Get and delete first element in queue
    */
   public dequeue(): T | null {
-    try {
-      return this._list.pop()
-    } catch {
-      return null;
-    }
+    return this.isEmpty() ? null : this._list.pop();
   }
 
   /**
