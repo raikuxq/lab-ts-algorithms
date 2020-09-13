@@ -1,15 +1,29 @@
 import IGraph from "../data-structures/IGraph";
-import Graph from "../data-structures/Graph/Graph";
-import hasPathByBFS from "./has-path-by-bfs";
+import IGraphIterationStrategy from "./strategy/IGraphIterationStrategy";
 
-describe('Breadth first search in graph', () => {
+import Graph from "../data-structures/Graph/Graph";
+import BFSIterationStrategy from "./strategy/BFSIterationStrategy";
+import DFSIterationStrategy from "./strategy/DFSIterationStrategy";
+
+import hasPath from "./has-path";
+
+describe.each(['BFS', 'DFS'])('search by %s method', (strategyType: string) => {
+
+  let strategy: IGraphIterationStrategy<string>;
+
+  switch (strategyType) {
+    case 'BFS': strategy = new BFSIterationStrategy(); break;
+    case 'DFS': strategy = new DFSIterationStrategy(); break;
+    default: throw new Error('Invalid search method');
+  }
 
   test('when graph is empty', () => {
     const graph: IGraph<string> = new Graph<string>();
 
-    const path = hasPathByBFS(graph, 'Asd', 'Qwe');
+    expect(() => {
+      const path = hasPath(graph, 'Asd', 'Qwe', strategy);
 
-    expect(path).toBeFalsy();
+    }).toThrow('Start vertex does not exist');
   });
 
   test('when graph is undirected', () => {
@@ -29,8 +43,8 @@ describe('Breadth first search in graph', () => {
       .addEdge('James', 'Aaron')
       .addEdge('James', 'Anna')
 
-    expect(hasPathByBFS(graph, 'Mike', 'Anna')).toBeTruthy();
-    expect(hasPathByBFS(graph, 'Mike', 'John')).toBeFalsy();
+    expect(hasPath(graph, 'Mike', 'Anna', strategy)).toBeTruthy();
+    expect(hasPath(graph, 'Mike', 'John', strategy)).toBeFalsy();
   })
 
   test('when graph is directed', () => {
@@ -50,10 +64,10 @@ describe('Breadth first search in graph', () => {
       .addEdge('James', 'Anna')
       .addEdge('Aaron', 'Anna')
 
-    expect(hasPathByBFS(graph, 'Mike', 'Anna')).toBeTruthy();
-    expect(hasPathByBFS(graph, 'Mike', 'Aaron')).toBeTruthy();
-    expect(hasPathByBFS(graph, 'Lisa', 'Bob')).toBeFalsy();
-    expect(hasPathByBFS(graph, 'Lisa', 'James')).toBeFalsy();
+    expect(hasPath(graph, 'Mike', 'Anna', strategy)).toBeTruthy();
+    expect(hasPath(graph, 'Mike', 'Aaron', strategy)).toBeTruthy();
+    expect(hasPath(graph, 'Lisa', 'Bob', strategy)).toBeFalsy();
+    expect(hasPath(graph, 'Lisa', 'James', strategy)).toBeFalsy();
   })
 
 });
