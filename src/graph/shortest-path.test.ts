@@ -7,7 +7,7 @@ import DFSIterationStrategy from "./strategy/DFSIterationStrategy";
 
 import shortestPath from "./shortest-path";
 
-describe.each(['BFS', 'DFS'])('search by %s method', (strategyType: string) => {
+describe.each(['BFS', 'DFS'])('shortest path searching by %s method', (strategyType: string) => {
 
   let strategy: IGraphIterationStrategy<string>;
 
@@ -34,7 +34,7 @@ describe.each(['BFS', 'DFS'])('search by %s method', (strategyType: string) => {
   });
 
   test('when graph is undirected', () => {
-    const graph: IGraph<string> = new Graph<string>(true);
+    const graph: IGraph<string> = new Graph<string>();
 
     graph
       .addVertex('Mike')
