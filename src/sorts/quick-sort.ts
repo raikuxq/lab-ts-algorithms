@@ -1,17 +1,44 @@
+import {swapArrayItems} from "../utils";
+
 export default function quickSort(arr: Array<number>): Array<number> {
-  /**
-   * Base case
-   */
-  if (arr.length <= 1) return arr;
 
-  /**
-   * Recursive case
-   */
-  const pivotIndex = Math.floor(arr.length / 2);
-  const pivot = arr[pivotIndex];
+  function partition (arr: Array<number>, lowIndex: number, highIndex: number): number {
 
-  const arrLess = arr.filter((item, index) => item < pivot);
-  const arrGreater = arr.filter((item) => item > pivot);
+    const pivot = arr[lowIndex];
 
-  return [...quickSort(arrLess), pivot, ...quickSort(arrGreater)];
+    let i = lowIndex;
+    let j = highIndex;
+
+    while (i <= j) {
+      while (arr[j] > pivot) {
+        j--;
+      }
+      while (arr[i] < pivot) {
+        i++;
+      }
+      if (i <= j) {
+        swapArrayItems(arr, i, j);
+        j--;
+        i++;
+      }
+    }
+
+    if (highIndex + 1 === i) {
+      return i - 1;
+    }
+
+    return i;
+  }
+
+  function sort (arr: Array<number>, lowIndex: number = 0, highIndex: number = arr.length - 1): Array<number> {
+    if (lowIndex < highIndex) {
+      const pivot = partition(arr, lowIndex, highIndex);
+
+      sort(arr, lowIndex, pivot - 1);
+      sort(arr, pivot, highIndex);
+    }
+    return arr;
+  }
+
+  return sort(arr);
 }
