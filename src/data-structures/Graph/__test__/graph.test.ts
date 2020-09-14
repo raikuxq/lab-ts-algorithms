@@ -3,7 +3,7 @@ import Graph from "../Graph";
 
 describe('Graph', () => {
 
-  test('when graph is empty', () => {
+  test('should throw when is empty', () => {
     const graph: IGraph<string> = new Graph<string>();
 
     expect(() => {
@@ -20,7 +20,7 @@ describe('Graph', () => {
   });
 
 
-  test('vertex addition', () => {
+  test('vertices addition', () => {
     const graph: IGraph<string> = new Graph<string>();
 
     graph
@@ -35,7 +35,7 @@ describe('Graph', () => {
   });
 
 
-  test('vertex deletion', () => {
+  test('vertices deletion', () => {
     const graph: IGraph<string> = new Graph<string>();
 
     graph
@@ -105,52 +105,128 @@ describe('Graph', () => {
   });
 
 
-  test('adjacency matrix view', () => {
-    const graph: IGraph<number> = new Graph<number>();
 
-    graph
-      .addVertex(1)
-      .addVertex(2)
-      .addVertex(3)
-      .addVertex(4)
-      .addEdge(1, 2)
-      .addEdge(1, 3)
-      .addEdge(3, 4)
+  describe('adjacency matrix', () => {
 
-    const matrix = graph.getAdjacencyMatrix();
+    test('when graph is empty', () => {
+      const graph: IGraph<number> = new Graph<number>();
 
-    expect(matrix).toEqual([
-      [0, 1, 1, 0],
-      [1, 0, 0, 0],
-      [1, 0, 0, 1],
-      [0, 0, 1, 0]
-    ])
+      const matrix = graph.getAdjacencyMatrix();
+
+      expect(matrix).toEqual([]);
+    });
+
+    test('when graph is undirected', () => {
+      const graph: IGraph<number> = new Graph<number>();
+
+      graph
+        .addVertex(1)
+        .addVertex(2)
+        .addVertex(3)
+        .addVertex(4)
+        .addEdge(1, 2)
+        .addEdge(1, 3)
+        .addEdge(3, 4)
+
+      const matrix = graph.getAdjacencyMatrix();
+
+      expect(matrix).toEqual([
+        [0, 1, 1, 0],
+        [1, 0, 0, 0],
+        [1, 0, 0, 1],
+        [0, 0, 1, 0]
+      ])
+    });
+
+    test('when graph is directed', () => {
+      const graph: IGraph<number> = new Graph<number>(true);
+
+      graph
+        .addVertex(1)
+        .addVertex(2)
+        .addVertex(3)
+        .addVertex(4)
+        .addEdge(1, 2)
+        .addEdge(1, 3)
+        .addEdge(3, 4)
+
+      const matrix = graph.getAdjacencyMatrix();
+
+      expect(matrix).toEqual([
+        [0, 1, 1, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 1],
+        [0, 0, 0, 0]
+      ])
+    });
+
   });
 
 
-  test('adjacency list view', () => {
-    const graph: IGraph<number> = new Graph<number>();
 
-    graph
-      .addVertex(1)
-      .addVertex(2)
-      .addVertex(3)
-      .addVertex(4)
-      .addEdge(1, 2)
-      .addEdge(1, 3)
-      .addEdge(3, 4)
+  describe('adjacency list', () => {
 
-    const list = graph.getAdjacencyList();
+    test('when graph is empty', () => {
+      const graph: IGraph<number> = new Graph<number>();
 
-    const expectedList = new Map<number, Array<number>>();
+      const emptyMap = new Map<number, number>();
+      const map = graph.getAdjacencyList();
 
-    expectedList
-      .set(1, [2, 3])
-      .set(2, [1])
-      .set(3, [1, 4])
-      .set(4, [3])
+      expect(map).toEqual(emptyMap);
+    });
 
-    expect(list).toEqual(expectedList)
+    test('when graph is undirected', () => {
+      const graph: IGraph<number> = new Graph<number>();
+
+      graph
+        .addVertex(1)
+        .addVertex(2)
+        .addVertex(3)
+        .addVertex(4)
+        .addEdge(1, 2)
+        .addEdge(1, 3)
+        .addEdge(3, 4)
+
+      const list = graph.getAdjacencyList();
+
+      const expectedList = new Map<number, Array<number>>();
+
+      expectedList
+        .set(1, [2, 3])
+        .set(2, [1])
+        .set(3, [1, 4])
+        .set(4, [3])
+
+      expect(list).toEqual(expectedList)
+    });
+
+    test('when graph is undirected', () => {
+      const graph: IGraph<number> = new Graph<number>(true);
+
+      graph
+        .addVertex(1)
+        .addVertex(2)
+        .addVertex(3)
+        .addVertex(4)
+        .addEdge(1, 2)
+        .addEdge(1, 3)
+        .addEdge(3, 4)
+
+      const list = graph.getAdjacencyList();
+
+      const expectedList = new Map<number, Array<number>>();
+
+      expectedList
+        .set(1, [2, 3])
+        .set(2, [])
+        .set(3, [4])
+        .set(4, [])
+
+      expect(list).toEqual(expectedList)
+    });
+
   });
+
+
 
 });
