@@ -5,6 +5,7 @@ Written in Node + TypeScript, tests in Jest.
 ## Basic
 + [Binary search](src/base/binary-search.ts)
 + [Factorial (+ memoized version)](src/base/factorial.ts)
++ [Fibonacci (+ memoized version)](src/base/fibonacci.ts)
 
 ## Sorts
 + [Bubble sort](src/sorts/bubble-sort.ts)
