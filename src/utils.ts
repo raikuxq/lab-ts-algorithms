@@ -17,15 +17,17 @@ export const swapArrayItems = <T>(arr: Array<T>, leftIndex: number, rightIndex: 
 }
 
 export function memoize<Key , Value> (fn: Function): Function {
-  const cache = new Map<Array<Key>, Value>();
+  const cache = new Map<string, Value>();
 
   return function (...args: Array<Key>) {
-    if (cache.has(args)) {
-      return cache.get(args);
+    const jsonArgs = JSON.stringify(args);
+
+    if (cache.has(jsonArgs)) {
+      return cache.get(jsonArgs);
     }
 
-    const result = fn(args);
-    cache.set(args, result);
+    const result = fn(...args);
+    cache.set(jsonArgs, result);
     return result;
   }
 }
