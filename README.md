@@ -9,7 +9,8 @@ Written in Node + TypeScript, tests in Jest.
 
 ## Sorts
 + [Bubble sort](src/sorts/bubble-sort.ts)
-+ [Selection sort](src/sorts/select-sort.ts) 
++ [Selection sort](src/sorts/select-sort.ts)
++ [Insertion sort](src/sorts/insertion-sort.ts) 
 + [Quick sort](src/sorts/quick-sort.ts)
 
 ## Data structures
