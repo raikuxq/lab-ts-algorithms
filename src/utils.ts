@@ -15,3 +15,17 @@ export const swapArrayItems = <T>(arr: Array<T>, leftIndex: number, rightIndex: 
     arr[rightIndex] = temp;
   }
 }
+
+export function memoize<Key , Value> (fn: Function): Function {
+  const cache = new Map<Array<Key>, Value>();
+
+  return function (...args: Array<Key>) {
+    if (cache.has(args)) {
+      return cache.get(args);
+    }
+
+    const result = fn(args);
+    cache.set(args, result);
+    return result;
+  }
+}
