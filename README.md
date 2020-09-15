@@ -11,6 +11,7 @@ Written in Node + TypeScript, tests in Jest.
 + [Bubble sort](src/sorts/bubble-sort.ts)
 + [Selection sort](src/sorts/select-sort.ts)
 + [Insertion sort](src/sorts/insertion-sort.ts) 
++ [Merge sort](src/sorts/merge-sort.ts)
 + [Quick sort](src/sorts/quick-sort.ts)
 
 ## Data structures
