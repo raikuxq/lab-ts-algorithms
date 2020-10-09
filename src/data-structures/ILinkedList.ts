@@ -17,4 +17,6 @@ export default interface ILinkedList<T> {
   pop(): T;
   shift(): T;
   clear(): void;
+
+  reverse(): void;
 };

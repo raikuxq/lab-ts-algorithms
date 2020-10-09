@@ -113,6 +113,33 @@ describe('Double linked list', () => {
 
 
   /**
+   * Reverse list
+   */
+  describe('reverse', () => {
+    test('should reverse list', () => {
+      const list: ILinkedList<number> = new DoubleLinkedList();
+      const array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110];
+      const reversedArray = [...array].reverse();
+      list.pushFromArray(array);
+      list.reverse();
+
+      expect(list.getAsArray()).toEqual(reversedArray)
+    });
+
+    test('with two elements', () => {
+      const list: ILinkedList<number> = new DoubleLinkedList();
+      const array = [10, 20];
+      const reversedArray = [...array].reverse();
+      list.pushFromArray(array);
+      list.reverse();
+
+      expect(list.getAsArray()).toEqual(reversedArray)
+    });
+  });
+
+
+
+  /**
    * Iteration methods
    */
 

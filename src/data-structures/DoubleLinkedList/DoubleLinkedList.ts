@@ -234,6 +234,29 @@ export default class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
   }
 
 
+  public reverse(): void {
+    let currentNode = this._tail;
+    let i = 0;
+
+    while (currentNode && i < this._length) {
+
+      const newPrev = currentNode.next;
+      const newNext = currentNode.prev;
+
+      currentNode.prev = newPrev;
+      currentNode.next = newNext;
+
+      i++;
+      currentNode = newNext;
+    }
+
+    if (currentNode) {
+      this._tail = currentNode.next;
+      this._head = currentNode;
+    }
+  }
+
+
   /**
    * List iterator
    *
