@@ -1,13 +1,14 @@
 import IGraph from "../../data-structures/IGraph";
-import IIterator from "../../data-structures/IIterator";
 import IStack from "../../data-structures/IStack";
 import Stack from "../../data-structures/Stack/Stack";
+import IGraphIterator from "./IGraphIterator";
 
-export default class GraphIteratorDFS<V> implements IIterator<V> {
+export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
 
   private readonly graph: IGraph<V>;
   private readonly stack: IStack<V>;
   private readonly visited: Map<V, boolean>;
+  private readonly parents: Map<V, V>;
 
   public constructor(graph: IGraph<V>, startVertex: V) {
 
@@ -16,8 +17,9 @@ export default class GraphIteratorDFS<V> implements IIterator<V> {
     }
 
     this.graph = graph;
-    this.stack = new Stack<V>(Infinity);
-    this.visited = new Map<V, boolean>();
+    this.stack = new Stack(Infinity);
+    this.visited = new Map();
+    this.parents = new Map();
 
     this.stack.push(startVertex);
     this.visited.set(startVertex, true);
@@ -40,7 +42,7 @@ export default class GraphIteratorDFS<V> implements IIterator<V> {
   }
 
 
-  public next(cb?: Function): V {
+  public next(): V {
 
     const next = this.stack.pop();
 
@@ -56,14 +58,29 @@ export default class GraphIteratorDFS<V> implements IIterator<V> {
       if (isNotVisited) {
         this.stack.push(neighbor);
         this.visited.set(neighbor, true);
-
-        if (cb) {
-          cb(neighbor);
-        }
-
+        this.parents.set(neighbor, next);
       }
     })
 
     return next;
+  }
+
+  public getPath(from: V, to: V): Array<V> {
+    const path: Array<V> = [];
+
+    let currentVertex = this.parents.get(to);
+
+    while (currentVertex) {
+      if (currentVertex !== from) {
+        path.push(currentVertex);
+      }
+
+      currentVertex = this.parents.get(currentVertex);
+      if (currentVertex === from) {
+        break;
+      }
+    }
+
+    return [from, ...path.reverse(), to];
   }
 }
