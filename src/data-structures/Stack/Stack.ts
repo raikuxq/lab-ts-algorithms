@@ -6,7 +6,6 @@ import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
  * LIFO data structure
  */
 export default class Stack<T> implements IStack<T> {
-
   private readonly _list: ILinkedList<T>;
   private readonly _capacity: number;
 
@@ -34,8 +33,8 @@ export default class Stack<T> implements IStack<T> {
   /**
    * Add element to stack head
    */
-  public push(item: T) {
-    if (this.isFull()) throw new Error('Stack is full');
+  public push(item: T): void {
+    if (this.isFull()) throw new Error("Stack is full");
 
     this._list.push(item);
   }
@@ -44,7 +43,7 @@ export default class Stack<T> implements IStack<T> {
    * Remove element from stack head
    */
   public pop(): T {
-    if (this.isEmpty()) throw new Error('Stack is empty');
+    if (this.isEmpty()) throw new Error("Stack is empty");
 
     return this._list.pop();
   }

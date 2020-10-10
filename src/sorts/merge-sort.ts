@@ -1,10 +1,13 @@
 export default function mergeSort(arr: Array<number>): Array<number> {
-
-
   /**
    * Merge two filtered arrays into one array
    */
-  function merge (arr: Array<number>, leftIndex: number, midIndex: number, rightIndex: number) {
+  function merge(
+    arr: Array<number>,
+    leftIndex: number,
+    midIndex: number,
+    rightIndex: number
+  ) {
     const res = arr.slice(leftIndex, rightIndex + 1);
 
     let i1 = leftIndex;
@@ -31,9 +34,9 @@ export default function mergeSort(arr: Array<number>): Array<number> {
   /**
    * Divide array into 2 halves and merge them
    */
-  function sortRange (
+  function sortRange(
     arr: Array<number>,
-    leftIndex: number = 0,
+    leftIndex = 0,
     rightIndex: number = arr.length - 1
   ) {
     if (rightIndex > leftIndex) {

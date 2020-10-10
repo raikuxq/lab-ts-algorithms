@@ -1,20 +1,21 @@
-export default function binarySearch(elements: Array<number>, searchElement: number): number | null {
+export default function binarySearch(
+  elements: Array<number>,
+  searchElement: number
+): number | null {
   const length: number = elements.length;
 
-  let leftIndex: number = 0;
+  let leftIndex = 0;
   let rightIndex: number = length - 1;
 
   while (leftIndex <= rightIndex) {
-    let midIndex: number = Math.ceil((leftIndex + rightIndex) / 2);
-    let midEl: number = elements[midIndex];
+    const midIndex: number = Math.ceil((leftIndex + rightIndex) / 2);
+    const midEl: number = elements[midIndex];
 
     if (searchElement == midEl) {
       return midIndex;
-    }
-    else if (midEl > searchElement) {
+    } else if (midEl > searchElement) {
       rightIndex = midIndex - 1;
-    }
-    else if (midEl < searchElement) {
+    } else if (midEl < searchElement) {
       leftIndex = midIndex + 1;
     }
   }

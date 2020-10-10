@@ -19,4 +19,4 @@ export default interface ILinkedList<T> {
   clear(): void;
 
   reverse(): void;
-};
+}

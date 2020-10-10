@@ -1,6 +1,6 @@
-import {fibonacci, memoizedFibonacci} from "./fibonacci";
+import { fibonacci, memoizedFibonacci } from "./fibonacci";
 
-describe('Fibonacci', () => {
+describe("Fibonacci", () => {
   const results = new Map<number, number>();
   const resultsBigValues = new Map<number, number>();
 
@@ -10,31 +10,29 @@ describe('Fibonacci', () => {
     .set(10, 55)
     .set(15, 610)
     .set(20, 6765)
-    .set(25, 75025)
+    .set(25, 75025);
 
   resultsBigValues
     .set(40, 102334155)
     .set(45, 1134903170)
     .set(77, 5527939700884757)
-    .set(90, 2880067194370816120)
+    .set(90, 2880067194370816120);
 
   const resultsKeys = Array.from(results.keys());
   const resultsBigValuesKeys = Array.from(resultsBigValues.keys());
 
-  describe('without memoize', () => {
-    test.each(resultsKeys)('with n = %i', (n) => {
+  describe("without memoize", () => {
+    test.each(resultsKeys)("with n = %i", (n) => {
       expect(fibonacci(n)).toBe(results.get(n));
     });
   });
 
-
-  describe('with memoize', () => {
-    test.each(resultsKeys)('with n = %i', (n) => {
+  describe("with memoize", () => {
+    test.each(resultsKeys)("with n = %i", (n) => {
       expect(memoizedFibonacci(n)).toBe(results.get(n));
     });
-    test.each(resultsBigValuesKeys)('with n = %i', (n) => {
+    test.each(resultsBigValuesKeys)("with n = %i", (n) => {
       expect(memoizedFibonacci(n)).toBe(resultsBigValues.get(n));
     });
   });
-
 });

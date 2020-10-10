@@ -8,16 +8,14 @@ export default function shortestPath<V>(
   to: V,
   strategy: IGraphIterationStrategy<V>
 ): Array<V> {
-
   const iterator: IGraphIterator<V> = strategy.createIterator(graph, from);
 
   /**
    * Validate
    */
   if (!graph.hasVertex(from) || !graph.hasVertex(to)) {
-    throw new Error('Invalid arguments: no such elements')
+    throw new Error("Invalid arguments: no such elements");
   }
-
 
   /**
    * Find target element and set parents table

@@ -13,12 +13,8 @@ export default class DoubleLinkedNode<T> {
     this._prev = prev;
   }
 
-  public get data(): T{
+  public get data(): T {
     return this._data;
-  }
-
-  public set data(value: T) {
-    this._data = value;
   }
 
   public get prev(): DoubleLinkedNode<T> | null {

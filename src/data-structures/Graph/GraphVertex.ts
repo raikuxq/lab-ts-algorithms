@@ -1,5 +1,4 @@
 export default class GraphVertex<V> {
-
   private readonly _data: V;
 
   public constructor(data: V) {

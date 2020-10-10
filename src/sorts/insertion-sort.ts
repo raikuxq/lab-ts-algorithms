@@ -1,7 +1,6 @@
-import {swapArrayItems} from "../utils";
+import { swapArrayItems } from "../utils";
 
 export default function insertionSort(arr: Array<number>): Array<number> {
-
   for (let i = 1; i < arr.length; i++) {
     const current = arr[i];
     let j = i - 1;

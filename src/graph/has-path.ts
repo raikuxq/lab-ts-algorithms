@@ -1,6 +1,6 @@
 import IGraph from "../data-structures/IGraph";
-import IIterator from "../data-structures/IIterator";
 import IGraphIterationStrategy from "./strategy/IGraphIterationStrategy";
+import IGraphIterator from "./iterator/IGraphIterator";
 
 export default function hasPath<V>(
   graph: IGraph<V>,
@@ -8,18 +8,14 @@ export default function hasPath<V>(
   to: V,
   strategy: IGraphIterationStrategy<V>
 ): boolean {
-
-  const iterator: IIterator<V> = strategy.createIterator(graph, from);
+  const iterator: IGraphIterator<V> = strategy.createIterator(graph, from);
 
   while (iterator.hasNext()) {
     const next = iterator.next();
 
-    try {
-      if (next === to) return true;
-    } catch (e) {
-      return false;
+    if (next === to) {
+      return true;
     }
-
   }
 
   return false;

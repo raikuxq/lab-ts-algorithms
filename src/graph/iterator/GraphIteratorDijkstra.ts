@@ -2,7 +2,6 @@ import IGraph from "../../data-structures/IGraph";
 import IGraphIterator from "./IGraphIterator";
 
 export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
-
   private readonly graph: IGraph<V>;
   private readonly visited: Map<V, boolean>;
   private readonly costs: Map<V, number>;
@@ -10,7 +9,7 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
 
   public constructor(graph: IGraph<V>, startVertex: V) {
     if (!graph.hasVertex(startVertex)) {
-      throw new Error('Start vertex does not exist');
+      throw new Error("Start vertex does not exist");
     }
 
     this.graph = graph;
@@ -28,8 +27,7 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
       const edgeWeight = this.graph.getEdgeWeightByVertices(from, neighbor);
       this.costs.set(neighbor, edgeWeight);
       this.parents.set(neighbor, from);
-    })
-
+    });
   }
 
   private getClosestNotVisited(): V | null {
@@ -48,28 +46,25 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
     return closestNotVisitedElement;
   }
 
-
   public hasNext(): boolean {
     return Boolean(this.getClosestNotVisited());
   }
-
 
   public current(): V {
     const current = this.getClosestNotVisited();
 
     if (!current) {
-      throw new Error('Current element does not exist');
+      throw new Error("Current element does not exist");
     }
 
     return current;
   }
 
-
   public next(): V {
     const next = this.getClosestNotVisited();
 
     if (!next) {
-      throw new Error('Next element does not exist');
+      throw new Error("Next element does not exist");
     }
 
     this.visited.set(next, true);
@@ -85,12 +80,10 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
         this.costs.set(neighbor, newNeighborCost);
         this.parents.set(neighbor, next);
       }
-
-    })
+    });
 
     return next;
   }
-
 
   public getPath(from: V, to: V): Array<V> {
     const path: Array<V> = [];

@@ -1,9 +1,8 @@
 import IQueue from "../../IQueue";
 import Queue from "../Queue";
 
-describe('Queue', () => {
-
-  test('enqueue', () => {
+describe("Queue", () => {
+  test("enqueue", () => {
     const queue: IQueue<number> = new Queue();
 
     queue.enqueue(10);
@@ -15,7 +14,7 @@ describe('Queue', () => {
     expect(head).toBe(10);
   });
 
-  test('dequeue', () => {
+  test("dequeue", () => {
     const queue: IQueue<number> = new Queue();
 
     queue.enqueue(10);
@@ -29,11 +28,21 @@ describe('Queue', () => {
     expect(head).toBe(20);
   });
 
-  test('when is empty', () => {
+  test("when is empty", () => {
     const queue: IQueue<number> = new Queue();
 
     expect(queue.peek()).toBeNull();
     expect(queue.dequeue()).toBeNull();
   });
 
-})
+  test("clear", () => {
+    const queue: IQueue<number> = new Queue();
+
+    queue.enqueue(1);
+    queue.enqueue(2);
+
+    queue.clear();
+
+    expect(queue.isEmpty()).toBe(true);
+  });
+});

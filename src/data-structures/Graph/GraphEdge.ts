@@ -5,7 +5,11 @@ export default class GraphEdge<V> {
   private readonly _toVertex: GraphVertex<V>;
   private readonly _weight: number;
 
-  public constructor(fromVertex: GraphVertex<V>, toVertex: GraphVertex<V>, weight: number = 0) {
+  public constructor(
+    fromVertex: GraphVertex<V>,
+    toVertex: GraphVertex<V>,
+    weight = 0
+  ) {
     this._fromVertex = fromVertex;
     this._toVertex = toVertex;
     this._weight = weight;

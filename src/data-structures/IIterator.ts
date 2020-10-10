@@ -1,5 +1,5 @@
-export default interface IIterator<V> {
-  next(cb?: Function): V;
-  current(): V;
+export default interface IIterator<T> {
+  next(): T;
+  current(): T;
   hasNext(): boolean;
 }

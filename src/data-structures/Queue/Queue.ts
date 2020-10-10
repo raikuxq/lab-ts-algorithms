@@ -5,8 +5,7 @@ import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
 /**
  * FIFO data structure
  */
-export default class Queue<T> implements IQueue<T>{
-
+export default class Queue<T> implements IQueue<T> {
   private readonly _list: ILinkedList<T>;
 
   /**
@@ -44,12 +43,10 @@ export default class Queue<T> implements IQueue<T>{
     return this._list.isEmpty();
   }
 
-
   /**
    * Clear queue
    */
   public clear(): void {
     this._list.clear();
   }
-
 }

@@ -1,15 +1,18 @@
 import IQueue from "../IQueue";
 import ILinkedList from "../ILinkedList";
-import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
 
-export default class Queue<T> implements IQueue<T>{
-
+export default class Queue<T> implements IQueue<T> {
   private readonly _list: ILinkedList<T>;
 
-  public constructor() ;
+  public constructor();
 
   public peek(): T | null;
-  public add(item: T) : void;
-  public pop(): T;
+
+  public enqueue(item: T): void;
+
+  public dequeue(): T;
+
   public isEmpty(): boolean;
+
+  public clear(): void;
 }

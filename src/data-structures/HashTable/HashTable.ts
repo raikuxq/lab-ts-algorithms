@@ -1,8 +1,7 @@
 import IHashTable from "../IHashTable";
-import {sha256} from 'js-sha256';
+import { sha256 } from "js-sha256";
 
 export default class HashTable<T> implements IHashTable<T> {
-
   private readonly _data: Array<T>;
 
   /**
@@ -28,10 +27,21 @@ export default class HashTable<T> implements IHashTable<T> {
    * @param prop
    * @param value
    */
-  public set(prop: string, value: T) {
+  public set(prop: string, value: T): void {
     const hash = sha256(prop);
     const index = parseInt(hash, 16);
 
     this._data[index] = value;
+  }
+
+  /**
+   * Has value <O(1)>
+   * @param prop
+   */
+  public has(prop: string): boolean {
+    const hash = sha256(prop);
+    const index = parseInt(hash, 16);
+
+    return Boolean(this._data[index]);
   }
 }

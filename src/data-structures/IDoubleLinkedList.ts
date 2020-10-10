@@ -5,9 +5,9 @@ export type DoubleLinkedListIterator<T> = {
   current(): T;
   next(): T;
   prev(): T;
-}
+};
 
-export default interface IDoubleLinkedList<T> extends ILinkedList<T>{
+export default interface IDoubleLinkedList<T> extends ILinkedList<T> {
   head: DoubleLinkedNode<T> | null;
   tail: DoubleLinkedNode<T> | null;
 

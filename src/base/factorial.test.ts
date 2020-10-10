@@ -1,6 +1,6 @@
-import {factorial, memoizedFactorial} from "./factorial";
+import { factorial, memoizedFactorial } from "./factorial";
 
-describe('Factorial', () => {
+describe("Factorial", () => {
   const results = new Map<number, number>();
   const resultsBigValues = new Map<number, number>();
 
@@ -10,34 +10,31 @@ describe('Factorial', () => {
     .set(10, 3628800)
     .set(15, 1307674368000)
     .set(20, 2432902008176640000)
-    .set(25, 15511210043330985984000000)
+    .set(25, 15511210043330985984000000);
 
   resultsBigValues
-    .set(35, 1.0333147966386144e+40)
-    .set(45, 1.1962222086548019e+56)
-    .set(77, 1.4518309202828584e+113)
-    .set(90, 1.4857159644817607e+138)
-    .set(99, 9.33262154439441e+155)
-    .set(100, 9.33262154439441e+157)
+    .set(35, 1.0333147966386144e40)
+    .set(45, 1.1962222086548019e56)
+    .set(77, 1.4518309202828584e113)
+    .set(90, 1.4857159644817607e138)
+    .set(99, 9.33262154439441e155)
+    .set(100, 9.33262154439441e157);
 
   const resultsKeys = Array.from(results.keys());
   const resultsBigValuesKeys = Array.from(resultsBigValues.keys());
 
-  describe('without memoize', () => {
-    test.each(resultsKeys)('with n = %i', (n) => {
+  describe("without memoize", () => {
+    test.each(resultsKeys)("with n = %i", (n) => {
       expect(factorial(n)).toBe(results.get(n));
     });
   });
 
-
-  describe('with memoize', () => {
-    test.each(resultsKeys)('with n = %i', (n) => {
+  describe("with memoize", () => {
+    test.each(resultsKeys)("with n = %i", (n) => {
       expect(memoizedFactorial(n)).toBe(results.get(n));
     });
-    test.each(resultsBigValuesKeys)('with n = %i', (n) => {
-      expect(memoizedFactorial(n)).toBe((resultsBigValues.get(n)));
+    test.each(resultsBigValuesKeys)("with n = %i", (n) => {
+      expect(memoizedFactorial(n)).toBe(resultsBigValues.get(n));
     });
   });
-
-
 });
