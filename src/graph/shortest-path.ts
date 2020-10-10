@@ -1,6 +1,6 @@
 import IGraph from "../data-structures/IGraph";
-import IIterator from "../data-structures/IIterator";
 import IGraphIterationStrategy from "./strategy/IGraphIterationStrategy";
+import IGraphIterator from "./iterator/IGraphIterator";
 
 export default function shortestPath<V>(
   graph: IGraph<V>,
@@ -9,10 +9,7 @@ export default function shortestPath<V>(
   strategy: IGraphIterationStrategy<V>
 ): Array<V> {
 
-  const iterator: IIterator<V> = strategy.createIterator(graph, from);
-  const parents: Map<V, V> = new Map<V, V>();
-  const path: Array<V> = new Array<V>();
-
+  const iterator: IGraphIterator<V> = strategy.createIterator(graph, from);
 
   /**
    * Validate
@@ -26,52 +23,12 @@ export default function shortestPath<V>(
    * Find target element and set parents table
    */
   while (iterator.hasNext()) {
-    try {
-      const current = iterator.current();
+    const next = iterator.next();
 
-      iterator.next((neighbor: V) => {
-        parents.set(neighbor, current);
-      });
-
-      if (current === to) {
-        break;
-      }
-
-    } catch (e) {
-      throw new Error('Next element does not exist')
-    }
-  }
-
-
-  /**
-   * Get closest path from parents map
-   */
-  let currentVertex = parents.get(to);
-
-  while (currentVertex) {
-    /**
-     * Add to path
-     */
-    if (currentVertex !== from) {
-      path.push(currentVertex);
-    }
-
-    /**
-     * Iterate next
-     */
-    currentVertex = parents.get(currentVertex);
-
-    /**
-     * Stop
-     */
-    if (currentVertex === from) {
+    if (next === to) {
       break;
     }
   }
 
-
-  /**
-   * Full path
-   */
-  return [from, ...path.reverse(), to];
+  return iterator.getPath(from, to);
 }
