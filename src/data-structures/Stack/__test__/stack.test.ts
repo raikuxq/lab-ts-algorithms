@@ -1,4 +1,4 @@
-import IStack from "../../IStack";
+import IStack from "../interface/IStack";
 import Stack from "../Stack";
 
 describe("Stack", () => {

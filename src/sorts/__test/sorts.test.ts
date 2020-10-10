@@ -1,8 +1,8 @@
-import quickSort from "./quick-sort";
-import mergeSort from "./merge-sort";
-import selectSort from "./select-sort";
-import bubbleSort from "./bubble-sort";
-import insertionSort from "./insertion-sort";
+import quickSort from "../quick-sort";
+import mergeSort from "../merge-sort";
+import selectSort from "../select-sort";
+import bubbleSort from "../bubble-sort";
+import insertionSort from "../insertion-sort";
 
 const randomArray = (length: number, max: number): Array<number> =>
   new Array(length).fill(0).map(() => Math.round(Math.random() * max));

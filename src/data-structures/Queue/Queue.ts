@@ -1,4 +1,4 @@
-import IQueue from "../IQueue";
+import IQueue from "./interface/IQueue";
 import ILinkedList from "../ILinkedList";
 import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
 

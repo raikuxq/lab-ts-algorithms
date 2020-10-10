@@ -1,6 +1,6 @@
-import IGraph from "../data-structures/IGraph";
-import IGraphIterationStrategy from "./strategy/IGraphIterationStrategy";
-import IGraphIterator from "./iterator/IGraphIterator";
+import IGraph from "../data-structures/Graph/interface/IGraph";
+import IGraphIterationStrategy from "../data-structures/Graph/strategy/interface/IGraphIterationStrategy";
+import IGraphIterator from "../data-structures/Graph/iterator/interface/IGraphIterator";
 
 export default function hasPath<V>(
   graph: IGraph<V>,

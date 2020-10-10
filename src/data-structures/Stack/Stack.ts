@@ -1,4 +1,4 @@
-import IStack from "../IStack";
+import IStack from "./interface/IStack";
 import ILinkedList from "../ILinkedList";
 import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
 

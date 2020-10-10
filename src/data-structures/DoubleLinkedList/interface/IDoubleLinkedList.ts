@@ -1,5 +1,5 @@
-import ILinkedList from "./ILinkedList";
-import DoubleLinkedNode from "./DoubleLinkedList/DoubleLinkedNode";
+import ILinkedList from "../../ILinkedList";
+import DoubleLinkedNode from "../DoubleLinkedNode";
 
 export type DoubleLinkedListIterator<T> = {
   current(): T;

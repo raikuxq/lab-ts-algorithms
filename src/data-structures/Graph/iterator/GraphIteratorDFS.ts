@@ -1,7 +1,7 @@
-import IGraph from "../../data-structures/IGraph";
-import IStack from "../../data-structures/IStack";
-import Stack from "../../data-structures/Stack/Stack";
-import IGraphIterator from "./IGraphIterator";
+import IGraph from "../interface/IGraph";
+import IStack from "../../Stack/interface/IStack";
+import Stack from "../../Stack/Stack";
+import IGraphIterator from "./interface/IGraphIterator";
 
 export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
   private readonly graph: IGraph<V>;

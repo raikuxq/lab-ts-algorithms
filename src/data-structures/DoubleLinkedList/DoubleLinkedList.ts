@@ -1,7 +1,7 @@
 import DoubleLinkedNode from "./DoubleLinkedNode";
 import IDoubleLinkedList, {
   DoubleLinkedListIterator,
-} from "../IDoubleLinkedList";
+} from "./interface/IDoubleLinkedList";
 
 export default class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
   private _head: DoubleLinkedNode<T> | null;

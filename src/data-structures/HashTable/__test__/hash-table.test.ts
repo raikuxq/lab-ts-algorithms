@@ -1,4 +1,4 @@
-import IHashTable from "../../IHashTable";
+import IHashTable from "../interface/IHashTable";
 import HashTable from "../HashTable";
 
 describe("Hash table", () => {

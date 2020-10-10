@@ -1,5 +1,5 @@
-import IGraph from "../../data-structures/IGraph";
-import IGraphIterator from "./IGraphIterator";
+import IGraph from "../interface/IGraph";
+import IGraphIterator from "./interface/IGraphIterator";
 
 export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
   private readonly graph: IGraph<V>;

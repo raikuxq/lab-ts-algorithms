@@ -1,11 +1,11 @@
-import IGraph from "../data-structures/IGraph";
-import IGraphIterationStrategy from "./strategy/IGraphIterationStrategy";
+import IGraph from "../../data-structures/Graph/interface/IGraph";
+import IGraphIterationStrategy from "../../data-structures/Graph/strategy/interface/IGraphIterationStrategy";
 
-import Graph from "../data-structures/Graph/Graph";
-import BFSIterationStrategy from "./strategy/BFSIterationStrategy";
-import DFSIterationStrategy from "./strategy/DFSIterationStrategy";
+import Graph from "../../data-structures/Graph/Graph";
+import BFSIterationStrategy from "../../data-structures/Graph/strategy/BFSIterationStrategy";
+import DFSIterationStrategy from "../../data-structures/Graph/strategy/DFSIterationStrategy";
 
-import hasPath from "./has-path";
+import hasPath from "../has-path";
 
 describe.each(["BFS", "DFS"])(
   "has path searching by %s method",

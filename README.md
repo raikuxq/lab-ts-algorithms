@@ -22,8 +22,8 @@ Written in Node + TypeScript, tests in Jest.
 + [Graph](src/data-structures/Graph/Graph.ts)
 
 ## Graph algorithms
-+ [Breadth first search Iterator](src/graph/iterator/GraphIteratorBFS.ts)
-+ [Depth first search Iterator](src/graph/iterator/GraphIteratorDFS.ts)
-+ [Dijkstra method Iterator](src/graph/iterator/GraphIteratorDijkstra.ts)
-+ [Has path (BFS/DFS)](src/graph/has-path.ts)
-+ [Shortest path (BFS/DFS/Dijkstra)](src/graph/shortest-path.ts)
++ [Breadth first search Iterator](src/data-structures/Graph/iterator/GraphIteratorBFS.ts)
++ [Depth first search Iterator](src/data-structures/Graph/iterator/GraphIteratorDFS.ts)
++ [Dijkstra method Iterator](src/data-structures/Graph/iterator/GraphIteratorDijkstra.ts)
++ [Has path (BFS/DFS)](src/graph-search/has-path.ts)
++ [Shortest path (BFS/DFS/Dijkstra)](src/graph-search/shortest-path.ts)

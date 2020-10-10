@@ -1,7 +1,7 @@
-import IGraph from "../../data-structures/IGraph";
-import IQueue from "../../data-structures/IQueue";
-import Queue from "../../data-structures/Queue/Queue";
-import IGraphIterator from "./IGraphIterator";
+import IGraph from "../interface/IGraph";
+import IQueue from "../../Queue/interface/IQueue";
+import Queue from "../../Queue/Queue";
+import IGraphIterator from "./interface/IGraphIterator";
 
 export default class GraphIteratorBFS<V> implements IGraphIterator<V> {
   private readonly graph: IGraph<V>;

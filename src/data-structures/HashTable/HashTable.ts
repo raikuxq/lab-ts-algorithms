@@ -1,4 +1,4 @@
-import IHashTable from "../IHashTable";
+import IHashTable from "./interface/IHashTable";
 import { sha256 } from "js-sha256";
 
 export default class HashTable<T> implements IHashTable<T> {

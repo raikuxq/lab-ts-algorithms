@@ -1,6 +1,6 @@
 import DoubleLinkedList from "../DoubleLinkedList";
 import ILinkedList from "../../ILinkedList";
-import IDoubleLinkedList from "../../IDoubleLinkedList";
+import IDoubleLinkedList from "../interface/IDoubleLinkedList";
 
 describe("Double linked list", () => {
   /**
