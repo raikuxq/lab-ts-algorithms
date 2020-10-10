@@ -47,7 +47,10 @@ export default class Graph<V> implements IGraph<V> {
    * @private
    */
   private getEdgeByValue(from: GraphVertex<V>, to: GraphVertex<V>): GraphEdge<V> {
-    const edge = this._edges.find((edge: GraphEdge<V>) => edge.fromVertex === from && edge.toVertex === to);
+    const edge = this._edges.find((edge: GraphEdge<V>) =>
+      (edge.fromVertex === from && edge.toVertex === to)
+      ||
+      (edge.fromVertex === to && edge.toVertex === from));
 
     if (!edge) throw new Error('Edge not found');
 
@@ -208,6 +211,21 @@ export default class Graph<V> implements IGraph<V> {
    */
   public hasVertex(value: V): boolean {
     return this.vertices.includes(value);
+  }
+
+
+  /**
+   * Get edge weight between two vertices
+   * @param from
+   * @param to
+   */
+  public getEdgeWeightByVertices(from: V, to: V) {
+    const fromVertex = this.getVertexByValue(from);
+    const toVertex = this.getVertexByValue(to);
+
+    const edge = this.getEdgeByValue(fromVertex, toVertex);
+
+    return edge.weight;
   }
 
 
