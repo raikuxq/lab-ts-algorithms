@@ -1,11 +1,10 @@
 import ILinkedList from "../../ILinkedList";
 import DoubleLinkedNode from "../DoubleLinkedNode";
+import IIterator from "../../IIterator";
 
-export type DoubleLinkedListIterator<T> = {
-  current(): T;
-  next(): T;
+export interface DoubleLinkedListIterator<T> extends IIterator<T> {
   prev(): T;
-};
+}
 
 export default interface IDoubleLinkedList<T> extends ILinkedList<T> {
   head: DoubleLinkedNode<T> | null;

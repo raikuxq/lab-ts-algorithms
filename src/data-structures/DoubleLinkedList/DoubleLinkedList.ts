@@ -249,6 +249,9 @@ export default class DoubleLinkedList<T> implements IDoubleLinkedList<T> {
       current: () => {
         return activeNode.data;
       },
+      hasNext(): boolean {
+        return Boolean(activeNode.next);
+      },
       next: () => {
         if (!activeNode.next) throw new Error("Next element does not exist");
         activeNode = activeNode.next;
