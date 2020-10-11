@@ -168,10 +168,6 @@ describe("shortest path searching algorithm", () => {
           .addEdge("James", "Anna");
 
         test("should find correct path between multiple nodes", () => {
-          /**
-           * Bob -> Mike (5) -> Anna (15) = 20
-           * Mike -> Lisa (3) -> Aaron (3) -> James (3) -> Anna (6) = 15
-           */
           expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
             "Mike",
             "Lisa",
@@ -199,10 +195,6 @@ describe("shortest path searching algorithm", () => {
           .addEdge("Lisa", "Anna");
 
         test("should find correct path between multiple nodes", () => {
-          /**
-           * Bob -> Mike (5) -> Anna (15) = 20
-           * Mike -> Lisa (3) -> Aaron (3) -> James (3) -> Anna (6) = 15
-           */
           expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
             "Mike",
             "Lisa",
