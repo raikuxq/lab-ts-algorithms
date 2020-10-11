@@ -19,20 +19,32 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
     this.initIterator(startVertex);
   }
 
-  private initIterator(from: V): void {
-    this.visited.set(from, true);
-    this.costs.set(from, 0);
+  /**
+   * Push first node and its neighbors to the costs and parents tables
+   * @param startVertex
+   * @private
+   */
+  private initIterator(startVertex: V): void {
+    this.visited.set(startVertex, true);
+    this.costs.set(startVertex, 0);
 
-    this.graph.getVertexNeighbors(from).forEach((neighbor: V) => {
-      const edgeWeight = this.graph.getEdgeWeightByVertices(from, neighbor);
+    this.graph.getVertexNeighbors(startVertex).forEach((neighbor: V) => {
+      const edgeWeight = this.graph.getEdgeWeightByVertices(
+        startVertex,
+        neighbor
+      );
       this.costs.set(neighbor, edgeWeight);
-      this.parents.set(neighbor, from);
+      this.parents.set(neighbor, startVertex);
     });
   }
 
+  /**
+   * Get closest (by cost) and not visited node
+   * @private
+   */
   private getClosestNotVisited(): V | null {
     const keys = Array.from(this.costs.keys());
-    const onlyNotVisitedKeys = keys
+    const priorityList = keys
       .filter((key: V) => !this.visited.get(key))
       .sort((aKey: V, bKey: V) => {
         const aCost = this.costs.get(aKey) || 0;
@@ -41,15 +53,19 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
         return aCost - bCost;
       });
 
-    const closestNotVisitedElement = onlyNotVisitedKeys[0] || null;
-
-    return closestNotVisitedElement;
+    return priorityList[0] || null;
   }
 
+  /**
+   * @inheritDoc
+   */
   public hasNext(): boolean {
     return Boolean(this.getClosestNotVisited());
   }
 
+  /**
+   * @inheritDoc
+   */
   public current(): V {
     const current = this.getClosestNotVisited();
 
@@ -60,6 +76,9 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
     return current;
   }
 
+  /**
+   * @inheritDoc
+   */
   public next(): V {
     const next = this.getClosestNotVisited();
 
@@ -85,6 +104,9 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
     return next;
   }
 
+  /**
+   * @inheritDoc
+   */
   public getPath(from: V, to: V): Array<V> {
     const path: Array<V> = [];
 

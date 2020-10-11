@@ -23,10 +23,16 @@ export default class GraphIteratorBFS<V> implements IGraphIterator<V> {
     this.visited.set(startVertex, true);
   }
 
+  /**
+   * @inheritDoc
+   */
   public hasNext(): boolean {
     return !this.queue.isEmpty();
   }
 
+  /**
+   * @inheritDoc
+   */
   public current(): V {
     const current = this.queue.peek();
 
@@ -37,6 +43,9 @@ export default class GraphIteratorBFS<V> implements IGraphIterator<V> {
     return current;
   }
 
+  /**
+   * @inheritDoc
+   */
   public next(): V {
     const next = this.queue.dequeue();
 
@@ -59,6 +68,9 @@ export default class GraphIteratorBFS<V> implements IGraphIterator<V> {
     return next;
   }
 
+  /**
+   * @inheritDoc
+   */
   public getPath(from: V, to: V): Array<V> {
     const path: Array<V> = new Array<V>();
     let currentVertex = this.parents.get(to);

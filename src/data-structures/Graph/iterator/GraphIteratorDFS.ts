@@ -27,6 +27,9 @@ export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
     return !this.stack.isEmpty();
   }
 
+  /**
+   * @inheritDoc
+   */
   public current(): V {
     const current = this.stack.peek();
 
@@ -37,6 +40,9 @@ export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
     return current;
   }
 
+  /**
+   * @inheritDoc
+   */
   public next(): V {
     const next = this.stack.pop();
 
@@ -59,9 +65,11 @@ export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
     return next;
   }
 
+  /**
+   * @inheritDoc
+   */
   public getPath(from: V, to: V): Array<V> {
     const path: Array<V> = new Array<V>();
-
     let currentVertex = this.parents.get(to);
 
     while (currentVertex) {
