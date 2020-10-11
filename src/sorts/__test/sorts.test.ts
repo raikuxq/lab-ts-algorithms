@@ -32,7 +32,7 @@ describe.each(["Quick", "Merge", "Selection", "Bubble", "Insertion"])(
         throw new Error("Invalid sort type");
     }
 
-    test("with not sorted random array", () => {
+    test("should correct sort with random numbers", () => {
       const notSortedArr: Array<number> = randomArray(100, 500);
 
       const sortedArr = [...notSortedArr].sort((a: number, b: number) => {
@@ -44,19 +44,19 @@ describe.each(["Quick", "Merge", "Selection", "Bubble", "Insertion"])(
       expect(sort(notSortedArr)).toEqual(sortedArr);
     });
 
-    test("with empty array", () => {
+    test("should correct sort an empty array", () => {
       const emptyArr: Array<number> = [];
 
       expect(sort(emptyArr)).toEqual(emptyArr);
     });
 
-    test("with already sorted array", () => {
+    test("should correct sort already sorted array", () => {
       const sortedArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
       expect(sort(sortedArr)).toEqual(sortedArr);
     });
 
-    test("with repeated numbers", () => {
+    test("should correct sort an array with repeated numbers", () => {
       const notSortedArr = [8, 7, 6, 4, 3, 1, 6, 2, 2, 4, 5];
       const sortedArr = [1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8];
 
