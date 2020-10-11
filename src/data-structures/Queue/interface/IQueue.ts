@@ -1,7 +1,7 @@
 export default interface IQueue<T> {
   isEmpty(): boolean;
   enqueue(item: T): void;
-  dequeue(): T | null;
-  peek(): T | null;
+  dequeue(): T;
+  peek(): T;
   clear(): void;
 }

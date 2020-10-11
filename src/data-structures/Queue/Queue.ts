@@ -18,8 +18,11 @@ export default class Queue<T> implements IQueue<T> {
   /**
    * Get first element in queue (without deleting)
    */
-  public peek(): T | null {
-    return this.isEmpty() ? null : this._list.peekHead();
+  public peek(): T {
+    if (this.isEmpty()) {
+      throw new Error("Cannot peek when list is empty");
+    }
+    return this._list.peekHead();
   }
 
   /**
@@ -32,8 +35,11 @@ export default class Queue<T> implements IQueue<T> {
   /**
    * Get and delete first element in queue
    */
-  public dequeue(): T | null {
-    return this.isEmpty() ? null : this._list.pop();
+  public dequeue(): T {
+    if (this.isEmpty()) {
+      throw new Error("Cannot dequeue when list is empty");
+    }
+    return this._list.pop();
   }
 
   /**

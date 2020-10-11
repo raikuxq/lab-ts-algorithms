@@ -1,48 +1,59 @@
 import IQueue from "../interface/IQueue";
 import Queue from "../Queue";
 
-describe("Queue", () => {
-  test("enqueue", () => {
-    const queue: IQueue<number> = new Queue();
+describe("queue", () => {
+  describe("method peek", () => {
+    test("should correct peek value from top", () => {
+      const queue: IQueue<number> = new Queue();
+      queue.enqueue(10);
+      const top = queue.peek();
 
-    queue.enqueue(10);
-    queue.enqueue(20);
-    queue.enqueue(30);
+      expect(queue.peek()).toBe(top);
+    });
+    test("should throw when queue is empty", () => {
+      const queue: IQueue<number> = new Queue();
 
-    const head = queue.peek();
-
-    expect(head).toBe(10);
+      expect(() => {
+        queue.peek();
+      }).toThrowError();
+    });
   });
 
-  test("dequeue", () => {
-    const queue: IQueue<number> = new Queue();
+  describe("method enqueue", () => {
+    test("should correct enqueue to top", () => {
+      const queue: IQueue<number> = new Queue();
+      queue.enqueue(10);
 
-    queue.enqueue(10);
-    queue.enqueue(20);
-    queue.enqueue(30);
-
-    const deleted = queue.dequeue();
-    const head = queue.peek();
-
-    expect(deleted).toBe(10);
-    expect(head).toBe(20);
+      expect(queue.peek()).toBe(10);
+    });
   });
 
-  test("when is empty", () => {
-    const queue: IQueue<number> = new Queue();
+  describe("method dequeue", () => {
+    describe("should correct dequeue from top", () => {
+      const queue: IQueue<number> = new Queue();
+      queue.enqueue(10);
+      const dequeued = queue.dequeue();
 
-    expect(queue.peek()).toBeNull();
-    expect(queue.dequeue()).toBeNull();
+      test("should delete correct", () => {
+        expect(queue.isEmpty()).toBe(true);
+      });
+      test("should return correct value", () => {
+        expect(dequeued).toBe(10);
+      });
+    });
+    test("should throw when queue is empty", () => {
+      const queue: IQueue<number> = new Queue();
+
+      expect(() => {
+        queue.dequeue();
+      }).toThrowError();
+    });
   });
 
-  test("clear", () => {
-    const queue: IQueue<number> = new Queue();
-
-    queue.enqueue(1);
-    queue.enqueue(2);
-
-    queue.clear();
-
-    expect(queue.isEmpty()).toBe(true);
+  describe("method isEmpty", () => {
+    test("should return true when queue is empty", () => {
+      const queue: IQueue<number> = new Queue();
+      expect(queue.isEmpty()).toBe(true);
+    });
   });
 });
