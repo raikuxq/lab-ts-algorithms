@@ -22,12 +22,11 @@ export default class Stack<T> implements IStack<T> {
   /**
    * Get stack top element (or null if stack is empty)
    */
-  public peek(): T | null {
-    try {
-      return this._list.peekHead();
-    } catch {
-      return null;
+  public peek(): T {
+    if (this.isEmpty()) {
+      throw new Error("Cannot peek when list is empty");
     }
+    return this._list.peekHead();
   }
 
   /**
@@ -43,8 +42,9 @@ export default class Stack<T> implements IStack<T> {
    * Remove element from stack head
    */
   public pop(): T {
-    if (this.isEmpty()) throw new Error("Stack is empty");
-
+    if (this.isEmpty()) {
+      throw new Error("Cannot pop when stack is empty");
+    }
     return this._list.pop();
   }
 

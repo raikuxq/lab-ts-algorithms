@@ -10,10 +10,12 @@ describe("stack", () => {
 
       expect(stack.peek()).toBe(top);
     });
-    test("should return null when stack is empty", () => {
+    test("should throw when stack is empty", () => {
       const stack: IStack<number> = new Stack(1);
 
-      expect(stack.peek()).toBeNull();
+      expect(() => {
+        stack.peek();
+      }).toThrowError();
     });
   });
 
