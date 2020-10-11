@@ -1,6 +1,6 @@
 import IGraph from "../data-structures/Graph/interface/IGraph";
-import IGraphIterationStrategy from "../data-structures/Graph/strategy/interface/IGraphIterationStrategy";
 import IGraphIterator from "../data-structures/Graph/iterator/interface/IGraphIterator";
+import IGraphIterationStrategy from "../data-structures/Graph/strategy/interface/IGraphIterationStrategy";
 
 export default function shortestPath<V>(
   graph: IGraph<V>,
@@ -18,7 +18,7 @@ export default function shortestPath<V>(
   }
 
   /**
-   * Find target element and set parents table
+   * Find target element
    */
   while (iterator.hasNext()) {
     const next = iterator.next();
