@@ -2,7 +2,7 @@ import IHashTable from "../interface/IHashTable";
 import HashTable from "../HashTable";
 
 describe("Hash table", () => {
-  test("any data types support", () => {
+  test("should support multiple data types", () => {
     const hashTable: IHashTable<number | string | number[]> = new HashTable();
 
     hashTable.set("myNumberProp", 5);
@@ -14,12 +14,18 @@ describe("Hash table", () => {
     expect(hashTable.get("myArrayProp")).toEqual([1, 2, 3, 4, 5]);
   });
 
-  test("when set to same property", () => {
+  test("should correct update value", () => {
     const hashTable: IHashTable<number> = new HashTable();
 
     hashTable.set("myProp", 5);
     hashTable.set("myProp", 10);
 
     expect(hashTable.get("myProp")).toBe(10);
+  });
+
+  test("should correct check on exist", () => {
+    const hashTable: IHashTable<number> = new HashTable();
+
+    expect(hashTable.has("myProp")).toBe(false);
   });
 });
