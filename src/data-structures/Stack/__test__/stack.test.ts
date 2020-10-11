@@ -1,41 +1,80 @@
 import IStack from "../interface/IStack";
 import Stack from "../Stack";
 
-describe("Stack", () => {
-  test("simple addition by push method", () => {
-    const stack: IStack<number> = new Stack(100);
+describe("stack", () => {
+  describe("method peek", () => {
+    test("should correct peek value from top", () => {
+      const stack: IStack<number> = new Stack(100);
+      stack.push(10);
+      const top = stack.peek();
 
-    stack.push(10);
-    expect(stack.peek()).toBe(10);
+      expect(stack.peek()).toBe(top);
+    });
+    test("should return null when stack is empty", () => {
+      const stack: IStack<number> = new Stack(1);
+
+      expect(stack.peek()).toBeNull();
+    });
   });
 
-  test("simple deletion by pop method", () => {
-    const stack: IStack<number> = new Stack(100);
+  describe("method push", () => {
+    test("should correct push to top", () => {
+      const stack: IStack<number> = new Stack(100);
+      stack.push(10);
 
-    stack.push(10);
-    stack.push(20);
+      expect(stack.peek()).toBe(10);
+    });
+    test("should throw when stack is full", () => {
+      const stack: IStack<number> = new Stack(1);
+      stack.push(10);
 
-    const deleted = stack.pop();
-
-    expect(deleted).toBe(20);
-    expect(stack.peek()).toBe(10);
+      expect(() => {
+        stack.push(20);
+      }).toThrowError();
+    });
   });
 
-  test("when is empty", () => {
-    const stack: IStack<number> = new Stack(10);
+  describe("method pop", () => {
+    describe("should correct pop from top", () => {
+      const stack: IStack<number> = new Stack(100);
+      stack.push(10);
+      const popped = stack.pop();
 
-    expect(stack.peek()).toBeNull();
-    expect(() => stack.pop()).toThrow("Stack is empty");
+      test("should delete correct", () => {
+        expect(stack.isEmpty()).toBe(true);
+      });
+      test("should return correct value", () => {
+        expect(popped).toBe(10);
+      });
+    });
+    test("should throw when stack is empty", () => {
+      const stack: IStack<number> = new Stack(1);
+
+      expect(() => {
+        stack.pop();
+      }).toThrowError();
+    });
   });
 
-  test("when is full", () => {
-    const capacity = 3;
-    const stack: IStack<number> = new Stack(capacity);
+  describe("method isEmpty", () => {
+    test("should return true when stack is empty", () => {
+      const stack: IStack<number> = new Stack(100);
+      expect(stack.isEmpty()).toBe(true);
+    });
+  });
 
-    for (let i = 0; i < capacity; i++) {
-      stack.push(i + 1);
-    }
+  describe("method isFull", () => {
+    test("should return false when stack elements length lower than its capacity", () => {
+      const stack: IStack<number> = new Stack(100);
+      stack.push(10);
 
-    expect(() => stack.push(0)).toThrow("Stack is full");
+      expect(stack.isFull()).toBe(false);
+    });
+    test("should return true when stack elements length same as its capacity", () => {
+      const stack: IStack<number> = new Stack(1);
+      stack.push(10);
+
+      expect(stack.isFull()).toBe(true);
+    });
   });
 });
