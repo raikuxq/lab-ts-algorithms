@@ -1,7 +1,7 @@
 import IGraph from "../interface/IGraph";
 import IGraphIterationStrategy from "./interface/IGraphIterationStrategy";
-import GraphIteratorDFS from "../iterator/GraphIteratorDFS";
 import IGraphIterator from "../iterator/interface/IGraphIterator";
+import GraphIteratorDFS from "../iterator/GraphIteratorDFS";
 
 export default class DFSIterationStrategy<V>
   implements IGraphIterationStrategy<V> {

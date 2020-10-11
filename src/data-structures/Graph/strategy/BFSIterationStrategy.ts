@@ -1,7 +1,7 @@
 import IGraph from "../interface/IGraph";
 import IGraphIterationStrategy from "./interface/IGraphIterationStrategy";
-import GraphIteratorBFS from "../iterator/GraphIteratorBFS";
 import IGraphIterator from "../iterator/interface/IGraphIterator";
+import GraphIteratorBFS from "../iterator/GraphIteratorBFS";
 
 export default class BFSIterationStrategy<V>
   implements IGraphIterationStrategy<V> {
