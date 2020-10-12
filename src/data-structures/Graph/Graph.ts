@@ -58,6 +58,23 @@ export default class Graph<V> implements IGraph<V> {
   }
 
   /**
+   * Update edge weight
+   * @param from
+   * @param to
+   * @param weight
+   * @private
+   */
+  private updateEdgeWeight(
+    from: GraphVertex<V>,
+    to: GraphVertex<V>,
+    weight: number
+  ): void {
+    const edge = this.getEdgeByValue(from, to);
+
+    edge.weight = weight;
+  }
+
+  /**
    *
    * @returns graph weight
    */
@@ -96,6 +113,10 @@ export default class Graph<V> implements IGraph<V> {
    * @param data
    */
   public addVertex(data: V): this {
+    if (this.hasVertex(data)) {
+      throw new Error("Vertex is already exist");
+    }
+
     const vertex = new GraphVertex<V>(data);
     const siblings = new Array<GraphVertex<V>>();
 
@@ -110,9 +131,36 @@ export default class Graph<V> implements IGraph<V> {
    */
   public removeVertex(data: V): this {
     try {
-      const vertex = this.getVertexByValue(data);
+      const vertexToRemove = this.getVertexByValue(data);
+      const vertexToRemoveNeighbors = this.getVertexNeighbors(data);
 
-      this._vertices.delete(vertex);
+      this._vertices.delete(vertexToRemove);
+
+      /** Cascade remove all vertices relations */
+      vertexToRemoveNeighbors.forEach((neighbor: V) => {
+        const neighborVertex = this.getVertexByValue(neighbor);
+        const neighborVertexNeighbors = this._vertices.get(neighborVertex);
+
+        if (neighborVertexNeighbors) {
+          const indexOfNeighborVertex = neighborVertexNeighbors.indexOf(
+            vertexToRemove
+          );
+
+          if (indexOfNeighborVertex >= 0) {
+            neighborVertexNeighbors?.splice(indexOfNeighborVertex, 1);
+          }
+        }
+      });
+
+      /** Cascade remove all edges with this vertex to remove */
+      this._edges.forEach((edge: GraphEdge<V>, index: number) => {
+        if (
+          edge.toVertex === vertexToRemove ||
+          edge.fromVertex === vertexToRemove
+        ) {
+          this._edges.splice(index, 1);
+        }
+      });
     } catch (e) {
       throw new Error("Vertex does not exist already");
     }
@@ -130,14 +178,21 @@ export default class Graph<V> implements IGraph<V> {
     try {
       const fromVertex = this.getVertexByValue(from);
       const toVertex = this.getVertexByValue(to);
+
+      /** When edge is already exist, we can update its weight */
+      if (this.hasEdge(fromVertex.data, toVertex.data)) {
+        if (weight) {
+          this.updateEdgeWeight(fromVertex, toVertex, weight);
+        }
+        return this;
+      }
+
       const edge = new GraphEdge(fromVertex, toVertex, weight);
 
       this._edges.push(edge);
       this._vertices.get(fromVertex)?.push(toVertex);
 
-      /**
-       * If graph is directed, there's no links in the opposite direction
-       */
+      /** If graph is directed, there's no links in the opposite direction */
       if (!this._isDirected) {
         this._vertices.get(toVertex)?.push(fromVertex);
       }
@@ -211,6 +266,19 @@ export default class Graph<V> implements IGraph<V> {
   }
 
   /**
+   * Graph has edge between two vertices
+   * @param from
+   * @param to
+   */
+  public hasEdge(from: V, to: V): boolean {
+    return Boolean(
+      this._edges.find((edge) => {
+        return edge.fromVertex.data === from && edge.toVertex.data === to;
+      })
+    );
+  }
+
+  /**
    * Get edge weight between two vertices
    * @param from
    * @param to
@@ -248,16 +316,10 @@ export default class Graph<V> implements IGraph<V> {
     const vertices = this.getVerticesArrayFormat();
     const matrix = new Array(this.verticesCount);
 
-    /**
-     * Matrix creating
-     */
     vertices.forEach((graphVertexRow, i) => {
       matrix[i] = new Array(this.verticesCount);
     });
 
-    /**
-     * Matrix filling
-     */
     vertices.forEach((graphVertexRow, i) => {
       vertices.forEach((graphVertexColumn, j) => {
         const rowElement = graphVertexRow.data;

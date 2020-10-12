@@ -3,7 +3,7 @@ import GraphVertex from "./GraphVertex";
 export default class GraphEdge<V> {
   private readonly _fromVertex: GraphVertex<V>;
   private readonly _toVertex: GraphVertex<V>;
-  private readonly _weight: number;
+  private _weight: number;
 
   public constructor(
     fromVertex: GraphVertex<V>,
@@ -25,5 +25,9 @@ export default class GraphEdge<V> {
 
   get weight(): number {
     return this._weight;
+  }
+
+  set weight(value: number) {
+    this._weight = value;
   }
 }

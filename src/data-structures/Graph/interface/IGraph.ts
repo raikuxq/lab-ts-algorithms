@@ -12,7 +12,9 @@ export default interface IGraph<V> {
 
   getVertexNeighbors(value: V): Array<V>;
   getEdgeWeightByVertices(from: V, to: V): number;
+
   hasVertex(value: V): boolean;
+  hasEdge(from: V, to: V): boolean;
 
   getAdjacencyMatrix(): Array<Array<number>>;
   getAdjacencyList(): Map<V, Array<V>>;
