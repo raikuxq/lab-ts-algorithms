@@ -1,11 +1,10 @@
 import IGraph from "../interface/IGraph";
-import IQueue from "../../Queue/interface/IQueue";
 import Queue from "../../Queue/Queue";
 import IGraphIterator from "./interface/IGraphIterator";
 
 export default class GraphIteratorBFS<V> implements IGraphIterator<V> {
   private readonly graph: IGraph<V>;
-  private readonly queue: IQueue<V>;
+  private readonly queue: Queue<V>;
   private readonly visited: Map<V, boolean>;
   private readonly parents: Map<V, V>;
 

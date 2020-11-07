@@ -1,17 +1,16 @@
-import IQueue from "../interface/IQueue";
 import Queue from "../Queue";
 
 describe("queue", () => {
   describe("method peek", () => {
     test("should correct peek value from top", () => {
-      const queue: IQueue<number> = new Queue();
+      const queue: Queue<number> = new Queue();
       queue.enqueue(10);
       const top = queue.peek();
 
       expect(queue.peek()).toBe(top);
     });
     test("should throw when queue is empty", () => {
-      const queue: IQueue<number> = new Queue();
+      const queue: Queue<number> = new Queue();
 
       expect(() => {
         queue.peek();
@@ -21,7 +20,7 @@ describe("queue", () => {
 
   describe("method enqueue", () => {
     test("should correct enqueue to top", () => {
-      const queue: IQueue<number> = new Queue();
+      const queue: Queue<number> = new Queue();
       queue.enqueue(10);
 
       expect(queue.peek()).toBe(10);
@@ -30,7 +29,7 @@ describe("queue", () => {
 
   describe("method dequeue", () => {
     describe("should correct dequeue from top", () => {
-      const queue: IQueue<number> = new Queue();
+      const queue: Queue<number> = new Queue();
       queue.enqueue(10);
       const dequeued = queue.dequeue();
 
@@ -42,7 +41,7 @@ describe("queue", () => {
       });
     });
     test("should throw when queue is empty", () => {
-      const queue: IQueue<number> = new Queue();
+      const queue: Queue<number> = new Queue();
 
       expect(() => {
         queue.dequeue();
@@ -52,7 +51,7 @@ describe("queue", () => {
 
   describe("method isEmpty", () => {
     test("should return true when queue is empty", () => {
-      const queue: IQueue<number> = new Queue();
+      const queue: Queue<number> = new Queue();
       expect(queue.isEmpty()).toBe(true);
     });
   });

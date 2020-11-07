@@ -1,11 +1,10 @@
-import IQueue from "./interface/IQueue";
 import ILinkedList from "../ILinkedList";
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 
 /**
  * FIFO data structure
  */
-export default class Queue<T> implements IQueue<T> {
+export default class Queue<T> {
   private readonly _list: ILinkedList<T>;
 
   /**

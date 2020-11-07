@@ -1,11 +1,10 @@
 import IGraph from "../interface/IGraph";
-import IStack from "../../Stack/interface/IStack";
 import Stack from "../../Stack/Stack";
 import IGraphIterator from "./interface/IGraphIterator";
 
 export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
   private readonly graph: IGraph<V>;
-  private readonly stack: IStack<V>;
+  private readonly stack: Stack<V>;
   private readonly visited: Map<V, boolean>;
   private readonly parents: Map<V, V>;
 

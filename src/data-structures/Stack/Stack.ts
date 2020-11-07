@@ -1,11 +1,10 @@
-import IStack from "./interface/IStack";
 import ILinkedList from "../ILinkedList";
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 
 /**
  * LIFO data structure
  */
-export default class Stack<T> implements IStack<T> {
+export default class Stack<T> {
   private readonly _list: ILinkedList<T>;
   private readonly _capacity: number;
 
