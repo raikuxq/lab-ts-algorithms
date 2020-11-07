@@ -131,6 +131,7 @@ describe("graph", () => {
           }).toThrowError();
         });
       });
+
       describe("should override an existed edge and its weight", () => {
         const graph: IGraph<string> = new Graph();
         graph
@@ -153,6 +154,7 @@ describe("graph", () => {
         });
       });
     });
+
     describe("in undirected graph", () => {
       describe("should correct add edge between two existed vertices", () => {
         const graph: IGraph<string> = new Graph();
@@ -166,6 +168,7 @@ describe("graph", () => {
         });
       });
     });
+
     describe("in directed graph", () => {
       describe("should correct add edge between two existed vertices", () => {
         const graph: IGraph<string> = new Graph(true);
@@ -308,7 +311,7 @@ describe("graph", () => {
       });
     });
 
-    describe("in undirected graph", () => {
+    describe("in directed graph", () => {
       const graph: IGraph<number> = new Graph(true);
       graph
         .addVertex(1)
@@ -335,6 +338,7 @@ describe("graph", () => {
   describe("method getAdjacencyList", () => {
     describe("in empty graph", () => {
       const graph: IGraph<number> = new Graph();
+
       test("should return empty list", () => {
         const map = graph.getAdjacencyList();
         const emptyMap = new Map<number, number>();
@@ -368,7 +372,7 @@ describe("graph", () => {
       });
     });
 
-    describe("in undirected graph", () => {
+    describe("in directed graph", () => {
       const graph: IGraph<number> = new Graph(true);
       graph
         .addVertex(1)
@@ -404,6 +408,7 @@ describe("graph", () => {
         graph.getVertexNeighbors(0);
       }).toThrowError();
     });
+
     describe("in undirected graph", () => {
       test("should return correct neighbors", () => {
         const graph: IGraph<number> = new Graph();
@@ -417,6 +422,7 @@ describe("graph", () => {
         expect(graph.getVertexNeighbors(2)).toEqual([1, 3]);
       });
     });
+
     describe("in directed graph", () => {
       test("should return correct neighbors", () => {
         const graph: IGraph<number> = new Graph(true);

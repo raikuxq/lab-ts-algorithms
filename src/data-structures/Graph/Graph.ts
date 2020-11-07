@@ -75,6 +75,40 @@ export default class Graph<V> implements IGraph<V> {
   }
 
   /**
+   * Will remove all vertex relations with others vertices
+   */
+  private cascadeRemoveVertexRelations(vertexToRemove: GraphVertex<V>) {
+    this.getVertexNeighbors(vertexToRemove.data).forEach((neighbor: V) => {
+      const neighborVertex = this.getVertexByValue(neighbor);
+      const neighborVertexNeighbors = this._vertices.get(neighborVertex);
+
+      if (neighborVertexNeighbors) {
+        const indexOfNeighborVertex = neighborVertexNeighbors.indexOf(
+          vertexToRemove
+        );
+
+        if (indexOfNeighborVertex >= 0) {
+          neighborVertexNeighbors?.splice(indexOfNeighborVertex, 1);
+        }
+      }
+    });
+  }
+
+  /**
+   * Will remove all vertices edges with vertex to remove
+   */
+  private cascadeRemoveVertexEdges(vertexToRemove: GraphVertex<V>) {
+    this._edges.forEach((edge: GraphEdge<V>, index: number) => {
+      if (
+        edge.toVertex === vertexToRemove ||
+        edge.fromVertex === vertexToRemove
+      ) {
+        this._edges.splice(index, 1);
+      }
+    });
+  }
+
+  /**
    *
    * @returns graph weight
    */
@@ -132,35 +166,10 @@ export default class Graph<V> implements IGraph<V> {
   public removeVertex(data: V): this {
     try {
       const vertexToRemove = this.getVertexByValue(data);
-      const vertexToRemoveNeighbors = this.getVertexNeighbors(data);
 
+      this.cascadeRemoveVertexRelations(vertexToRemove);
+      this.cascadeRemoveVertexEdges(vertexToRemove);
       this._vertices.delete(vertexToRemove);
-
-      /** Cascade remove all vertices relations */
-      vertexToRemoveNeighbors.forEach((neighbor: V) => {
-        const neighborVertex = this.getVertexByValue(neighbor);
-        const neighborVertexNeighbors = this._vertices.get(neighborVertex);
-
-        if (neighborVertexNeighbors) {
-          const indexOfNeighborVertex = neighborVertexNeighbors.indexOf(
-            vertexToRemove
-          );
-
-          if (indexOfNeighborVertex >= 0) {
-            neighborVertexNeighbors?.splice(indexOfNeighborVertex, 1);
-          }
-        }
-      });
-
-      /** Cascade remove all edges with this vertex to remove */
-      this._edges.forEach((edge: GraphEdge<V>, index: number) => {
-        if (
-          edge.toVertex === vertexToRemove ||
-          edge.fromVertex === vertexToRemove
-        ) {
-          this._edges.splice(index, 1);
-        }
-      });
     } catch (e) {
       throw new Error("Vertex does not exist already");
     }
@@ -241,7 +250,6 @@ export default class Graph<V> implements IGraph<V> {
 
   /**
    * Get vertex neighbors by vertex value
-   * @param value
    */
   public getVertexNeighbors(value: V): Array<V> {
     try {
@@ -259,7 +267,6 @@ export default class Graph<V> implements IGraph<V> {
 
   /**
    * Graph has vertex by its value
-   * @param value
    */
   public hasVertex(value: V): boolean {
     return this.vertices.includes(value);
@@ -267,8 +274,6 @@ export default class Graph<V> implements IGraph<V> {
 
   /**
    * Graph has edge between two vertices
-   * @param from
-   * @param to
    */
   public hasEdge(from: V, to: V): boolean {
     return Boolean(
@@ -280,8 +285,6 @@ export default class Graph<V> implements IGraph<V> {
 
   /**
    * Get edge weight between two vertices
-   * @param from
-   * @param to
    */
   public getEdgeWeightByVertices(from: V, to: V): number {
     const fromVertex = this.getVertexByValue(from);
@@ -310,37 +313,37 @@ export default class Graph<V> implements IGraph<V> {
   }
 
   /**
-   * Get graph adjacency list
+   * Get graph adjacency matrix
+   *
+   * @example
+   *
+   * Directed graph:
+   * - Bob [Maria]
+   * - Maria [Bob, John]
+   * - John []
+   *
+   * Its matrix:
+   *       |  Bob  | Maria |  John |
+   * Bob   |   0   |   1   |   0   |
+   * Maria |   1   |   0   |   1   |
+   * John  |   0   |   0   |   0   |
    */
-  public getAdjacencyMatrix(): Array<Array<number>> {
+  public getAdjacencyMatrix(): number[][] {
     const vertices = this.getVerticesArrayFormat();
     const matrix = new Array(this.verticesCount);
 
-    vertices.forEach((graphVertexRow, i) => {
-      matrix[i] = new Array(this.verticesCount);
-    });
+    vertices.forEach((graphVertexRow, rowIndex) => {
+      matrix[rowIndex] = new Array(this.verticesCount);
 
-    vertices.forEach((graphVertexRow, i) => {
-      vertices.forEach((graphVertexColumn, j) => {
+      vertices.forEach((graphVertexColumn, columnIndex) => {
         const rowElement = graphVertexRow.data;
         const columnElement = graphVertexColumn.data;
 
-        const rowElementNeighbors = this.getVertexNeighbors(rowElement);
-        const columnElementNeighbors = this.getVertexNeighbors(columnElement);
+        const isElementLinked = this.getVertexNeighbors(rowElement).includes(
+          columnElement
+        );
 
-        matrix[i][j] = 0;
-        matrix[j][i] = 0;
-
-        const isRowLinkedToColumn = rowElementNeighbors.includes(columnElement);
-        const isColumnLinkedToRow = columnElementNeighbors.includes(rowElement);
-
-        if (isRowLinkedToColumn) {
-          matrix[i][j] = 1;
-        }
-
-        if (isColumnLinkedToRow) {
-          matrix[j][i] = 1;
-        }
+        matrix[rowIndex][columnIndex] = isElementLinked ? 1 : 0;
       });
     });
 
