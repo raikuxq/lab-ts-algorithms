@@ -1,6 +1,6 @@
 import IStack from "./interface/IStack";
 import ILinkedList from "../ILinkedList";
-import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
+import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 
 /**
  * LIFO data structure

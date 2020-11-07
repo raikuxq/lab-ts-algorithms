@@ -1,6 +1,6 @@
 import IQueue from "./interface/IQueue";
 import ILinkedList from "../ILinkedList";
-import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
+import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 
 /**
  * FIFO data structure
