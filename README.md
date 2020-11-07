@@ -15,7 +15,7 @@ Written in Node + TypeScript, tests in Jest.
 + [Quick sort](src/sorts/quick-sort.ts) [[test](src/sorts/__test/sorts.test.ts)]
 
 ## Data structures
-+ [Linked list](src/data-structures/DoubleLinkedList) [[test](src/data-structures/DoubleLinkedList/__test__/double-linked-list.test.ts)]
++ [Linked list](src/data-structures/LinkedList/DoubleLinkedList) [[test](src/data-structures/LinkedList/DoubleLinkedList/__test__/double-linked-list.test.ts)]
 + [Stack](src/data-structures/Stack/Stack.ts) [[test](src/data-structures/Stack/__test__/stack.test.ts)]
 + [Queue](src/data-structures/Queue/Queue.ts) [[test](src/data-structures/Queue/__test__/queue.test.ts)]
 + [Hash table](src/data-structures/HashTable/HashTable.ts) [[test](src/data-structures/HashTable/__test__/hash-table.test.ts)]
