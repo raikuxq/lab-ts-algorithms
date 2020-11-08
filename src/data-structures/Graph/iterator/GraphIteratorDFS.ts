@@ -1,14 +1,14 @@
-import IGraph from "../interface/IGraph";
+import AbstractGraph from "../AbstractGraph";
 import Stack from "../../Stack/Stack";
 import IGraphIterator from "./interface/IGraphIterator";
 
 export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
-  private readonly graph: IGraph<V>;
+  private readonly graph: AbstractGraph<V>;
   private readonly stack: Stack<V>;
   private readonly visited: Map<V, boolean>;
   private readonly parents: Map<V, V>;
 
-  public constructor(graph: IGraph<V>, startVertex: V) {
+  public constructor(graph: AbstractGraph<V>, startVertex: V) {
     if (!graph.hasVertex(startVertex)) {
       throw new Error("Start vertex does not exist");
     }

@@ -1,7 +1,7 @@
-import IGraph from "../../data-structures/Graph/interface/IGraph";
+import AbstractGraph from "../../data-structures/Graph/AbstractGraph";
+import UndirectedGraph from "../../data-structures/Graph/UndirectedGraph";
+import DirectedGraph from "../../data-structures/Graph/DirectedGraph";
 import IGraphIterationStrategy from "../../data-structures/Graph/strategy/interface/IGraphIterationStrategy";
-
-import Graph from "../../data-structures/Graph/Graph";
 import BFSIterationStrategy from "../../data-structures/Graph/strategy/BFSIterationStrategy";
 import DFSIterationStrategy from "../../data-structures/Graph/strategy/DFSIterationStrategy";
 
@@ -13,7 +13,7 @@ describe("has path searching algorithm", () => {
     const strategy: IGraphIterationStrategy<string> = new BFSIterationStrategy();
 
     describe("in empty graph", () => {
-      const graph: IGraph<string> = new Graph();
+      const graph: AbstractGraph<string> = new UndirectedGraph();
 
       test("should throw when graph is empty", () => {
         expect(() => {
@@ -23,7 +23,7 @@ describe("has path searching algorithm", () => {
     });
 
     describe("in non empty graph", () => {
-      const graph: IGraph<string> = new Graph();
+      const graph: AbstractGraph<string> = new UndirectedGraph();
 
       graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
 
@@ -58,7 +58,7 @@ describe("has path searching algorithm", () => {
       }
 
       describe("in undirected graph", () => {
-        const graph: IGraph<string> = new Graph();
+        const graph: AbstractGraph<string> = new UndirectedGraph();
 
         graph
           .addVertex("Mike")
@@ -84,7 +84,7 @@ describe("has path searching algorithm", () => {
       });
 
       describe("in directed graph", () => {
-        const graph: IGraph<string> = new Graph(true);
+        const graph: AbstractGraph<string> = new DirectedGraph();
 
         graph
           .addVertex("Mike")
