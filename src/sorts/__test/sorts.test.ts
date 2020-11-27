@@ -4,33 +4,32 @@ import selectSort from "../select-sort";
 import bubbleSort from "../bubble-sort";
 import insertionSort from "../insertion-sort";
 
+const createSortFunction = (
+  sortType: string
+): ((arr: Array<number>) => Array<number>) => {
+  switch (sortType) {
+    case "Quick":
+      return quickSort;
+    case "Merge":
+      return mergeSort;
+    case "Selection":
+      return selectSort;
+    case "Bubble":
+      return bubbleSort;
+    case "Insertion":
+      return insertionSort;
+    default:
+      throw new Error("Invalid sort type");
+  }
+};
+
 const randomArray = (length: number, max: number): Array<number> =>
   new Array(length).fill(0).map(() => Math.round(Math.random() * max));
 
 describe.each(["Quick", "Merge", "Selection", "Bubble", "Insertion"])(
   "%s sort",
   (sortStrategyType: string) => {
-    let sort: (arr: Array<number>) => Array<number>;
-
-    switch (sortStrategyType) {
-      case "Quick":
-        sort = quickSort;
-        break;
-      case "Merge":
-        sort = mergeSort;
-        break;
-      case "Selection":
-        sort = selectSort;
-        break;
-      case "Bubble":
-        sort = bubbleSort;
-        break;
-      case "Insertion":
-        sort = insertionSort;
-        break;
-      default:
-        throw new Error("Invalid sort type");
-    }
+    const sort = createSortFunction(sortStrategyType);
 
     test("should correct sort with random numbers", () => {
       const notSortedArr: Array<number> = randomArray(100, 500);
@@ -51,7 +50,7 @@ describe.each(["Quick", "Merge", "Selection", "Bubble", "Insertion"])(
     });
 
     test("should correct sort already sorted array", () => {
-      const sortedArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const sortedArr = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
 
       expect(sort(sortedArr)).toEqual(sortedArr);
     });
