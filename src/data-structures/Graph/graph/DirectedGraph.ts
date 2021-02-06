@@ -31,13 +31,12 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
         if (typeof weight === "number") {
           this.updateEdgeWeight(fromVertex, toVertex, weight);
         }
-        return this;
+      } else {
+        const edge = new GraphEdge(fromVertex, toVertex, weight);
+
+        this._edges.push(edge);
+        this._vertices.get(fromVertex)?.push(toVertex);
       }
-
-      const edge = new GraphEdge(fromVertex, toVertex, weight);
-
-      this._edges.push(edge);
-      this._vertices.get(fromVertex)?.push(toVertex);
     } catch {
       throw new Error("Edge cannot be added");
     }

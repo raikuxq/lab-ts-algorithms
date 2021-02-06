@@ -16,7 +16,9 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
         (edge.fromVertex === to && edge.toVertex === from)
     );
 
-    if (!edge) throw new Error("Edge not found");
+    if (!edge) {
+      throw new Error("Edge not found");
+    }
 
     return edge;
   }
@@ -29,19 +31,18 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
       const fromVertex = this.getVertexByValue(from);
       const toVertex = this.getVertexByValue(to);
 
-      /** When edge is already exist, we can update its weight */
+      /** When edge is already exist, we should only update its weight */
       if (this.hasEdge(fromVertex, toVertex)) {
-        if (weight) {
+        if (typeof weight === "number") {
           this.updateEdgeWeight(fromVertex, toVertex, weight);
         }
-        return this;
+      } else {
+        const edge = new GraphEdge(fromVertex, toVertex, weight);
+
+        this._edges.push(edge);
+        this._vertices.get(fromVertex)?.push(toVertex);
+        this._vertices.get(toVertex)?.push(fromVertex);
       }
-
-      const edge = new GraphEdge(fromVertex, toVertex, weight);
-
-      this._edges.push(edge);
-      this._vertices.get(fromVertex)?.push(toVertex);
-      this._vertices.get(toVertex)?.push(fromVertex);
     } catch {
       throw new Error("Edge cannot be added");
     }
