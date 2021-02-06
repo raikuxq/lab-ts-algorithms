@@ -9,19 +9,15 @@ export default class GraphPresenter<V> {
 
   /**
    * Get graph adjacency list
-   */
+   *
+   **/
   public getAdjacencyList(): Map<V, Array<V>> {
-    const keys = this.graph.vertices;
-    const map = new Map<V, Array<V>>();
-
-    keys.forEach((key) => {
-      const vertex = key;
+    return this.graph.vertices.reduce((map: Map<V, Array<V>>, vertex: V) => {
       const neighbors = this.graph.getVertexNeighbors(vertex);
-
       map.set(vertex, neighbors);
-    });
 
-    return map;
+      return map;
+    }, new Map());
   }
 
   /**
