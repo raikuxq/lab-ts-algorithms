@@ -1,25 +1,19 @@
-import GraphVertex from "./GraphVertex";
-
 export default class GraphEdge<V> {
-  private readonly _fromVertex: GraphVertex<V>;
-  private readonly _toVertex: GraphVertex<V>;
+  private readonly _fromVertex: V;
+  private readonly _toVertex: V;
   private _weight: number;
 
-  public constructor(
-    fromVertex: GraphVertex<V>,
-    toVertex: GraphVertex<V>,
-    weight = 0
-  ) {
+  public constructor(fromVertex: V, toVertex: V, weight = 0) {
     this._fromVertex = fromVertex;
     this._toVertex = toVertex;
     this._weight = weight;
   }
 
-  get fromVertex(): GraphVertex<V> {
+  get fromVertex(): V {
     return this._fromVertex;
   }
 
-  get toVertex(): GraphVertex<V> {
+  get toVertex(): V {
     return this._toVertex;
   }
 

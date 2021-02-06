@@ -1,14 +1,14 @@
-import AbstractGraph from "../AbstractGraph";
 import Queue from "../../Queue/Queue";
-import IGraphIterator from "./interface/IGraphIterator";
+import IGraphIterator from "../IGraphIterator";
+import IGraph from "../IGraph";
 
 export default class GraphIteratorBFS<V> implements IGraphIterator<V> {
-  private readonly graph: AbstractGraph<V>;
+  private readonly graph: IGraph<V>;
   private readonly queue: Queue<V>;
   private readonly visited: Map<V, boolean>;
   private readonly parents: Map<V, V>;
 
-  public constructor(graph: AbstractGraph<V>, startVertex: V) {
+  public constructor(graph: IGraph<V>, startVertex: V) {
     if (!graph.hasVertex(startVertex)) {
       throw new Error("Start vertex does not exist");
     }

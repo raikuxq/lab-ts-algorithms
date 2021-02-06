@@ -1,12 +1,11 @@
-import GraphVertex from "./GraphVertex";
 import GraphEdge from "./GraphEdge";
 
 export default abstract class AbstractGraph<V> {
-  protected _vertices: Map<GraphVertex<V>, Array<GraphVertex<V>>>;
+  protected _vertices: Map<V, Array<V>>;
   protected _edges: Array<GraphEdge<V>>;
 
   protected constructor() {
-    this._vertices = new Map<GraphVertex<V>, Array<GraphVertex<V>>>();
+    this._vertices = new Map<V, Array<V>>();
     this._edges = new Array<GraphEdge<V>>();
   }
 
@@ -16,16 +15,13 @@ export default abstract class AbstractGraph<V> {
    * @param to
    * @private
    */
-  protected abstract getEdgeByValue(
-    from: GraphVertex<V>,
-    to: GraphVertex<V>
-  ): GraphEdge<V>;
+  protected abstract getEdgeByValue(from: V, to: V): GraphEdge<V>;
 
   /**
    * Get vertices list in array format
    * @private
    */
-  protected getVerticesArrayFormat(): Array<GraphVertex<V>> {
+  protected getVerticesArrayFormat(): Array<V> {
     return Array.from(this._vertices.keys());
   }
 
@@ -34,9 +30,9 @@ export default abstract class AbstractGraph<V> {
    * @param value
    * @private
    */
-  protected getVertexByValue(value: V): GraphVertex<V> {
+  protected getVertexByValue(value: V): V {
     const vertex = this.getVerticesArrayFormat().find(
-      (vertex: GraphVertex<V>) => vertex.data === value
+      (vertex: V) => vertex === value
     );
 
     if (!vertex) throw new Error("Vertex not found");
@@ -51,11 +47,7 @@ export default abstract class AbstractGraph<V> {
    * @param weight
    * @private
    */
-  protected updateEdgeWeight(
-    from: GraphVertex<V>,
-    to: GraphVertex<V>,
-    weight: number
-  ): void {
+  protected updateEdgeWeight(from: V, to: V, weight: number): void {
     const edge = this.getEdgeByValue(from, to);
 
     edge.weight = weight;
@@ -64,13 +56,13 @@ export default abstract class AbstractGraph<V> {
   /**
    * Will remove all vertex relations with others vertices
    */
-  protected cascadeRemoveVertexRelations(vertexToRemove: GraphVertex<V>): void {
-    this.getVerticesArrayFormat().forEach((neighbor: GraphVertex<V>) => {
+  protected cascadeRemoveVertexRelations(vertexToRemove: V): void {
+    this.getVerticesArrayFormat().forEach((neighbor: V) => {
       const neighborVertexNeighbors = this._vertices.get(neighbor);
 
       if (neighborVertexNeighbors) {
         const neighborVertexFilteredNeighbors = neighborVertexNeighbors.filter(
-          (newNeighbor: GraphVertex<V>) => newNeighbor !== vertexToRemove
+          (newNeighbor: V) => newNeighbor !== vertexToRemove
         );
 
         this._vertices.set(neighbor, neighborVertexFilteredNeighbors);
@@ -81,7 +73,7 @@ export default abstract class AbstractGraph<V> {
   /**
    * Will remove all vertices edges with vertex to remove
    */
-  protected cascadeRemoveVertexEdges(vertexToRemove: GraphVertex<V>): void {
+  protected cascadeRemoveVertexEdges(vertexToRemove: V): void {
     this._edges.forEach((edge: GraphEdge<V>, index: number) => {
       if (
         edge.toVertex === vertexToRemove ||
@@ -107,9 +99,7 @@ export default abstract class AbstractGraph<V> {
    * @returns array of vertices
    */
   public get vertices(): Array<V> {
-    return this.getVerticesArrayFormat().map(
-      (vertex: GraphVertex<V>) => vertex.data
-    );
+    return this.getVerticesArrayFormat().map((vertex: V) => vertex);
   }
 
   /**
@@ -135,10 +125,7 @@ export default abstract class AbstractGraph<V> {
       throw new Error("Vertex is already exist");
     }
 
-    const vertex = new GraphVertex<V>(data);
-    const siblings = new Array<GraphVertex<V>>();
-
-    this._vertices.set(vertex, siblings);
+    this._vertices.set(data, new Array<V>());
 
     return this;
   }
@@ -178,11 +165,7 @@ export default abstract class AbstractGraph<V> {
     try {
       const vertex = this.getVertexByValue(value);
 
-      return (
-        this._vertices
-          .get(vertex)
-          ?.map((vertex: GraphVertex<V>) => vertex.data) || []
-      );
+      return this._vertices.get(vertex)?.map((vertex: V) => vertex) || [];
     } catch (e) {
       throw new Error("No such vertex");
     }
@@ -201,7 +184,7 @@ export default abstract class AbstractGraph<V> {
   public hasEdge(from: V, to: V): boolean {
     return Boolean(
       this._edges.find((edge) => {
-        return edge.fromVertex.data === from && edge.toVertex.data === to;
+        return edge.fromVertex === from && edge.toVertex === to;
       })
     );
   }
@@ -216,60 +199,5 @@ export default abstract class AbstractGraph<V> {
     const edge = this.getEdgeByValue(fromVertex, toVertex);
 
     return edge.weight;
-  }
-
-  /**
-   * Get graph adjacency list
-   */
-  public getAdjacencyList(): Map<V, Array<V>> {
-    const keys = this.getVerticesArrayFormat();
-    const map = new Map<V, Array<V>>();
-
-    keys.forEach((key) => {
-      const vertex = key.data;
-      const neighbors = this.getVertexNeighbors(vertex);
-
-      map.set(vertex, neighbors);
-    });
-
-    return map;
-  }
-
-  /**
-   * Get graph adjacency matrix N x N
-   *
-   * @example
-   *
-   * Directed graph:
-   * - Bob [Maria]
-   * - Maria [Bob, John]
-   * - John []
-   *
-   * Its matrix:
-   *       |  Bob  | Maria |  John |
-   * Bob   |   0   |   1   |   0   |
-   * Maria |   1   |   0   |   1   |
-   * John  |   0   |   0   |   0   |
-   */
-  public getAdjacencyMatrix(): number[][] {
-    const vertices = this.getVerticesArrayFormat();
-    const matrix = new Array(this.verticesCount);
-
-    vertices.forEach((graphVertexRow, rowIndex) => {
-      matrix[rowIndex] = new Array(this.verticesCount);
-
-      vertices.forEach((graphVertexColumn, columnIndex) => {
-        const rowElement = graphVertexRow.data;
-        const columnElement = graphVertexColumn.data;
-
-        const isElementLinked = this.getVertexNeighbors(rowElement).includes(
-          columnElement
-        );
-
-        matrix[rowIndex][columnIndex] = isElementLinked ? 1 : 0;
-      });
-    });
-
-    return matrix;
   }
 }

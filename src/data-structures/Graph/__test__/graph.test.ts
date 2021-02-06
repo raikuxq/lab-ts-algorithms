@@ -1,27 +1,11 @@
-import AbstractGraph from "../AbstractGraph";
-import UndirectedGraph from "../UndirectedGraph";
-import DirectedGraph from "../DirectedGraph";
-
-const createGraph = <T>(type: string): AbstractGraph<T> => {
-  let graph: AbstractGraph<T>;
-
-  switch (type) {
-    case "Directed":
-      graph = new DirectedGraph();
-      break;
-    case "Undirected":
-      graph = new UndirectedGraph();
-      break;
-    default:
-      throw new Error("Invalid graph type");
-  }
-
-  return graph;
-};
+import IGraph from "../IGraph";
+import UndirectedGraph from "../graph/UndirectedGraph";
+import DirectedGraph from "../graph/DirectedGraph";
+import createGraph from "../helpers/createGraph";
 
 describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
   describe("getter weight", () => {
-    const graph: AbstractGraph<string> = createGraph(graphType);
+    const graph: IGraph<string> = createGraph(graphType);
 
     graph
       .addVertex("Mike")
@@ -41,14 +25,14 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
 
   describe("getter verticesCount", () => {
     describe("in empty graph", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
+      const graph: IGraph<string> = createGraph(graphType);
 
       test("should return correct vertices count", () => {
         expect(graph.verticesCount).toBe(0);
       });
     });
     describe("in non empty graph", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
+      const graph: IGraph<string> = createGraph(graphType);
       graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
 
       test("should return correct vertices count", () => {
@@ -59,7 +43,7 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
 
   describe("getter edgesCount", () => {
     describe("in empty graph", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
+      const graph: IGraph<string> = createGraph(graphType);
 
       test("should return correct vertices count", () => {
         expect(graph.edgesCount).toBe(0);
@@ -69,14 +53,14 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
 
   describe("getter edgesCount", () => {
     describe("in empty graph", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
+      const graph: IGraph<string> = createGraph(graphType);
 
       test("should return empty array of vertices", () => {
         expect(graph.vertices).toEqual([]);
       });
     });
     describe("in non empty graph", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
+      const graph: IGraph<string> = createGraph(graphType);
       graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
 
       test("should return correct array of vertices", () => {
@@ -87,7 +71,7 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
 
   describe("method addVertex", () => {
     test("should correct add vertex", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
+      const graph: IGraph<string> = createGraph(graphType);
       graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
 
       const vertices = graph.vertices;
@@ -96,7 +80,7 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
       expect(vertices).toEqual(expectedVertices);
     });
     test("should throw when try to add an existed vertex", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
+      const graph: IGraph<string> = createGraph(graphType);
       graph.addVertex("Mike");
 
       expect(() => {
@@ -108,7 +92,7 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
   describe("method addEdge", () => {
     describe("in any graph", () => {
       describe("should throw when try to add edge between not existed vertices", () => {
-        const graph: AbstractGraph<string> = createGraph(graphType);
+        const graph: IGraph<string> = createGraph(graphType);
         graph.addVertex("Mike").addVertex("Bob");
 
         test("when first node does not exist", () => {
@@ -127,7 +111,7 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
 
   describe("method removeVertex", () => {
     test("should throw when try to delete not existed vertex", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
+      const graph: IGraph<string> = createGraph(graphType);
 
       expect(() => {
         graph.removeVertex("NOT_EXISTED_VERTEX");
@@ -137,7 +121,7 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
 
   describe("method removeEdge", () => {
     test("should throw when try to delete not existed edge", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
+      const graph: IGraph<string> = createGraph(graphType);
 
       expect(() => {
         graph.removeEdge("NOT_EXISTED_VERTEX", "NOT_EXISTED_VERTEX");
@@ -145,32 +129,9 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
     });
   });
 
-  describe("method getAdjacencyMatrix", () => {
-    describe("in empty graph", () => {
-      const graph: AbstractGraph<string> = createGraph(graphType);
-      test("should return empty list", () => {
-        const matrix = graph.getAdjacencyMatrix();
-
-        expect(matrix).toEqual([]);
-      });
-    });
-  });
-
-  describe("method getAdjacencyList", () => {
-    describe("in empty graph", () => {
-      const graph: AbstractGraph<number> = createGraph(graphType);
-
-      test("should return empty list", () => {
-        const map = graph.getAdjacencyList();
-        const emptyMap = new Map<number, number>();
-        expect(map).toEqual(emptyMap);
-      });
-    });
-  });
-
   describe("method getVertexNeighbors", () => {
     test("should throw when vertex does not exist", () => {
-      const graph: AbstractGraph<number> = createGraph(graphType);
+      const graph: IGraph<number> = createGraph(graphType);
       graph.addVertex(1).addVertex(2).addEdge(1, 2);
 
       expect(() => {
@@ -183,7 +144,7 @@ describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
 describe("graph", () => {
   describe("getter edgesCount", () => {
     describe("in undirected graph", () => {
-      const graph: AbstractGraph<string> = new UndirectedGraph();
+      const graph: IGraph<string> = new UndirectedGraph();
       graph
         .addVertex("Mike")
         .addVertex("Bob")
@@ -196,7 +157,7 @@ describe("graph", () => {
       });
     });
     describe("in directed graph", () => {
-      const graph: AbstractGraph<string> = new DirectedGraph();
+      const graph: IGraph<string> = new DirectedGraph();
       graph
         .addVertex("Mike")
         .addVertex("Bob")
@@ -214,7 +175,7 @@ describe("graph", () => {
   describe("method addEdge", () => {
     describe("in undirected graph", () => {
       describe("should correct add edge between two existed vertices", () => {
-        const graph: AbstractGraph<string> = new UndirectedGraph();
+        const graph: IGraph<string> = new UndirectedGraph();
         graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
 
         test("should add second node to first node neighbors", () => {
@@ -226,7 +187,7 @@ describe("graph", () => {
       });
 
       describe("should override an existed edge and its weight", () => {
-        const graph: AbstractGraph<string> = new UndirectedGraph();
+        const graph: IGraph<string> = new UndirectedGraph();
         graph
           .addVertex("Mike")
           .addVertex("Bob")
@@ -250,7 +211,7 @@ describe("graph", () => {
 
     describe("in directed graph", () => {
       describe("should correct add edge between two existed vertices", () => {
-        const graph: AbstractGraph<string> = new DirectedGraph();
+        const graph: IGraph<string> = new DirectedGraph();
         graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
 
         test("should add second node to first node neighbors", () => {
@@ -262,7 +223,7 @@ describe("graph", () => {
       });
 
       describe("should override an existed edge and its weight", () => {
-        const graph: AbstractGraph<string> = new DirectedGraph();
+        const graph: IGraph<string> = new DirectedGraph();
         graph
           .addVertex("Mike")
           .addVertex("Bob")
@@ -292,7 +253,7 @@ describe("graph", () => {
 
   describe("method removeEdge", () => {
     describe("in undirected graph", () => {
-      const graph: AbstractGraph<string> = new UndirectedGraph();
+      const graph: IGraph<string> = new UndirectedGraph();
 
       graph
         .addVertex("Mike")
@@ -309,7 +270,7 @@ describe("graph", () => {
       });
     });
     describe("in directed graph", () => {
-      const graph: AbstractGraph<string> = new DirectedGraph();
+      const graph: IGraph<string> = new DirectedGraph();
 
       graph
         .addVertex("Mike")
@@ -333,112 +294,10 @@ describe("graph", () => {
     });
   });
 
-  describe("method getAdjacencyMatrix", () => {
-    describe("in undirected graph", () => {
-      const graph: AbstractGraph<number> = new UndirectedGraph();
-      graph
-        .addVertex(1)
-        .addVertex(2)
-        .addVertex(3)
-        .addVertex(4)
-        .addEdge(1, 2)
-        .addEdge(1, 3)
-        .addEdge(3, 4);
-
-      test("should return correct matrix", () => {
-        const matrix = graph.getAdjacencyMatrix();
-
-        expect(matrix).toEqual([
-          [0, 1, 1, 0],
-          [1, 0, 0, 0],
-          [1, 0, 0, 1],
-          [0, 0, 1, 0],
-        ]);
-      });
-    });
-
-    describe("in directed graph", () => {
-      const graph: AbstractGraph<number> = new DirectedGraph();
-      graph
-        .addVertex(1)
-        .addVertex(2)
-        .addVertex(3)
-        .addVertex(4)
-        .addEdge(1, 2)
-        .addEdge(1, 3)
-        .addEdge(3, 4);
-
-      test("should return correct matrix", () => {
-        const matrix = graph.getAdjacencyMatrix();
-
-        expect(matrix).toEqual([
-          [0, 1, 1, 0],
-          [0, 0, 0, 0],
-          [0, 0, 0, 1],
-          [0, 0, 0, 0],
-        ]);
-      });
-    });
-  });
-
-  describe("method getAdjacencyList", () => {
-    describe("in undirected graph", () => {
-      const graph: AbstractGraph<number> = new UndirectedGraph();
-      graph
-        .addVertex(1)
-        .addVertex(2)
-        .addVertex(3)
-        .addVertex(4)
-        .addEdge(1, 2)
-        .addEdge(1, 3)
-        .addEdge(3, 4);
-
-      test("should return correct list", () => {
-        const list = graph.getAdjacencyList();
-        const expectedList = new Map<number, Array<number>>();
-
-        // eslint-disable-next-line
-        expectedList
-          .set(1, [2, 3])
-          .set(2, [1])
-          .set(3, [1, 4])
-          .set(4, [3]);
-
-        expect(list).toEqual(expectedList);
-      });
-    });
-
-    describe("in directed graph", () => {
-      const graph: AbstractGraph<number> = new DirectedGraph();
-      graph
-        .addVertex(1)
-        .addVertex(2)
-        .addVertex(3)
-        .addVertex(4)
-        .addEdge(1, 2)
-        .addEdge(1, 3)
-        .addEdge(3, 4);
-
-      test("should return correct list", () => {
-        const list = graph.getAdjacencyList();
-        const expectedList = new Map<number, Array<number>>();
-
-        // eslint-disable-next-line
-        expectedList
-          .set(1, [2, 3])
-          .set(2, [])
-          .set(3, [4])
-          .set(4, []);
-
-        expect(list).toEqual(expectedList);
-      });
-    });
-  });
-
   describe("method getVertexNeighbors", () => {
     describe("in undirected graph", () => {
       test("should return correct neighbors", () => {
-        const graph: AbstractGraph<number> = new UndirectedGraph();
+        const graph: IGraph<number> = new UndirectedGraph();
         graph
           .addVertex(1)
           .addVertex(2)
@@ -452,7 +311,7 @@ describe("graph", () => {
 
     describe("in directed graph", () => {
       test("should return correct neighbors", () => {
-        const graph: AbstractGraph<number> = new DirectedGraph();
+        const graph: IGraph<number> = new DirectedGraph();
         graph
           .addVertex(1)
           .addVertex(2)
@@ -468,7 +327,7 @@ describe("graph", () => {
   describe("method removeVertex", () => {
     describe("in undirected graph", () => {
       describe("should cascade remove", () => {
-        const graph: AbstractGraph<string> = new UndirectedGraph();
+        const graph: IGraph<string> = new UndirectedGraph();
 
         graph
           .addVertex("Mike")
@@ -488,23 +347,20 @@ describe("graph", () => {
           expect(hasEdge).toBe(false);
         });
         test("should remove related vertexes neighbors", () => {
-          const list = graph.getAdjacencyList();
-          const expectedList = new Map();
+          const mikeNeighbors = graph.getVertexNeighbors("Mike");
+          const lisaNeighbors = graph.getVertexNeighbors("Lisa");
+          const johnNeighbors = graph.getVertexNeighbors("John");
 
-          // eslint-disable-next-line
-          expectedList
-            .set("Mike", ["Lisa"])
-            .set("Lisa", ["Mike", "John"])
-            .set("John", ["Lisa"]);
-
-          expect(list).toEqual(expectedList);
+          expect(mikeNeighbors).toEqual(["Lisa"]);
+          expect(lisaNeighbors).toEqual(["Mike", "John"]);
+          expect(johnNeighbors).toEqual(["Lisa"]);
         });
       });
     });
 
     describe("in directed graph", () => {
       describe("should cascade remove", () => {
-        const graph: AbstractGraph<string> = new DirectedGraph();
+        const graph: IGraph<string> = new DirectedGraph();
 
         graph
           .addVertex("Mike")
@@ -524,16 +380,13 @@ describe("graph", () => {
         });
 
         test("should remove related vertices neighbors", () => {
-          const list = graph.getAdjacencyList();
-          const expectedList = new Map();
+          const mikeNeighbors = graph.getVertexNeighbors("Mike");
+          const lisaNeighbors = graph.getVertexNeighbors("Lisa");
+          const johnNeighbors = graph.getVertexNeighbors("John");
 
-          // eslint-disable-next-line
-          expectedList
-            .set("Mike", ["Lisa"])
-            .set("Lisa", [])
-            .set("John", ["Lisa"]);
-
-          expect(list).toEqual(expectedList);
+          expect(mikeNeighbors).toEqual(["Lisa"]);
+          expect(lisaNeighbors).toEqual([]);
+          expect(johnNeighbors).toEqual(["Lisa"]);
         });
       });
     });
