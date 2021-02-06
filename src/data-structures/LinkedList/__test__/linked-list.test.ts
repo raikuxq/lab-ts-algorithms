@@ -1,8 +1,6 @@
-import ILinkedList from "../../ILinkedList";
+import ILinkedList from "../ILinkedList";
 import SingleLinkedList from "../SingleLinkedList/SingleLinkedList";
 import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
-import IIterable from "../../IIterable";
-import IIterator from "../../IIterator";
 
 const createList = <T>(type: string): ILinkedList<T> => {
   let linkedList: ILinkedList<T>;

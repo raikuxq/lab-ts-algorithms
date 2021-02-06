@@ -1,4 +1,4 @@
-import ILinkedList from "../ILinkedList";
+import ILinkedList from "./ILinkedList";
 import AbstractLinkedNode from "./AbstractLinkedNode";
 
 export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
