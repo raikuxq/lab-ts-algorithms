@@ -50,14 +50,14 @@ describe.each(["Quick", "Merge", "Selection", "Bubble", "Insertion"])(
     });
 
     test("should correct sort already sorted array", () => {
-      const sortedArr = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5];
+      const sortedArr = [-5, 0, 5];
 
       expect(sort(sortedArr)).toEqual(sortedArr);
     });
 
     test("should correct sort an array with repeated numbers", () => {
-      const notSortedArr = [8, 7, 6, 4, 3, 1, 6, 2, 2, 4, 5];
-      const sortedArr = [1, 2, 2, 3, 4, 4, 5, 6, 6, 7, 8];
+      const notSortedArr = [7, 2, 1, 2, 7];
+      const sortedArr = [1, 2, 2, 7, 7];
 
       expect(sort(notSortedArr)).toEqual(sortedArr);
     });

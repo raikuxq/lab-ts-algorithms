@@ -8,27 +8,43 @@ export default function mergeSort(arr: Array<number>): Array<number> {
     midIndex: number,
     rightIndex: number
   ) {
-    const res = arr.slice(leftIndex, rightIndex + 1);
+    const container = arr.slice(leftIndex, rightIndex + 1);
 
-    let i1 = leftIndex;
-    let i2 = midIndex + 1;
-    let i = leftIndex;
+    let leftHalfIndex = leftIndex;
+    let rightHalfIndex = midIndex + 1;
 
-    while (i1 <= midIndex && i2 <= rightIndex) {
-      const v1 = res[i1 - leftIndex];
-      const v2 = res[i2 - leftIndex];
+    let resultArrIndex = leftIndex;
 
-      if (v1 < v2) {
-        arr[i++] = v1;
-        ++i1;
+    /**
+     * While both halves of array are not ended
+     */
+    while (leftHalfIndex <= midIndex && rightHalfIndex <= rightIndex) {
+      const leftHalfElement = container[leftHalfIndex - leftIndex];
+      const rightHalfElement = container[rightHalfIndex - leftIndex];
+
+      if (leftHalfElement < rightHalfElement) {
+        arr[resultArrIndex] = leftHalfElement;
+        leftHalfIndex++;
       } else {
-        arr[i++] = v2;
-        ++i2;
+        arr[resultArrIndex] = rightHalfElement;
+        rightHalfIndex++;
       }
+      resultArrIndex++;
     }
 
-    while (i1 <= midIndex) arr[i++] = res[i1++ - leftIndex];
-    while (i2 <= midIndex) arr[i++] = res[i2++ - leftIndex];
+    /**
+     * If one of halves is ended, the remaining one will just be pushed to result
+     */
+    while (leftHalfIndex <= midIndex) {
+      arr[resultArrIndex] = container[leftHalfIndex - leftIndex];
+      resultArrIndex++;
+      leftHalfIndex++;
+    }
+    while (rightHalfIndex <= midIndex) {
+      arr[resultArrIndex] = container[rightHalfIndex - leftIndex];
+      resultArrIndex++;
+      rightHalfIndex++;
+    }
   }
 
   /**
@@ -37,7 +53,7 @@ export default function mergeSort(arr: Array<number>): Array<number> {
   function sortRange(
     arr: Array<number>,
     leftIndex = 0,
-    rightIndex: number = arr.length - 1
+    rightIndex = arr.length - 1
   ) {
     if (rightIndex > leftIndex) {
       const midIndex = Math.floor(leftIndex + (rightIndex - leftIndex) / 2);
