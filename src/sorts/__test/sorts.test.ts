@@ -3,6 +3,7 @@ import mergeSort from "../merge-sort";
 import selectSort from "../select-sort";
 import bubbleSort from "../bubble-sort";
 import insertionSort from "../insertion-sort";
+import { randomArray } from "../sort-compare";
 
 const createSortFunction = (
   sortType: string
@@ -22,9 +23,6 @@ const createSortFunction = (
       throw new Error("Invalid sort type");
   }
 };
-
-const randomArray = (length: number, max: number): Array<number> =>
-  new Array(length).fill(0).map(() => Math.round(Math.random() * max));
 
 describe.each(["Quick", "Merge", "Selection", "Bubble", "Insertion"])(
   "%s sort",
@@ -58,6 +56,13 @@ describe.each(["Quick", "Merge", "Selection", "Bubble", "Insertion"])(
     test("should correct sort an array with repeated numbers", () => {
       const notSortedArr = [7, 2, 1, 2, 7];
       const sortedArr = [1, 2, 2, 7, 7];
+
+      expect(sort(notSortedArr)).toEqual(sortedArr);
+    });
+
+    test("should correct sort an array with float numbers", () => {
+      const notSortedArr = [2.5, -2.5, 0, 5.5, -5.5];
+      const sortedArr = [-5.5, -2.5, 0, 2.5, 5.5];
 
       expect(sort(notSortedArr)).toEqual(sortedArr);
     });
