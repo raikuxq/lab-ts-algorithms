@@ -1,9 +1,9 @@
-import quickSort from "../quick-sort";
-import mergeSort from "../merge-sort";
-import selectSort from "../select-sort";
-import bubbleSort from "../bubble-sort";
-import insertionSort from "../insertion-sort";
-import { randomizeArray } from "../../performance/sort-compare";
+import quickSort from "../src/sorts/quick-sort";
+import mergeSort from "../src/sorts/merge-sort";
+import selectSort from "../src/sorts/select-sort";
+import bubbleSort from "../src/sorts/bubble-sort";
+import insertionSort from "../src/sorts/insertion-sort";
+import { randomizeArray } from "../src/performance/sort-compare";
 
 const createSortFunction = (
   sortType: string

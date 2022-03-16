@@ -1,8 +1,8 @@
-import IGraph from "../IGraph";
-import UndirectedGraph from "../graph/UndirectedGraph";
-import DirectedGraph from "../graph/DirectedGraph";
-import GraphPresenter from "../presenter/GraphPresenter";
-import createGraph from "../helpers/createGraph";
+import IGraph from "../src/data-structures/Graph/IGraph";
+import UndirectedGraph from "../src/data-structures/Graph/graph/UndirectedGraph";
+import DirectedGraph from "../src/data-structures/Graph/graph/DirectedGraph";
+import GraphPresenter from "../src/data-structures/Graph/presenter/GraphPresenter";
+import createGraph from "../src/data-structures/Graph/helpers/createGraph";
 
 describe.each(["Directed", "Undirected"])(
   "%s graph graphPresenter",

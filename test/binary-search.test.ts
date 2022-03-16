@@ -1,4 +1,4 @@
-import binarySearch from "../binary-search";
+import binarySearch from "../src/base/binary-search";
 
 describe("Binary search", () => {
   test("find in positive 100 elements", () => {

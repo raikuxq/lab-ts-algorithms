@@ -1,12 +1,12 @@
-import AbstractGraph from "../graph/AbstractGraph";
-import UndirectedGraph from "../graph/UndirectedGraph";
-import DirectedGraph from "../graph/DirectedGraph";
-import IGraphIterationStrategy from "../IGraphIterationStrategy";
-import BFSIterationStrategy from "../strategy/BFSIterationStrategy";
-import DFSIterationStrategy from "../strategy/DFSIterationStrategy";
-import DijkstraIterationStrategy from "../strategy/DijkstraIterationStrategy";
+import AbstractGraph from "../src/data-structures/Graph/graph/AbstractGraph";
+import UndirectedGraph from "../src/data-structures/Graph/graph/UndirectedGraph";
+import DirectedGraph from "../src/data-structures/Graph/graph/DirectedGraph";
+import IGraphIterationStrategy from "../src/data-structures/Graph/IGraphIterationStrategy";
+import BFSIterationStrategy from "../src/data-structures/Graph/strategy/BFSIterationStrategy";
+import DFSIterationStrategy from "../src/data-structures/Graph/strategy/DFSIterationStrategy";
+import DijkstraIterationStrategy from "../src/data-structures/Graph/strategy/DijkstraIterationStrategy";
 
-import shortestPath from "../searching/shortestPath";
+import shortestPath from "../src/data-structures/Graph/searching/shortestPath";
 
 describe("shortest path searching algorithm", () => {
   describe("in any graph type", () => {

@@ -1,6 +1,6 @@
-import ILinkedList from "../ILinkedList";
-import SingleLinkedList from "../SingleLinkedList/SingleLinkedList";
-import DoubleLinkedList from "../DoubleLinkedList/DoubleLinkedList";
+import ILinkedList from "../src/data-structures/LinkedList/ILinkedList";
+import SingleLinkedList from "../src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
+import DoubleLinkedList from "../src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
 
 const createList = <T>(type: string): ILinkedList<T> => {
   let linkedList: ILinkedList<T>;

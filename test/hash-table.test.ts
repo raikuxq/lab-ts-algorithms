@@ -1,5 +1,5 @@
-import IHashTable from "../interface/IHashTable";
-import HashTable from "../HashTable";
+import IHashTable from "../src/data-structures/HashTable/interface/IHashTable";
+import HashTable from "../src/data-structures/HashTable/HashTable";
 
 describe("Hash table", () => {
   test("should support multiple data types", () => {

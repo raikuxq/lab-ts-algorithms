@@ -1,13 +1,13 @@
-import Stack from "../Stack";
+import Stack from "../src/data-structures/Stack/Stack";
 
 describe("stack", () => {
   describe("method peek", () => {
     test("should correct peek value from top", () => {
       const stack: Stack<number> = new Stack(100);
+      stack.push(5);
       stack.push(10);
-      const top = stack.peek();
 
-      expect(stack.peek()).toBe(top);
+      expect(stack.peek()).toBe(10);
     });
     test("should throw when stack is empty", () => {
       const stack: Stack<number> = new Stack(1);
@@ -21,6 +21,7 @@ describe("stack", () => {
   describe("method push", () => {
     test("should correct push to top", () => {
       const stack: Stack<number> = new Stack(100);
+      stack.push(5);
       stack.push(10);
 
       expect(stack.peek()).toBe(10);
@@ -38,11 +39,12 @@ describe("stack", () => {
   describe("method pop", () => {
     describe("should correct pop from top", () => {
       const stack: Stack<number> = new Stack(100);
+      stack.push(5);
       stack.push(10);
       const popped = stack.pop();
 
       test("should delete correct", () => {
-        expect(stack.isEmpty()).toBe(true);
+        expect(stack.peek()).toBe(5);
       });
       test("should return correct value", () => {
         expect(popped).toBe(10);
