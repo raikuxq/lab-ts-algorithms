@@ -1,4 +1,4 @@
-import ILinkedList from "../ILinkedList";
+import ILinkedList from "../LinkedList/ILinkedList";
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 
 /**
@@ -6,12 +6,14 @@ import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
  */
 export default class Queue<T> {
   private readonly _list: ILinkedList<T>;
+  private readonly _capacity: number;
 
   /**
    * Create queue instance
    */
-  public constructor() {
+  public constructor(capacity?: number) {
     this._list = new DoubleLinkedList();
+    this._capacity = capacity || Infinity;
   }
 
   /**
@@ -28,6 +30,9 @@ export default class Queue<T> {
    * Add element to queue
    */
   public enqueue(item: T): void {
+    if (this._list.length >= this._capacity) {
+      throw new Error("Cannot enqueue when queue is full");
+    }
     this._list.unshift(item);
   }
 

@@ -1,4 +1,4 @@
-import ILinkedList from "../ILinkedList";
+import ILinkedList from "../LinkedList/ILinkedList";
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 
 /**
