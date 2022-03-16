@@ -3,7 +3,7 @@ import mergeSort from "../merge-sort";
 import selectSort from "../select-sort";
 import bubbleSort from "../bubble-sort";
 import insertionSort from "../insertion-sort";
-import { randomArray } from "../sort-compare";
+import { randomizeArray } from "../../performance/sort-compare";
 
 const createSortFunction = (
   sortType: string
@@ -30,7 +30,7 @@ describe.each(["Quick", "Merge", "Selection", "Bubble", "Insertion"])(
     const sort = createSortFunction(sortStrategyType);
 
     test("should correct sort with random numbers", () => {
-      const notSortedArr: Array<number> = randomArray(100, 500);
+      const notSortedArr: Array<number> = randomizeArray(100, 500);
 
       const sortedArr = [...notSortedArr].sort((a: number, b: number) => {
         if (a > b) return 1;
