@@ -1,18 +1,32 @@
-import IGraph from "../IGraph";
+import IGraph from "../../../types/IGraph";
 
+/**
+ * It can represent graph in different ways
+ * @example Adjacency matrix
+ * @example Adjacency list
+ */
 export default class GraphPresenter<V> {
   private graph: IGraph<V>;
 
+  /**
+   * Create empty instance of presenter
+   * @param graph - graph instance
+   */
   public constructor(graph: IGraph<V>) {
     this.graph = graph;
   }
 
   /**
    * Get graph adjacency list
+   * @example
    *
+   * Directed graph:
+   * - Bob [Maria]
+   * - Maria [Bob, John]
+   * - John []
    **/
   public getAdjacencyList(): Map<V, Array<V>> {
-    return this.graph.vertices.reduce((map: Map<V, Array<V>>, vertex: V) => {
+    return this.graph.vertices().reduce((map: Map<V, Array<V>>, vertex: V) => {
       const neighbors = this.graph.getVertexNeighbors(vertex);
       map.set(vertex, neighbors);
 
@@ -37,11 +51,11 @@ export default class GraphPresenter<V> {
    * John  |   0   |   0   |   0   |
    */
   public getAdjacencyMatrix(): number[][] {
-    const vertices = this.graph.vertices;
-    const matrix = new Array(this.graph.verticesCount);
+    const vertices = this.graph.vertices();
+    const matrix = new Array(this.graph.verticesCount());
 
     vertices.forEach((graphVertexRow, rowIndex) => {
-      matrix[rowIndex] = new Array(this.graph.verticesCount);
+      matrix[rowIndex] = new Array(this.graph.verticesCount());
 
       vertices.forEach((graphVertexColumn, columnIndex) => {
         const isElementLinked = this.graph

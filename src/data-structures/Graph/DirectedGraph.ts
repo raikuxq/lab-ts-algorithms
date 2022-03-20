@@ -1,7 +1,14 @@
 import AbstractGraph from "./AbstractGraph";
 import GraphEdge from "./GraphEdge";
 
+/**
+ * Directed graph - data structure where edges with same pair of vertices are not equal
+ * @example A-B is not the same as B-A
+ */
 export default class DirectedGraph<V> extends AbstractGraph<V> {
+  /**
+   * @inheritDoc
+   */
   public constructor() {
     super();
   }
@@ -14,7 +21,9 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
       (edge: GraphEdge<V>) => edge.fromVertex === from && edge.toVertex === to
     );
 
-    if (!edge) throw new Error("Edge not found");
+    if (!edge) {
+      throw new Error("Edge not found");
+    }
 
     return edge;
   }
@@ -24,8 +33,8 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
    */
   public addEdge(from: V, to: V, weight?: number): this {
     try {
-      const fromVertex = this.getVertexByValue(from);
-      const toVertex = this.getVertexByValue(to);
+      const fromVertex = this.tryFindVertex(from);
+      const toVertex = this.tryFindVertex(to);
 
       if (this.hasEdge(fromVertex, toVertex)) {
         if (typeof weight === "number") {
@@ -38,7 +47,9 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
         this._vertices.get(fromVertex)?.push(toVertex);
       }
     } catch {
-      throw new Error("Edge cannot be added");
+      throw new Error(
+        "Edge cannot be added because one of vertices was not found"
+      );
     }
 
     return this;
@@ -49,8 +60,8 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
    */
   public removeEdge(from: V, to: V): this {
     try {
-      const fromVertex = this.getVertexByValue(from);
-      const toVertex = this.getVertexByValue(to);
+      const fromVertex = this.tryFindVertex(from);
+      const toVertex = this.tryFindVertex(to);
       const edgeToRemove = this.getEdgeByValue(fromVertex, toVertex);
 
       const fromVertexNeighbors = this._vertices.get(fromVertex) || [];
@@ -63,7 +74,9 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
         (edge: GraphEdge<V>) => edge !== edgeToRemove
       );
     } catch {
-      throw new Error("Edge cannot be removed");
+      throw new Error(
+        "Edge cannot be removed because one of vertices was not found"
+      );
     }
 
     return this;

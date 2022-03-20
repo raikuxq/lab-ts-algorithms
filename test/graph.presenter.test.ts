@@ -1,12 +1,13 @@
-import IGraph from "../src/data-structures/Graph/IGraph";
-import UndirectedGraph from "../src/data-structures/Graph/graph/UndirectedGraph";
-import DirectedGraph from "../src/data-structures/Graph/graph/DirectedGraph";
+import IGraph from "../src/types/IGraph";
+import UndirectedGraph from "../src/data-structures/Graph/UndirectedGraph";
+import DirectedGraph from "../src/data-structures/Graph/DirectedGraph";
 import GraphPresenter from "../src/data-structures/Graph/presenter/GraphPresenter";
-import createGraph from "../src/data-structures/Graph/helpers/createGraph";
+import { createGraph } from "../src/data-structures/Graph/helpers/createGraph";
+import { EnumGraphType } from "../src/types/EnumGraphType";
 
-describe.each(["Directed", "Undirected"])(
-  "%s graph graphPresenter",
-  (graphType: string) => {
+describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
+  "%s graph",
+  (graphType: EnumGraphType) => {
     describe("method getAdjacencyMatrix", () => {
       describe("in empty graph", () => {
         const graph: IGraph<string> = createGraph(graphType);
@@ -35,7 +36,7 @@ describe.each(["Directed", "Undirected"])(
   }
 );
 
-describe("graphPresenter", () => {
+describe("Any type of graph", () => {
   describe("method getAdjacencyMatrix", () => {
     describe("in undirected graph", () => {
       const graph: IGraph<number> = new UndirectedGraph();

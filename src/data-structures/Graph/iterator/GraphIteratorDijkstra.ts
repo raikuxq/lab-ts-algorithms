@@ -1,12 +1,21 @@
-import IGraph from "../IGraph";
-import IGraphIterator from "../IGraphIterator";
+import IGraph from "../../../types/IGraph";
+import IGraphIterator from "../../../types/IGraphIterator";
 
+/**
+ * Dijkstra method graph traversal
+ */
 export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
   private readonly graph: IGraph<V>;
   private readonly visited: Map<V, boolean>;
   private readonly costs: Map<V, number>;
   private readonly parents: Map<V, V>;
 
+  /**
+   * Creates empty instance and does one iteration
+   * @param graph - graph instance
+   * @param startVertex - vertex where traversal starts
+   * @throws when startVertex does not exist
+   */
   public constructor(graph: IGraph<V>, startVertex: V) {
     if (!graph.hasVertex(startVertex)) {
       throw new Error("Start vertex does not exist");

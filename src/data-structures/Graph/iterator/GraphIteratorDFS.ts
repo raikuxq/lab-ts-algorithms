@@ -1,13 +1,22 @@
 import Stack from "../../Stack/Stack";
-import IGraphIterator from "../IGraphIterator";
-import IGraph from "../IGraph";
+import IGraphIterator from "../../../types/IGraphIterator";
+import IGraph from "../../../types/IGraph";
 
+/**
+ * Deep first graph traversal
+ */
 export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
   private readonly graph: IGraph<V>;
   private readonly stack: Stack<V>;
   private readonly visited: Map<V, boolean>;
   private readonly parents: Map<V, V>;
 
+  /**
+   * Creates empty instance and does one iteration
+   * @param graph - graph instance
+   * @param startVertex - vertex where traversal starts
+   * @throws when startVertex does not exist
+   */
   public constructor(graph: IGraph<V>, startVertex: V) {
     if (!graph.hasVertex(startVertex)) {
       throw new Error("Start vertex does not exist");
@@ -22,6 +31,9 @@ export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
     this.visited.set(startVertex, true);
   }
 
+  /**
+   * @inheritDoc
+   */
   public hasNext(): boolean {
     return !this.stack.isEmpty();
   }

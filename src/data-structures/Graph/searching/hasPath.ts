@@ -1,25 +1,31 @@
-import IGraph from "../IGraph";
-import IGraphIterator from "../IGraphIterator";
-import IGraphIterationStrategy from "../IGraphIterationStrategy";
+import IGraph from "../../../types/IGraph";
+import IGraphIterator from "../../../types/IGraphIterator";
+import IGraphIterationStrategy from "../../../types/IGraphIterationStrategy";
 
-export default function hasPath<V>(
+/**
+ * Check if graph has a path between two vertices
+ *
+ * @param graph - graph instance
+ * @param from - start vertex
+ * @param to - finish vertex
+ * @param strategy - traversal method
+ * @throws when one of vertices was not found
+ * @returns boolean
+ */
+export const hasPath = <V>(
   graph: IGraph<V>,
   from: V,
   to: V,
   strategy: IGraphIterationStrategy<V>
-): boolean {
+): boolean => {
   const iterator: IGraphIterator<V> = strategy.createIterator(graph, from);
 
-  /**
-   * Validate
-   */
+  /* Validate */
   if (!graph.hasVertex(from) || !graph.hasVertex(to)) {
     throw new Error("Invalid arguments: no such elements");
   }
 
-  /**
-   * Find target element
-   */
+  /* Find target element */
   while (iterator.hasNext()) {
     const next = iterator.next();
 
@@ -29,4 +35,4 @@ export default function hasPath<V>(
   }
 
   return false;
-}
+};

@@ -1,148 +1,152 @@
-import IGraph from "../src/data-structures/Graph/IGraph";
-import UndirectedGraph from "../src/data-structures/Graph/graph/UndirectedGraph";
-import DirectedGraph from "../src/data-structures/Graph/graph/DirectedGraph";
-import createGraph from "../src/data-structures/Graph/helpers/createGraph";
+import IGraph from "../src/types/IGraph";
+import UndirectedGraph from "../src/data-structures/Graph/UndirectedGraph";
+import DirectedGraph from "../src/data-structures/Graph/DirectedGraph";
+import { createGraph } from "../src/data-structures/Graph/helpers/createGraph";
+import { EnumGraphType } from "../src/types/EnumGraphType";
 
-describe.each(["Directed", "Undirected"])("%s graph", (graphType: string) => {
-  describe("getter weight", () => {
-    const graph: IGraph<string> = createGraph(graphType);
-
-    graph
-      .addVertex("Mike")
-      .addVertex("Bob")
-      .addVertex("Lisa")
-      .addEdge("Mike", "Bob", 5)
-      .addEdge("Bob", "Lisa", 10)
-      .addEdge("Mike", "Lisa", 20);
-
-    test("should return correct weight value", () => {
-      const weight = graph.weight;
-      const expectedWeight = 35;
-
-      expect(weight).toBe(expectedWeight);
-    });
-  });
-
-  describe("getter verticesCount", () => {
-    describe("in empty graph", () => {
+describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
+  "%s graph",
+  (graphType: EnumGraphType) => {
+    describe("method weight", () => {
       const graph: IGraph<string> = createGraph(graphType);
 
-      test("should return correct vertices count", () => {
-        expect(graph.verticesCount).toBe(0);
+      graph
+        .addVertex("Mike")
+        .addVertex("Bob")
+        .addVertex("Lisa")
+        .addEdge("Mike", "Bob", 5)
+        .addEdge("Bob", "Lisa", 10)
+        .addEdge("Mike", "Lisa", 20);
+
+      test("should return correct weight value", () => {
+        const weight = graph.weight();
+        const expectedWeight = 35;
+
+        expect(weight).toBe(expectedWeight);
       });
     });
-    describe("in non empty graph", () => {
-      const graph: IGraph<string> = createGraph(graphType);
-      graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
 
-      test("should return correct vertices count", () => {
-        expect(graph.verticesCount).toBe(3);
-      });
-    });
-  });
-
-  describe("getter edgesCount", () => {
-    describe("in empty graph", () => {
-      const graph: IGraph<string> = createGraph(graphType);
-
-      test("should return correct vertices count", () => {
-        expect(graph.edgesCount).toBe(0);
-      });
-    });
-  });
-
-  describe("getter edgesCount", () => {
-    describe("in empty graph", () => {
-      const graph: IGraph<string> = createGraph(graphType);
-
-      test("should return empty array of vertices", () => {
-        expect(graph.vertices).toEqual([]);
-      });
-    });
-    describe("in non empty graph", () => {
-      const graph: IGraph<string> = createGraph(graphType);
-      graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
-
-      test("should return correct array of vertices", () => {
-        expect(graph.vertices).toEqual(["Mike", "Bob", "Lisa"]);
-      });
-    });
-  });
-
-  describe("method addVertex", () => {
-    test("should correct add vertex", () => {
-      const graph: IGraph<string> = createGraph(graphType);
-      graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
-
-      const vertices = graph.vertices;
-      const expectedVertices = ["Mike", "Bob", "Lisa"];
-
-      expect(vertices).toEqual(expectedVertices);
-    });
-    test("should throw when try to add an existed vertex", () => {
-      const graph: IGraph<string> = createGraph(graphType);
-      graph.addVertex("Mike");
-
-      expect(() => {
-        graph.addVertex("Mike");
-      }).toThrowError();
-    });
-  });
-
-  describe("method addEdge", () => {
-    describe("in any graph", () => {
-      describe("should throw when try to add edge between not existed vertices", () => {
+    describe("method verticesCount", () => {
+      describe("in empty graph", () => {
         const graph: IGraph<string> = createGraph(graphType);
-        graph.addVertex("Mike").addVertex("Bob");
 
-        test("when first node does not exist", () => {
-          expect(() => {
-            graph.addEdge("NOT_EXISTED_NODE", "Bob");
-          }).toThrowError();
+        test("should return correct vertices count", () => {
+          expect(graph.verticesCount()).toBe(0);
         });
-        test("when second node does not exist", () => {
-          expect(() => {
-            graph.addEdge("Mike", "NOT_EXISTED_NODE");
-          }).toThrowError();
+      });
+      describe("in non empty graph", () => {
+        const graph: IGraph<string> = createGraph(graphType);
+        graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
+
+        test("should return correct vertices count", () => {
+          expect(graph.verticesCount()).toBe(3);
         });
       });
     });
-  });
 
-  describe("method removeVertex", () => {
-    test("should throw when try to delete not existed vertex", () => {
-      const graph: IGraph<string> = createGraph(graphType);
+    describe("method edgesCount", () => {
+      describe("in empty graph", () => {
+        const graph: IGraph<string> = createGraph(graphType);
 
-      expect(() => {
-        graph.removeVertex("NOT_EXISTED_VERTEX");
-      }).toThrowError();
+        test("should return correct vertices count", () => {
+          expect(graph.edgesCount()).toBe(0);
+        });
+      });
     });
-  });
 
-  describe("method removeEdge", () => {
-    test("should throw when try to delete not existed edge", () => {
-      const graph: IGraph<string> = createGraph(graphType);
+    describe("method vertices", () => {
+      describe("in empty graph", () => {
+        const graph: IGraph<string> = createGraph(graphType);
 
-      expect(() => {
-        graph.removeEdge("NOT_EXISTED_VERTEX", "NOT_EXISTED_VERTEX");
-      }).toThrowError();
+        test("should return empty array of vertices", () => {
+          expect(graph.vertices()).toEqual([]);
+        });
+      });
+      describe("in non empty graph", () => {
+        const graph: IGraph<string> = createGraph(graphType);
+        graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
+
+        test("should return correct array of vertices", () => {
+          expect(graph.vertices()).toEqual(["Mike", "Bob", "Lisa"]);
+        });
+      });
     });
-  });
 
-  describe("method getVertexNeighbors", () => {
-    test("should throw when vertex does not exist", () => {
-      const graph: IGraph<number> = createGraph(graphType);
-      graph.addVertex(1).addVertex(2).addEdge(1, 2);
+    describe("method addVertex", () => {
+      test("should correct add vertex", () => {
+        const graph: IGraph<string> = createGraph(graphType);
+        graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
 
-      expect(() => {
-        graph.getVertexNeighbors(0);
-      }).toThrowError();
+        const vertices = graph.vertices();
+        const expectedVertices = ["Mike", "Bob", "Lisa"];
+
+        expect(vertices).toEqual(expectedVertices);
+      });
+      test("should throw when try to add an existed vertex", () => {
+        const graph: IGraph<string> = createGraph(graphType);
+        graph.addVertex("Mike");
+
+        expect(() => {
+          graph.addVertex("Mike");
+        }).toThrowError();
+      });
     });
-  });
-});
 
-describe("graph", () => {
-  describe("getter edgesCount", () => {
+    describe("method addEdge", () => {
+      describe("in any graph", () => {
+        describe("should throw when try to add edge between not existed vertices", () => {
+          const graph: IGraph<string> = createGraph(graphType);
+          graph.addVertex("Mike").addVertex("Bob");
+
+          test("when first node does not exist", () => {
+            expect(() => {
+              graph.addEdge("NOT_EXISTED_NODE", "Bob");
+            }).toThrowError();
+          });
+          test("when second node does not exist", () => {
+            expect(() => {
+              graph.addEdge("Mike", "NOT_EXISTED_NODE");
+            }).toThrowError();
+          });
+        });
+      });
+    });
+
+    describe("method removeVertex", () => {
+      test("should throw when try to delete not existed vertex", () => {
+        const graph: IGraph<string> = createGraph(graphType);
+
+        expect(() => {
+          graph.removeVertex("NOT_EXISTED_VERTEX");
+        }).toThrowError();
+      });
+    });
+
+    describe("method removeEdge", () => {
+      test("should throw when try to delete not existed edge", () => {
+        const graph: IGraph<string> = createGraph(graphType);
+
+        expect(() => {
+          graph.removeEdge("NOT_EXISTED_VERTEX", "NOT_EXISTED_VERTEX");
+        }).toThrowError();
+      });
+    });
+
+    describe("method getVertexNeighbors", () => {
+      test("should throw when vertex does not exist", () => {
+        const graph: IGraph<number> = createGraph(graphType);
+        graph.addVertex(1).addVertex(2).addEdge(1, 2);
+
+        expect(() => {
+          graph.getVertexNeighbors(0);
+        }).toThrowError();
+      });
+    });
+  }
+);
+
+describe("Any type of graph", () => {
+  describe("method edgesCount", () => {
     describe("in undirected graph", () => {
       const graph: IGraph<string> = new UndirectedGraph();
       graph
@@ -153,7 +157,7 @@ describe("graph", () => {
         .addEdge("Mike", "Lisa");
 
       test("should return correct vertices count", () => {
-        expect(graph.edgesCount).toBe(2);
+        expect(graph.edgesCount()).toBe(2);
       });
     });
     describe("in directed graph", () => {
@@ -167,7 +171,7 @@ describe("graph", () => {
         .addEdge("Lisa", "Mike");
 
       test("should return correct vertices count", () => {
-        expect(graph.edgesCount).toBe(3);
+        expect(graph.edgesCount()).toBe(3);
       });
     });
   });

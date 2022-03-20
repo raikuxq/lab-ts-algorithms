@@ -1,15 +1,21 @@
-import IGraph from "../IGraph";
-import DirectedGraph from "../graph/DirectedGraph";
-import UndirectedGraph from "../graph/UndirectedGraph";
+import IGraph from "../../../types/IGraph";
+import DirectedGraph from "../DirectedGraph";
+import UndirectedGraph from "../UndirectedGraph";
+import { EnumGraphType } from "../../../types/EnumGraphType";
 
-const createGraph = <T>(type: string): IGraph<T> => {
+/**
+ * Returns graph by type
+ * @param type
+ * @returns graph empty instance
+ */
+export const createGraph = <T>(type: EnumGraphType): IGraph<T> => {
   let graph: IGraph<T>;
 
   switch (type) {
-    case "Directed":
+    case EnumGraphType.Directed:
       graph = new DirectedGraph();
       break;
-    case "Undirected":
+    case EnumGraphType.Undirected:
       graph = new UndirectedGraph();
       break;
     default:
@@ -18,5 +24,3 @@ const createGraph = <T>(type: string): IGraph<T> => {
 
   return graph;
 };
-
-export default createGraph;

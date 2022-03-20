@@ -1,7 +1,14 @@
 import AbstractGraph from "./AbstractGraph";
 import GraphEdge from "./GraphEdge";
 
+/**
+ * Undirected graph - data structure where edges with same pair of vertices are equal
+ * @example A-B is same as B-A
+ */
 export default class UndirectedGraph<V> extends AbstractGraph<V> {
+  /**
+   * @inheritDoc
+   */
   public constructor() {
     super();
   }
@@ -28,8 +35,8 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
    */
   public addEdge(from: V, to: V, weight?: number): this {
     try {
-      const fromVertex = this.getVertexByValue(from);
-      const toVertex = this.getVertexByValue(to);
+      const fromVertex = this.tryFindVertex(from);
+      const toVertex = this.tryFindVertex(to);
 
       /** When edge is already exist, we should only update its weight */
       if (this.hasEdge(fromVertex, toVertex)) {
@@ -44,7 +51,9 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
         this._vertices.get(toVertex)?.push(fromVertex);
       }
     } catch {
-      throw new Error("Edge cannot be added");
+      throw new Error(
+        "Edge cannot be added because one of vertices was not found"
+      );
     }
 
     return this;
@@ -55,8 +64,8 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
    */
   public removeEdge(from: V, to: V): this {
     try {
-      const fromVertex = this.getVertexByValue(from);
-      const toVertex = this.getVertexByValue(to);
+      const fromVertex = this.tryFindVertex(from);
+      const toVertex = this.tryFindVertex(to);
       const edgeToRemove = this.getEdgeByValue(fromVertex, toVertex);
 
       const fromVertexNeighbors = this._vertices.get(fromVertex) || [];
@@ -75,7 +84,9 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
         (edge: GraphEdge<V>) => edge !== edgeToRemove
       );
     } catch {
-      throw new Error("Edge cannot be removed");
+      throw new Error(
+        "Edge cannot be removed because one of vertices was not found"
+      );
     }
 
     return this;

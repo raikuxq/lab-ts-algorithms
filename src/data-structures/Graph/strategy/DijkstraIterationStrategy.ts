@@ -1,6 +1,6 @@
-import IGraph from "../IGraph";
-import IGraphIterationStrategy from "../IGraphIterationStrategy";
-import IGraphIterator from "../IGraphIterator";
+import IGraph from "../../../types/IGraph";
+import IGraphIterationStrategy from "../../../types/IGraphIterationStrategy";
+import IGraphIterator from "../../../types/IGraphIterator";
 import GraphIteratorDijkstra from "../iterator/GraphIteratorDijkstra";
 
 export default class DijkstraIterationStrategy<V>

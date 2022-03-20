@@ -1,207 +1,206 @@
-import AbstractGraph from "../src/data-structures/Graph/graph/AbstractGraph";
-import UndirectedGraph from "../src/data-structures/Graph/graph/UndirectedGraph";
-import DirectedGraph from "../src/data-structures/Graph/graph/DirectedGraph";
-import IGraphIterationStrategy from "../src/data-structures/Graph/IGraphIterationStrategy";
+import AbstractGraph from "../src/data-structures/Graph/AbstractGraph";
+import UndirectedGraph from "../src/data-structures/Graph/UndirectedGraph";
+import DirectedGraph from "../src/data-structures/Graph/DirectedGraph";
+import IGraphIterationStrategy from "../src/types/IGraphIterationStrategy";
 import BFSIterationStrategy from "../src/data-structures/Graph/strategy/BFSIterationStrategy";
 import DFSIterationStrategy from "../src/data-structures/Graph/strategy/DFSIterationStrategy";
 import DijkstraIterationStrategy from "../src/data-structures/Graph/strategy/DijkstraIterationStrategy";
 
-import shortestPath from "../src/data-structures/Graph/searching/shortestPath";
+import { shortestPath } from "../src/data-structures/Graph/searching/shortestPath";
+import { EnumGraphTraversalType } from "../src/types/EnumGraphTraversalType";
 
-describe("shortest path searching algorithm", () => {
-  describe("in any graph type", () => {
-    const strategy: IGraphIterationStrategy<string> = new BFSIterationStrategy();
+describe("Any graph type", () => {
+  const strategy: IGraphIterationStrategy<string> = new BFSIterationStrategy();
 
-    describe("in empty graph", () => {
-      const graph: AbstractGraph<string> = new UndirectedGraph();
+  describe("in empty graph", () => {
+    const graph: AbstractGraph<string> = new UndirectedGraph();
 
-      test("should throw when graph is empty", () => {
-        expect(() => {
-          shortestPath(graph, "-", "-", strategy);
-        }).toThrowError();
-      });
-    });
-
-    describe("in non empty graph", () => {
-      const graph: AbstractGraph<string> = new UndirectedGraph();
-
-      graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
-
-      test("should throw when first node does not exist", () => {
-        expect(() => {
-          shortestPath(graph, "Mike", "NOT_EXISTED_NODE", strategy);
-        }).toThrowError();
-      });
-
-      test("should throw when second node does not exist", () => {
-        expect(() => {
-          shortestPath(graph, "NOT_EXISTED_NODE", "Bob", strategy);
-        }).toThrowError();
-      });
-
-      test("should find correct path between neighbor nodes", () => {
-        expect(shortestPath(graph, "Mike", "Bob", strategy)).toEqual([
-          "Mike",
-          "Bob",
-        ]);
-      });
+    test("should throw when graph is empty", () => {
+      expect(() => {
+        shortestPath(graph, "-", "-", strategy);
+      }).toThrowError();
     });
   });
 
-  describe.each(["Dijkstra"])(
-    "in weighted graph by %s method",
-    (strategyType: string) => {
-      let strategy: IGraphIterationStrategy<string>;
+  describe("in non empty graph", () => {
+    const graph: AbstractGraph<string> = new UndirectedGraph();
 
-      switch (strategyType) {
-        case "Dijkstra": {
-          strategy = new DijkstraIterationStrategy();
-          break;
-        }
-        default: {
-          throw new Error("Invalid search method");
-        }
-      }
+    graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
 
-      describe("in undirected graph", () => {
-        const graph: AbstractGraph<string> = new UndirectedGraph();
+    test("should throw when first node does not exist", () => {
+      expect(() => {
+        shortestPath(graph, "Mike", "NOT_EXISTED_NODE", strategy);
+      }).toThrowError();
+    });
 
-        graph
-          .addVertex("Mike")
-          .addVertex("Bob")
-          .addVertex("Lisa")
-          .addVertex("Aaron")
-          .addVertex("James")
-          .addVertex("Anna")
-          .addEdge("Mike", "Bob", 5)
-          .addEdge("Mike", "Lisa", 3)
-          .addEdge("Lisa", "Aaron", 3)
-          .addEdge("Lisa", "James", 3)
-          .addEdge("James", "Aaron", 3)
-          .addEdge("James", "Anna", 6)
-          .addEdge("Bob", "Anna", 15);
+    test("should throw when second node does not exist", () => {
+      expect(() => {
+        shortestPath(graph, "NOT_EXISTED_NODE", "Bob", strategy);
+      }).toThrowError();
+    });
 
-        test("should find correct path between multiple nodes", () => {
-          /**
-           * Bob -> Mike (5) -> Anna (15) = 20
-           * Mike -> Lisa (3) -> James (3) -> Anna (6) = 12
-           */
-          expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
-            "Mike",
-            "Lisa",
-            "James",
-            "Anna",
-          ]);
-        });
-      });
-
-      describe("in directed graph", () => {
-        const graph: AbstractGraph<string> = new DirectedGraph();
-
-        graph
-          .addVertex("Mike")
-          .addVertex("Bob")
-          .addVertex("Lisa")
-          .addVertex("Aaron")
-          .addVertex("James")
-          .addVertex("Anna")
-          .addEdge("Mike", "Bob", 5)
-          .addEdge("Mike", "Lisa", 3)
-          .addEdge("Lisa", "Aaron", 3)
-          .addEdge("Aaron", "James", 3)
-          .addEdge("James", "Lisa", 10)
-          .addEdge("James", "Aaron", 10)
-          .addEdge("James", "Anna", 6)
-          .addEdge("Bob", "Anna", 15);
-
-        test("should find correct path between multiple nodes", () => {
-          /**
-           * Bob -> Mike (5) -> Anna (15) = 20
-           * Mike -> Lisa (3) -> Aaron (3) -> James (3) -> Anna (6) = 15
-           */
-          expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
-            "Mike",
-            "Lisa",
-            "Aaron",
-            "James",
-            "Anna",
-          ]);
-        });
-      });
-    }
-  );
-
-  describe.each(["BFS", "DFS"])(
-    "in unweighted graph by %s method",
-    (strategyType: string) => {
-      let strategy: IGraphIterationStrategy<string>;
-
-      switch (strategyType) {
-        case "BFS": {
-          strategy = new BFSIterationStrategy();
-          break;
-        }
-        case "DFS": {
-          strategy = new DFSIterationStrategy();
-          break;
-        }
-        default: {
-          throw new Error("Invalid search method");
-        }
-      }
-
-      describe("in undirected graph", () => {
-        const graph: AbstractGraph<string> = new UndirectedGraph();
-
-        graph
-          .addVertex("Mike")
-          .addVertex("Bob")
-          .addVertex("Lisa")
-          .addVertex("Aaron")
-          .addVertex("James")
-          .addVertex("Anna")
-          .addEdge("Mike", "Bob")
-          .addEdge("Mike", "Lisa")
-          .addEdge("Lisa", "James")
-          .addEdge("Lisa", "Aaron")
-          .addEdge("James", "Aaron")
-          .addEdge("James", "Anna");
-
-        test("should find correct path between multiple nodes", () => {
-          expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
-            "Mike",
-            "Lisa",
-            "James",
-            "Anna",
-          ]);
-        });
-      });
-
-      describe("in directed graph", () => {
-        const graph: AbstractGraph<string> = new DirectedGraph();
-
-        graph
-          .addVertex("Mike")
-          .addVertex("Bob")
-          .addVertex("Lisa")
-          .addVertex("Aaron")
-          .addVertex("James")
-          .addVertex("Anna")
-          .addEdge("Mike", "Bob")
-          .addEdge("Mike", "Lisa")
-          .addEdge("Lisa", "James")
-          .addEdge("James", "Aaron")
-          .addEdge("Aaron", "Anna")
-          .addEdge("Lisa", "Anna");
-
-        test("should find correct path between multiple nodes", () => {
-          expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
-            "Mike",
-            "Lisa",
-            "Anna",
-          ]);
-        });
-      });
-    }
-  );
+    test("should find correct path between neighbor nodes", () => {
+      expect(shortestPath(graph, "Mike", "Bob", strategy)).toEqual([
+        "Mike",
+        "Bob",
+      ]);
+    });
+  });
 });
+
+describe.each([EnumGraphTraversalType.DIJKSTRA])(
+  "Weighted graph by %s",
+  (strategyType: EnumGraphTraversalType) => {
+    let strategy: IGraphIterationStrategy<string>;
+
+    switch (strategyType) {
+      case EnumGraphTraversalType.DIJKSTRA: {
+        strategy = new DijkstraIterationStrategy();
+        break;
+      }
+      default: {
+        throw new Error("Invalid search method");
+      }
+    }
+
+    describe("in undirected graph", () => {
+      const graph: AbstractGraph<string> = new UndirectedGraph();
+
+      graph
+        .addVertex("Mike")
+        .addVertex("Bob")
+        .addVertex("Lisa")
+        .addVertex("Aaron")
+        .addVertex("James")
+        .addVertex("Anna")
+        .addEdge("Mike", "Bob", 5)
+        .addEdge("Mike", "Lisa", 3)
+        .addEdge("Lisa", "Aaron", 3)
+        .addEdge("Lisa", "James", 3)
+        .addEdge("James", "Aaron", 3)
+        .addEdge("James", "Anna", 6)
+        .addEdge("Bob", "Anna", 15);
+
+      test("should find correct path between multiple nodes", () => {
+        /**
+         * Bob -> Mike (5) -> Anna (15) = 20
+         * Mike -> Lisa (3) -> James (3) -> Anna (6) = 12
+         */
+        expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
+          "Mike",
+          "Lisa",
+          "James",
+          "Anna",
+        ]);
+      });
+    });
+
+    describe("in directed graph", () => {
+      const graph: AbstractGraph<string> = new DirectedGraph();
+
+      graph
+        .addVertex("Mike")
+        .addVertex("Bob")
+        .addVertex("Lisa")
+        .addVertex("Aaron")
+        .addVertex("James")
+        .addVertex("Anna")
+        .addEdge("Mike", "Bob", 5)
+        .addEdge("Mike", "Lisa", 3)
+        .addEdge("Lisa", "Aaron", 3)
+        .addEdge("Aaron", "James", 3)
+        .addEdge("James", "Lisa", 10)
+        .addEdge("James", "Aaron", 10)
+        .addEdge("James", "Anna", 6)
+        .addEdge("Bob", "Anna", 15);
+
+      test("should find correct path between multiple nodes", () => {
+        /**
+         * Bob -> Mike (5) -> Anna (15) = 20
+         * Mike -> Lisa (3) -> Aaron (3) -> James (3) -> Anna (6) = 15
+         */
+        expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
+          "Mike",
+          "Lisa",
+          "Aaron",
+          "James",
+          "Anna",
+        ]);
+      });
+    });
+  }
+);
+
+describe.each([EnumGraphTraversalType.BFS, EnumGraphTraversalType.DFS])(
+  "Unweighted graph by %s",
+  (strategyType: EnumGraphTraversalType) => {
+    let strategy: IGraphIterationStrategy<string>;
+
+    switch (strategyType) {
+      case EnumGraphTraversalType.BFS: {
+        strategy = new BFSIterationStrategy();
+        break;
+      }
+      case EnumGraphTraversalType.DFS: {
+        strategy = new DFSIterationStrategy();
+        break;
+      }
+      default: {
+        throw new Error("Invalid search method");
+      }
+    }
+
+    describe("in undirected graph", () => {
+      const graph: AbstractGraph<string> = new UndirectedGraph();
+
+      graph
+        .addVertex("Mike")
+        .addVertex("Bob")
+        .addVertex("Lisa")
+        .addVertex("Aaron")
+        .addVertex("James")
+        .addVertex("Anna")
+        .addEdge("Mike", "Bob")
+        .addEdge("Mike", "Lisa")
+        .addEdge("Lisa", "James")
+        .addEdge("Lisa", "Aaron")
+        .addEdge("James", "Aaron")
+        .addEdge("James", "Anna");
+
+      test("should find correct path between multiple nodes", () => {
+        expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
+          "Mike",
+          "Lisa",
+          "James",
+          "Anna",
+        ]);
+      });
+    });
+
+    describe("in directed graph", () => {
+      const graph: AbstractGraph<string> = new DirectedGraph();
+
+      graph
+        .addVertex("Mike")
+        .addVertex("Bob")
+        .addVertex("Lisa")
+        .addVertex("Aaron")
+        .addVertex("James")
+        .addVertex("Anna")
+        .addEdge("Mike", "Bob")
+        .addEdge("Mike", "Lisa")
+        .addEdge("Lisa", "James")
+        .addEdge("James", "Aaron")
+        .addEdge("Aaron", "Anna")
+        .addEdge("Lisa", "Anna");
+
+      test("should find correct path between multiple nodes", () => {
+        expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
+          "Mike",
+          "Lisa",
+          "Anna",
+        ]);
+      });
+    });
+  }
+);
