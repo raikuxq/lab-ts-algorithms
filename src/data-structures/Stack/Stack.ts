@@ -1,12 +1,14 @@
 import IStack from "../../types/IStack";
 import ILinkedList from "../../types/ILinkedList";
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
+import ICollection from "../../types/ICollection";
+import LoopedArray from "../LoopedArray/LoopedArray";
 
 /**
  * LIFO data structure
  */
 export default class Stack<T> implements IStack<T> {
-  private readonly _list: ILinkedList<T>;
+  private readonly _list: ICollection<T>;
   private readonly _capacity: number;
 
   /**
@@ -16,6 +18,7 @@ export default class Stack<T> implements IStack<T> {
   public constructor(capacity?: number) {
     this._capacity = capacity || Number.MAX_VALUE;
     this._list = new DoubleLinkedList();
+    // this._list = new LoopedArray(this._capacity);
   }
 
   /**

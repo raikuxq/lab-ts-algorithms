@@ -1,12 +1,14 @@
 import IQueue from "../../types/IQueue";
 import ILinkedList from "../../types/ILinkedList";
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
+import LoopedArray from "../LoopedArray/LoopedArray";
+import ICollection from "../../types/ICollection";
 
 /**
  * FIFO data structure
  */
 export default class Queue<T> implements IQueue<T> {
-  private readonly _list: ILinkedList<T>;
+  private readonly _list: ICollection<T>;
   private readonly _capacity: number;
 
   /**
@@ -16,6 +18,7 @@ export default class Queue<T> implements IQueue<T> {
   public constructor(capacity?: number) {
     this._capacity = capacity || Number.MAX_VALUE;
     this._list = new DoubleLinkedList();
+    // this._list = new LoopedArray(this._capacity);
   }
 
   /**
