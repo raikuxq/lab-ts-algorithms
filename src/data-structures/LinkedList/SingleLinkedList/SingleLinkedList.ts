@@ -2,7 +2,6 @@ import IIterator from "../../../types/IIterator";
 import IIterable from "../../../types/IIterable";
 import AbstractLinkedList from "../AbstractLinkedList";
 import SingleLinkedNode from "./SingleLinkedNode";
-import DoubleLinkedNode from "../DoubleLinkedList/DoubleLinkedNode";
 
 /**
  * Linear data structure
