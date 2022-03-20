@@ -1,4 +1,4 @@
-import ILinkedList from "./ILinkedList";
+import ILinkedList from "../../types/ILinkedList";
 import AbstractLinkedNode from "./AbstractLinkedNode";
 
 export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
@@ -15,42 +15,67 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
     this._length = 0;
   }
 
+  /**
+   * Will find node by its index
+   * @param index - index from start
+   * @protected
+   */
   protected abstract getNodeByIndex(index: number): AbstractLinkedNode<T>;
 
   /**
-   * Push node into start
+   * Push into start
+   * @param value - data
    */
   public abstract unshift(value: T): void;
 
   /**
-   * Push node into end
+   * Push into end
+   * @param value - data
    */
   public abstract push(value: T): void;
 
   /**
-   * Delete node from end
+   * Push from index
+   * @param value - data
+   * @param fromIndex - index from start
+   */
+  public abstract pushFromIndex(value: T, fromIndex: number): void;
+
+  /**
+   * Delete node from list's end
+   * @returns data of deleted element
    */
   public abstract pop(): T;
 
   /**
-   * Delete node from start
+   * Delete node from list by index from start
+   * @returns data of deleted element
+   */
+  public abstract deleteFromIndex(fromIndex: number): T;
+
+  /**
+   * Delete node from list's start
+   * @returns data of deleted element
    */
   public abstract shift(): T;
 
   /**
    * Reverse list nodes links and swap head with tail
+   * @example "4 -> 7 -> 10" will be reversed to "10 -> 7 -> 4"
    */
   public abstract reverse(): void;
 
   /**
    * List length
+   * @returns number - quantity of list's elements
    */
-  public get length(): number {
+  public length(): number {
     return this._length;
   }
 
   /**
    * Is list empty
+   * @returns boolean - is list empty
    */
   public isEmpty(): boolean {
     return this._length === 0;
@@ -58,6 +83,8 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Get head element data
+   * @throws Error when head does not exists
+   * @returns data of picked element
    */
   public peekHead(): T {
     if (!this._head) {
@@ -69,6 +96,8 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Get tail element data
+   * @throws Error when head does not exists
+   * @returns data of picked element
    */
   public peekTail(): T {
     if (!this._tail) {
@@ -80,6 +109,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Get elements as array
+   * @returns array representation of list
    */
   public getAsArray(): Array<T> {
     const array: Array<T> = [];
@@ -98,6 +128,8 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Get list element by index from start
+   * @throws when element does not exists
+   * @returns data of picked element
    */
   public getByIndex(index: number): T {
     try {
@@ -119,6 +151,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Add elements to list from array
+   * @param elements - array of elements to push
    * */
   public pushFromArray(elements: Array<T>): void {
     elements.forEach((element: T) => {

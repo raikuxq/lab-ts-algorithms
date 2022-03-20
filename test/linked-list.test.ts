@@ -1,4 +1,4 @@
-import ILinkedList from "../src/data-structures/LinkedList/ILinkedList";
+import ILinkedList from "../src/types/ILinkedList";
 import SingleLinkedList from "../src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
 import DoubleLinkedList from "../src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
 
@@ -19,22 +19,65 @@ const createList = <T>(type: string): ILinkedList<T> => {
   return linkedList;
 };
 
-describe.each(["Double", "Single"])("%s linked list", (listType: string) => {
-  describe("method getByIndex", () => {
-    test("should throw when list is empty", () => {
-      const emptyList: ILinkedList<number> = createList<number>(listType);
+describe("Linked list collection", () => {
+  describe("polymorphism should work correctly", () => {
+    const doubleLinkedList = new DoubleLinkedList<number>();
+    const singleLinkedList = new SingleLinkedList<number>();
+    const collection: Array<ILinkedList<number>> = [
+      doubleLinkedList,
+      singleLinkedList,
+    ];
 
-      expect(() => {
-        emptyList.getByIndex(0);
-      }).toThrowError();
+    collection.forEach((list: ILinkedList<number>) => {
+      list.push(1);
+      list.push(2);
+    });
+
+    test("double linked list should contain elements", () => {
+      expect(doubleLinkedList.getAsArray()).toEqual([1, 2]);
+    });
+    test("single linked list should contain elements", () => {
+      expect(doubleLinkedList.getAsArray()).toEqual([1, 2]);
     });
   });
+});
 
+describe.each(["Double", "Single"])("%s linked list", (listType: string) => {
   describe("method push", () => {
     test("should add elements to list's end", () => {
       const list: ILinkedList<number> = createList<number>(listType);
       list.push(1);
       expect(list.peekHead()).toBe(1);
+    });
+  });
+
+  describe("method pushFromIndex", () => {
+    test("should add elements to list from index", () => {
+      const list: ILinkedList<number> = createList<number>(listType);
+      const expectedArr: Array<number> = [10, 20, 30, 40, 50];
+      list.pushFromArray([10, 30, 40, 50]);
+      list.pushFromIndex(20, 1);
+      expect(list.getAsArray()).toEqual(expectedArr);
+    });
+    test("should add elements to list from start", () => {
+      const list: ILinkedList<number> = createList<number>(listType);
+      const expectedArr: Array<number> = [0, 10];
+      list.pushFromArray([0]);
+      list.pushFromIndex(10, 1);
+      expect(list.getAsArray()).toEqual(expectedArr);
+    });
+    test("should add elements to empty list", () => {
+      const list: ILinkedList<number> = createList<number>(listType);
+      const expectedArr: Array<number> = [10];
+      list.pushFromIndex(10, 0);
+      expect(list.getAsArray()).toEqual(expectedArr);
+    });
+    test("should add elements to list from end", () => {
+      const list: ILinkedList<number> = createList<number>(listType);
+      const expectedArr: Array<number> = [0, 10, 20, 30];
+      list.pushFromArray([0, 10, 30]);
+      list.pushFromIndex(20, 2);
+      expect(list.getAsArray()).toEqual(expectedArr);
     });
   });
 
@@ -154,6 +197,29 @@ describe.each(["Double", "Single"])("%s linked list", (listType: string) => {
 
       expect(() => {
         emptyList.pop();
+      }).toThrowError();
+    });
+  });
+
+  describe("method deleteFromIndex", () => {
+    describe("should delete element by index and return its value", () => {
+      const list: ILinkedList<number> = createList<number>(listType);
+      list.pushFromArray([10, 20, 30]);
+      const shifted = list.deleteFromIndex(1);
+
+      test("should delete correct", () => {
+        expect(list.getAsArray()).toEqual([10, 30]);
+      });
+      test("should return correct value", () => {
+        expect(shifted).toBe(20);
+      });
+    });
+
+    test("should throw when list is empty", () => {
+      const emptyList: ILinkedList<number> = createList<number>(listType);
+
+      expect(() => {
+        emptyList.shift();
       }).toThrowError();
     });
   });

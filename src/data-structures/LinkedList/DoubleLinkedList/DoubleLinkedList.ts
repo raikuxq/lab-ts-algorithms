@@ -1,21 +1,25 @@
-import IBiDirectIterator from "../../IBiDirectIterator";
-import IBiDirectIterable from "../../IBiDirectIterable";
+import IBiDirectIterator from "../../../types/IBiDirectIterator";
+import IBiDirectIterable from "../../../types/IBiDirectIterable";
 import AbstractLinkedList from "../AbstractLinkedList";
 import DoubleLinkedNode from "./DoubleLinkedNode";
 
+/**
+ * Linear data structure
+ * Each node has next and prev sibling
+ * Head and tail are linked to each other
+ */
 export default class DoubleLinkedList<T>
   extends AbstractLinkedList<T>
   implements IBiDirectIterable<T> {
   /**
    * Override types
    */
-
   protected _head: DoubleLinkedNode<T> | null;
   protected _tail: DoubleLinkedNode<T> | null;
   protected _length: number;
 
   /**
-   * Create empty instance
+   * @inheritDoc
    */
   public constructor() {
     super();
@@ -26,19 +30,35 @@ export default class DoubleLinkedList<T>
 
   /**
    * Will insert node into head next and tail prev links
+   * @param nodeToPush - node that will be added between two nodes
+   * @param nodeLeft - will be prev element of pushed node
+   * @param nodeRight - will be next element of pushed node
    */
-  protected insertNodeBetweenHeadAndTail(node: DoubleLinkedNode<T>): void {
-    node.next = this._tail;
-    node.prev = this._head;
+  protected insertNodeBetweenTwoNodes(
+    nodeToPush: DoubleLinkedNode<T>,
+    nodeLeft: DoubleLinkedNode<T> | null,
+    nodeRight: DoubleLinkedNode<T> | null
+  ): void {
+    if (!this._head) this._head = nodeToPush;
+    if (!this._tail) this._tail = nodeToPush;
 
-    if (node.prev) node.prev.next = node;
-    if (node.next) node.next.prev = node;
+    if (!nodeLeft) nodeLeft = this._tail;
+    if (!nodeRight) nodeRight = this._head;
+
+    nodeToPush.next = nodeRight;
+    nodeToPush.prev = nodeLeft;
+
+    if (nodeToPush.prev) nodeToPush.prev.next = nodeToPush;
+    if (nodeToPush.next) nodeToPush.next.prev = nodeToPush;
 
     this._length++;
   }
 
   /**
-   * Will change it's neighbors nodes links
+   * Will change its neighbors nodes links
+   * @param node - node to delete
+   * @throws when node does not exist
+   * @returns node with empty links that contain only data
    */
   protected deleteNode(node: DoubleLinkedNode<T> | null): DoubleLinkedNode<T> {
     if (node === null) throw new Error("Node should be existed");
@@ -82,10 +102,25 @@ export default class DoubleLinkedList<T>
    */
   public push(value: T): void {
     const node: DoubleLinkedNode<T> = new DoubleLinkedNode<T>(value);
-    if (!this._tail) this._tail = node;
-
-    this.insertNodeBetweenHeadAndTail(node);
+    this.insertNodeBetweenTwoNodes(node, this._head, this._tail);
     this._head = node;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public pushFromIndex(value: T, fromIndex: number): void {
+    const node: DoubleLinkedNode<T> = new DoubleLinkedNode<T>(value);
+
+    if (this.isEmpty() && fromIndex === 0) {
+      this.push(value);
+      return;
+    }
+
+    const nodeLeft: DoubleLinkedNode<T> = this.getNodeByIndex(fromIndex - 1);
+    const nodeRight: DoubleLinkedNode<T> = this.getNodeByIndex(fromIndex);
+
+    this.insertNodeBetweenTwoNodes(node, nodeLeft, nodeRight);
   }
 
   /**
@@ -93,9 +128,7 @@ export default class DoubleLinkedList<T>
    */
   public unshift(value: T): void {
     const node: DoubleLinkedNode<T> = new DoubleLinkedNode<T>(value);
-    if (!this._head) this._head = node;
-
-    this.insertNodeBetweenHeadAndTail(node);
+    this.insertNodeBetweenTwoNodes(node, this._tail, this._head);
     this._tail = node;
   }
 
@@ -109,10 +142,30 @@ export default class DoubleLinkedList<T>
     return deletedNode.data;
   }
 
+  /**
+   * @inheritDoc
+   */
   public shift(): T {
     const deletedNode = this.deleteNode(this._tail);
     this._tail = this._head?.next || null;
 
+    return deletedNode.data;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public deleteFromIndex(fromIndex: number): T {
+    const nodeToDelete = this.getNodeByIndex(fromIndex);
+
+    if (nodeToDelete === this._tail) {
+      return this.shift();
+    }
+    if (nodeToDelete === this._head) {
+      return this.pop();
+    }
+
+    const deletedNode = this.deleteNode(nodeToDelete);
     return deletedNode.data;
   }
 
@@ -142,27 +195,41 @@ export default class DoubleLinkedList<T>
 
   /**
    * List iterator
-   *
-   * @param {Number} fromIndex - where iterator starts
+   * @param fromIndex - where iterator starts from list start
+   * @returns iterator instance
    */
   public iterator(fromIndex = 0): IBiDirectIterator<T> {
     let activeNode: DoubleLinkedNode<T> = this.getNodeByIndex(fromIndex);
 
     return {
+      /**
+       * @returns current element data
+       */
       current: () => {
         return activeNode.data;
       },
+      /**
+       * @returns boolean - is next element exists
+       */
       hasNext(): boolean {
         return Boolean(activeNode.next);
       },
-      next: () => {
+      /**
+       * @throws when next element does not exists
+       * @returns next element data
+       */
+      next: (): T => {
         if (!activeNode.next) {
           throw new Error("Next element does not exist");
         }
         activeNode = activeNode.next;
         return activeNode.data;
       },
-      prev: () => {
+      /**
+       * @throws when prev element does not exists
+       * @returns next element data
+       */
+      prev: (): T => {
         if (!activeNode.prev) {
           throw new Error("Prev element does not exist");
         }
