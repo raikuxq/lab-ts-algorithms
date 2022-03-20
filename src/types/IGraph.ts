@@ -1,8 +1,8 @@
 export default interface IGraph<V> {
-  weight: number;
-  vertices: Array<V>;
-  verticesCount: number;
-  edgesCount: number;
+  weight(): number;
+  vertices(): Array<V>;
+  verticesCount(): number;
+  edgesCount(): number;
 
   addVertex(data: V): this;
   removeVertex(data: V): this;

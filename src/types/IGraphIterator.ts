@@ -1,4 +1,4 @@
-import IIterator from "../IIterator";
+import IIterator from "./IIterator";
 
 export default interface IGraphIterator<T> extends IIterator<T> {
   /**
