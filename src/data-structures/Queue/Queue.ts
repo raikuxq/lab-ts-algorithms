@@ -1,23 +1,27 @@
-import ILinkedList from "../LinkedList/ILinkedList";
+import IQueue from "../../types/IQueue";
+import ILinkedList from "../../types/ILinkedList";
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 
 /**
  * FIFO data structure
  */
-export default class Queue<T> {
+export default class Queue<T> implements IQueue<T> {
   private readonly _list: ILinkedList<T>;
   private readonly _capacity: number;
 
   /**
-   * Create queue instance
+   * Create a queue instance
+   * @param capacity - max stack elements count
    */
   public constructor(capacity?: number) {
+    this._capacity = capacity || Number.MAX_VALUE;
     this._list = new DoubleLinkedList();
-    this._capacity = capacity || Infinity;
   }
 
   /**
    * Get first element in queue (without deleting)
+   * @throws when list is empty
+   * @returns element data
    */
   public peek(): T {
     if (this.isEmpty()) {
@@ -28,16 +32,20 @@ export default class Queue<T> {
 
   /**
    * Add element to queue
+   * @param item - element data
+   * @throws when list is full
    */
   public enqueue(item: T): void {
-    if (this._list.length >= this._capacity) {
+    if (this._list.length() >= this._capacity) {
       throw new Error("Cannot enqueue when queue is full");
     }
     this._list.unshift(item);
   }
 
   /**
-   * Get and delete first element in queue
+   * Delete first element in queue
+   * @throws when list is empty
+   * @returns element data
    */
   public dequeue(): T {
     if (this.isEmpty()) {
@@ -48,13 +56,22 @@ export default class Queue<T> {
 
   /**
    * Is queue empty
+   * @returns boolean
    */
   public isEmpty(): boolean {
     return this._list.isEmpty();
   }
 
   /**
-   * Clear queue
+   * Is stack full
+   * @returns boolean
+   */
+  public isFull(): boolean {
+    return this._list.length() >= this._capacity;
+  }
+
+  /**
+   * Remove all elements in queue
    */
   public clear(): void {
     this._list.clear();
