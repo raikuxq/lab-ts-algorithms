@@ -1,4 +1,4 @@
-import IHashTable from "../src/data-structures/HashTable/interface/IHashTable";
+import IHashTable from "../src/types/IHashTable";
 import HashTable from "../src/data-structures/HashTable/HashTable";
 
 describe("Hash table", () => {
