@@ -1,3 +1,5 @@
+import { FnToMemoize } from "./types/FnToMemoize";
+
 export const getMinIndex = (arr: Array<number>): number => {
   return arr.reduce((minIndex, item, index): number => {
     return item < arr[minIndex] ? index : minIndex;
@@ -23,14 +25,12 @@ export const swapArrayItems = <T>(
   }
 };
 
-export type FnToMemoize<Key, Value> = (...args: Array<Key>) => Value;
-
-export function memoize<Key, Value>(
+export const memoize = <Key, Value>(
   fn: FnToMemoize<Key, Value>
-): FnToMemoize<Key, Value> {
+): FnToMemoize<Key, Value> => {
   const cache = new Map<string, Value>();
 
-  return function (...args: Array<Key>): Value {
+  return (...args: Array<Key>): Value => {
     const jsonArgs = JSON.stringify(args);
 
     if (!cache.has(jsonArgs)) {
@@ -40,4 +40,4 @@ export function memoize<Key, Value>(
 
     return <Value>cache.get(jsonArgs);
   };
-}
+};

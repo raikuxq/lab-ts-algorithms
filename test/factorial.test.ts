@@ -1,4 +1,4 @@
-import { factorial, memoizedFactorial } from "../src/base/factorial";
+import { factorial, memoizedFactorial } from "../src/algorithms/factorial";
 
 describe("Factorial", () => {
   const results = new Map<number, number>();

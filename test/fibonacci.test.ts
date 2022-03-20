@@ -1,4 +1,4 @@
-import { fibonacci, memoizedFibonacci } from "../src/base/fibonacci";
+import { fibonacci, memoizedFibonacci } from "../src/algorithms/fibonacci";
 
 describe("Fibonacci", () => {
   const results = new Map<number, number>();

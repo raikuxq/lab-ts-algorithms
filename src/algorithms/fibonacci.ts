@@ -1,8 +1,9 @@
-import { FnToMemoize, memoize } from "../utils";
+import { memoize } from "../utils";
+import { FnToMemoize } from "../types/FnToMemoize";
 
-export function fibonacci(n: number): number {
+export const fibonacci = (n: number): number => {
   return n > 1 ? fibonacci(n - 1) + fibonacci(n - 2) : n;
-}
+};
 
 export const memoizedFibonacci: FnToMemoize<number, number> = memoize(
   (n: number) => {

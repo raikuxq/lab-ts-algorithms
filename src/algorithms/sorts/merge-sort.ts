@@ -5,12 +5,12 @@
  * @param midIndex - Describes end index of left half
  * @param rightIndex - Describes end index of right half (right half starts at midIndex + 1)
  */
-function merge(
+const merge = (
   arr: Array<number>,
   leftIndex: number,
   midIndex: number,
   rightIndex: number
-) {
+) => {
   const container = arr.slice(leftIndex, rightIndex + 1);
 
   let resultArrIndex = leftIndex;
@@ -43,7 +43,7 @@ function merge(
     resultArrIndex++;
     rightHalfIndex++;
   }
-}
+};
 
 /**
  * Divide array into 2 halves and merge them
@@ -52,7 +52,11 @@ function merge(
  * @param leftIndex - Describes start index of part to sort
  * @param rightIndex - Describes end index of part to sort
  */
-function sortRange(arr: Array<number>, leftIndex: number, rightIndex: number) {
+const sortRange = (
+  arr: Array<number>,
+  leftIndex: number,
+  rightIndex: number
+) => {
   if (rightIndex > leftIndex) {
     const midIndex = Math.floor(leftIndex + (rightIndex - leftIndex) / 2);
 
@@ -61,16 +65,21 @@ function sortRange(arr: Array<number>, leftIndex: number, rightIndex: number) {
 
     merge(arr, leftIndex, midIndex, rightIndex);
   }
-}
+};
 
 /**
- * Merge sorting algorithm implementation
- * @description Big O: N*Log(N)
+ * Merge sorting algorithm
+ * @param arr - array of numbers
+ * @returns arr - sorted array of numbers (array is mutable)
  *
- * @param arr - Array to sort
+ * @description
+ * Time complexity: Best O(n * log(n)); Avg O(n * log(n)); Worst O(n * log(n))
+ *
+ * Memory complexity:
+ * Worst case: O(n)
  */
-export default function mergeSort(arr: Array<number>): Array<number> {
+export const mergeSort = (arr: Array<number>): Array<number> => {
   sortRange(arr, 0, arr.length - 1);
 
   return arr;
-}
+};
