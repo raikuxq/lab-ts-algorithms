@@ -1,4 +1,5 @@
 import { FnToMemoize } from "./types/FnToMemoize";
+import { ArrayMatrix } from "./types/ArrayMatrix";
 
 export const getMinIndex = (arr: Array<number>): number => {
   return arr.reduce((minIndex, item, index): number => {
@@ -40,4 +41,11 @@ export const memoize = <Key, Value>(
 
     return <Value>cache.get(jsonArgs);
   };
+};
+
+export const transposeMatrix = (matrix: ArrayMatrix) => {
+  return matrix.reduce((acc, current, currentIndex) => {
+    acc[currentIndex] = matrix.map((rowArr) => rowArr[currentIndex]);
+    return acc;
+  }, new Array(matrix.length));
 };
