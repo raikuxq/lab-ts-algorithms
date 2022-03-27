@@ -27,7 +27,7 @@ export default class GraphIteratorBFS<V> implements IGraphIterator<V> {
     this.visited = new Map();
     this.parents = new Map();
 
-    this.queue.enqueue(startVertex);
+    this.queue.push(startVertex);
     this.visited.set(startVertex, true);
   }
 
@@ -55,7 +55,7 @@ export default class GraphIteratorBFS<V> implements IGraphIterator<V> {
    * @inheritDoc
    */
   public next(): V {
-    const next = this.queue.dequeue();
+    const next = this.queue.pop();
 
     if (!next) {
       throw new Error("Next element does not exist");
@@ -67,7 +67,7 @@ export default class GraphIteratorBFS<V> implements IGraphIterator<V> {
       const isNotVisited = !this.visited.get(neighbor);
 
       if (isNotVisited) {
-        this.queue.enqueue(neighbor);
+        this.queue.push(neighbor);
         this.visited.set(neighbor, true);
         this.parents.set(neighbor, next);
       }

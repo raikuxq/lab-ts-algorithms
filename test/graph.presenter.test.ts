@@ -2,7 +2,7 @@ import IGraph from "../src/types/IGraph";
 import UndirectedGraph from "../src/data-structures/Graph/UndirectedGraph";
 import DirectedGraph from "../src/data-structures/Graph/DirectedGraph";
 import GraphPresenter from "../src/data-structures/Graph/presenter/GraphPresenter";
-import { createGraph } from "../src/data-structures/Graph/helpers/createGraph";
+import { createGraph } from "../src/helpers/createGraph";
 import { EnumGraphType } from "../src/types/EnumGraphType";
 
 describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(

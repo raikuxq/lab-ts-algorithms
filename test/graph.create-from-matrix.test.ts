@@ -1,5 +1,5 @@
 import { EnumGraphType } from "../src/types/EnumGraphType";
-import { createGraphFromMatrix } from "../src/data-structures/Graph/helpers/createGraphFromMatrix";
+import { createGraphFromMatrix } from "../src/helpers/createGraphFromMatrix";
 import { ArrayMatrix } from "../src/types/ArrayMatrix";
 import IGraph from "../src/types/IGraph";
 
