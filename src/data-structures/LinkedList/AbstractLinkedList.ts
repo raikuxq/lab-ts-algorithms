@@ -1,15 +1,28 @@
-import ILinkedList from "../../types/ILinkedList";
 import AbstractLinkedNode from "./AbstractLinkedNode";
+import ILinearStorageAccessible from "../../types/ILinearStorageAccessible";
 
-export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
+export default abstract class AbstractLinkedList<T>
+  implements ILinearStorageAccessible<T> {
+  protected readonly _capacity: number;
+  protected _length: number;
   protected _head: AbstractLinkedNode<T> | null;
   protected _tail: AbstractLinkedNode<T> | null;
-  protected _length: number;
 
   /**
    * Create empty instance
    */
-  protected constructor() {
+  protected constructor(capacity?: number) {
+    if (capacity === undefined) {
+      this._capacity = Number.MAX_VALUE;
+    } else {
+      if (capacity > 0) {
+        this._capacity = capacity;
+      } else {
+        throw new Error("Capacity must be larger than 0");
+      }
+    }
+
+    this._capacity = capacity && capacity > 0 ? capacity : Number.MAX_VALUE;
     this._head = null;
     this._tail = null;
     this._length = 0;
@@ -75,10 +88,18 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Is list empty
-   * @returns boolean - is list empty
+   * @returns boolean
    */
   public isEmpty(): boolean {
     return this._length === 0;
+  }
+
+  /**
+   * Is list full
+   * @returns boolean
+   */
+  public isFull(): boolean {
+    return this._length >= this._capacity;
   }
 
   /**
@@ -86,7 +107,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * @throws Error when head does not exists
    * @returns data of picked element
    */
-  public peekHead(): T {
+  public peek(): T {
     if (!this._head) {
       throw new Error("Head does not exist");
     }
@@ -99,12 +120,21 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * @throws Error when head does not exists
    * @returns data of picked element
    */
-  public peekTail(): T {
+  public peekFromStart(): T {
     if (!this._tail) {
       throw new Error("Tail does not exist");
     }
 
     return this._tail.data;
+  }
+
+  /**
+   * Check if element exists in list
+   * @param item
+   * @returns boolean
+   */
+  public has(item: T): boolean {
+    return this.getAsArray().includes(item);
   }
 
   /**
@@ -131,7 +161,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * @throws when element does not exists
    * @returns data of picked element
    */
-  public getByIndex(index: number): T {
+  public peekByIndex(index: number): T {
     try {
       const node = this.getNodeByIndex(index);
       return node.data;
@@ -155,6 +185,9 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * */
   public pushFromArray(elements: Array<T>): void {
     elements.forEach((element: T) => {
+      if (this.isFull()) {
+        throw new Error("List is full, no more space available");
+      }
       this.push(element);
     });
   }

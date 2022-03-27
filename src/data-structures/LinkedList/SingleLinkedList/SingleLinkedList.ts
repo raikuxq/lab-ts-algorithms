@@ -21,8 +21,8 @@ export default class SingleLinkedList<T>
   /**
    * @inheritDoc
    */
-  public constructor() {
-    super();
+  public constructor(capacity?: number) {
+    super(capacity);
     this._head = null;
     this._tail = null;
     this._length = 0;
@@ -39,6 +39,8 @@ export default class SingleLinkedList<T>
     nodeLeft: SingleLinkedNode<T> | null,
     nodeRight: SingleLinkedNode<T> | null
   ): void {
+    if (this.isFull()) throw new Error("List is full, no more space available");
+
     if (!this._head) this._head = nodeToPush;
     if (!this._tail) this._tail = nodeToPush;
 
@@ -138,7 +140,7 @@ export default class SingleLinkedList<T>
    */
   public unshift(value: T): void {
     const node: SingleLinkedNode<T> = new SingleLinkedNode<T>(value);
-    this.insertNodeBetweenTwoNodes(node, this._tail, this._head);
+    this.insertNodeBetweenTwoNodes(node, this._head, this._tail);
     this._tail = node;
   }
 

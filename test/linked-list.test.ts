@@ -1,19 +1,19 @@
-import ILinkedList from "../src/types/ILinkedList";
+import ILinearStorageAccessible from "../src/types/ILinearStorageAccessible";
 import SingleLinkedList from "../src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
 import DoubleLinkedList from "../src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
 import { EnumLinkedListType } from "../src/types/EnumLinkedListType";
-import { createLinkedList } from "../src/data-structures/LinkedList/helpers/createLinkedList";
+import { createLinkedList } from "../src/helpers/createLinkedList";
 
 describe("Linked list collection", () => {
   describe("polymorphism should work correctly", () => {
     const doubleLinkedList = new DoubleLinkedList<number>();
     const singleLinkedList = new SingleLinkedList<number>();
-    const collection: Array<ILinkedList<number>> = [
+    const collection: Array<ILinearStorageAccessible<number>> = [
       doubleLinkedList,
       singleLinkedList,
     ];
 
-    collection.forEach((list: ILinkedList<number>) => {
+    collection.forEach((list: ILinearStorageAccessible<number>) => {
       list.push(1);
       list.push(2);
     });
@@ -30,37 +30,53 @@ describe("Linked list collection", () => {
 describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
   "%s linked list",
   (listType: EnumLinkedListType) => {
+    describe("constructor", () => {
+      test("should throw when capacity is less than 1", () => {
+        expect(() => {
+          createLinkedList<number>(listType, -5);
+        }).toThrowError();
+      });
+    });
+
     describe("method push", () => {
       test("should add elements to list's end", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         list.push(1);
-        expect(list.peekHead()).toBe(1);
+        expect(list.peek()).toBe(1);
+      });
+      test("should throw when list is full", () => {
+        const list = createLinkedList<number>(listType, 2);
+        list.push(1);
+        list.push(2);
+        expect(() => {
+          list.push(3);
+        }).toThrowError();
       });
     });
 
     describe("method pushFromIndex", () => {
       test("should add elements to list from index", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         const expectedArr: Array<number> = [10, 20, 30, 40, 50];
         list.pushFromArray([10, 30, 40, 50]);
         list.pushFromIndex(20, 1);
         expect(list.getAsArray()).toEqual(expectedArr);
       });
       test("should add elements to list from start", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         const expectedArr: Array<number> = [0, 10];
         list.pushFromArray([0]);
         list.pushFromIndex(10, 1);
         expect(list.getAsArray()).toEqual(expectedArr);
       });
       test("should add elements to empty list", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         const expectedArr: Array<number> = [10];
         list.pushFromIndex(10, 0);
         expect(list.getAsArray()).toEqual(expectedArr);
       });
       test("should add elements to list from end", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         const expectedArr: Array<number> = [0, 10, 20, 30];
         list.pushFromArray([0, 10, 30]);
         list.pushFromIndex(20, 2);
@@ -70,86 +86,95 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
     describe("method unshift", () => {
       test("should add elements to list's start", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         list.unshift(1);
         list.unshift(0);
-        expect(list.peekTail()).toBe(0);
+        expect(list.peekFromStart()).toBe(0);
+      });
+      test("should throw when list is full", () => {
+        const list = createLinkedList<number>(listType, 2);
+        list.unshift(1);
+        list.unshift(2);
+        expect(() => {
+          list.unshift(3);
+        }).toThrowError();
       });
     });
 
     describe("method pushFromArray", () => {
       test("should add elements to list's end", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         const arr = [1, 2, 3, 4, 5];
         list.pushFromArray(arr);
         expect(list.getAsArray()).toEqual(arr);
       });
+      test("should throw when list is full", () => {
+        const list = createLinkedList<number>(listType, 2);
+        list.pushFromArray([1]);
+        expect(() => {
+          list.pushFromArray([2, 3]);
+        }).toThrowError();
+      });
     });
 
-    describe("method peekTail", () => {
+    describe("method peekFromStart", () => {
       test("should throw when list is empty", () => {
-        const emptyList: ILinkedList<number> = createLinkedList<number>(
-          listType
-        );
+        const emptyList = createLinkedList<number>(listType);
 
         expect(() => {
-          emptyList.peekTail();
+          emptyList.peekFromStart();
         }).toThrowError();
       });
       test("should return first element from list", () => {
-        const list: ILinkedList<number> = new DoubleLinkedList();
+        const list = new DoubleLinkedList();
         list.pushFromArray([10, 20, 30, 40, 50]);
 
-        expect(list.peekTail()).toBe(10);
+        expect(list.peekFromStart()).toBe(10);
       });
     });
 
-    describe("method peekHead", () => {
+    describe("method peek", () => {
       test("should throw when list is empty", () => {
-        const emptyList: ILinkedList<number> = createLinkedList<number>(
-          listType
-        );
+        const emptyList = createLinkedList<number>(listType);
 
         expect(() => {
-          emptyList.peekHead();
+          emptyList.peek();
         }).toThrowError();
       });
       test("should return first element from list", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         list.pushFromArray([10, 20, 30, 40, 50]);
 
-        expect(list.peekHead()).toBe(50);
+        expect(list.peek()).toBe(50);
       });
     });
 
-    describe("method getByIndex", () => {
+    describe("method peekByIndex", () => {
       test("should throw when list is empty", () => {
-        const emptyList: ILinkedList<number> = createLinkedList<number>(
-          listType
-        );
+        const emptyList = createLinkedList<number>(listType);
 
         expect(() => {
-          emptyList.getByIndex(0);
+          emptyList.peekByIndex(0);
         }).toThrowError();
       });
       test("should return element by its index from list", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         list.pushFromArray([10, 20, 30, 40, 50]);
 
-        expect(list.getByIndex(2)).toBe(30);
+        expect(list.peekByIndex(2)).toBe(30);
       });
       test("should throw when index exceed list length", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
 
         expect(() => {
-          list.getByIndex(1000);
+          list.peekByIndex(1000);
         }).toThrowError();
       });
     });
 
     describe("method shift", () => {
       describe("should delete first element and return its value", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         list.pushFromArray([10, 20]);
         const shifted = list.shift();
 
@@ -162,9 +187,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       });
 
       test("should throw when list is empty", () => {
-        const emptyList: ILinkedList<number> = createLinkedList<number>(
-          listType
-        );
+        const emptyList = createLinkedList<number>(listType);
 
         expect(() => {
           emptyList.shift();
@@ -174,7 +197,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
     describe("method pop", () => {
       describe("should delete last element and return its value", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         list.pushFromArray([10, 40]);
         const shifted = list.pop();
 
@@ -188,9 +211,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       });
 
       test("should throw when list is empty", () => {
-        const emptyList: ILinkedList<number> = createLinkedList<number>(
-          listType
-        );
+        const emptyList = createLinkedList<number>(listType);
 
         expect(() => {
           emptyList.pop();
@@ -200,7 +221,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
     describe("method deleteFromIndex", () => {
       describe("should delete element by index and return its value", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         list.pushFromArray([10, 20, 30]);
         const shifted = list.deleteFromIndex(1);
 
@@ -213,9 +234,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       });
 
       test("should throw when list is empty", () => {
-        const emptyList: ILinkedList<number> = createLinkedList<number>(
-          listType
-        );
+        const emptyList = createLinkedList<number>(listType);
 
         expect(() => {
           emptyList.shift();
@@ -225,7 +244,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
     describe("method reverse", () => {
       test("should correct reverse list", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         const array = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110];
         const reversedArray = [...array].reverse();
         list.pushFromArray(array);
@@ -237,7 +256,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
     describe("method clear", () => {
       test("should correct clear list", () => {
-        const list: ILinkedList<number> = createLinkedList<number>(listType);
+        const list = createLinkedList<number>(listType);
         const testArray: Array<number> = [10, 20, 30, 40, 50, 60, 70, 80, 90];
         list.pushFromArray(testArray);
         list.clear();

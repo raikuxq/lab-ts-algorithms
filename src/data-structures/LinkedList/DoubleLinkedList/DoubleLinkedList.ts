@@ -21,8 +21,8 @@ export default class DoubleLinkedList<T>
   /**
    * @inheritDoc
    */
-  public constructor() {
-    super();
+  public constructor(capacity?: number) {
+    super(capacity);
     this._head = null;
     this._tail = null;
     this._length = 0;
@@ -39,6 +39,8 @@ export default class DoubleLinkedList<T>
     nodeLeft: DoubleLinkedNode<T> | null,
     nodeRight: DoubleLinkedNode<T> | null
   ): void {
+    if (this.isFull()) throw new Error("List is full, no more space available");
+
     if (!this._head) this._head = nodeToPush;
     if (!this._tail) this._tail = nodeToPush;
 
@@ -81,7 +83,7 @@ export default class DoubleLinkedList<T>
    * @inheritDoc
    */
   protected getNodeByIndex(index: number): DoubleLinkedNode<T> {
-    if (this._length === 0) throw new Error("List is empty");
+    if (this.isEmpty()) throw new Error("List is empty");
     if (this._length < index) throw new Error("Index exceed list length");
 
     let currentNode = this._tail;
@@ -128,7 +130,7 @@ export default class DoubleLinkedList<T>
    */
   public unshift(value: T): void {
     const node: DoubleLinkedNode<T> = new DoubleLinkedNode<T>(value);
-    this.insertNodeBetweenTwoNodes(node, this._tail, this._head);
+    this.insertNodeBetweenTwoNodes(node, this._head, this._tail);
     this._tail = node;
   }
 
