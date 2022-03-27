@@ -1,14 +1,13 @@
-import IQueue from "../../types/IQueue";
-import ILinkedList from "../../types/ILinkedList";
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 import LoopedArray from "../LoopedArray/LoopedArray";
-import ICollection from "../../types/ICollection";
+import ILinearStorage from "../../types/ILinearStorage";
+import ILinearStorageAccessible from "../../types/ILinearStorageAccessible";
 
 /**
  * FIFO data structure
  */
-export default class Queue<T> implements IQueue<T> {
-  private readonly _list: ICollection<T>;
+export default class Queue<T> implements ILinearStorage<T> {
+  private readonly _list: ILinearStorageAccessible<T>;
   private readonly _capacity: number;
 
   /**
@@ -16,8 +15,16 @@ export default class Queue<T> implements IQueue<T> {
    * @param capacity - max stack elements count
    */
   public constructor(capacity?: number) {
-    this._capacity = capacity || Number.MAX_VALUE;
-    this._list = new DoubleLinkedList();
+    if (capacity === undefined) {
+      this._capacity = Number.MAX_VALUE;
+    } else {
+      if (capacity > 0) {
+        this._capacity = capacity;
+      } else {
+        throw new Error("Capacity must be larger than 0");
+      }
+    }
+    this._list = new DoubleLinkedList<T>(this._capacity);
     // this._list = new LoopedArray(this._capacity);
   }
 
@@ -30,7 +37,7 @@ export default class Queue<T> implements IQueue<T> {
     if (this.isEmpty()) {
       throw new Error("Cannot peek when list is empty");
     }
-    return this._list.peekHead();
+    return this._list.peek();
   }
 
   /**
@@ -38,9 +45,9 @@ export default class Queue<T> implements IQueue<T> {
    * @param item - element data
    * @throws when list is full
    */
-  public enqueue(item: T): void {
+  public push(item: T): void {
     if (this._list.length() >= this._capacity) {
-      throw new Error("Cannot enqueue when queue is full");
+      throw new Error("Cannot push when queue is full");
     }
     this._list.unshift(item);
   }
@@ -50,11 +57,20 @@ export default class Queue<T> implements IQueue<T> {
    * @throws when list is empty
    * @returns element data
    */
-  public dequeue(): T {
+  public pop(): T {
     if (this.isEmpty()) {
-      throw new Error("Cannot dequeue when list is empty");
+      throw new Error("Cannot pop when list is empty");
     }
     return this._list.pop();
+  }
+
+  /**
+   * Check if element exists in list
+   * @param item
+   * @returns boolean
+   */
+  public has(item: T): boolean {
+    return this._list.has(item);
   }
 
   /**
@@ -78,5 +94,13 @@ export default class Queue<T> implements IQueue<T> {
    */
   public clear(): void {
     this._list.clear();
+  }
+
+  /**
+   * Queue length
+   * @returns number
+   */
+  public length(): number {
+    return this._list.length();
   }
 }
