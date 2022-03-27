@@ -24,6 +24,8 @@ Written in TypeScript, tested with Jest.
 
 
 ## Linear data structures
+
+### Common
 + Interfaces
   + [ILinearStorage](src/types/ILinearStorage.ts)
   + [ILinearStorageAccessible](src/types/ILinearStorageAccessible.ts)
@@ -37,6 +39,9 @@ Written in TypeScript, tested with Jest.
   + [SingleLinkedList](src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList.ts) [[ test ](test/linked-list.test.ts)]
   + [DoubleLinkedList](src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList.ts) [[ test ](test/linked-list.test.ts)]
 
+### Looped Array
++ Implementation
+  + [LoopedArray](src/data-structures/LoopedArray/LoopedArray.ts) [[ test ](test/looped-array.test.ts)]
 
 ### Stack
 + Implementation
