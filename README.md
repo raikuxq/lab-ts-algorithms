@@ -1,4 +1,4 @@
-ga# Common algorithms and data structures
+Common algorithms and data structures
 
 Written in TypeScript, tested with Jest.
 
@@ -6,6 +6,8 @@ Written in TypeScript, tested with Jest.
 
 
 ### Basic
++ [memoization](src/utils.ts)
++ [matrix-transpose](src/utils.ts)
 + [binary-search](src/algorithms/binary-search.ts) [[ test ](test/binary-search.test.ts)]
 + [factorial (+ memoized version)](src/algorithms/factorial.ts) [[ test ](test/factorial.test.ts)]
 + [fibonacci (+ memoized version)](src/algorithms/fibonacci.ts) [[ test ](test/fibonacci.test.ts)]
@@ -21,12 +23,12 @@ Written in TypeScript, tested with Jest.
 
 
 
-## Data structures
-
+## Linear data structures
++ Interfaces
+  + [ILinearStorage](src/types/ILinearStorage.ts)
+  + [ILinearStorageAccessible](src/types/ILinearStorageAccessible.ts)
 
 ### Linked List
-+ Interfaces
-  + [ILinkedList](src/types/ILinkedList.ts)
 + Implementation
   + [AbstractLinkedNode](src/data-structures/LinkedList/AbstractLinkedNode.ts)
   + [SingleLinkedNode](src/data-structures/LinkedList/SingleLinkedList/SingleLinkedNode.ts)
@@ -37,24 +39,21 @@ Written in TypeScript, tested with Jest.
 
 
 ### Stack
-+ Interfaces
-  + [IStack](src/types/IStack.ts)
 + Implementation
   + [Stack](src/data-structures/Stack/Stack.ts) [[ test ](test/stack.test.ts)]
 
 
 ### Queue
-+ Interfaces
-  + [IQueue](src/types/IQueue.ts)
 + Implementation
   + [Queue](src/data-structures/Queue/Queue.ts) [[ test ](test/queue.test.ts)]
 
 
 ### Hash Table
-+ Interfaces
-  + [IHashTable](src/types/IHashTable.ts)
 + Implementation
   + [HashTable](src/data-structures/HashTable/HashTable.ts) [[ test ](test/hash-table.test.ts)]
+
+
+## Non-linear data structures
 
 
 ### Graph
@@ -76,3 +75,7 @@ Written in TypeScript, tested with Jest.
 + Searching
     + [has-path (BFS/DFS)](src/data-structures/Graph/searching/hasPath.ts) [[ test ](test/graph.has-path.test.ts)]
     + [shortest-path (BFS/DFS/Dijkstra)](src/data-structures/Graph/searching/shortestPath.ts) [[ test ](test/graph.shortest-path.test.ts)]
++ Creators
+    + [create-graph-from-matrix](src/helpers/createGraphFromMatrix.ts) [[ test ](test/graph.create-from-matrix.test.ts)]
++ Transposing
+    + [transpose-directed-graph](src/data-structures/Graph/transposing/transposeDirectedGraph.ts) [[ test ](test/graph.transpose.test.ts)]
