@@ -1,7 +1,7 @@
-import IGraph from "../../../types/IGraph";
-import DirectedGraph from "../DirectedGraph";
-import UndirectedGraph from "../UndirectedGraph";
-import { EnumGraphType } from "../../../types/EnumGraphType";
+import IGraph from "../types/IGraph";
+import DirectedGraph from "../data-structures/Graph/DirectedGraph";
+import UndirectedGraph from "../data-structures/Graph/UndirectedGraph";
+import { EnumGraphType } from "../types/EnumGraphType";
 
 /**
  * Returns graph by type

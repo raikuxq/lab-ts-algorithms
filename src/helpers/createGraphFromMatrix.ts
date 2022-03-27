@@ -1,6 +1,6 @@
-import IGraph from "../../../types/IGraph";
-import { EnumGraphType } from "../../../types/EnumGraphType";
-import { ArrayMatrix } from "../../../types/ArrayMatrix";
+import IGraph from "../types/IGraph";
+import { EnumGraphType } from "../types/EnumGraphType";
+import { ArrayMatrix } from "../types/ArrayMatrix";
 import { createGraph } from "./createGraph";
 
 export const EDGE_EXISTS_STATE = 1;
