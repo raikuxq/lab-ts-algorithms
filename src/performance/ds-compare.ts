@@ -6,7 +6,7 @@ export const perf = (fn: () => void, operation: string): void => {
   const queue = new Queue<number>();
 
   const perfStart = performance.now();
-  queue.enqueue(4);
+  queue.push(4);
   fn();
   const perfEnd = performance.now();
   console.log(`${operation} = ${perfEnd - perfStart}ms`);
@@ -17,16 +17,16 @@ export const perfQueue = (): void => {
   const queue = new Queue<number>();
 
   perf(() => {
-    queue.enqueue(4);
-  }, "enqueue");
+    queue.push(4);
+  }, "push");
 
   perf(() => {
     queue.peek();
   }, "peek");
 
   perf(() => {
-    queue.dequeue();
-  }, "dequeue");
+    queue.pop();
+  }, "pop");
 
   perf(() => {
     queue.isEmpty();
