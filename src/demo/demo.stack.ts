@@ -1,7 +1,7 @@
 import ILinearStorage from "../types/ILinearStorage";
 import Stack from "../data-structures/Stack/Stack";
 
-export const demoStack = () => {
+export const demoStack = (): void => {
   console.log("\nEmpty stack created");
   const stack: ILinearStorage<string> = new Stack<string>();
 

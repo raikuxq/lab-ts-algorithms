@@ -1,7 +1,7 @@
 import Queue from "../data-structures/Queue/Queue";
 import ILinearStorage from "../types/ILinearStorage";
 
-export const demoQueue = () => {
+export const demoQueue = (): void => {
   console.log("\nEmpty queue created");
   const queue: ILinearStorage<string> = new Queue<string>();
 

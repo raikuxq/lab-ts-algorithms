@@ -1,7 +1,8 @@
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
-import LoopedArray from "../LoopedArray/LoopedArray";
 import ILinearStorage from "../../types/ILinearStorage";
 import ILinearStorageAccessible from "../../types/ILinearStorageAccessible";
+// eslint-disable-next-line
+import LoopedArray from "../LoopedArray/LoopedArray";
 
 /**
  * FIFO data structure
@@ -25,6 +26,7 @@ export default class Queue<T> implements ILinearStorage<T> {
       }
     }
     this._list = new DoubleLinkedList<T>(this._capacity);
+    // eslint-disable-next-line
     // this._list = new LoopedArray(this._capacity);
   }
 

@@ -43,7 +43,7 @@ export const memoize = <Key, Value>(
   };
 };
 
-export const transposeMatrix = (matrix: ArrayMatrix) => {
+export const transposeMatrix = (matrix: ArrayMatrix): ArrayMatrix => {
   return matrix.reduce((acc, current, currentIndex) => {
     acc[currentIndex] = matrix.map((rowArr) => rowArr[currentIndex]);
     return acc;

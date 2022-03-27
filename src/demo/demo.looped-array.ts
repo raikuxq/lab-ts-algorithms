@@ -1,7 +1,7 @@
 import LoopedArray from "../data-structures/LoopedArray/LoopedArray";
 import ILinearStorageAccessible from "../types/ILinearStorageAccessible";
 
-export const demoLoopedArray = () => {
+export const demoLoopedArray = (): void => {
   console.log("LoopedArray instance was created with capacity = 4");
   const loopedArray: ILinearStorageAccessible<string> = new LoopedArray<string>(
     4
