@@ -1,14 +1,13 @@
-import IStack from "../../types/IStack";
-import ILinkedList from "../../types/ILinkedList";
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
-import ICollection from "../../types/ICollection";
+import ILinearStorage from "../../types/ILinearStorage";
 import LoopedArray from "../LoopedArray/LoopedArray";
+import ILinearStorageAccessible from "../../types/ILinearStorageAccessible";
 
 /**
  * LIFO data structure
  */
-export default class Stack<T> implements IStack<T> {
-  private readonly _list: ICollection<T>;
+export default class Stack<T> implements ILinearStorage<T> {
+  private readonly _list: ILinearStorageAccessible<T>;
   private readonly _capacity: number;
 
   /**
@@ -16,8 +15,16 @@ export default class Stack<T> implements IStack<T> {
    * @param capacity - max stack elements count
    */
   public constructor(capacity?: number) {
-    this._capacity = capacity || Number.MAX_VALUE;
-    this._list = new DoubleLinkedList();
+    if (capacity === undefined) {
+      this._capacity = Number.MAX_VALUE;
+    } else {
+      if (capacity > 0) {
+        this._capacity = capacity;
+      } else {
+        throw new Error("Capacity must be larger than 0");
+      }
+    }
+    this._list = new DoubleLinkedList(this._capacity);
     // this._list = new LoopedArray(this._capacity);
   }
 
@@ -30,7 +37,7 @@ export default class Stack<T> implements IStack<T> {
     if (this.isEmpty()) {
       throw new Error("Cannot peek when list is empty");
     }
-    return this._list.peekHead();
+    return this._list.peek();
   }
 
   /**
@@ -58,6 +65,15 @@ export default class Stack<T> implements IStack<T> {
   }
 
   /**
+   * Check if element exists in list
+   * @param item
+   * @returns boolean
+   */
+  public has(item: T): boolean {
+    return this._list.has(item);
+  }
+
+  /**
    * Is stack empty
    * @returns boolean
    */
@@ -78,5 +94,13 @@ export default class Stack<T> implements IStack<T> {
    */
   public clear(): void {
     this._list.clear();
+  }
+
+  /**
+   * Queue length
+   * @returns number
+   */
+  public length(): number {
+    return this._list.length();
   }
 }
