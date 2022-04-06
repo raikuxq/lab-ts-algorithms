@@ -154,10 +154,11 @@ describe("Any type of graph", () => {
         .addVertex("Bob")
         .addVertex("Lisa")
         .addEdge("Mike", "Bob")
-        .addEdge("Mike", "Lisa");
+        .addEdge("Mike", "Lisa")
+        .addEdge("Bob", "Lisa");
 
       test("should return correct vertices count", () => {
-        expect(graph.edgesCount()).toBe(2);
+        expect(graph.edgesCount()).toBe(3);
       });
     });
     describe("in directed graph", () => {

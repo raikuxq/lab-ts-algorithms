@@ -33,6 +33,20 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
   /**
    * @inheritDoc
    */
+  public hasEdge(from: V, to: V): boolean {
+    return Boolean(
+      this._edges.find((edge) => {
+        return (
+          (edge.fromVertex === from && edge.toVertex === to) ||
+          (edge.fromVertex === to && edge.toVertex === from)
+        );
+      })
+    );
+  }
+
+  /**
+   * @inheritDoc
+   */
   public addEdge(from: V, to: V, weight?: number): this {
     try {
       const fromVertex = this.tryFindVertex(from);
@@ -50,6 +64,7 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
         this._vertices.get(fromVertex)?.push(toVertex);
         this._vertices.get(toVertex)?.push(fromVertex);
       }
+      console.log(this._edges);
     } catch {
       throw new Error(
         "Edge cannot be added because one of vertices was not found"
@@ -91,4 +106,8 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
 
     return this;
   }
+  //
+  // public edgesCount(): number {
+  //   return Math.floor(super.edgesCount() / 2);
+  // }
 }
