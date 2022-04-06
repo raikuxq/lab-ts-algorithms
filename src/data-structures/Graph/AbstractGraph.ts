@@ -83,13 +83,11 @@ export default abstract class AbstractGraph<V> {
    * @param vertexToRemove
    */
   protected cascadeRemoveVertexEdges(vertexToRemove: V): void {
-    this._edges.forEach((edge: GraphEdge<V>, index: number) => {
-      if (
-        edge.toVertex === vertexToRemove ||
-        edge.fromVertex === vertexToRemove
-      ) {
-        this._edges.splice(index, 1);
-      }
+    this._edges = this._edges.filter((edge: GraphEdge<V>) => {
+      const shouldBeDeleted =
+        edge.toVertex === vertexToRemove || edge.fromVertex === vertexToRemove;
+
+      return !shouldBeDeleted;
     });
   }
 
@@ -150,8 +148,8 @@ export default abstract class AbstractGraph<V> {
     try {
       const vertexToRemove = this.tryFindVertex(data);
 
-      this.cascadeRemoveVertexRelations(vertexToRemove);
       this.cascadeRemoveVertexEdges(vertexToRemove);
+      this.cascadeRemoveVertexRelations(vertexToRemove);
       this._vertices.delete(vertexToRemove);
     } catch (e) {
       throw new Error("Vertex does not exist already");
