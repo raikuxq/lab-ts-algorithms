@@ -64,7 +64,6 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
         this._vertices.get(fromVertex)?.push(toVertex);
         this._vertices.get(toVertex)?.push(fromVertex);
       }
-      console.log(this._edges);
     } catch {
       throw new Error(
         "Edge cannot be added because one of vertices was not found"
