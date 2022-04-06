@@ -131,7 +131,7 @@ describe.each([EnumGraphTraversalType.DIJKSTRA])(
   }
 );
 
-describe.each([EnumGraphTraversalType.BFS, EnumGraphTraversalType.DFS])(
+describe.each([EnumGraphTraversalType.BFS])(
   "Unweighted graph by %s",
   (strategyType: EnumGraphTraversalType) => {
     let strategy: IGraphIterationStrategy<string>;
@@ -139,10 +139,6 @@ describe.each([EnumGraphTraversalType.BFS, EnumGraphTraversalType.DFS])(
     switch (strategyType) {
       case EnumGraphTraversalType.BFS: {
         strategy = new BFSIterationStrategy();
-        break;
-      }
-      case EnumGraphTraversalType.DFS: {
-        strategy = new DFSIterationStrategy();
         break;
       }
       default: {
@@ -161,17 +157,24 @@ describe.each([EnumGraphTraversalType.BFS, EnumGraphTraversalType.DFS])(
         .addVertex("James")
         .addVertex("Anna")
         .addEdge("Mike", "Bob")
+        .addEdge("Mike", "Aaron")
         .addEdge("Mike", "Lisa")
         .addEdge("Lisa", "James")
         .addEdge("Lisa", "Aaron")
         .addEdge("James", "Aaron")
-        .addEdge("James", "Anna");
+        .addEdge("James", "Anna")
+        .addEdge("Aaron", "Anna");
 
       test("should find correct path between multiple nodes", () => {
+        // expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
+        //   "Mike",
+        //   "Lisa",
+        //   "James",
+        //   "Anna",
+        // ]);
         expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
           "Mike",
-          "Lisa",
-          "James",
+          "Aaron",
           "Anna",
         ]);
       });
