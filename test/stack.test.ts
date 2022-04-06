@@ -81,4 +81,16 @@ describe("stack", () => {
       expect(stack.isFull()).toBe(true);
     });
   });
+
+  describe("method reverse", () => {
+    test("should correctly reverse stack", () => {
+      const stack: ILinearStorage<number> = new Stack();
+      stack.push(5);
+      stack.push(10);
+      stack.push(15);
+      stack.reverse();
+
+      expect(stack.peek()).toBe(5);
+    });
+  });
 });

@@ -52,6 +52,18 @@ describe("queue", () => {
     });
   });
 
+  // describe("method reverse", () => {
+  //   test("should correctly reverse queue", () => {
+  //     const queue: ILinearStorage<number> = new Queue();
+  //     queue.push(5);
+  //     queue.push(10);
+  //     queue.push(15);
+  //     queue.reverse();
+  //
+  //     expect(queue.peek()).toBe(15);
+  //   });
+  // });
+
   describe("method isEmpty", () => {
     test("should return true when queue is empty", () => {
       const queue: ILinearStorage<number> = new Queue();

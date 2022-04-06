@@ -1,6 +1,6 @@
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 import ILinearStorage from "../../types/ILinearStorage";
-import ILinearStorageAccessible from "../../types/ILinearStorageAccessible";
+import ILinearStorageRA from "../../types/ILinearStorageRA";
 // eslint-disable-next-line
 import LoopedArray from "../LoopedArray/LoopedArray";
 
@@ -8,7 +8,7 @@ import LoopedArray from "../LoopedArray/LoopedArray";
  * LIFO data structure
  */
 export default class Stack<T> implements ILinearStorage<T> {
-  private readonly _list: ILinearStorageAccessible<T>;
+  private readonly _list: ILinearStorageRA<T>;
   private readonly _capacity: number;
 
   /**
@@ -104,5 +104,12 @@ export default class Stack<T> implements ILinearStorage<T> {
    */
   public length(): number {
     return this._list.length();
+  }
+
+  /**
+   * Reverse stack
+   */
+  public reverse(): void {
+    this._list.reverse();
   }
 }
