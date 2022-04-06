@@ -1,9 +1,9 @@
 import DoubleLinkedList from "../data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
-import ILinearStorageAccessible from "../types/ILinearStorageAccessible";
+import ILinkedList from "../types/ILinkedList";
 
 export const demoLinkedList = (): void => {
   console.log("\nEmpty linked list created");
-  const list: ILinearStorageAccessible<string> = new DoubleLinkedList<string>();
+  const list: ILinkedList<string> = new DoubleLinkedList<string>();
 
   list.push("John");
   list.push("Mary");

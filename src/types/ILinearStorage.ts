@@ -7,4 +7,5 @@ export default interface ILinearStorage<T> {
   isFull(): boolean;
   length(): number;
   clear(): void;
+  reverse(): void;
 }

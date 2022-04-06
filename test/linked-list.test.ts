@@ -1,4 +1,4 @@
-import ILinearStorageAccessible from "../src/types/ILinearStorageAccessible";
+import ILinkedList from "../src/types/ILinkedList";
 import SingleLinkedList from "../src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
 import DoubleLinkedList from "../src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
 import { EnumLinkedListType } from "../src/types/EnumLinkedListType";
@@ -8,12 +8,12 @@ describe("Linked list collection", () => {
   describe("polymorphism should work correctly", () => {
     const doubleLinkedList = new DoubleLinkedList<number>();
     const singleLinkedList = new SingleLinkedList<number>();
-    const collection: Array<ILinearStorageAccessible<number>> = [
+    const collection: Array<ILinkedList<number>> = [
       doubleLinkedList,
       singleLinkedList,
     ];
 
-    collection.forEach((list: ILinearStorageAccessible<number>) => {
+    collection.forEach((list: ILinkedList<number>) => {
       list.push(1);
       list.push(2);
     });

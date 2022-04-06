@@ -1,8 +1,7 @@
 import AbstractLinkedNode from "./AbstractLinkedNode";
-import ILinearStorageAccessible from "../../types/ILinearStorageAccessible";
+import ILinkedList from "../../types/ILinkedList";
 
-export default abstract class AbstractLinkedList<T>
-  implements ILinearStorageAccessible<T> {
+export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
   protected readonly _capacity: number;
   protected _length: number;
   protected _head: AbstractLinkedNode<T> | null;

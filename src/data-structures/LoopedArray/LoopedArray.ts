@@ -1,11 +1,11 @@
-import ILinearStorageAccessible from "../../types/ILinearStorageAccessible";
+import IArrayFacade from "../../types/IArrayFacade";
 
 /**
  * Linear data structure
  * Facade above array
  * After reaching full array new pushed elements will be overwritten over old elements
  */
-export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
+export default class LoopedArray<T> implements IArrayFacade<T> {
   private readonly _capacity: number;
   private _realLength = 0;
   private _array: Array<T>;
@@ -52,7 +52,7 @@ export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
   }
 
   /**
-   * Delete node from list's end
+   * Delete node from array's end
    * @returns data of deleted element
    */
   public pop(): T {
@@ -66,7 +66,7 @@ export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
   }
 
   /**
-   * Delete node from list's start
+   * Delete node from array's start
    * @returns data of deleted element
    */
   public shift(): T {
@@ -98,7 +98,7 @@ export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
   }
 
   /**
-   * Get list element by index from start
+   * Get array element by index from start
    * @throws when element does not exists
    * @returns data of picked element
    */
@@ -117,14 +117,14 @@ export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
 
   /**
    * Get elements as array
-   * @returns array representation of list
+   * @returns array representation of array
    */
   public getAsArray(): Array<T> {
     return this._array;
   }
 
   /**
-   * Check if element exists in list
+   * Check if element exists in array
    * @param item
    * @returns boolean
    */
@@ -133,7 +133,7 @@ export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
   }
 
   /**
-   * Is list empty
+   * Is array empty
    * @returns boolean
    */
   public isEmpty(): boolean {
@@ -141,7 +141,7 @@ export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
   }
 
   /**
-   * Is list full
+   * Is array full
    * @returns boolean
    */
   public isFull(): boolean {
@@ -150,21 +150,21 @@ export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
 
   /**
    * List length
-   * @returns number - quantity of list's elements
+   * @returns number - quantity of array's elements
    */
   public length(): number {
     return this._array.length;
   }
 
   /**
-   * Remove all elements from list
+   * Remove all elements from array
    */
   public clear(): void {
     this._array = new Array<T>(0);
   }
 
   /**
-   * Delete node from list by index from start
+   * Delete node from array by index from start
    * @returns data of deleted element
    */
   deleteFromIndex(fromIndex: number): T {
@@ -174,7 +174,7 @@ export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
   }
 
   /**
-   * Add elements to list from array
+   * Add elements to array from array
    * @param elements - array of elements to push
    * */
   pushFromArray(elements: Array<T>): void {
@@ -184,7 +184,7 @@ export default class LoopedArray<T> implements ILinearStorageAccessible<T> {
   }
 
   /**
-   * Reverse list nodes links and swap head with tail
+   * Reverse array nodes links and swap head with tail
    */
   reverse(): void {
     this._array = this._array.reverse();

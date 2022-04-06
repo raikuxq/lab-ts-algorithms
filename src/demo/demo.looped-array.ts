@@ -1,11 +1,9 @@
 import LoopedArray from "../data-structures/LoopedArray/LoopedArray";
-import ILinearStorageAccessible from "../types/ILinearStorageAccessible";
+import IArrayFacade from "../types/IArrayFacade";
 
 export const demoLoopedArray = (): void => {
   console.log("LoopedArray instance was created with capacity = 4");
-  const loopedArray: ILinearStorageAccessible<string> = new LoopedArray<string>(
-    4
-  );
+  const loopedArray: IArrayFacade<string> = new LoopedArray<string>(4);
 
   loopedArray.push("John");
   loopedArray.push("Mary");
