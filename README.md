@@ -28,7 +28,12 @@ Written in TypeScript, tested with Jest.
 ### Common
 + Interfaces
   + [ILinearStorage](src/types/ILinearStorage.ts)
-  + [ILinearStorageAccessible](src/types/ILinearStorageAccessible.ts)
+  + [ILinearStorageRA](src/types/ILinearStorageRA.ts) (Random Access)
+  + [IIterable](src/types/IIterable.ts)
+  + [IBiDirectIterable](src/types/IBiDirectIterable.ts)
+  + [IIterator](src/types/IIterator.ts) (Next only)
+  + [IBiDirectIterator](src/types/IBiDirectIterator.ts) (Next/Prev)
+  + [IConvertableToArray](src/types/IConvertableToArray.ts)
 
 ### Linked List
 + Implementation
@@ -51,11 +56,7 @@ Written in TypeScript, tested with Jest.
 ### Queue
 + Implementation
   + [Queue](src/data-structures/Queue/Queue.ts) [[ test ](test/queue.test.ts)]
-
-
-### Hash Table
-+ Implementation
-  + [HashTable](src/data-structures/HashTable/HashTable.ts) [[ test ](test/hash-table.test.ts)]
+  
 
 
 ## Non-linear data structures
