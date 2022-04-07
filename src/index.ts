@@ -2,6 +2,7 @@
  * Write your code here
  */
 
+import { perfQueue, perfStack } from "./performance/ds-compare";
 import { demoLinkedList } from "./demo/demo.linked-list";
 import { demoQueue } from "./demo/demo.queue";
 import { demoLoopedArray } from "./demo/demo.looped-array";
@@ -28,3 +29,8 @@ import {
 // demoGraphGenerated();
 // console.log("================================================================");
 // compareAllSortTypes();
+// console.log("================================================================");
+// perfQueue();
+// console.log("================================================================");
+// perfStack();
+// console.log("================================================================");
