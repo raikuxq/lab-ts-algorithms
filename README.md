@@ -2,16 +2,33 @@ Common algorithms and data structures
 
 Written in TypeScript, tested with Jest.
 
+# Getting started
+
+## Scripts
+`yarn test` - run all tests via jest
+
+`yarn dev` - run in dev mode via nodemon
+
+`yarn build` - compile ts sources into 
+
+`yarn start` - build and run
+
+`yarn lint` - lint check via eslint
+
+`yarn lint:fix` - fix source files via eslint
+
+
+
+# Navigation
+
 ## Algorithms
 
-
-### Basic
+### Uncategorized
 + [memoization](src/utils.ts)
 + [matrix-transpose](src/utils.ts)
 + [binary-search](src/algorithms/binary-search.ts) [[ test ](test/binary-search.test.ts)]
 + [factorial (+ memoized version)](src/algorithms/factorial.ts) [[ test ](test/factorial.test.ts)]
 + [fibonacci (+ memoized version)](src/algorithms/fibonacci.ts) [[ test ](test/fibonacci.test.ts)]
-
 
 ### Sorts
 + [bubble-sort](src/algorithms/sorts/bubble-sort.ts) [[ test ](test/sorts.test.ts)]
@@ -80,7 +97,7 @@ Written in TypeScript, tested with Jest.
     + [GraphPresenter](src/data-structures/Graph/presenter/GraphPresenter.ts) [[ test ](test/graph-presenter.test.ts)]
 + Searching
     + [has-path (BFS/DFS)](src/data-structures/Graph/searching/hasPath.ts) [[ test ](test/graph.has-path.test.ts)]
-    + [shortest-path (BFS/DFS/Dijkstra)](src/data-structures/Graph/searching/shortestPath.ts) [[ test ](test/graph.shortest-path.test.ts)]
+    + [shortest-path (BFS/Dijkstra)](src/data-structures/Graph/searching/shortestPath.ts) [[ test ](test/graph.shortest-path.test.ts)]
 + Creators
     + [create-graph-from-matrix](src/helpers/createGraphFromMatrix.ts) [[ test ](test/graph.create-from-matrix.test.ts)]
 + Transposing
