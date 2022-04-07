@@ -2,6 +2,8 @@ import IGraph from "../types/IGraph";
 import { createGraph } from "../helpers/createGraph";
 import { EnumGraphType } from "../types/EnumGraphType";
 import { generateRandomGraph } from "../data-structures/Graph/demo/generateRandomGraph";
+import { shortestPath } from "../data-structures/Graph/searching/shortestPath";
+import BFSIterationStrategy from "../data-structures/Graph/strategy/BFSIterationStrategy";
 
 export const demoUndirectedGraph = (): void => {
   console.log("\nEmpty undirected graph created");
@@ -196,21 +198,49 @@ export const demoDirectedGraph = (): void => {
   console.log(graph);
 };
 
-export const demoGraphGenerated = (): void => {
-  const verticesCount = 3;
-  const graphUndirected: IGraph<string> = generateRandomGraph(
+export const demoGraphGeneratedByType = (
+  type: EnumGraphType,
+  verticesCount: number,
+  edgesCount: number
+): void => {
+  const bfsIteration = new BFSIterationStrategy<string>();
+  const graph: IGraph<string> = generateRandomGraph(
     verticesCount,
-    EnumGraphType.Undirected
+    edgesCount,
+    type
   );
   console.log(
-    `\nRandomly created undirected graph with N = ${verticesCount}: `
+    `\nGenerated ${type.toLocaleLowerCase()} graph (N = ${verticesCount}, K = ${edgesCount}): \n`
   );
-  console.log(graphUndirected);
+  console.log(graph);
 
-  const graphDirected: IGraph<string> = generateRandomGraph(
-    verticesCount,
-    EnumGraphType.Directed
-  );
-  console.log(`\nRandomly created directed graph with N = ${verticesCount}: `);
-  console.log(graphDirected);
+  console.log(`\nFinding shortest path via BFS: \n`);
+  graph.vertices().forEach((vertexFrom: string) => {
+    graph.vertices().forEach((vertexTo: string) => {
+      const getPath = () => {
+        try {
+          return shortestPath<string>(
+            graph,
+            vertexFrom,
+            vertexTo,
+            bfsIteration
+          );
+        } catch (e) {
+          return `[-- ${e.message} --]`;
+        }
+      };
+
+      if (vertexFrom !== vertexTo) {
+        console.log(`\nShortest path from ${vertexFrom} to ${vertexTo} is:`);
+        console.log(getPath());
+      }
+    });
+  });
+};
+
+export const demoGraphGenerated = (): void => {
+  const verticesCount = 6;
+  const edgesCount = 6;
+  demoGraphGeneratedByType(EnumGraphType.Directed, verticesCount, edgesCount);
+  demoGraphGeneratedByType(EnumGraphType.Undirected, verticesCount, edgesCount);
 };
