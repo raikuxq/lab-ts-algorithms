@@ -46,6 +46,9 @@ export const demoLinkedList = (): void => {
   console.log("\nAdding Sam by index 2: ");
   console.log(list.getAsArray());
 
+  console.log("\nCheck if head and tail correctly linked with each other");
+  console.log(list);
+
   console.log("\nArray length is: ");
   console.log(list.length());
 
@@ -62,6 +65,9 @@ export const demoLinkedList = (): void => {
   console.log("\nReversing list... ");
   console.log("\nReversed list: ");
   console.log(list.getAsArray());
+
+  console.log("\nCheck if head and tail correctly linked with each other");
+  console.log(list);
 
   list.clear();
   console.log("\nClear list... ");

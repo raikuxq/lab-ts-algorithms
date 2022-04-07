@@ -197,23 +197,20 @@ export const demoDirectedGraph = (): void => {
 };
 
 export const demoGraphGenerated = (): void => {
+  const verticesCount = 3;
   const graphUndirected: IGraph<string> = generateRandomGraph(
-    5,
+    verticesCount,
     EnumGraphType.Undirected
   );
-  console.log("\nRandomly created undirected graph with N = 5: ");
-  console.log("\nVertices list: ");
-  console.log(graphUndirected);
-  console.log("\nEdges count: ");
+  console.log(
+    `\nRandomly created undirected graph with N = ${verticesCount}: `
+  );
   console.log(graphUndirected);
 
   const graphDirected: IGraph<string> = generateRandomGraph(
-    5,
+    verticesCount,
     EnumGraphType.Directed
   );
-  console.log("\nRandomly created directed graph with N = 5: ");
-  console.log("\nVertices list: ");
-  console.log(graphDirected);
-  console.log("\nEdges count: ");
+  console.log(`\nRandomly created directed graph with N = ${verticesCount}: `);
   console.log(graphDirected);
 };
