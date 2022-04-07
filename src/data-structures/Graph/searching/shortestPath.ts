@@ -34,5 +34,10 @@ export const shortestPath = <V>(
     }
   }
 
-  return iterator.getPath(from, to);
+  const fullPath = iterator.getPath(from, to);
+  if (fullPath.length === 2 && !graph.hasEdge(from, to)) {
+    throw new Error("There is no path found");
+  }
+
+  return fullPath;
 };
