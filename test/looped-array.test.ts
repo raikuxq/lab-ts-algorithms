@@ -13,7 +13,7 @@ describe("Looped Array", () => {
     });
   });
   describe("method push", () => {
-    const loopedArray = new LoopedArray(5);
+    const loopedArray: IArrayFacade<string> = new LoopedArray(5);
 
     loopedArray.push("q");
     loopedArray.push("w");
@@ -51,7 +51,7 @@ describe("Looped Array", () => {
   });
 
   describe("method unshift", () => {
-    const loopedArray = new LoopedArray(5);
+    const loopedArray: IArrayFacade<string> = new LoopedArray(5);
 
     loopedArray.unshift("q");
     loopedArray.unshift("w");
@@ -136,7 +136,7 @@ describe("Looped Array", () => {
 
   describe("method peekFromStart", () => {
     test("should return first element of array", () => {
-      const loopedArray = new LoopedArray(5);
+      const loopedArray: IArrayFacade<string> = new LoopedArray(5);
 
       loopedArray.push("q");
       loopedArray.push("w");
@@ -145,7 +145,7 @@ describe("Looped Array", () => {
       expect(loopedArray.peekFromStart()).toEqual("q");
     });
     test("should return undefined when array is empty", () => {
-      const loopedArray = new LoopedArray(5);
+      const loopedArray: IArrayFacade<number> = new LoopedArray(5);
 
       expect(loopedArray.peekFromStart()).toEqual(undefined);
     });
@@ -163,7 +163,7 @@ describe("Looped Array", () => {
 
   describe("method peek", () => {
     test("should return last element of array", () => {
-      const loopedArray = new LoopedArray(5);
+      const loopedArray: IArrayFacade<string> = new LoopedArray(5);
 
       loopedArray.push("q");
       loopedArray.push("w");
@@ -172,7 +172,7 @@ describe("Looped Array", () => {
       expect(loopedArray.peek()).toEqual("e");
     });
     test("should return undefined when array is empty", () => {
-      const loopedArray = new LoopedArray(5);
+      const loopedArray: IArrayFacade<number> = new LoopedArray(5);
 
       expect(loopedArray.peek()).toEqual(undefined);
     });
