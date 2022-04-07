@@ -49,3 +49,6 @@ export const transposeMatrix = (matrix: ArrayMatrix): ArrayMatrix => {
     return acc;
   }, new Array(matrix.length));
 };
+
+export const randomizeNumberInRange = (min: number, max: number): number =>
+  Math.floor(Math.random() * (max - min)) + min;
