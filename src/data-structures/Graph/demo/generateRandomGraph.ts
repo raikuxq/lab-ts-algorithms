@@ -31,7 +31,7 @@ export const generateRandomGraph = (
     }
   }
 
-  if (edgesCount <= 0 || edgesCount >= possibleEdgesCount) {
+  if (edgesCount <= 0 || edgesCount > possibleEdgesCount) {
     throw new Error(
       `Edges count must be in range between 0 and ${possibleEdgesCount}`
     );
