@@ -1,5 +1,6 @@
 import { FnToMemoize } from "./types/FnToMemoize";
 import { ArrayMatrix } from "./types/ArrayMatrix";
+import { performance } from "perf_hooks";
 
 export const getMinIndex = (arr: Array<number>): number => {
   return arr.reduce((minIndex, item, index): number => {
@@ -52,3 +53,12 @@ export const transposeMatrix = (matrix: ArrayMatrix): ArrayMatrix => {
 
 export const randomizeNumberInRange = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min)) + min;
+
+export const perf = (fn: () => void, operation: string): void => {
+  const perfStart = performance.now();
+  fn();
+  const perfEnd = performance.now();
+  console.log(
+    `${operation} = ${Math.round((perfEnd - perfStart) * 100) / 100}ms`
+  );
+};

@@ -1,19 +1,7 @@
-import { performance } from "perf_hooks";
 import Queue from "../data-structures/Queue/Queue";
 import Stack from "../data-structures/Stack/Stack";
 import ILinearStorage from "../types/ILinearStorage";
-
-export const perf = (fn: () => void, operation: string): void => {
-  const queue = new Queue<number>();
-
-  const perfStart = performance.now();
-  queue.push(4);
-  fn();
-  const perfEnd = performance.now();
-  console.log(
-    `${operation} = ${Math.round((perfEnd - perfStart) * 100) / 100}ms`
-  );
-};
+import { perf } from "../utils";
 
 export const pushToLinearDS = (
   linearDS: ILinearStorage<string>,
