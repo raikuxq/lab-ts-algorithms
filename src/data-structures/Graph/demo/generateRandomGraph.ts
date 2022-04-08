@@ -10,26 +10,48 @@ const getRandomVertex = (): string => {
 
 export const generateRandomGraph = (
   verticesCount: number,
-  edgesCount: number | null = null,
+  edgesCount: number,
   type: EnumGraphType,
   format: EnumRandomGenerationFormat = EnumRandomGenerationFormat.Numbers
 ): IGraph<string> => {
   const graph = createGraph<string>(type);
 
-  // eslint-disable-next-line for-direction
-  for (let i = 0; i < verticesCount; i++) {
-    switch (format) {
-      case EnumRandomGenerationFormat.Hash: {
+  let possibleEdgesCount = verticesCount * (verticesCount - 1);
+
+  switch (type) {
+    case EnumGraphType.Directed: {
+      break;
+    }
+    case EnumGraphType.Undirected: {
+      possibleEdgesCount = Math.floor(possibleEdgesCount / 2);
+      break;
+    }
+    default: {
+      throw new Error("Wrong random generation format");
+    }
+  }
+
+  if (edgesCount <= 0 || edgesCount >= possibleEdgesCount) {
+    throw new Error(
+      `Edges count must be in range between 0 and ${possibleEdgesCount}`
+    );
+  }
+
+  switch (format) {
+    case EnumRandomGenerationFormat.Hash: {
+      for (let i = 0; i < verticesCount; i++) {
         graph.addVertex(getRandomVertex());
-        break;
       }
-      case EnumRandomGenerationFormat.Numbers: {
+      break;
+    }
+    case EnumRandomGenerationFormat.Numbers: {
+      for (let i = 0; i < verticesCount; i++) {
         graph.addVertex((i + 1).toString());
-        break;
       }
-      default: {
-        throw new Error("Wrong random generation format");
-      }
+      break;
+    }
+    default: {
+      throw new Error("Wrong random generation format");
     }
   }
 
