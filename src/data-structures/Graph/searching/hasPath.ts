@@ -18,12 +18,15 @@ export const hasPath = <V>(
   to: V,
   strategy: IGraphIterationStrategy<V>
 ): boolean => {
-  const iterator: IGraphIterator<V> = strategy.createIterator(graph, from);
-
   /* Validate */
-  if (!graph.hasVertex(from) || !graph.hasVertex(to)) {
-    throw new Error("Invalid arguments: no such elements");
+  if (!graph.hasVertex(from)) {
+    throw new Error("Start vertex was not found");
   }
+  if (!graph.hasVertex(to)) {
+    throw new Error("End vertex was not found");
+  }
+
+  const iterator: IGraphIterator<V> = strategy.createIterator(graph, from);
 
   /* Find target element */
   while (iterator.hasNext()) {
