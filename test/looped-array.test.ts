@@ -21,6 +21,18 @@ describe("Looped Array", () => {
     loopedArray.push("r");
     loopedArray.push("t");
 
+    test("should collect correct elements before overwriting", () => {
+      expect(loopedArray.getAsArray()).toEqual(["q", "w", "e", "r", "t"]);
+    });
+
+    test("should correctly overwrite ", () => {
+      loopedArray.push("y");
+      loopedArray.push("u");
+      loopedArray.push("i");
+
+      expect(loopedArray.getAsArray()).toEqual(["y", "u", "i"]);
+    });
+
     test("should add elements to array's end", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
@@ -34,19 +46,7 @@ describe("Looped Array", () => {
       array.push(2);
       array.push(3);
 
-      expect(array.getAsArray()).toEqual([3, 2]);
-    });
-
-    test("should collect correct elements before overwriting", () => {
-      expect(loopedArray.getAsArray()).toEqual(["q", "w", "e", "r", "t"]);
-    });
-
-    test("should correctly overwrite ", () => {
-      loopedArray.push("y");
-      loopedArray.push("u");
-      loopedArray.push("i");
-
-      expect(loopedArray.getAsArray()).toEqual(["y", "u", "i", "r", "t"]);
+      expect(array.getAsArray()).toEqual([3]);
     });
   });
 
@@ -68,7 +68,7 @@ describe("Looped Array", () => {
       loopedArray.unshift("u");
       loopedArray.unshift("i");
 
-      expect(loopedArray.getAsArray()).toEqual(["i", "u", "y", "t", "r"]);
+      expect(loopedArray.getAsArray()).toEqual(["i", "u", "y"]);
     });
 
     test("should add elements to array's start", () => {
@@ -83,7 +83,8 @@ describe("Looped Array", () => {
       array.unshift(1);
       array.unshift(2);
       array.unshift(3);
-      expect(array.getAsArray()).toEqual([3, 2]);
+      array.unshift(4);
+      expect(array.getAsArray()).toEqual([4, 3]);
     });
   });
 
@@ -130,7 +131,7 @@ describe("Looped Array", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(2);
       array.pushFromArray([1]);
       array.pushFromArray([2, 3]);
-      expect(array.getAsArray()).toEqual([3, 2]);
+      expect(array.getAsArray()).toEqual([3]);
     });
   });
 

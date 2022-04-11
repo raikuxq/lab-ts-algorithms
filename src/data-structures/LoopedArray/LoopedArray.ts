@@ -26,6 +26,10 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
    * @param value - data
    */
   public push(value: T): void {
+    if (this._realLength % this._capacity === 0) {
+      this._array = new Array<T>(0);
+    }
+
     this._realLength++;
 
     if (!this.isFull()) {
@@ -41,6 +45,9 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
    * @param value - data
    */
   public unshift(value: T): void {
+    if (this._realLength % this._capacity === 0) {
+      this._array = new Array<T>(0);
+    }
     this._realLength++;
 
     if (!this.isFull()) {
