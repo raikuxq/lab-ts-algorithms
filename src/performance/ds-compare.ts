@@ -1,7 +1,7 @@
 import Queue from "../data-structures/Queue/Queue";
 import Stack from "../data-structures/Stack/Stack";
 import ILinearStorage from "../types/ILinearStorage";
-import { perf } from "../utils";
+import { perf, roundNumber } from "../utils";
 
 export const pushToLinearDS = (
   linearDS: ILinearStorage<string>,
@@ -13,62 +13,46 @@ export const pushToLinearDS = (
   }
 };
 
+export const perfLinearDS = (linearDS: ILinearStorage<string>): void => {
+  let elementsCount = 50;
+
+  while (elementsCount <= 5000000) {
+    pushToLinearDS(linearDS, elementsCount, "qwerty");
+
+    const perfPush = perf(() => {
+      linearDS.push("qwerty");
+    });
+    const perfPeek = perf(() => {
+      linearDS.peek();
+    });
+
+    const perfPop = perf(() => {
+      linearDS.pop();
+    });
+    const perfHas = perf(() => {
+      linearDS.has(`qwerty_${elementsCount - 10}`);
+    });
+
+    console.log(`N: ${elementsCount} push: ${roundNumber(perfPush)}ms`);
+    console.log(`N: ${elementsCount} peek: ${roundNumber(perfPeek)}ms`);
+    console.log(`N: ${elementsCount} pop: ${roundNumber(perfPop)}ms`);
+    console.log(`N: ${elementsCount} has: ${roundNumber(perfHas)}ms`);
+    console.log("=========================");
+
+    elementsCount *= 10;
+  }
+};
+
 export const perfQueue = (): void => {
   console.log(`QUEUE PERFORMANCE TEST:`);
   const queue: ILinearStorage<string> = new Queue<string>();
 
-  let elementsCount = 50;
-
-  while (elementsCount <= 5000000) {
-    pushToLinearDS(queue, elementsCount, "qwerty");
-
-    perf(() => {
-      queue.push("qwerty");
-    }, `N: ${elementsCount} push: `);
-
-    perf(() => {
-      queue.peek();
-    }, `N: ${elementsCount} peek: `);
-
-    perf(() => {
-      queue.pop();
-    }, `N: ${elementsCount} pop: `);
-
-    perf(() => {
-      queue.has(`qwerty_${elementsCount - 10}`);
-    }, `N: ${elementsCount} has: `);
-
-    elementsCount *= 10;
-    console.log("=========================");
-  }
+  perfLinearDS(queue);
 };
 
 export const perfStack = (): void => {
   console.log(`STACK PERFORMANCE TEST:`);
   const stack: ILinearStorage<string> = new Stack<string>();
 
-  let elementsCount = 50;
-
-  while (elementsCount <= 5000000) {
-    pushToLinearDS(stack, elementsCount, "qwerty");
-
-    perf(() => {
-      stack.push("qwerty");
-    }, `N: ${elementsCount} push: `);
-
-    perf(() => {
-      stack.peek();
-    }, `N: ${elementsCount} peek: `);
-
-    perf(() => {
-      stack.pop();
-    }, `N: ${elementsCount} pop: `);
-
-    perf(() => {
-      stack.has(`qwerty_${elementsCount - 10}`);
-    }, `N: ${elementsCount} has: `);
-
-    elementsCount *= 10;
-    console.log("=========================");
-  }
+  perfLinearDS(stack);
 };

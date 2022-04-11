@@ -1,10 +1,10 @@
-import { performance } from "perf_hooks";
 import { FnSort } from "../types/FnSort";
 import { mergeSort } from "../algorithms/sorts/merge-sort";
 import { insertionSort } from "../algorithms/sorts/insertion-sort";
 import { bubbleSort } from "../algorithms/sorts/bubble-sort";
 import { quickSort } from "../algorithms/sorts/quick-sort";
 import { selectSort } from "../algorithms/sorts/select-sort";
+import { perf } from "../utils";
 
 export const randomizeArray = (length: number, max: number): Array<number> =>
   new Array(length).fill(0).map(() => Math.round(Math.random() * max));
@@ -18,10 +18,10 @@ export const sortCompare = (
 
   for (let i = 0; i < callsNumber; i++) {
     const generatedArr = randomizeArray(n, 1000);
-    const perfStart = performance.now();
-    sortFn(generatedArr);
-    const perfEnd = performance.now();
-    totalTime += perfEnd - perfStart;
+    const perfResult = perf(() => {
+      sortFn(generatedArr);
+    });
+    totalTime += perfResult;
   }
 
   const averageTime = totalTime / callsNumber;
