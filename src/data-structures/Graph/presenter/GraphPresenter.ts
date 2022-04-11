@@ -1,4 +1,5 @@
 import IGraph from "../../../types/IGraph";
+import { EDGE_EXISTS_STATE, EDGE_NOT_EXISTS_STATE } from "../../../constants";
 
 /**
  * It can represent graph in different ways
@@ -62,7 +63,9 @@ export default class GraphPresenter<T> {
           .getVertexNeighbors(graphVertexRow)
           .includes(graphVertexColumn);
 
-        matrix[rowIndex][columnIndex] = isElementLinked ? 1 : 0;
+        matrix[rowIndex][columnIndex] = isElementLinked
+          ? EDGE_EXISTS_STATE
+          : EDGE_NOT_EXISTS_STATE;
       });
     });
 
