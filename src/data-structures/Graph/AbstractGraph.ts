@@ -1,16 +1,16 @@
 import GraphEdge from "./GraphEdge";
 
-export default abstract class AbstractGraph<V> {
-  protected _vertices: Map<V, Array<V>>;
-  protected _edges: Array<GraphEdge<V>>;
+export default abstract class AbstractGraph<T> {
+  protected _vertices: Map<T, Array<T>>;
+  protected _edges: Array<GraphEdge<T>>;
 
   /**
    * Created empty instance
    * @protected
    */
   protected constructor() {
-    this._vertices = new Map<V, Array<V>>();
-    this._edges = new Array<GraphEdge<V>>();
+    this._vertices = new Map<T, Array<T>>();
+    this._edges = new Array<GraphEdge<T>>();
   }
 
   /**
@@ -19,14 +19,14 @@ export default abstract class AbstractGraph<V> {
    * @param to
    * @protected
    */
-  protected abstract getEdgeByValue(from: V, to: V): GraphEdge<V>;
+  protected abstract getEdgeByValue(from: T, to: T): GraphEdge<T>;
 
   /**
    * Get vertices list in array format
    * @protected
    * @returns array of graph elements
    */
-  protected getVerticesArrayFormat(): Array<V> {
+  protected getVerticesArrayFormat(): Array<T> {
     return Array.from(this._vertices.keys());
   }
 
@@ -37,9 +37,9 @@ export default abstract class AbstractGraph<V> {
    * @throws when vertex was not found
    * @returns vertex data
    */
-  protected tryFindVertex(value: V): V {
+  protected tryFindVertex(value: T): T {
     const vertex = this.getVerticesArrayFormat().find(
-      (vertex: V) => vertex === value
+      (vertex: T) => vertex === value
     );
 
     if (!vertex) throw new Error("Vertex not found");
@@ -54,7 +54,7 @@ export default abstract class AbstractGraph<V> {
    * @param weight
    * @protected
    */
-  protected updateEdgeWeight(from: V, to: V, weight: number): void {
+  protected updateEdgeWeight(from: T, to: T, weight: number): void {
     const edge = this.getEdgeByValue(from, to);
 
     edge.weight = weight;
@@ -64,13 +64,13 @@ export default abstract class AbstractGraph<V> {
    * Will remove all vertex relations with others vertices
    * @param vertexToRemove
    */
-  protected cascadeRemoveVertexRelations(vertexToRemove: V): void {
-    this.getVerticesArrayFormat().forEach((neighbor: V) => {
+  protected cascadeRemoveVertexRelations(vertexToRemove: T): void {
+    this.getVerticesArrayFormat().forEach((neighbor: T) => {
       const neighborVertexNeighbors = this._vertices.get(neighbor);
 
       if (neighborVertexNeighbors) {
         const neighborVertexFilteredNeighbors = neighborVertexNeighbors.filter(
-          (newNeighbor: V) => newNeighbor !== vertexToRemove
+          (newNeighbor: T) => newNeighbor !== vertexToRemove
         );
 
         this._vertices.set(neighbor, neighborVertexFilteredNeighbors);
@@ -82,8 +82,8 @@ export default abstract class AbstractGraph<V> {
    * Will remove all vertices edges with vertex to remove
    * @param vertexToRemove
    */
-  protected cascadeRemoveVertexEdges(vertexToRemove: V): void {
-    this._edges = this._edges.filter((edge: GraphEdge<V>) => {
+  protected cascadeRemoveVertexEdges(vertexToRemove: T): void {
+    this._edges = this._edges.filter((edge: GraphEdge<T>) => {
       const shouldBeDeleted =
         edge.toVertex === vertexToRemove || edge.fromVertex === vertexToRemove;
 
@@ -96,7 +96,7 @@ export default abstract class AbstractGraph<V> {
    */
   public weight(): number {
     return this._edges.reduce(
-      (acc: number, edge: GraphEdge<V>) => acc + edge.weight,
+      (acc: number, edge: GraphEdge<T>) => acc + edge.weight,
       0
     );
   }
@@ -104,8 +104,8 @@ export default abstract class AbstractGraph<V> {
   /**
    * @returns array of vertices
    */
-  public vertices(): Array<V> {
-    return this.getVerticesArrayFormat().map((vertex: V) => vertex);
+  public vertices(): Array<T> {
+    return this.getVerticesArrayFormat().map((vertex: T) => vertex);
   }
 
   /**
@@ -128,12 +128,12 @@ export default abstract class AbstractGraph<V> {
    * @throws when vertex is already exists
    * @returns graph instance
    */
-  public addVertex(data: V): this {
+  public addVertex(data: T): this {
     if (this.hasVertex(data)) {
       throw new Error("Vertex is already exist");
     }
 
-    this._vertices.set(data, new Array<V>());
+    this._vertices.set(data, new Array<T>());
 
     return this;
   }
@@ -144,7 +144,7 @@ export default abstract class AbstractGraph<V> {
    * @throws when vertex is already does not exist
    * @returns graph instance
    */
-  public removeVertex(data: V): this {
+  public removeVertex(data: T): this {
     try {
       const vertexToRemove = this.tryFindVertex(data);
 
@@ -165,7 +165,7 @@ export default abstract class AbstractGraph<V> {
    * @param weight
    * @returns graph instance
    */
-  public abstract addEdge(from: V, to: V, weight?: number): this;
+  public abstract addEdge(from: T, to: T, weight?: number): this;
 
   /**
    * Remove edge between two vertices
@@ -173,18 +173,18 @@ export default abstract class AbstractGraph<V> {
    * @param to
    * @returns graph instance
    */
-  public abstract removeEdge(from: V, to: V): this;
+  public abstract removeEdge(from: T, to: T): this;
 
   /**
    * Get vertex neighbors by its value
    * @param value - vertex value
    * @returns array of neighbors elements
    */
-  public getVertexNeighbors(value: V): Array<V> {
+  public getVertexNeighbors(value: T): Array<T> {
     try {
       const vertex = this.tryFindVertex(value);
 
-      return this._vertices.get(vertex)?.map((vertex: V) => vertex) || [];
+      return this._vertices.get(vertex)?.map((vertex: T) => vertex) || [];
     } catch (e) {
       throw new Error("No such vertex");
     }
@@ -195,7 +195,7 @@ export default abstract class AbstractGraph<V> {
    * @param value - vertex value
    * @returns boolean
    */
-  public hasVertex(value: V): boolean {
+  public hasVertex(value: T): boolean {
     return this.vertices().includes(value);
   }
 
@@ -205,7 +205,7 @@ export default abstract class AbstractGraph<V> {
    * @param to
    * @returns boolean
    */
-  public hasEdge(from: V, to: V): boolean {
+  public hasEdge(from: T, to: T): boolean {
     return Boolean(
       this._edges.find((edge) => {
         return edge.fromVertex === from && edge.toVertex === to;
@@ -219,7 +219,7 @@ export default abstract class AbstractGraph<V> {
    * @param to
    * @returns number
    */
-  public getEdgeWeightByVertices(from: V, to: V): number {
+  public getEdgeWeightByVertices(from: T, to: T): number {
     const fromVertex = this.tryFindVertex(from);
     const toVertex = this.tryFindVertex(to);
 

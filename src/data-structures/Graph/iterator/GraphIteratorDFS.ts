@@ -5,11 +5,11 @@ import IGraph from "../../../types/IGraph";
 /**
  * Deep first graph traversal
  */
-export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
-  private readonly graph: IGraph<V>;
-  private readonly stack: Stack<V>;
-  private readonly visited: Map<V, boolean>;
-  private readonly parents: Map<V, V>;
+export default class GraphIteratorDFS<T> implements IGraphIterator<T> {
+  private readonly graph: IGraph<T>;
+  private readonly stack: Stack<T>;
+  private readonly visited: Map<T, boolean>;
+  private readonly parents: Map<T, T>;
 
   /**
    * Creates empty instance and does one iteration
@@ -17,7 +17,7 @@ export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
    * @param startVertex - vertex where traversal starts
    * @throws when startVertex does not exist
    */
-  public constructor(graph: IGraph<V>, startVertex: V) {
+  public constructor(graph: IGraph<T>, startVertex: T) {
     if (!graph.hasVertex(startVertex)) {
       throw new Error("Start vertex does not exist");
     }
@@ -41,7 +41,7 @@ export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
   /**
    * @inheritDoc
    */
-  public current(): V {
+  public current(): T {
     const current = this.stack.peek();
 
     if (!current) {
@@ -54,7 +54,7 @@ export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
   /**
    * @inheritDoc
    */
-  public next(): V {
+  public next(): T {
     const next = this.stack.pop();
 
     if (!next) {
@@ -79,8 +79,8 @@ export default class GraphIteratorDFS<V> implements IGraphIterator<V> {
   /**
    * @inheritDoc
    */
-  public getPath(from: V, to: V): Array<V> {
-    const path: Array<V> = new Array<V>();
+  public getPath(from: T, to: T): Array<T> {
+    const path: Array<T> = new Array<T>();
     let currentVertex = this.parents.get(to);
 
     while (currentVertex) {

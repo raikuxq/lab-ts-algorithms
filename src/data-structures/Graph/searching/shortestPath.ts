@@ -14,12 +14,12 @@ import IGraphIterationStrategy from "../../../types/IGraphIterationStrategy";
  * @throws when there is no path between two vertices
  * @returns Array - the shortest path
  */
-export const shortestPath = <V>(
-  graph: IGraph<V>,
-  from: V,
-  to: V,
-  strategy: IGraphIterationStrategy<V>
-): Array<V> => {
+export const shortestPath = <T>(
+  graph: IGraph<T>,
+  from: T,
+  to: T,
+  strategy: IGraphIterationStrategy<T>
+): Array<T> => {
   /* Validate */
   if (!graph.hasVertex(from)) {
     throw new Error("Start vertex was not found");
@@ -28,7 +28,7 @@ export const shortestPath = <V>(
     throw new Error("End vertex was not found");
   }
 
-  const iterator: IGraphIterator<V> = strategy.createIterator(graph, from);
+  const iterator: IGraphIterator<T> = strategy.createIterator(graph, from);
 
   /* Find target element */
   while (iterator.hasNext()) {
@@ -39,7 +39,7 @@ export const shortestPath = <V>(
     }
   }
 
-  const fullPath: Array<V> = iterator.getPath(from, to);
+  const fullPath: Array<T> = iterator.getPath(from, to);
   if (fullPath.length === 2 && !graph.hasEdge(from, to)) {
     throw new Error("There is no path found");
   }

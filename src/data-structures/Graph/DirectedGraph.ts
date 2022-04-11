@@ -5,7 +5,7 @@ import GraphEdge from "./GraphEdge";
  * Directed graph - data structure where edges with same pair of vertices are not equal
  * @example A-B is not the same as B-A
  */
-export default class DirectedGraph<V> extends AbstractGraph<V> {
+export default class DirectedGraph<T> extends AbstractGraph<T> {
   /**
    * @inheritDoc
    */
@@ -16,9 +16,9 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
   /**
    * @inheritDoc
    */
-  protected getEdgeByValue(from: V, to: V): GraphEdge<V> {
+  protected getEdgeByValue(from: T, to: T): GraphEdge<T> {
     const edge = this._edges.find(
-      (edge: GraphEdge<V>) => edge.fromVertex === from && edge.toVertex === to
+      (edge: GraphEdge<T>) => edge.fromVertex === from && edge.toVertex === to
     );
 
     if (!edge) {
@@ -31,7 +31,7 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
   /**
    * @inheritDoc
    */
-  public addEdge(from: V, to: V, weight?: number): this {
+  public addEdge(from: T, to: T, weight?: number): this {
     try {
       const fromVertex = this.tryFindVertex(from);
       const toVertex = this.tryFindVertex(to);
@@ -58,7 +58,7 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
   /**
    * @inheritDoc
    */
-  public removeEdge(from: V, to: V): this {
+  public removeEdge(from: T, to: T): this {
     try {
       const fromVertex = this.tryFindVertex(from);
       const toVertex = this.tryFindVertex(to);
@@ -66,12 +66,12 @@ export default class DirectedGraph<V> extends AbstractGraph<V> {
 
       const fromVertexNeighbors = this._vertices.get(fromVertex) || [];
       const fromNewNeighbors = fromVertexNeighbors.filter(
-        (vertex: V) => toVertex !== vertex
+        (vertex: T) => toVertex !== vertex
       );
 
       this._vertices.set(fromVertex, fromNewNeighbors);
       this._edges = this._edges.filter(
-        (edge: GraphEdge<V>) => edge !== edgeToRemove
+        (edge: GraphEdge<T>) => edge !== edgeToRemove
       );
     } catch {
       throw new Error(

@@ -5,14 +5,14 @@ import IGraph from "../../../types/IGraph";
  * @example Adjacency matrix
  * @example Adjacency list
  */
-export default class GraphPresenter<V> {
-  private graph: IGraph<V>;
+export default class GraphPresenter<T> {
+  private graph: IGraph<T>;
 
   /**
    * Create empty instance of presenter
    * @param graph - graph instance
    */
-  public constructor(graph: IGraph<V>) {
+  public constructor(graph: IGraph<T>) {
     this.graph = graph;
   }
 
@@ -25,8 +25,8 @@ export default class GraphPresenter<V> {
    * - Maria [Bob, John]
    * - John []
    **/
-  public getAdjacencyList(): Map<V, Array<V>> {
-    return this.graph.vertices().reduce((map: Map<V, Array<V>>, vertex: V) => {
+  public getAdjacencyList(): Map<T, Array<T>> {
+    return this.graph.vertices().reduce((map: Map<T, Array<T>>, vertex: T) => {
       const neighbors = this.graph.getVertexNeighbors(vertex);
       map.set(vertex, neighbors);
 

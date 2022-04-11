@@ -1,17 +1,17 @@
-export default interface IGraph<V> {
+export default interface IGraph<T> {
   weight(): number;
-  vertices(): Array<V>;
+  vertices(): Array<T>;
   verticesCount(): number;
   edgesCount(): number;
 
-  addVertex(data: V): this;
-  removeVertex(data: V): this;
-  hasVertex(value: V): boolean;
+  addVertex(data: T): this;
+  removeVertex(data: T): this;
+  hasVertex(value: T): boolean;
 
-  addEdge(from: V, to: V, weight?: number): this;
-  removeEdge(from: V, to: V): this;
-  hasEdge(from: V, to: V): boolean;
+  addEdge(from: T, to: T, weight?: number): this;
+  removeEdge(from: T, to: T): this;
+  hasEdge(from: T, to: T): boolean;
 
-  getVertexNeighbors(value: V): Array<V>;
-  getEdgeWeightByVertices(from: V, to: V): number;
+  getVertexNeighbors(value: T): Array<T>;
+  getEdgeWeightByVertices(from: T, to: T): number;
 }

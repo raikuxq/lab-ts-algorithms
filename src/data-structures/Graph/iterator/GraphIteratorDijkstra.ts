@@ -4,11 +4,11 @@ import IGraphIterator from "../../../types/IGraphIterator";
 /**
  * Dijkstra method graph traversal
  */
-export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
-  private readonly graph: IGraph<V>;
-  private readonly visited: Map<V, boolean>;
-  private readonly costs: Map<V, number>;
-  private readonly parents: Map<V, V>;
+export default class GraphIteratorDijkstra<T> implements IGraphIterator<T> {
+  private readonly graph: IGraph<T>;
+  private readonly visited: Map<T, boolean>;
+  private readonly costs: Map<T, number>;
+  private readonly parents: Map<T, T>;
 
   /**
    * Creates empty instance and does one iteration
@@ -16,7 +16,7 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
    * @param startVertex - vertex where traversal starts
    * @throws when startVertex does not exist
    */
-  public constructor(graph: IGraph<V>, startVertex: V) {
+  public constructor(graph: IGraph<T>, startVertex: T) {
     if (!graph.hasVertex(startVertex)) {
       throw new Error("Start vertex does not exist");
     }
@@ -33,11 +33,11 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
    * @param startVertex
    * @private
    */
-  private initIterator(startVertex: V): void {
+  private initIterator(startVertex: T): void {
     this.visited.set(startVertex, true);
     this.costs.set(startVertex, 0);
 
-    this.graph.getVertexNeighbors(startVertex).forEach((neighbor: V) => {
+    this.graph.getVertexNeighbors(startVertex).forEach((neighbor: T) => {
       const edgeWeight = this.graph.getEdgeWeightByVertices(
         startVertex,
         neighbor
@@ -51,11 +51,11 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
    * Get closest (by cost) and not visited node
    * @private
    */
-  private getClosestNotVisited(): V | null {
+  private getClosestNotVisited(): T | null {
     const keys = Array.from(this.costs.keys());
     const priorityList = keys
-      .filter((key: V) => !this.visited.get(key))
-      .sort((aKey: V, bKey: V) => {
+      .filter((key: T) => !this.visited.get(key))
+      .sort((aKey: T, bKey: T) => {
         const aCost = this.costs.get(aKey) || 0;
         const bCost = this.costs.get(bKey) || 0;
 
@@ -75,7 +75,7 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
   /**
    * @inheritDoc
    */
-  public current(): V {
+  public current(): T {
     const current = this.getClosestNotVisited();
 
     if (!current) {
@@ -88,7 +88,7 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
   /**
    * @inheritDoc
    */
-  public next(): V {
+  public next(): T {
     const next = this.getClosestNotVisited();
 
     if (!next) {
@@ -99,7 +99,7 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
     const nextNeighbors = this.graph.getVertexNeighbors(next);
     const nextCost = this.costs.get(next);
 
-    nextNeighbors.forEach((neighbor: V) => {
+    nextNeighbors.forEach((neighbor: T) => {
       const edgeWeight = this.graph.getEdgeWeightByVertices(next, neighbor);
       const currentNeighborCost = this.costs.get(neighbor) || Infinity;
       const newNeighborCost = (nextCost || 0) + edgeWeight;
@@ -116,8 +116,8 @@ export default class GraphIteratorDijkstra<V> implements IGraphIterator<V> {
   /**
    * @inheritDoc
    */
-  public getPath(from: V, to: V): Array<V> {
-    const path: Array<V> = [];
+  public getPath(from: T, to: T): Array<T> {
+    const path: Array<T> = [];
 
     let currentVertex = this.parents.get(to);
 

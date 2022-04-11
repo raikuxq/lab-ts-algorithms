@@ -12,11 +12,11 @@ import IGraphIterationStrategy from "../../../types/IGraphIterationStrategy";
  * @throws when one of vertices was not found
  * @returns boolean
  */
-export const hasPath = <V>(
-  graph: IGraph<V>,
-  from: V,
-  to: V,
-  strategy: IGraphIterationStrategy<V>
+export const hasPath = <T>(
+  graph: IGraph<T>,
+  from: T,
+  to: T,
+  strategy: IGraphIterationStrategy<T>
 ): boolean => {
   /* Validate */
   if (!graph.hasVertex(from)) {
@@ -26,7 +26,7 @@ export const hasPath = <V>(
     throw new Error("End vertex was not found");
   }
 
-  const iterator: IGraphIterator<V> = strategy.createIterator(graph, from);
+  const iterator: IGraphIterator<T> = strategy.createIterator(graph, from);
 
   /* Find target element */
   while (iterator.hasNext()) {

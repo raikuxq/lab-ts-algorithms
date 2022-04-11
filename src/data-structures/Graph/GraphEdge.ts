@@ -1,9 +1,9 @@
 /**
  * Graph edge between two vertices
  */
-export default class GraphEdge<V> {
-  private readonly _fromVertex: V;
-  private readonly _toVertex: V;
+export default class GraphEdge<T> {
+  private readonly _fromVertex: T;
+  private readonly _toVertex: T;
   private _weight: number;
 
   /**
@@ -12,7 +12,7 @@ export default class GraphEdge<V> {
    * @param toVertex - end vertex
    * @param weight - edge weight is 0 by default
    */
-  public constructor(fromVertex: V, toVertex: V, weight = 0) {
+  public constructor(fromVertex: T, toVertex: T, weight = 0) {
     this._fromVertex = fromVertex;
     this._toVertex = toVertex;
     this._weight = weight;
@@ -21,14 +21,14 @@ export default class GraphEdge<V> {
   /**
    * @returns vertex data
    */
-  get fromVertex(): V {
+  get fromVertex(): T {
     return this._fromVertex;
   }
 
   /**
    * @returns vertex data
    */
-  get toVertex(): V {
+  get toVertex(): T {
     return this._toVertex;
   }
 

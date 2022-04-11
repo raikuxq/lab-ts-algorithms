@@ -5,7 +5,7 @@ import GraphEdge from "./GraphEdge";
  * Undirected graph - data structure where edges with same pair of vertices are equal
  * @example A-B is same as B-A
  */
-export default class UndirectedGraph<V> extends AbstractGraph<V> {
+export default class UndirectedGraph<T> extends AbstractGraph<T> {
   /**
    * @inheritDoc
    */
@@ -16,9 +16,9 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
   /**
    * @inheritDoc
    */
-  protected getEdgeByValue(from: V, to: V): GraphEdge<V> {
+  protected getEdgeByValue(from: T, to: T): GraphEdge<T> {
     const edge = this._edges.find(
-      (edge: GraphEdge<V>) =>
+      (edge: GraphEdge<T>) =>
         (edge.fromVertex === from && edge.toVertex === to) ||
         (edge.fromVertex === to && edge.toVertex === from)
     );
@@ -33,7 +33,7 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
   /**
    * @inheritDoc
    */
-  public hasEdge(from: V, to: V): boolean {
+  public hasEdge(from: T, to: T): boolean {
     return Boolean(
       this._edges.find((edge) => {
         return (
@@ -47,7 +47,7 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
   /**
    * @inheritDoc
    */
-  public addEdge(from: V, to: V, weight?: number): this {
+  public addEdge(from: T, to: T, weight?: number): this {
     try {
       const fromVertex = this.tryFindVertex(from);
       const toVertex = this.tryFindVertex(to);
@@ -76,7 +76,7 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
   /**
    * @inheritDoc
    */
-  public removeEdge(from: V, to: V): this {
+  public removeEdge(from: T, to: T): this {
     try {
       const fromVertex = this.tryFindVertex(from);
       const toVertex = this.tryFindVertex(to);
@@ -86,16 +86,16 @@ export default class UndirectedGraph<V> extends AbstractGraph<V> {
       const toVertexNeighbors = this._vertices.get(toVertex) || [];
 
       const fromNewNeighbors = fromVertexNeighbors.filter(
-        (vertex: V) => toVertex !== vertex
+        (vertex: T) => toVertex !== vertex
       );
       const toNewNeighbors = toVertexNeighbors.filter(
-        (vertex: V) => fromVertex !== vertex
+        (vertex: T) => fromVertex !== vertex
       );
 
       this._vertices.set(fromVertex, fromNewNeighbors);
       this._vertices.set(toVertex, toNewNeighbors);
       this._edges = this._edges.filter(
-        (edge: GraphEdge<V>) => edge !== edgeToRemove
+        (edge: GraphEdge<T>) => edge !== edgeToRemove
       );
     } catch {
       throw new Error(
