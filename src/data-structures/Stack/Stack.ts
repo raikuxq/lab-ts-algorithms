@@ -1,33 +1,19 @@
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 import ILinearStorage from "../../types/ILinearStorage";
 import ILinearStorageRA from "../../types/ILinearStorageRA";
-// eslint-disable-next-line
-import LoopedArray from "../LoopedArray/LoopedArray";
 
 /**
  * LIFO data structure
  */
 export default class Stack<T> implements ILinearStorage<T> {
   private readonly _list: ILinearStorageRA<T>;
-  private readonly _capacity: number;
 
   /**
    * Create a stack instance
    * @param capacity - max stack elements count
    */
   public constructor(capacity?: number) {
-    if (capacity === undefined) {
-      this._capacity = Number.MAX_VALUE;
-    } else {
-      if (capacity > 0) {
-        this._capacity = capacity;
-      } else {
-        throw new Error("Capacity must be larger than 0");
-      }
-    }
-    this._list = new DoubleLinkedList(this._capacity);
-    // eslint-disable-next-line
-    // this._list = new LoopedArray(this._capacity);
+    this._list = new DoubleLinkedList(capacity);
   }
 
   /**
@@ -80,7 +66,7 @@ export default class Stack<T> implements ILinearStorage<T> {
    * @returns boolean
    */
   public isEmpty(): boolean {
-    return this._list.length() === 0;
+    return this._list.isEmpty();
   }
 
   /**
@@ -88,7 +74,7 @@ export default class Stack<T> implements ILinearStorage<T> {
    * @returns boolean
    */
   public isFull(): boolean {
-    return this._list.length() >= this._capacity;
+    return this._list.isFull();
   }
 
   /**

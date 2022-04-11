@@ -1,33 +1,19 @@
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 import ILinearStorage from "../../types/ILinearStorage";
 import ILinearStorageRA from "../../types/ILinearStorageRA";
-// eslint-disable-next-line
-import LoopedArray from "../LoopedArray/LoopedArray";
 
 /**
  * FIFO data structure
  */
 export default class Queue<T> implements ILinearStorage<T> {
   private readonly _list: ILinearStorageRA<T>;
-  private readonly _capacity: number;
 
   /**
    * Create a queue instance
    * @param capacity - max stack elements count
    */
   public constructor(capacity?: number) {
-    if (capacity === undefined) {
-      this._capacity = Number.MAX_VALUE;
-    } else {
-      if (capacity > 0) {
-        this._capacity = capacity;
-      } else {
-        throw new Error("Capacity must be larger than 0");
-      }
-    }
-    this._list = new DoubleLinkedList<T>(this._capacity);
-    // eslint-disable-next-line
-    // this._list = new LoopedArray(this._capacity);
+    this._list = new DoubleLinkedList<T>(capacity);
   }
 
   /**
@@ -48,7 +34,7 @@ export default class Queue<T> implements ILinearStorage<T> {
    * @throws when list is full
    */
   public push(item: T): void {
-    if (this._list.length() >= this._capacity) {
+    if (this._list.isFull()) {
       throw new Error("Cannot push when queue is full");
     }
     this._list.unshift(item);
@@ -88,7 +74,7 @@ export default class Queue<T> implements ILinearStorage<T> {
    * @returns boolean
    */
   public isFull(): boolean {
-    return this._list.length() >= this._capacity;
+    return this._list.isFull();
   }
 
   /**
