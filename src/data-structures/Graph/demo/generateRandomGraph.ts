@@ -8,14 +8,10 @@ const getRandomVertex = (): string => {
   return "_" + Math.random().toString(36).substr(2, 9);
 };
 
-export const generateRandomGraph = (
-  verticesCount: number,
-  edgesCount: number,
+const getPossibleEdgesCount = (
   type: EnumGraphType,
-  format: EnumRandomGenerationFormat = EnumRandomGenerationFormat.Numbers
-): IGraph<string> => {
-  const graph = createGraph<string>(type);
-
+  verticesCount: number
+): number => {
   let possibleEdgesCount = verticesCount * (verticesCount - 1);
 
   switch (type) {
@@ -31,12 +27,14 @@ export const generateRandomGraph = (
     }
   }
 
-  if (edgesCount <= 0 || edgesCount > possibleEdgesCount) {
-    throw new Error(
-      `Edges count must be in range between 0 and ${possibleEdgesCount}`
-    );
-  }
+  return possibleEdgesCount;
+};
 
+const fillGraphRandomly = (
+  graph: IGraph<string>,
+  format: EnumRandomGenerationFormat,
+  verticesCount: number
+): void => {
   switch (format) {
     case EnumRandomGenerationFormat.Hash: {
       for (let i = 0; i < verticesCount; i++) {
@@ -54,37 +52,41 @@ export const generateRandomGraph = (
       throw new Error("Wrong random generation format");
     }
   }
+};
 
+export const generateRandomGraph = (
+  verticesCount: number,
+  edgesCount: number,
+  type: EnumGraphType = EnumGraphType.Undirected,
+  format: EnumRandomGenerationFormat = EnumRandomGenerationFormat.Numbers
+): IGraph<string> => {
+  const graph = createGraph<string>(type);
+  const possibleEdgesCount = getPossibleEdgesCount(type, verticesCount);
+
+  if (edgesCount <= 0 || edgesCount > possibleEdgesCount) {
+    throw new Error(
+      `Edges count must be in range between 0 and ${possibleEdgesCount}`
+    );
+  }
+
+  fillGraphRandomly(graph, format, verticesCount);
   const addedVertices = graph.vertices();
+  let addedEdgesCount = 0;
 
-  if (edgesCount !== null) {
-    let addedEdgesCount = 0;
-    while (addedEdgesCount < edgesCount) {
-      const randomizeIndex = () => {
-        return randomizeNumberInRange(0, addedVertices.length);
-      };
-      const randomVertexFrom = addedVertices[randomizeIndex()];
-      const randomVertexTo = addedVertices[randomizeIndex()];
+  while (addedEdgesCount < edgesCount) {
+    const randomizeIndex = () => {
+      return randomizeNumberInRange(0, addedVertices.length);
+    };
+    const randomVertexFrom = addedVertices[randomizeIndex()];
+    const randomVertexTo = addedVertices[randomizeIndex()];
 
-      const isEdgeAlreadyExists = graph.hasEdge(
-        randomVertexFrom,
-        randomVertexTo
-      );
-      const isTheSameVertex = randomVertexFrom === randomVertexTo;
+    const isEdgeAlreadyExists = graph.hasEdge(randomVertexFrom, randomVertexTo);
+    const isTheSameVertex = randomVertexFrom === randomVertexTo;
 
-      if (!isTheSameVertex && !isEdgeAlreadyExists) {
-        graph.addEdge(randomVertexFrom, randomVertexTo);
-        addedEdgesCount++;
-      }
+    if (!isTheSameVertex && !isEdgeAlreadyExists) {
+      graph.addEdge(randomVertexFrom, randomVertexTo);
+      addedEdgesCount++;
     }
-  } else {
-    addedVertices.forEach((vertexOuter) => {
-      addedVertices.forEach((vertexInner) => {
-        if (vertexOuter !== vertexInner) {
-          graph.addEdge(vertexOuter, vertexInner);
-        }
-      });
-    });
   }
 
   return graph;
