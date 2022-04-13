@@ -97,7 +97,7 @@ Clone this repository and install dependencies by using `yarn` command
     + Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface
 + Implementation
   + [LoopedArray](src/data-structures/LoopedArray/LoopedArray.ts) 
-    + Implements [ILinearStorageRA](src/types/ILinearStorageRA.ts) interface
+    + Overwrites data on capacity overflow
 + Tests
   + [ Unit tests ](test/looped-array.test.ts)
 
@@ -164,16 +164,18 @@ Clone this repository and install dependencies by using `yarn` command
 + Tests 
   + [ Unit tests ](test/graph.presenter.test.ts)
 
+
 #### Graph Searching
 
 + Implementation
   + [has-path (BFS/DFS)](src/data-structures/Graph/searching/hasPath.ts) 
       + Search for the existence of a path between two vertices
-      + [ Unit tests ](test/graph.has-path.test.ts)
   + [shortest-path (BFS/Dijkstra)](src/data-structures/Graph/searching/shortestPath.ts) 
     + Search for one of several shortest paths between two vertices
 + Tests
-  + [ Unit tests ](test/graph.shortest-path.test.ts)
+  + [ has path unit tests ](test/graph.has-path.test.ts)
+  + [ shortest path unit tests ](test/graph.shortest-path.test.ts)
+
 
 #### Graph Creators
 + Implementation
@@ -181,6 +183,7 @@ Clone this repository and install dependencies by using `yarn` command
     + Convert a matrix N*N into a graph instance
 + Tests
   + [ Unit tests ](test/graph.create-from-matrix.test.ts)
+
 
 #### Graph Transposing
 + Implementation
