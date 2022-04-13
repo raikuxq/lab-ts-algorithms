@@ -4,14 +4,16 @@ Written in TypeScript, tested with Jest.
 
 # Getting started
 
+Clone this repository and install dependencies by using `yarn` command
+
 ## Scripts
 `yarn test` - run all tests via jest
 
-`yarn dev` - run in dev mode via nodemon
+`yarn dev` - run in dev mode via nodemon (src/index.ts is an entrypoint)
 
-`yarn build` - compile ts sources into 
+`yarn build` - compile ts sources into js files
 
-`yarn start` - build and run
+`yarn start` - build and run in production mode
 
 `yarn lint` - lint check via eslint
 
@@ -26,16 +28,20 @@ Written in TypeScript, tested with Jest.
 ### Uncategorized
 + [memoization](src/utils.ts)
 + [matrix-transpose](src/utils.ts)
-+ [binary-search](src/algorithms/binary-search.ts) [[ test ](test/binary-search.test.ts)]
-+ [factorial (+ memoized version)](src/algorithms/factorial.ts) [[ test ](test/factorial.test.ts)]
-+ [fibonacci (+ memoized version)](src/algorithms/fibonacci.ts) [[ test ](test/fibonacci.test.ts)]
++ [binary-search](src/algorithms/binary-search.ts) [[ unit tests ](test/binary-search.test.ts)]
++ [factorial](src/algorithms/factorial.ts) [[ unit tests ](test/factorial.test.ts)]
++ [fibonacci](src/algorithms/fibonacci.ts) [[ unit tests ](test/fibonacci.test.ts)]
 
 ### Sorts
-+ [bubble-sort](src/algorithms/sorts/bubble-sort.ts) [[ test ](test/sorts.test.ts)]
-+ [selection-sort](src/algorithms/sorts/select-sort.ts) [[ test ](test/sorts.test.ts)]
-+ [insertion-sort](src/algorithms/sorts/insertion-sort.ts) [[ test ](test/sorts.test.ts)]
-+ [merge-sort](src/algorithms/sorts/merge-sort.ts) [[ test ](test/sorts.test.ts)]
-+ [quick-sort](src/algorithms/sorts/quick-sort.ts) [[ test ](test/sorts.test.ts)]
+
++ Implementation
+  + [bubble-sort](src/algorithms/sorts/bubble-sort.ts)
+  + [selection-sort](src/algorithms/sorts/select-sort.ts)
+  + [insertion-sort](src/algorithms/sorts/insertion-sort.ts)
+  + [merge-sort](src/algorithms/sorts/merge-sort.ts)
+  + [quick-sort](src/algorithms/sorts/quick-sort.ts)
++ Tests
+  + [ Unit tests ](test/sorts.test.ts)
 
 
 
@@ -45,34 +51,72 @@ Written in TypeScript, tested with Jest.
 ### Common
 + Interfaces
   + [ILinearStorage](src/types/ILinearStorage.ts)
-  + [ILinearStorageRA](src/types/ILinearStorageRA.ts) (Random Access)
+    + Contains common methods of linear data structures
+    + (push/pop/has) and (length/isEmpty/isFull/clear/reverse)
+  + [ILinearStorageRA](src/types/ILinearStorageRA.ts) 
+    + Allows random access (from end, from start, by index)
+    + Extends [ILinearStorage](src/types/ILinearStorage.ts) interface
   + [IIterable](src/types/IIterable.ts)
+    + Allows to create an iterator instance
   + [IBiDirectIterable](src/types/IBiDirectIterable.ts)
-  + [IIterator](src/types/IIterator.ts) (Next only)
-  + [IBiDirectIterator](src/types/IBiDirectIterator.ts) (Next/Prev)
+    + Allows to create a bi-direct iterator instance
+    + Extends [IIterable](src/types/IIterable.ts) interface
+  + [IIterator](src/types/IIterator.ts) 
+    + Allows only next navigation
+  + [IBiDirectIterator](src/types/IBiDirectIterator.ts) 
+    + Allows both next and prev navigation
+    + Extends [IIterator](src/types/IIterator.ts) interface
   + [IConvertableToArray](src/types/IConvertableToArray.ts)
+    + Contain methods for converting from/into array
 
 ### Linked List
++ Interfaces
+  + [ILinkedList](src/types/ILinkedList.ts)
+    + Contains basic linked lists operations
+    + Extends [ILinearStorageRA](src/types/ILinearStorageRA.ts) interface
+    + Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface
+
 + Implementation
-  + [AbstractLinkedNode](src/data-structures/LinkedList/AbstractLinkedNode.ts)
-  + [SingleLinkedNode](src/data-structures/LinkedList/SingleLinkedList/SingleLinkedNode.ts)
-  + [DoubleLinkedNode](src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedNode.ts)
   + [AbstractLinkedList](src/data-structures/LinkedList/AbstractLinkedList.ts)
-  + [SingleLinkedList](src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList.ts) [[ test ](test/linked-list.test.ts)]
-  + [DoubleLinkedList](src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList.ts) [[ test ](test/linked-list.test.ts)]
+    + Common logic for both single and double linked lists
+    + Implements [ILinearStorageRA](src/types/ILinearStorageRA.ts) interface
+  + [SingleLinkedList](src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList.ts) 
+    + Extends abstract linked list with implementation of one-way linking
+    + Implements [IIterable](src/types/IIterable.ts) interface
+  + [DoubleLinkedList](src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList.ts)
+    + Extends abstract linked list with implementation of two-way linking
+    + Implements [IBiDirectIterable](src/types/IBiDirectIterable.ts) interface
++ Tests
+  + [ Unit tests ](test/linked-list.test.ts)
 
 ### Looped Array
++ Interfaces
+  + [IArrayFacade](src/types/IArrayFacade.ts)
+    + Contains basic array operations
+    + Extends [ILinearStorageRA](src/types/ILinearStorageRA.ts) interface
+    + Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface
 + Implementation
-  + [LoopedArray](src/data-structures/LoopedArray/LoopedArray.ts) [[ test ](test/looped-array.test.ts)]
+  + [LoopedArray](src/data-structures/LoopedArray/LoopedArray.ts) 
+    + Implements [ILinearStorageRA](src/types/ILinearStorageRA.ts) interface
++ Tests
+  + [ Unit tests ](test/looped-array.test.ts)
 
 ### Stack
 + Implementation
-  + [Stack](src/data-structures/Stack/Stack.ts) [[ test ](test/stack.test.ts)]
+  + [Stack](src/data-structures/Stack/Stack.ts) 
+    + LIFO data structure
+    + Implements [ILinearStorage](src/types/ILinearStorage.ts) interface
++ Tests
+  + [ Unit tests ](test/stack.test.ts)
 
 
 ### Queue
 + Implementation
-  + [Queue](src/data-structures/Queue/Queue.ts) [[ test ](test/queue.test.ts)]
+  + [Queue](src/data-structures/Queue/Queue.ts) 
+    + FIFO data structure
+    + Implements [ILinearStorage](src/types/ILinearStorage.ts) interface
++ Tests
+  + [ Unit tests ](test/queue.test.ts)
   
 
 
@@ -82,23 +126,65 @@ Written in TypeScript, tested with Jest.
 ### Graph
 + Interfaces
     + [IGraph](src/types/IGraph.ts)
+      + Contains basics graph operations  
+      + (add/has/remove methods for vertices and edges)
     + [IGraphIterator](src/types/IGraphIterator.ts)
+      + Extends the default iterator with init and getPath methods
     + [IGraphIterationStrategy](src/types/IGraphIterationStrategy.ts)
+      + Iteration strategies which is used in shortest-path, has-path 
 + Implementation
     + [GraphEdge](src/data-structures/Graph/GraphEdge.ts)
+      + Storage class for from/to links and edge weight
     + [AbstractGraph](src/data-structures/Graph/AbstractGraph.ts)
-    + [DirectedGraph](src/data-structures/Graph/DirectedGraph.ts) [[ test ](test/graph.test.ts)]
-    + [UndirectedGraph](src/data-structures/Graph/UndirectedGraph.ts) [[ test ](test/graph.test.ts)]
-+ Iterators
-    + [BreadthFirstSearchIterator](src/data-structures/Graph/iterator/GraphIteratorBFS.ts)
-    + [DepthFirstSearchIterator](src/data-structures/Graph/iterator/GraphIteratorDFS.ts)
-    + [DijkstraMethodIterator](src/data-structures/Graph/iterator/GraphIteratorDijkstra.ts)
-+ Presenter
-    + [GraphPresenter](src/data-structures/Graph/presenter/GraphPresenter.ts) [[ test ](test/graph-presenter.test.ts)]
-+ Searching
-    + [has-path (BFS/DFS)](src/data-structures/Graph/searching/hasPath.ts) [[ test ](test/graph.has-path.test.ts)]
-    + [shortest-path (BFS/Dijkstra)](src/data-structures/Graph/searching/shortestPath.ts) [[ test ](test/graph.shortest-path.test.ts)]
-+ Creators
-    + [create-graph-from-matrix](src/helpers/createGraphFromMatrix.ts) [[ test ](test/graph.create-from-matrix.test.ts)]
-+ Transposing
-    + [transpose-directed-graph](src/data-structures/Graph/transposing/transposeDirectedGraph.ts) [[ test ](test/graph.transpose.test.ts)]
+      + Common logic for both directed and undirected graphs
+    + [DirectedGraph](src/data-structures/Graph/DirectedGraph.ts) 
+      + In case of directed graph A->B and B->A edges are not the same
+      + [ Unit tests ](test/graph.test.ts)
+    + [UndirectedGraph](src/data-structures/Graph/UndirectedGraph.ts) 
+      + In case of undirected graph A->B and B->A are equal
++ Tests
+  + [ Unit tests ](test/graph.test.ts)
+
+
+#### Graph Iterators
+
++ [BreadthFirstSearchIterator](src/data-structures/Graph/iterator/GraphIteratorBFS.ts)
+  + Traversal method for unweighted graphs, built on queue
++ [DepthFirstSearchIterator](src/data-structures/Graph/iterator/GraphIteratorDFS.ts)
+  + Traversal method for unweighted graphs, built on stack 
++ [DijkstraMethodIterator](src/data-structures/Graph/iterator/GraphIteratorDijkstra.ts)
+  + Traversal method for weighted graphs, built on finding the minimal cost
+
+
+#### Graph Presenter
+
++ Implementation  
+  + [GraphPresenter](src/data-structures/Graph/presenter/GraphPresenter.ts) 
+    + Representation of graph as an adjacency list and an adjacency matrix 
++ Tests 
+  + [ Unit tests ](test/graph.presenter.test.ts)
+
+#### Graph Searching
+
++ Implementation
+  + [has-path (BFS/DFS)](src/data-structures/Graph/searching/hasPath.ts) 
+      + Search for the existence of a path between two vertices
+      + [ Unit tests ](test/graph.has-path.test.ts)
+  + [shortest-path (BFS/Dijkstra)](src/data-structures/Graph/searching/shortestPath.ts) 
+    + Search for one of several shortest paths between two vertices
++ Tests
+  + [ Unit tests ](test/graph.shortest-path.test.ts)
+
+#### Graph Creators
++ Implementation
+  + [create-graph-from-matrix](src/helpers/createGraphFromMatrix.ts)
+    + Convert a matrix N*N into a graph instance
++ Tests
+  + [ Unit tests ](test/graph.create-from-matrix.test.ts)
+
+#### Graph Transposing
++ Implementation
+  + [transpose-directed-graph](src/data-structures/Graph/transposing/transposeDirectedGraph.ts) 
+    + Transpose a directed graph (undirected graphs are symmetrical already)
++ Tests
+  + [ Unit tests ](test/graph.transpose.test.ts)
