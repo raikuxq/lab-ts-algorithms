@@ -6,7 +6,6 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Created empty instance
-   * @protected
    */
   protected constructor() {
     this._vertices = new Map<T, Array<T>>();
@@ -15,16 +14,11 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Find edge by its from and to vertices
-   * @param from
-   * @param to
-   * @protected
    */
   protected abstract getEdgeByValue(from: T, to: T): GraphEdge<T>;
 
   /**
    * Get vertices list in array format
-   * @protected
-   * @returns array of graph elements
    */
   protected getVerticesArrayFormat(): Array<T> {
     return Array.from(this._vertices.keys());
@@ -32,10 +26,7 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Find vertex in vertices list by its value
-   * @param value
-   * @protected
    * @throws when vertex was not found
-   * @returns vertex data
    */
   protected tryFindVertex(value: T): T {
     const isExists = this._vertices.has(value);
@@ -48,11 +39,7 @@ export default abstract class AbstractGraph<T> {
   }
 
   /**
-   * Update edge weight
-   * @param from
-   * @param to
-   * @param weight
-   * @protected
+   * Update edge weight between from and to vertices
    */
   protected updateEdgeWeight(from: T, to: T, weight: number): void {
     const edge = this.getEdgeByValue(from, to);
@@ -62,7 +49,6 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Will remove all vertex relations with others vertices
-   * @param vertexToRemove
    */
   protected cascadeRemoveVertexRelations(vertexToRemove: T): void {
     this.getVerticesArrayFormat().forEach((neighbor: T) => {
@@ -80,7 +66,6 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Will remove all vertices edges with vertex to remove
-   * @param vertexToRemove
    */
   protected cascadeRemoveVertexEdges(vertexToRemove: T): void {
     this._edges = this._edges.filter((edge: GraphEdge<T>) => {
@@ -92,7 +77,7 @@ export default abstract class AbstractGraph<T> {
   }
 
   /**
-   * @returns graph weight
+   * @returns sum of all graph edges
    */
   public weight(): number {
     return this._edges.reduce(
@@ -124,9 +109,7 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Add vertex
-   * @param data
    * @throws when vertex is already exists
-   * @returns graph instance
    */
   public addVertex(data: T): this {
     if (this.hasVertex(data)) {
@@ -140,9 +123,7 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Remove vertex
-   * @param data
    * @throws when vertex is already does not exist
-   * @returns graph instance
    */
   public removeVertex(data: T): this {
     try {
@@ -160,25 +141,16 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Add edge between two vertices
-   * @param from
-   * @param to
-   * @param weight
-   * @returns graph instance
    */
   public abstract addEdge(from: T, to: T, weight?: number): this;
 
   /**
    * Remove edge between two vertices
-   * @param from
-   * @param to
-   * @returns graph instance
    */
   public abstract removeEdge(from: T, to: T): this;
 
   /**
    * Get vertex neighbors by its value
-   * @param value - vertex value
-   * @returns array of neighbors elements
    */
   public getVertexNeighbors(value: T): Array<T> {
     const vertex = this.tryFindVertex(value);
@@ -186,19 +158,14 @@ export default abstract class AbstractGraph<T> {
   }
 
   /**
-   * Graph has vertex by its value
-   * @param value - vertex value
-   * @returns boolean
+   * Check if graph has vertex
    */
   public hasVertex(value: T): boolean {
     return this._vertices.has(value);
   }
 
   /**
-   * Graph has edge between two vertices
-   * @param from
-   * @param to
-   * @returns boolean
+   * Check if graph has edge between from and to vertices
    */
   public hasEdge(from: T, to: T): boolean {
     return Boolean(
@@ -209,10 +176,7 @@ export default abstract class AbstractGraph<T> {
   }
 
   /**
-   * Get edge weight between two vertices
-   * @param from
-   * @param to
-   * @returns number
+   * Get edge weight between from and to vertices
    */
   public getEdgeWeightByVertices(from: T, to: T): number {
     const fromVertex = this.tryFindVertex(from);

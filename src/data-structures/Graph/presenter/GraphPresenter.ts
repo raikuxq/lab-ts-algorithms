@@ -11,7 +11,6 @@ export default class GraphPresenter<T> {
 
   /**
    * Create empty instance of presenter
-   * @param graph - graph instance
    */
   public constructor(graph: IGraph<T>) {
     this.graph = graph;
@@ -59,9 +58,10 @@ export default class GraphPresenter<T> {
       matrix[rowIndex] = new Array(this.graph.verticesCount());
 
       vertices.forEach((graphVertexColumn, columnIndex) => {
-        const isElementLinked = this.graph
-          .getVertexNeighbors(graphVertexRow)
-          .includes(graphVertexColumn);
+        const isElementLinked = this.graph.hasEdge(
+          graphVertexRow,
+          graphVertexColumn
+        );
 
         matrix[rowIndex][columnIndex] = isElementLinked
           ? EDGE_EXISTS_STATE

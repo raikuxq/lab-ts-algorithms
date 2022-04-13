@@ -105,8 +105,4 @@ export default class UndirectedGraph<T> extends AbstractGraph<T> {
 
     return this;
   }
-  //
-  // public edgesCount(): number {
-  //   return Math.floor(super.edgesCount() / 2);
-  // }
 }

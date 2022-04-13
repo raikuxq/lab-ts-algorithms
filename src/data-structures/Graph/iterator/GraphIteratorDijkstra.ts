@@ -17,7 +17,6 @@ export default class GraphIteratorDijkstra<T> extends AbstractGraphIterator<T> {
 
   /**
    * Get closest (by cost) and not visited node
-   * @private
    */
   private getClosestNotVisited(): T | null {
     const keys = Array.from(this.costs.keys());

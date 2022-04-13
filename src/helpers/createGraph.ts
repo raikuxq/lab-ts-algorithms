@@ -5,7 +5,6 @@ import { EnumGraphType } from "../types/EnumGraphType";
 
 /**
  * Returns graph by type
- * @param type
  * @returns graph empty instance
  */
 export const createGraph = <T>(type: EnumGraphType): IGraph<T> => {
