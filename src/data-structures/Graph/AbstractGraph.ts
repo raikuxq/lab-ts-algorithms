@@ -38,13 +38,13 @@ export default abstract class AbstractGraph<T> {
    * @returns vertex data
    */
   protected tryFindVertex(value: T): T {
-    const vertex = this.getVerticesArrayFormat().find(
-      (vertex: T) => vertex === value
-    );
+    const isExists = this._vertices.has(value);
 
-    if (!vertex) throw new Error("Vertex not found");
+    if (!isExists) {
+      throw new Error("Vertex not found");
+    }
 
-    return vertex;
+    return value;
   }
 
   /**
@@ -181,13 +181,8 @@ export default abstract class AbstractGraph<T> {
    * @returns array of neighbors elements
    */
   public getVertexNeighbors(value: T): Array<T> {
-    try {
-      const vertex = this.tryFindVertex(value);
-
-      return this._vertices.get(vertex)?.map((vertex: T) => vertex) || [];
-    } catch (e) {
-      throw new Error("No such vertex");
-    }
+    const vertex = this.tryFindVertex(value);
+    return this._vertices.get(vertex) || [];
   }
 
   /**
@@ -196,7 +191,7 @@ export default abstract class AbstractGraph<T> {
    * @returns boolean
    */
   public hasVertex(value: T): boolean {
-    return this.vertices().includes(value);
+    return this._vertices.has(value);
   }
 
   /**
