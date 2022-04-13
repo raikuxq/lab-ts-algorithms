@@ -77,7 +77,7 @@ export default abstract class AbstractGraph<T> {
   }
 
   /**
-   * @returns sum of all graph edges
+   * Get sum of all graph edges
    */
   public weight(): number {
     return this._edges.reduce(
@@ -87,21 +87,21 @@ export default abstract class AbstractGraph<T> {
   }
 
   /**
-   * @returns array of vertices
+   * Get array of vertices
    */
   public vertices(): Array<T> {
     return this.getVerticesArrayFormat().map((vertex: T) => vertex);
   }
 
   /**
-   * @returns vertices count
+   * Get vertices count
    */
   public verticesCount(): number {
     return this.vertices().length;
   }
 
   /**
-   * @returns edges count
+   * Get edges count
    */
   public edgesCount(): number {
     return this._edges.length;

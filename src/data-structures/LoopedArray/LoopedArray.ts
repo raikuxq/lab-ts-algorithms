@@ -23,7 +23,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Push into end
-   * @param value - data
    */
   public push(value: T): void {
     if (this._realLength % this._capacity === 0) {
@@ -42,7 +41,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Push into start
-   * @param value - data
    */
   public unshift(value: T): void {
     if (this._realLength % this._capacity === 0) {
@@ -60,7 +58,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Delete node from array's end
-   * @returns data of deleted element
    */
   public pop(): T {
     this._realLength--;
@@ -74,7 +71,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Delete node from array's start
-   * @returns data of deleted element
    */
   public shift(): T {
     this._realLength--;
@@ -89,7 +85,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
   /**
    * Get head element data
    * @throws Error when head does not exists
-   * @returns data of picked element
    */
   public peek(): T {
     return this._array[this._array.length - 1];
@@ -98,7 +93,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
   /**
    * Get tail element data
    * @throws Error when head does not exists
-   * @returns data of picked element
    */
   public peekFromStart(): T {
     return this._array[0];
@@ -107,7 +101,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
   /**
    * Get array element by index from start
    * @throws when element does not exists
-   * @returns data of picked element
    */
   peekByIndex(index: number): T {
     return this._array[index];
@@ -115,8 +108,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Push from index
-   * @param value - data
-   * @param fromIndex - index from start
    */
   pushFromIndex(value: T, fromIndex: number): void {
     this._array[fromIndex] = value;
@@ -124,7 +115,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Get elements as array
-   * @returns array representation of array
    */
   public getAsArray(): Array<T> {
     return this._array;
@@ -132,8 +122,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Check if element exists in array
-   * @param item
-   * @returns boolean
    */
   public has(item: T): boolean {
     return this._array.includes(item);
@@ -141,7 +129,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Is array empty
-   * @returns boolean
    */
   public isEmpty(): boolean {
     return this._array.length === 0;
@@ -149,7 +136,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Is array full
-   * @returns boolean
    */
   public isFull(): boolean {
     return this._array.length >= this._capacity;
@@ -157,7 +143,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * List length
-   * @returns number - quantity of array's elements
    */
   public length(): number {
     return this._array.length;
@@ -172,7 +157,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Delete node from array by index from start
-   * @returns data of deleted element
    */
   deleteFromIndex(fromIndex: number): T {
     const deletedElement = this._array[fromIndex];
@@ -182,7 +166,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Add elements to array from array
-   * @param elements - array of elements to push
    * */
   pushFromArray(elements: Array<T>): void {
     elements.forEach((element: T) => {

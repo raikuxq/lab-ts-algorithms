@@ -29,10 +29,8 @@ export default class DoubleLinkedList<T>
   }
 
   /**
-   * Will insert node into head next and tail prev links
-   * @param nodeToPush - node that will be added between two nodes
-   * @param nodeLeft - will be prev element of pushed node
-   * @param nodeRight - will be next element of pushed node
+   * Will insert node between nodeLeft and nodeRight
+   * @throws when list is full
    */
   protected insertNodeBetweenTwoNodes(
     nodeToPush: DoubleLinkedNode<T>,
@@ -57,10 +55,9 @@ export default class DoubleLinkedList<T>
   }
 
   /**
-   * Will change its neighbors nodes links
-   * @param node - node to delete
+   * Will remove the node from its neighbors links
+   *
    * @throws when node does not exist
-   * @returns node with empty links that contain only data
    */
   protected deleteNode(node: DoubleLinkedNode<T> | null): DoubleLinkedNode<T> {
     if (node === null) throw new Error("Node should be existed");
@@ -197,28 +194,26 @@ export default class DoubleLinkedList<T>
 
   /**
    * List iterator
-   * @param fromIndex - where iterator starts from list start
-   * @returns iterator instance
    */
   public iterator(fromIndex = 0): IBiDirectIterator<T> {
     let activeNode: DoubleLinkedNode<T> = this.getNodeByIndex(fromIndex);
 
     return {
       /**
-       * @returns current element data
+       * @inheritDoc
        */
       current: () => {
         return activeNode.data;
       },
       /**
-       * @returns boolean - is next element exists
+       * @inheritDoc
        */
       hasNext(): boolean {
         return Boolean(activeNode.next);
       },
       /**
-       * @throws when next element does not exists
-       * @returns next element data
+       * @inheritDoc
+       * @throws when next element does not exist
        */
       next: (): T => {
         if (!activeNode.next) {
@@ -228,8 +223,8 @@ export default class DoubleLinkedList<T>
         return activeNode.data;
       },
       /**
+       * @inheritDoc
        * @throws when prev element does not exists
-       * @returns next element data
        */
       prev: (): T => {
         if (!activeNode.prev) {

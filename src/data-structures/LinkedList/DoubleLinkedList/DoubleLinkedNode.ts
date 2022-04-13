@@ -6,9 +6,6 @@ export default class DoubleLinkedNode<T> extends AbstractLinkedNode<T> {
 
   /**
    * Will create empty node
-   * @param data - element data
-   * @param next - link to next node (null by default)
-   * @param prev - link to previous node (null by default)
    */
   public constructor(
     data: T,
@@ -21,14 +18,14 @@ export default class DoubleLinkedNode<T> extends AbstractLinkedNode<T> {
   }
 
   /**
-   * @param value - link to prev node element or null
+   * Set previous node link
    */
   public set prev(value: DoubleLinkedNode<T> | null) {
     this._prev = value;
   }
 
   /**
-   * @returns link to prev node element or null
+   * Get previous node link
    */
   public get prev(): DoubleLinkedNode<T> | null {
     return this._prev;

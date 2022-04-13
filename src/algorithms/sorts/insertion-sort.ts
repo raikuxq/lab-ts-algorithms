@@ -2,14 +2,11 @@ import { swapArrayItems } from "../../utils";
 
 /**
  * Insertion sorting algorithm
- * @param arr - array of numbers
- * @returns arr - sorted array of numbers (array is mutable)
  *
  * @description
  * Time complexity: Best O(n); Avg O(n \^ 2); Worst O(n \^ 2);
- *
- * Memory complexity:
- * Worst case: O(1)
+ * @description
+ * Memory complexity: Worst case: O(1)
  */
 export const insertionSort = (arr: Array<number>): Array<number> => {
   for (let i = 1; i < arr.length; i++) {

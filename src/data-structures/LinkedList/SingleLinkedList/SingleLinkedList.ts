@@ -29,10 +29,7 @@ export default class SingleLinkedList<T>
   }
 
   /**
-   * Will insert node into head next and tail prev links
-   * @param nodeToPush - node that will be added between two nodes
-   * @param nodeLeft - will be prev element of pushed node
-   * @param nodeRight - will be next element of pushed node
+   * Will insert node between nodeLeft and nodeRight
    */
   protected insertNodeBetweenTwoNodes(
     nodeToPush: SingleLinkedNode<T>,
@@ -55,10 +52,8 @@ export default class SingleLinkedList<T>
   }
 
   /**
-   * Will change its neighbors nodes links
-   * @param node - node to delete
+   * Will remove the node from its neighbors nodes links
    * @throws when node does not exist
-   * @returns node with empty links that contain only data
    */
   protected deleteNode(node: SingleLinkedNode<T> | null): SingleLinkedNode<T> {
     if (node === null) {
@@ -207,28 +202,26 @@ export default class SingleLinkedList<T>
 
   /**
    * List iterator
-   * @param fromIndex - where iterator starts from list start
-   * @returns iterator instance
    */
   public iterator(fromIndex = 0): IIterator<T> {
     let activeNode: SingleLinkedNode<T> = this.getNodeByIndex(fromIndex);
 
     return {
       /**
-       * @returns current element data
+       * @inheritDoc
        */
       current: () => {
         return activeNode.data;
       },
       /**
-       * @returns boolean - is next element exists
+       * @inheritDoc
        */
       hasNext(): boolean {
         return Boolean(activeNode.next);
       },
       /**
-       * @throws when next element does not exists
-       * @returns next element data
+       * @inheritDoc
+       * @throws when next element does not exist
        */
       next: () => {
         if (!activeNode.next) {

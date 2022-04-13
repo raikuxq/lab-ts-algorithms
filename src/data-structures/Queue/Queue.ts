@@ -10,7 +10,6 @@ export default class Queue<T> implements ILinearStorage<T> {
 
   /**
    * Create a queue instance
-   * @param capacity - max stack elements count
    */
   public constructor(capacity?: number) {
     this._list = new DoubleLinkedList<T>(capacity);
@@ -19,7 +18,6 @@ export default class Queue<T> implements ILinearStorage<T> {
   /**
    * Get first element in queue (without deleting)
    * @throws when list is empty
-   * @returns element data
    */
   public peek(): T {
     if (this.isEmpty()) {
@@ -30,7 +28,6 @@ export default class Queue<T> implements ILinearStorage<T> {
 
   /**
    * Add element to queue
-   * @param item - element data
    * @throws when list is full
    */
   public push(item: T): void {
@@ -43,7 +40,6 @@ export default class Queue<T> implements ILinearStorage<T> {
   /**
    * Delete first element in queue
    * @throws when list is empty
-   * @returns element data
    */
   public pop(): T {
     if (this.isEmpty()) {
@@ -54,8 +50,6 @@ export default class Queue<T> implements ILinearStorage<T> {
 
   /**
    * Check if element exists in list
-   * @param item
-   * @returns boolean
    */
   public has(item: T): boolean {
     return this._list.has(item);
@@ -63,7 +57,6 @@ export default class Queue<T> implements ILinearStorage<T> {
 
   /**
    * Is queue empty
-   * @returns boolean
    */
   public isEmpty(): boolean {
     return this._list.isEmpty();
@@ -71,7 +64,6 @@ export default class Queue<T> implements ILinearStorage<T> {
 
   /**
    * Is stack full
-   * @returns boolean
    */
   public isFull(): boolean {
     return this._list.isFull();
@@ -86,7 +78,6 @@ export default class Queue<T> implements ILinearStorage<T> {
 
   /**
    * Queue length
-   * @returns number
    */
   public length(): number {
     return this._list.length();

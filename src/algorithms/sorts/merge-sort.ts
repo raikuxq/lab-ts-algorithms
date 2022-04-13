@@ -1,9 +1,5 @@
 /**
  * Merge two sorted arrays into one array
- * @param arr
- * @param leftIndex - Describes start index of left half
- * @param midIndex - Describes end index of left half
- * @param rightIndex - Describes end index of right half (right half starts at midIndex + 1)
  */
 const merge = (
   arr: Array<number>,
@@ -47,10 +43,6 @@ const merge = (
 
 /**
  * Divide array into 2 halves and merge them
- *
- * @param arr - Array to sort
- * @param leftIndex - Describes start index of part to sort
- * @param rightIndex - Describes end index of part to sort
  */
 const sortRange = (
   arr: Array<number>,
@@ -69,14 +61,11 @@ const sortRange = (
 
 /**
  * Merge sorting algorithm
- * @param arr - array of numbers
- * @returns arr - sorted array of numbers (array is mutable)
  *
  * @description
  * Time complexity: Best O(n * log(n)); Avg O(n * log(n)); Worst O(n * log(n))
- *
- * Memory complexity:
- * Worst case: O(n)
+ * @description
+ * Memory complexity: Worst case: O(n)
  */
 export const mergeSort = (arr: Array<number>): Array<number> => {
   sortRange(arr, 0, arr.length - 1);

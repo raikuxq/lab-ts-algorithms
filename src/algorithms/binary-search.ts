@@ -1,9 +1,6 @@
 /**
  * Find element's index in sorted array
  * Time complexity: O(log(n))
- * @param elements - sorted array of numbers
- * @param searchElement - value of element to search
- * @returns element's index or null if it does not exist
  */
 export const binarySearch = (
   elements: Array<number>,

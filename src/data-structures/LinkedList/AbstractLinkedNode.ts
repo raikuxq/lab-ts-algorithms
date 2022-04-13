@@ -4,9 +4,6 @@ export default abstract class AbstractLinkedNode<T> {
 
   /**
    * Will create empty node
-   * @param data - element data
-   * @param next - link to next node (null by default)
-   * @protected
    */
   protected constructor(data: T, next: AbstractLinkedNode<T> | null = null) {
     this._data = data;
@@ -14,21 +11,21 @@ export default abstract class AbstractLinkedNode<T> {
   }
 
   /**
-   * @returns data of node element
+   * Get data of node
    */
   public get data(): T {
     return this._data;
   }
 
   /**
-   * @returns link to next node element or null
+   * Get next node link
    */
   public get next(): AbstractLinkedNode<T> | null {
     return this._next;
   }
 
   /**
-   * @param value - link to next node element or null
+   * Set next node link
    */
   public set next(value: AbstractLinkedNode<T> | null) {
     this._next = value;

@@ -6,7 +6,6 @@ import { EDGE_EXISTS_STATE } from "../constants";
 
 /**
  * Creates a graph from N*N matrix that contains 1 in case of edge exists or 0 in case it does not
- * @returns graph filled instance
  */
 export const createGraphFromMatrix = <T>(
   matrix: ArrayMatrix,
