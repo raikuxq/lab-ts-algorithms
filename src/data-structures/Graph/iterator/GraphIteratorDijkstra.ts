@@ -97,27 +97,4 @@ export default class GraphIteratorDijkstra<T> extends AbstractGraphIterator<T> {
 
     return next;
   }
-
-  /**
-   * @inheritDoc
-   */
-  public getPath(from: T, to: T): Array<T> {
-    const path: Array<T> = [];
-
-    let currentVertex = this.parents.get(to);
-
-    while (currentVertex) {
-      if (currentVertex === from) {
-        break;
-      }
-      path.push(currentVertex);
-      currentVertex = this.parents.get(currentVertex);
-    }
-
-    if (path.length === 0) {
-      throw new Error("There is no path found");
-    }
-
-    return [from, ...path.reverse(), to];
-  }
 }
