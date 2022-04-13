@@ -209,7 +209,7 @@ describe("Any type of graph", () => {
         });
 
         test("should override edge weight", () => {
-          expect(graph.getEdgeWeightByVertices("Mike", "Bob")).toBe(10);
+          expect(graph.getEdgeWeight("Mike", "Bob")).toBe(10);
         });
       });
     });
@@ -246,11 +246,11 @@ describe("Any type of graph", () => {
         });
 
         test("should override edge weight", () => {
-          expect(graph.getEdgeWeightByVertices("Mike", "Bob")).toBe(10);
+          expect(graph.getEdgeWeight("Mike", "Bob")).toBe(10);
         });
 
         test("should not override back edge weight", () => {
-          expect(graph.getEdgeWeightByVertices("Bob", "Mike")).toBe(15);
+          expect(graph.getEdgeWeight("Bob", "Mike")).toBe(15);
         });
       });
     });

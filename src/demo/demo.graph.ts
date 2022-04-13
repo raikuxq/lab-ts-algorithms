@@ -39,9 +39,9 @@ export const demoUndirectedGraph = (): void => {
   console.log("\nHas edge between Elon и Bob: ");
   console.log(graph.hasEdge("Elon", "Bob"));
   console.log("\nEdge weight between Bob и Elon: ");
-  console.log(graph.getEdgeWeightByVertices("Bob", "Elon"));
+  console.log(graph.getEdgeWeight("Bob", "Elon"));
   console.log("\nEdge weight between Elon and Kate: ");
-  console.log(graph.getEdgeWeightByVertices("Elon", "Bob"));
+  console.log(graph.getEdgeWeight("Elon", "Bob"));
   console.log("==========================================");
 
   graph.addEdge("Kate", "Elon", 12);
@@ -51,9 +51,9 @@ export const demoUndirectedGraph = (): void => {
   console.log("\nHas edge between Elon и Kate: ");
   console.log(graph.hasEdge("Elon", "Kate"));
   console.log("\nEdge weight between Kate и Elon: ");
-  console.log(graph.getEdgeWeightByVertices("Kate", "Elon"));
+  console.log(graph.getEdgeWeight("Kate", "Elon"));
   console.log("\nEdge weight between Elon and Kate: ");
-  console.log(graph.getEdgeWeightByVertices("Elon", "Kate"));
+  console.log(graph.getEdgeWeight("Elon", "Kate"));
   console.log("==========================================");
 
   graph.addEdge("Kate", "Mary", 8);
@@ -63,9 +63,9 @@ export const demoUndirectedGraph = (): void => {
   console.log("\nHas edge between Mary и Kate: ");
   console.log(graph.hasEdge("Mary", "Kate"));
   console.log("\nEdge weight between Kate и Mary: ");
-  console.log(graph.getEdgeWeightByVertices("Kate", "Mary"));
+  console.log(graph.getEdgeWeight("Kate", "Mary"));
   console.log("\nEdge weight between Mary and Kate: ");
-  console.log(graph.getEdgeWeightByVertices("Mary", "Kate"));
+  console.log(graph.getEdgeWeight("Mary", "Kate"));
   console.log("==========================================");
 
   console.log("Edges count:");
@@ -86,9 +86,9 @@ export const demoUndirectedGraph = (): void => {
   console.log("\nUpdating edge between Elon and Bob: ");
   graph.addEdge("Elon", "Bob", 10);
   console.log("\nEdge weight between Bob и Elon: ");
-  console.log(graph.getEdgeWeightByVertices("Bob", "Elon"));
+  console.log(graph.getEdgeWeight("Bob", "Elon"));
   console.log("\nEdge weight between Elon and Kate: ");
-  console.log(graph.getEdgeWeightByVertices("Elon", "Bob"));
+  console.log(graph.getEdgeWeight("Elon", "Bob"));
   console.log("==========================================");
 
   console.log("\nGraph weight after one edge weight was updated: ");
@@ -138,7 +138,7 @@ export const demoDirectedGraph = (): void => {
   console.log("\nHas edge between Elon и Bob: ");
   console.log(graph.hasEdge("Elon", "Bob"));
   console.log("\nEdge weight between Bob и Elon: ");
-  console.log(graph.getEdgeWeightByVertices("Bob", "Elon"));
+  console.log(graph.getEdgeWeight("Bob", "Elon"));
   console.log("==========================================");
 
   graph.addEdge("Kate", "Elon", 12);
@@ -148,7 +148,7 @@ export const demoDirectedGraph = (): void => {
   console.log("\nHas edge between Elon и Kate: ");
   console.log(graph.hasEdge("Elon", "Kate"));
   console.log("\nEdge weight between Kate и Elon: ");
-  console.log(graph.getEdgeWeightByVertices("Kate", "Elon"));
+  console.log(graph.getEdgeWeight("Kate", "Elon"));
   console.log("==========================================");
 
   graph.addEdge("Kate", "Mary", 8);
@@ -158,7 +158,7 @@ export const demoDirectedGraph = (): void => {
   console.log("\nHas edge between Mary и Kate: ");
   console.log(graph.hasEdge("Mary", "Kate"));
   console.log("\nEdge weight between Kate и Mary: ");
-  console.log(graph.getEdgeWeightByVertices("Kate", "Mary"));
+  console.log(graph.getEdgeWeight("Kate", "Mary"));
   console.log("==========================================");
 
   console.log("Edges count:");
@@ -179,9 +179,9 @@ export const demoDirectedGraph = (): void => {
   console.log("\nAdding edge between Elon and Bob: ");
   graph.addEdge("Elon", "Bob", 10);
   console.log("\nEdge weight between Elon и Bob: ");
-  console.log(graph.getEdgeWeightByVertices("Elon", "Bob"));
+  console.log(graph.getEdgeWeight("Elon", "Bob"));
   console.log("\nEdge weight between Bob and Elon: ");
-  console.log(graph.getEdgeWeightByVertices("Bob", "Elon"));
+  console.log(graph.getEdgeWeight("Bob", "Elon"));
   console.log("==========================================");
   console.log(graph);
 

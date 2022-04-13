@@ -44,10 +44,7 @@ export default class GraphIteratorDijkstra<T> extends AbstractGraphIterator<T> {
     this.costs.set(startVertex, 0);
 
     this.graph.getVertexNeighbors(startVertex).forEach((neighbor: T) => {
-      const edgeWeight = this.graph.getEdgeWeightByVertices(
-        startVertex,
-        neighbor
-      );
+      const edgeWeight = this.graph.getEdgeWeight(startVertex, neighbor);
       this.costs.set(neighbor, edgeWeight);
       this.parents.set(neighbor, startVertex);
     });
@@ -88,7 +85,7 @@ export default class GraphIteratorDijkstra<T> extends AbstractGraphIterator<T> {
     const nextCost = this.costs.get(next);
 
     nextNeighbors.forEach((neighbor: T) => {
-      const edgeWeight = this.graph.getEdgeWeightByVertices(next, neighbor);
+      const edgeWeight = this.graph.getEdgeWeight(next, neighbor);
       const currentNeighborCost = this.costs.get(neighbor) || Infinity;
       const newNeighborCost = (nextCost || 0) + edgeWeight;
 

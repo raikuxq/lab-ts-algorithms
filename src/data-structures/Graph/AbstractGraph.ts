@@ -25,17 +25,17 @@ export default abstract class AbstractGraph<T> {
   }
 
   /**
-   * Find vertex in vertices list by its value
+   * Find vertex in vertices list by its data
    * @throws when vertex was not found
    */
-  protected tryFindVertex(value: T): T {
-    const isExists = this._vertices.has(value);
+  protected tryFindVertex(data: T): T {
+    const isExists = this._vertices.has(data);
 
     if (!isExists) {
       throw new Error("Vertex not found");
     }
 
-    return value;
+    return data;
   }
 
   /**
@@ -150,18 +150,18 @@ export default abstract class AbstractGraph<T> {
   public abstract removeEdge(from: T, to: T): this;
 
   /**
-   * Get vertex neighbors by its value
+   * Get vertex neighbors by its data
    */
-  public getVertexNeighbors(value: T): Array<T> {
-    const vertex = this.tryFindVertex(value);
+  public getVertexNeighbors(data: T): Array<T> {
+    const vertex = this.tryFindVertex(data);
     return this._vertices.get(vertex) || [];
   }
 
   /**
    * Check if graph has vertex
    */
-  public hasVertex(value: T): boolean {
-    return this._vertices.has(value);
+  public hasVertex(data: T): boolean {
+    return this._vertices.has(data);
   }
 
   /**
@@ -178,7 +178,7 @@ export default abstract class AbstractGraph<T> {
   /**
    * Get edge weight between from and to vertices
    */
-  public getEdgeWeightByVertices(from: T, to: T): number {
+  public getEdgeWeight(from: T, to: T): number {
     const fromVertex = this.tryFindVertex(from);
     const toVertex = this.tryFindVertex(to);
 

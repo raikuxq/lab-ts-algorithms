@@ -1,5 +1,4 @@
 import Stack from "../../Stack/Stack";
-import IGraphIterator from "../../../types/IGraphIterator";
 import IGraph from "../../../types/IGraph";
 import AbstractGraphIterator from "./AbstractGraphIterator";
 

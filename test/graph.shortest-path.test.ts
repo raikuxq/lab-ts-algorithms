@@ -3,7 +3,6 @@ import UndirectedGraph from "../src/data-structures/Graph/UndirectedGraph";
 import DirectedGraph from "../src/data-structures/Graph/DirectedGraph";
 import IGraphIterationStrategy from "../src/types/IGraphIterationStrategy";
 import BFSIterationStrategy from "../src/data-structures/Graph/strategy/BFSIterationStrategy";
-import DFSIterationStrategy from "../src/data-structures/Graph/strategy/DFSIterationStrategy";
 import DijkstraIterationStrategy from "../src/data-structures/Graph/strategy/DijkstraIterationStrategy";
 
 import { shortestPath } from "../src/data-structures/Graph/searching/shortestPath";
