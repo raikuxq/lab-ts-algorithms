@@ -1,50 +1,18 @@
 import IGraph from "../../../types/IGraph";
-import IGraphIterator from "../../../types/IGraphIterator";
+import AbstractGraphIterator from "./AbstractGraphIterator";
 
 /**
  * Dijkstra method graph traversal
  */
-export default class GraphIteratorDijkstra<T> implements IGraphIterator<T> {
-  private readonly graph: IGraph<T>;
-  private readonly visited: Map<T, boolean>;
+export default class GraphIteratorDijkstra<T> extends AbstractGraphIterator<T> {
   private readonly costs: Map<T, number>;
-  private readonly parents: Map<T, T>;
 
   /**
-   * Creates empty instance and does one iteration
-   * @param graph - graph instance
-   * @param startVertex - vertex where traversal starts
-   * @throws when startVertex does not exist
+   * @inheritDoc
    */
-  public constructor(graph: IGraph<T>, startVertex: T) {
-    if (!graph.hasVertex(startVertex)) {
-      throw new Error("Start vertex does not exist");
-    }
-
-    this.graph = graph;
-    this.visited = new Map();
+  public constructor(graph: IGraph<T>) {
+    super(graph);
     this.costs = new Map();
-    this.parents = new Map();
-    this.initIterator(startVertex);
-  }
-
-  /**
-   * Push first node and its neighbors to the costs and parents tables
-   * @param startVertex
-   * @private
-   */
-  private initIterator(startVertex: T): void {
-    this.visited.set(startVertex, true);
-    this.costs.set(startVertex, 0);
-
-    this.graph.getVertexNeighbors(startVertex).forEach((neighbor: T) => {
-      const edgeWeight = this.graph.getEdgeWeightByVertices(
-        startVertex,
-        neighbor
-      );
-      this.costs.set(neighbor, edgeWeight);
-      this.parents.set(neighbor, startVertex);
-    });
   }
 
   /**
@@ -68,8 +36,29 @@ export default class GraphIteratorDijkstra<T> implements IGraphIterator<T> {
   /**
    * @inheritDoc
    */
+  public initIterator(startVertex: T): void {
+    if (!this.graph.hasVertex(startVertex)) {
+      throw new Error("Start vertex does not exist");
+    }
+
+    this.visited.set(startVertex, true);
+    this.costs.set(startVertex, 0);
+
+    this.graph.getVertexNeighbors(startVertex).forEach((neighbor: T) => {
+      const edgeWeight = this.graph.getEdgeWeightByVertices(
+        startVertex,
+        neighbor
+      );
+      this.costs.set(neighbor, edgeWeight);
+      this.parents.set(neighbor, startVertex);
+    });
+  }
+
+  /**
+   * @inheritDoc
+   */
   public hasNext(): boolean {
-    return Boolean(this.getClosestNotVisited());
+    return !(this.getClosestNotVisited() === null);
   }
 
   /**
@@ -78,7 +67,7 @@ export default class GraphIteratorDijkstra<T> implements IGraphIterator<T> {
   public current(): T {
     const current = this.getClosestNotVisited();
 
-    if (!current) {
+    if (current === null) {
       throw new Error("Current element does not exist");
     }
 
@@ -91,7 +80,7 @@ export default class GraphIteratorDijkstra<T> implements IGraphIterator<T> {
   public next(): T {
     const next = this.getClosestNotVisited();
 
-    if (!next) {
+    if (next === null) {
       throw new Error("Next element does not exist");
     }
 
@@ -127,6 +116,10 @@ export default class GraphIteratorDijkstra<T> implements IGraphIterator<T> {
       }
       path.push(currentVertex);
       currentVertex = this.parents.get(currentVertex);
+    }
+
+    if (path.length === 0) {
+      throw new Error("There is no path found");
     }
 
     return [from, ...path.reverse(), to];

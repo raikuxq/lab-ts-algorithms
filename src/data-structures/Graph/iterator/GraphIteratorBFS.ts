@@ -1,34 +1,38 @@
 import Queue from "../../Queue/Queue";
-import IGraphIterator from "../../../types/IGraphIterator";
 import IGraph from "../../../types/IGraph";
+import AbstractGraphIterator from "./AbstractGraphIterator";
 
 /**
  * Breadth first graph traversal
  */
-export default class GraphIteratorBFS<T> implements IGraphIterator<T> {
-  private readonly graph: IGraph<T>;
+export default class GraphIteratorBFS<T> extends AbstractGraphIterator<T> {
   private readonly queue: Queue<T>;
-  private readonly visited: Map<T, boolean>;
-  private readonly parents: Map<T, T>;
 
   /**
-   * Creates empty instance and does one iteration
-   * @param graph - graph instance
-   * @param startVertex - vertex where traversal starts
-   * @throws when startVertex does not exist
+   * @inheritDoc
    */
-  public constructor(graph: IGraph<T>, startVertex: T) {
-    if (!graph.hasVertex(startVertex)) {
-      throw new Error("Start vertex does not exist");
-    }
-
-    this.graph = graph;
+  public constructor(graph: IGraph<T>) {
+    super(graph);
     this.queue = new Queue();
-    this.visited = new Map();
-    this.parents = new Map();
+  }
 
+  /**
+    @inheritDoc
+   */
+  public initIterator(startVertex: T): void {
     this.queue.push(startVertex);
     this.visited.set(startVertex, true);
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public current(): T {
+    try {
+      return this.queue.peek();
+    } catch (e) {
+      throw new Error("Current element does not exist");
+    }
   }
 
   /**
@@ -41,26 +45,12 @@ export default class GraphIteratorBFS<T> implements IGraphIterator<T> {
   /**
    * @inheritDoc
    */
-  public current(): T {
-    const current = this.queue.peek();
-
-    if (!current) {
-      throw new Error("Current element does not exist");
-    }
-
-    return current;
-  }
-
-  /**
-   * @inheritDoc
-   */
   public next(): T {
-    const next = this.queue.pop();
-
-    if (!next) {
+    if (!this.hasNext()) {
       throw new Error("Next element does not exist");
     }
 
+    const next = this.queue.pop();
     const nextNeighbors = this.graph.getVertexNeighbors(next);
 
     nextNeighbors.forEach((neighbor) => {
@@ -74,24 +64,5 @@ export default class GraphIteratorBFS<T> implements IGraphIterator<T> {
     });
 
     return next;
-  }
-
-  /**
-   * @inheritDoc
-   */
-  public getPath(from: T, to: T): Array<T> {
-    const path: Array<T> = new Array<T>();
-    let currentVertex = this.parents.get(to);
-
-    while (currentVertex) {
-      if (currentVertex === from) {
-        break;
-      }
-
-      path.push(currentVertex);
-      currentVertex = this.parents.get(currentVertex);
-    }
-
-    return [from, ...path.reverse(), to];
   }
 }

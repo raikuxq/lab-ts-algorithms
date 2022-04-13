@@ -4,13 +4,9 @@ import IGraphIterationStrategy from "../../../types/IGraphIterationStrategy";
 
 /**
  * Check if graph has a path between two vertices
- *
- * @param graph - graph instance
- * @param from - start vertex
- * @param to - finish vertex
- * @param strategy - traversal method
- * @throws when one of vertices was not found
- * @returns boolean
+ * @throws when start vertex was not found
+ * @throws when end vertex was not found
+ * @throws when there is no path between two vertices
  */
 export const hasPath = <T>(
   graph: IGraph<T>,
@@ -26,7 +22,8 @@ export const hasPath = <T>(
     throw new Error("End vertex was not found");
   }
 
-  const iterator: IGraphIterator<T> = strategy.createIterator(graph, from);
+  const iterator: IGraphIterator<T> = strategy.createIterator(graph);
+  iterator.initIterator(from);
 
   /* Find target element */
   while (iterator.hasNext()) {
