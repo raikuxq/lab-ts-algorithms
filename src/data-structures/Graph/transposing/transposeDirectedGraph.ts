@@ -1,15 +1,14 @@
 import IGraph from "../../../types/IGraph";
-import GraphPresenter from "../presenter/GraphPresenter";
 import { transposeMatrix } from "../../../utils";
 import { createGraphFromMatrix } from "../../../helpers/createGraphFromMatrix";
 import { EnumGraphType } from "../../../types/EnumGraphType";
+import { presenterAdjacencyMatrix } from "../presenter/presenterAdjacencyMatrix";
 
 export const transposeDirectedGraph = <T>(
   sourceGraph: IGraph<T>
 ): IGraph<T> => {
-  const graphPresenter = new GraphPresenter(sourceGraph);
   const verticesList = sourceGraph.vertices();
-  const matrix = graphPresenter.getAdjacencyMatrix();
+  const matrix = presenterAdjacencyMatrix(sourceGraph);
   const transposedMatrix = transposeMatrix(matrix);
 
   return createGraphFromMatrix(

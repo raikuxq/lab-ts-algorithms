@@ -159,10 +159,13 @@ Clone this repository and install dependencies by using `yarn` command
 #### Graph Presenter
 
 + Implementation  
-  + [GraphPresenter](src/data-structures/Graph/presenter/GraphPresenter.ts) 
-    + Representation of graph as an adjacency list and an adjacency matrix 
+  + [presenter-adjacency-lists](src/data-structures/Graph/presenter/presenterAdjacencyLists.ts) 
+    + Representation of graph as an adjacency list (using Map)
+  + [presenter-adjacency-matrix](src/data-structures/Graph/presenter/presenterAdjacencyMatrix.ts)
+    + Representation of graph as an adjacency matrix (using Array\[N]\[N])
 + Tests 
-  + [ Unit tests ](test/graph.presenter.test.ts)
+  + [ adjacency lists test ](test/graph.presenter.lists.test.ts)
+  + [ adjacency matrix test ](test/graph.presenter.matrix.test.ts)
 
 
 #### Graph Searching
