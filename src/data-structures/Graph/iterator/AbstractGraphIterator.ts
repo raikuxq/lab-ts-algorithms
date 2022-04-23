@@ -8,7 +8,7 @@ export default abstract class AbstractGraphIterator<T>
   protected readonly parents: Map<T, T>;
 
   /**
-   * Creates empty instance and does one iteration
+   * Creates empty instance
    */
   protected constructor(graph: IGraph<T>) {
     this.graph = graph;
@@ -16,25 +16,58 @@ export default abstract class AbstractGraphIterator<T>
     this.parents = new Map();
   }
 
-  /**
-   * @inheritDoc
-   */
-  public abstract initIterator(from: T): void;
+  protected abstract currentImpl(): T;
+  protected abstract nextImpl(): T;
+  protected abstract initIteratorImpl(from: T): void;
+  protected abstract hasNextImpl(): boolean;
 
   /**
    * @inheritDoc
    */
-  public abstract hasNext(): boolean;
+  public initIterator(from: T): void {
+    if (!this.graph.hasVertex(from)) {
+      throw new Error("Start vertex does not exist");
+    }
+    this.initIteratorImpl(from);
+  }
 
   /**
    * @inheritDoc
    */
-  public abstract next(): T;
+  public hasNext(): boolean {
+    return this.hasNextImpl();
+  }
 
   /**
    * @inheritDoc
    */
-  public abstract current(): T;
+  public next(): T {
+    try {
+      if (!this.hasNext()) {
+        throw new Error();
+      }
+
+      return this.nextImpl();
+    } catch (e) {
+      throw new Error("Next element does not exist");
+    }
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public current(): T {
+    try {
+      const current = this.currentImpl();
+
+      if (current === null) {
+        throw new Error();
+      }
+      return current;
+    } catch (e) {
+      throw new Error("Current element does not exist");
+    }
+  }
 
   /**
    * @inheritDoc

@@ -16,9 +16,9 @@ export default class GraphIteratorDijkstra<T> extends AbstractGraphIterator<T> {
   }
 
   /**
-   * Get closest (by cost) and not visited node
+   * Get not visited vertex with minimal cost
    */
-  private getClosestNotVisited(): T | null {
+  private getClosestNotVisited(): T {
     const keys = Array.from(this.costs.keys());
     const priorityList = keys
       .filter((key: T) => !this.visited.get(key))
@@ -29,13 +29,17 @@ export default class GraphIteratorDijkstra<T> extends AbstractGraphIterator<T> {
         return aCost - bCost;
       });
 
-    return priorityList[0] || null;
+    if (priorityList[0] === undefined) {
+      throw new Error("No more vertices found");
+    }
+
+    return priorityList[0];
   }
 
   /**
    * @inheritDoc
    */
-  public initIterator(startVertex: T): void {
+  public initIteratorImpl(startVertex: T): void {
     if (!this.graph.hasVertex(startVertex)) {
       throw new Error("Start vertex does not exist");
     }
@@ -53,32 +57,22 @@ export default class GraphIteratorDijkstra<T> extends AbstractGraphIterator<T> {
   /**
    * @inheritDoc
    */
-  public hasNext(): boolean {
+  public hasNextImpl(): boolean {
     return !(this.getClosestNotVisited() === null);
   }
 
   /**
    * @inheritDoc
    */
-  public current(): T {
-    const current = this.getClosestNotVisited();
-
-    if (current === null) {
-      throw new Error("Current element does not exist");
-    }
-
-    return current;
+  public currentImpl(): T {
+    return this.getClosestNotVisited();
   }
 
   /**
    * @inheritDoc
    */
-  public next(): T {
+  public nextImpl(): T {
     const next = this.getClosestNotVisited();
-
-    if (next === null) {
-      throw new Error("Next element does not exist");
-    }
 
     this.visited.set(next, true);
     const nextNeighbors = this.graph.getVertexNeighbors(next);

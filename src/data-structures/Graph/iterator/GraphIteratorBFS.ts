@@ -17,9 +17,16 @@ export default class GraphIteratorBFS<T> extends AbstractGraphIterator<T> {
   }
 
   /**
+   * @inheritDoc
+   */
+  protected currentImpl(): T {
+    return this.queue.peek();
+  }
+
+  /**
     @inheritDoc
    */
-  public initIterator(startVertex: T): void {
+  public initIteratorImpl(startVertex: T): void {
     this.queue.push(startVertex);
     this.visited.set(startVertex, true);
   }
@@ -27,29 +34,14 @@ export default class GraphIteratorBFS<T> extends AbstractGraphIterator<T> {
   /**
    * @inheritDoc
    */
-  public current(): T {
-    try {
-      return this.queue.peek();
-    } catch (e) {
-      throw new Error("Current element does not exist");
-    }
-  }
-
-  /**
-   * @inheritDoc
-   */
-  public hasNext(): boolean {
+  public hasNextImpl(): boolean {
     return !this.queue.isEmpty();
   }
 
   /**
    * @inheritDoc
    */
-  public next(): T {
-    if (!this.hasNext()) {
-      throw new Error("Next element does not exist");
-    }
-
+  protected nextImpl(): T {
     const next = this.queue.pop();
     const nextNeighbors = this.graph.getVertexNeighbors(next);
 

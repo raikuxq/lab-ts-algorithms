@@ -19,14 +19,14 @@ export default class GraphIteratorDFS<T> extends AbstractGraphIterator<T> {
   /**
    * @inheritDoc
    */
-  public hasNext(): boolean {
+  public hasNextImpl(): boolean {
     return !this.stack.isEmpty();
   }
 
   /**
    @inheritDoc
    */
-  public initIterator(startVertex: T): void {
+  public initIteratorImpl(startVertex: T): void {
     this.stack.push(startVertex);
     this.visited.set(startVertex, true);
   }
@@ -34,21 +34,14 @@ export default class GraphIteratorDFS<T> extends AbstractGraphIterator<T> {
   /**
    * @inheritDoc
    */
-  public current(): T {
-    try {
-      return this.stack.peek();
-    } catch (e) {
-      throw new Error("Current element does not exist");
-    }
+  public currentImpl(): T {
+    return this.stack.peek();
   }
 
   /**
    * @inheritDoc
    */
-  public next(): T {
-    if (!this.hasNext()) {
-      throw new Error("Next element does not exist");
-    }
+  public nextImpl(): T {
     const next = this.stack.pop();
     const nextNeighbors = this.graph.getVertexNeighbors(next);
 
