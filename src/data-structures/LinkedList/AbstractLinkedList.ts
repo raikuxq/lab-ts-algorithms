@@ -11,62 +11,195 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * Create empty instance
    */
   protected constructor(capacity?: number) {
-    if (capacity === undefined) {
-      this._capacity = Number.MAX_VALUE;
-    } else {
-      if (capacity > 0) {
-        this._capacity = capacity;
-      } else {
-        throw new Error("Capacity must be larger than 0");
-      }
-    }
-
-    this._capacity = capacity && capacity > 0 ? capacity : Number.MAX_VALUE;
+    this._capacity = AbstractLinkedList.calculateCapacity(capacity);
     this._head = null;
     this._tail = null;
     this._length = 0;
   }
 
   /**
-   * Will find node by its index
+   * Will calculate real capacity value
+   * @throws when capacity <= 0
    */
-  protected abstract getNodeByIndex(index: number): AbstractLinkedNode<T>;
+  private static calculateCapacity(capacity?: number) {
+    if (capacity === undefined) {
+      return Number.MAX_VALUE;
+    }
+    if (capacity <= 0) {
+      throw new Error("Capacity must be larger than 0");
+    }
+
+    return capacity;
+  }
+
+  /**
+   * Will insert node between nodeLeft and nodeRight
+   * @throws when list is full
+   */
+  private insertNodeBetweenTwoNodes(
+    targetNode: AbstractLinkedNode<T>,
+    leftNode: AbstractLinkedNode<T> | null,
+    rightNode: AbstractLinkedNode<T> | null
+  ): void {
+    if (this.isFull()) {
+      throw new Error("List is full, no more space available");
+    }
+    if (this._head === null) {
+      this._head = targetNode;
+    }
+    if (this._tail === null) {
+      this._tail = targetNode;
+    }
+    if (!leftNode) {
+      leftNode = this._tail;
+    }
+    if (!rightNode) {
+      rightNode = this._head;
+    }
+
+    this.insertNodeBetweenTwoNodesImpl(targetNode, leftNode, rightNode);
+    this._length++;
+  }
+
+  /**
+   * Will remove the node from its neighbors nodes links
+   * @throws when node does not exist
+   */
+  private deleteNode(
+    node: AbstractLinkedNode<T> | null
+  ): AbstractLinkedNode<T> {
+    if (node === null) {
+      throw new Error("Node should be existed");
+    }
+    this.deleteNodeImpl(node);
+    this._length--;
+
+    if (this.isEmpty()) {
+      this.clear();
+    }
+    return node;
+  }
+
+  /**
+   * Will find node by its index
+   * @throws when node was not found
+   */
+  protected getNodeByIndex(index: number): AbstractLinkedNode<T> {
+    if (this.isEmpty()) {
+      throw new Error("List is empty");
+    }
+    if (this._length < index) {
+      throw new Error("Index exceed list length");
+    }
+
+    let currentNode = this._tail;
+    let counter = 0;
+
+    while (currentNode && counter < index) {
+      currentNode = currentNode.next;
+      counter++;
+    }
+
+    if (currentNode === null) {
+      throw new Error("Node does not exist");
+    }
+
+    return currentNode;
+  }
+
+  /**
+   * Will set links between target, left and right siblings
+   */
+  protected abstract insertNodeBetweenTwoNodesImpl(
+    nodeToPush: AbstractLinkedNode<T>,
+    nodeLeft: AbstractLinkedNode<T>,
+    nodeRight: AbstractLinkedNode<T>
+  ): void;
+
+  /**
+   * Will unset itself links and its neighbors links
+   */
+  protected abstract deleteNodeImpl(node: AbstractLinkedNode<T>): void;
+
+  /**
+   * Update head link
+   */
+  protected abstract popImpl(): void;
+
+  /**
+   * Update tail link
+   */
+  protected abstract shiftImpl(): void;
+
+  /**
+   * Will create empty node instance
+   */
+  protected abstract createNode(value: T): AbstractLinkedNode<T>;
 
   /**
    * Push into start
    */
-  public abstract unshift(value: T): void;
+  public unshift(value: T): void {
+    const node = this.createNode(value);
+    this.insertNodeBetweenTwoNodes(node, this._head, this._tail);
+    this._tail = node;
+  }
 
   /**
    * Push into end
    */
-  public abstract push(value: T): void;
+  public push(value: T): void {
+    const node = this.createNode(value);
+    this.insertNodeBetweenTwoNodes(node, this._head, this._tail);
+    this._head = node;
+  }
 
   /**
    * Push from index
    */
-  public abstract pushFromIndex(value: T, fromIndex: number): void;
+  public pushFromIndex(value: T, fromIndex: number): void {
+    const isIndexNotInRange = fromIndex < 0 || fromIndex > this._length;
+    const shouldPushAsFirst = this.isEmpty() && fromIndex === 0;
+
+    if (isIndexNotInRange) {
+      throw new Error("index must be in range between 0 and list length");
+    }
+    if (shouldPushAsFirst) {
+      this.push(value);
+    } else {
+      const node = this.createNode(value);
+      const nodeLeft = this.getNodeByIndex(fromIndex - 1);
+      const nodeRight = this.getNodeByIndex(fromIndex);
+      this.insertNodeBetweenTwoNodes(node, nodeLeft, nodeRight);
+    }
+  }
 
   /**
    * Delete node from list's end
    */
-  public abstract pop(): T;
-
-  /**
-   * Delete node from list by index from start and get its data
-   */
-  public abstract deleteFromIndex(fromIndex: number): T;
+  public pop(): T {
+    const deletedNode = this.deleteNode(this._head);
+    this.popImpl();
+    return deletedNode.data;
+  }
 
   /**
    * Delete node from list's start and get its data
    */
-  public abstract shift(): T;
+  public shift(): T {
+    const deletedNode = this.deleteNode(this._tail);
+    this.shiftImpl();
+    return deletedNode.data;
+  }
 
   /**
-   * Reverse list nodes links and swap head with tail
-   * @example "4 -> 7 -> 10" will be reversed to "10 -> 7 -> 4"
+   * Delete node from list by index from start
    */
-  public abstract reverse(): void;
+  public deleteFromIndex(fromIndex: number): T {
+    const nodeToDelete = this.getNodeByIndex(fromIndex);
+    const deletedNode = this.deleteNode(nodeToDelete);
+    return deletedNode.data;
+  }
 
   /**
    * List length
@@ -87,6 +220,13 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    */
   public isFull(): boolean {
     return this._length >= this._capacity;
+  }
+
+  /**
+   * Check if element exists in list
+   */
+  public has(item: T): boolean {
+    return this.getAsArray().includes(item);
   }
 
   /**
@@ -114,10 +254,21 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
   }
 
   /**
-   * Check if element exists in list
+   * Get list element by index from start
+   * @throws when element does not exist
    */
-  public has(item: T): boolean {
-    return this.getAsArray().includes(item);
+  public peekByIndex(index: number): T {
+    const node = this.getNodeByIndex(index);
+    return node.data;
+  }
+
+  /**
+   * Remove all elements from list
+   */
+  public clear(): void {
+    this._head = null;
+    this._tail = null;
+    this._length = 0;
   }
 
   /**
@@ -139,28 +290,6 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
   }
 
   /**
-   * Get list element by index from start
-   * @throws when element does not exist
-   */
-  public peekByIndex(index: number): T {
-    try {
-      const node = this.getNodeByIndex(index);
-      return node.data;
-    } catch (e) {
-      throw new Error(e);
-    }
-  }
-
-  /**
-   * Remove all elements from list
-   */
-  public clear(): void {
-    this._head = null;
-    this._tail = null;
-    this._length = 0;
-  }
-
-  /**
    * Add elements to list from array
    * @throws when list is full
    * */
@@ -172,4 +301,10 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
       this.push(element);
     });
   }
+
+  /**
+   * Reverse list nodes links and swap head with tail
+   * @example "4>7>10" will be reversed to "10>7>4"
+   */
+  public abstract reverse(): void;
 }

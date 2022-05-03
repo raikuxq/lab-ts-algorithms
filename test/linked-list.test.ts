@@ -82,6 +82,20 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
         list.pushFromIndex(20, 2);
         expect(list.getAsArray()).toEqual(expectedArr);
       });
+      test("should throw when index exceeds list length ", () => {
+        const list = createLinkedList<number>(listType);
+        list.pushFromArray([0, 10, 30]);
+        expect(() => {
+          list.pushFromIndex(10, 1000);
+        }).toThrowError();
+      });
+      test("should throw when index less than 0 ", () => {
+        const list = createLinkedList<number>(listType);
+        list.pushFromArray([0, 10, 30]);
+        expect(() => {
+          list.pushFromIndex(10, -20);
+        }).toThrowError();
+      });
     });
 
     describe("method unshift", () => {
@@ -198,15 +212,15 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
     describe("method pop", () => {
       describe("should delete last element and return its value", () => {
         const list = createLinkedList<number>(listType);
-        list.pushFromArray([10, 40]);
+        list.pushFromArray([10, 40, 50]);
         const shifted = list.pop();
 
         test("should delete correct", () => {
-          expect(list.getAsArray()).toEqual([10]);
+          expect(list.getAsArray()).toEqual([10, 40]);
         });
 
         test("should return correct value", () => {
-          expect(shifted).toBe(40);
+          expect(shifted).toBe(50);
         });
       });
 

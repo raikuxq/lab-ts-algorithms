@@ -16,7 +16,6 @@ export default class SingleLinkedList<T>
    */
   protected _head: SingleLinkedNode<T> | null;
   protected _tail: SingleLinkedNode<T> | null;
-  protected _length: number;
 
   /**
    * @inheritDoc
@@ -25,153 +24,63 @@ export default class SingleLinkedList<T>
     super(capacity);
     this._head = null;
     this._tail = null;
-    this._length = 0;
   }
 
   /**
-   * Will insert node between nodeLeft and nodeRight
+   * Find previous sibling of given node
    */
-  protected insertNodeBetweenTwoNodes(
-    nodeToPush: SingleLinkedNode<T>,
-    nodeLeft: SingleLinkedNode<T> | null,
-    nodeRight: SingleLinkedNode<T> | null
-  ): void {
-    if (this.isFull()) throw new Error("List is full, no more space available");
-
-    if (!this._head) this._head = nodeToPush;
-    if (!this._tail) this._tail = nodeToPush;
-
-    if (!nodeLeft) nodeLeft = this._tail;
-    if (!nodeRight) nodeRight = this._head;
-
-    nodeToPush.next = nodeRight;
-
-    if (nodeLeft) nodeLeft.next = nodeToPush;
-
-    this._length++;
-  }
-
-  /**
-   * Will remove the node from its neighbors nodes links
-   * @throws when node does not exist
-   */
-  protected deleteNode(node: SingleLinkedNode<T> | null): SingleLinkedNode<T> {
-    if (node === null) {
-      throw new Error("Node should be existed");
-    }
-
-    const getPrevNode = (): SingleLinkedNode<T> | null => {
-      let currentNode = this._tail;
-      while (currentNode?.next !== node) {
-        currentNode = currentNode?.next || null;
-      }
-      return currentNode;
-    };
-
-    const getNextNode = (): SingleLinkedNode<T> | null => {
-      return node.next;
-    };
-
-    const prevNode = getPrevNode();
-    const nextNode = getNextNode();
-
-    if (prevNode) {
-      prevNode.next = nextNode;
-      this._length--;
-      this._tail = prevNode;
-    }
-
-    return node;
-  }
-
-  /**
-   * @inheritDoc
-   */
-  protected getNodeByIndex(index: number): SingleLinkedNode<T> {
-    if (this._length === 0) throw new Error("List is empty");
-    if (this._length < index) throw new Error("Index exceed list length");
-
+  private getPrevNode(
+    node: SingleLinkedNode<T> | null
+  ): SingleLinkedNode<T> | null {
     let currentNode = this._tail;
-    let counter = 0;
-
-    while (currentNode && counter < index) {
-      currentNode = currentNode.next;
-      counter++;
+    while (currentNode?.next !== node) {
+      currentNode = currentNode?.next || null;
     }
-
-    if (currentNode === null) throw new Error("Node does not exist");
-
     return currentNode;
   }
 
   /**
    * @inheritDoc
    */
-  public push(value: T): void {
-    const node: SingleLinkedNode<T> = new SingleLinkedNode<T>(value);
-    this.insertNodeBetweenTwoNodes(node, this._head, this._tail);
-    this._head = node;
+  protected createNode(value: T): SingleLinkedNode<T> {
+    return new SingleLinkedNode<T>(value);
   }
 
   /**
    * @inheritDoc
    */
-  public pushFromIndex(value: T, fromIndex: number): void {
-    const node: SingleLinkedNode<T> = new SingleLinkedNode<T>(value);
+  protected insertNodeBetweenTwoNodesImpl(
+    targetNode: SingleLinkedNode<T>,
+    leftNode: SingleLinkedNode<T>,
+    rightNode: SingleLinkedNode<T>
+  ): void {
+    targetNode.next = rightNode;
 
-    if (this.isEmpty() && fromIndex === 0) {
-      this.push(value);
-      return;
+    if (leftNode) {
+      leftNode.next = targetNode;
     }
-
-    const nodeLeft: SingleLinkedNode<T> = this.getNodeByIndex(fromIndex - 1);
-    const nodeRight: SingleLinkedNode<T> = this.getNodeByIndex(fromIndex);
-
-    this.insertNodeBetweenTwoNodes(node, nodeLeft, nodeRight);
   }
 
   /**
    * @inheritDoc
    */
-  public unshift(value: T): void {
-    const node: SingleLinkedNode<T> = new SingleLinkedNode<T>(value);
-    this.insertNodeBetweenTwoNodes(node, this._head, this._tail);
-    this._tail = node;
+  protected deleteNodeImpl(node: SingleLinkedNode<T>): void {
+    this.getPrevNode(node)!.next = node.next;
+    node.next = null;
   }
 
   /**
    * @inheritDoc
    */
-  public pop(): T {
-    const deletedNode = this.deleteNode(this._head);
-
-    return deletedNode.data;
+  protected popImpl(): void {
+    this._head = this.getPrevNode(this._tail);
   }
 
   /**
    * @inheritDoc
    */
-  public shift(): T {
-    const deletedNode = this.deleteNode(this._tail);
-
-    return deletedNode.data;
-  }
-
-  /**
-   * @inheritDoc
-   */
-  public deleteFromIndex(fromIndex: number): T {
-    const nodeToDelete = this.getNodeByIndex(fromIndex);
-
-    if (nodeToDelete === this._tail) {
-      return this.shift();
-    }
-    if (nodeToDelete === this._head) {
-      return this.pop();
-    }
-
-    const deletedNode = this.deleteNode(nodeToDelete);
-    return deletedNode.data;
+  protected shiftImpl(): void {
+    this._tail = this._head?.next || null;
   }
 
   /**
@@ -204,6 +113,7 @@ export default class SingleLinkedList<T>
    * List iterator
    */
   public iterator(fromIndex = 0): IIterator<T> {
+    const head = this._head;
     let activeNode: SingleLinkedNode<T> = this.getNodeByIndex(fromIndex);
 
     return {
@@ -217,7 +127,7 @@ export default class SingleLinkedList<T>
        * @inheritDoc
        */
       hasNext(): boolean {
-        return Boolean(activeNode.next);
+        return Boolean(activeNode.next) && activeNode !== head;
       },
       /**
        * @inheritDoc
