@@ -21,17 +21,17 @@ Clone this repository and install dependencies by using `yarn` command.
 
 
 # Navigation
-+ [Alrotihms](#Algorithms)
-  + [Sorting algorithms](#Sorting algorithms)
-+ [Iterators](#Iterators)
-+ [Linear data structures](#Linear data structures)
-  + [Linked list](#Linked List)
-  + [Looped array](#Looped array)
-  + [Stack](#Stack)
-  + [Queue](#Queue)
-+ [Non-linear data structures](#Non linear data structures)
-  + [Graph](#Graph)
-  + [Binary tree](#Binary trees)
++ [Alrotihms](#algorithms)
+  + [Sorting algorithms](#sorting-algorithms)
++ [Iterators](#iterators)
++ [Linear data structures](#linear-data-structures)
+  + [Linked list](#linked-list)
+  + [Looped array](#looped-array)
+  + [Stack](#stack)
+  + [Queue](#queue)
++ [Non-linear data structures](#non-linear-data-structures)
+  + [Graph](#graph)
+  + [Binary tree](#binary-trees)
 
 
 # Algorithms
