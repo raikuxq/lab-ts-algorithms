@@ -1,10 +1,10 @@
-import { FnSort } from "../types/FnSort";
-import { mergeSort } from "../algorithms/sorts/merge-sort";
-import { insertionSort } from "../algorithms/sorts/insertion-sort";
-import { bubbleSort } from "../algorithms/sorts/bubble-sort";
-import { quickSort } from "../algorithms/sorts/quick-sort";
-import { selectSort } from "../algorithms/sorts/select-sort";
-import { perf } from "../utils";
+import { FnSort } from "../../types/FnSort";
+import { mergeSort } from "../../algorithms/sorts/merge-sort";
+import { insertionSort } from "../../algorithms/sorts/insertion-sort";
+import { bubbleSort } from "../../algorithms/sorts/bubble-sort";
+import { quickSort } from "../../algorithms/sorts/quick-sort";
+import { selectSort } from "../../algorithms/sorts/select-sort";
+import { perf } from "../../utils";
 
 export const randomizeArray = (length: number, max: number): Array<number> =>
   new Array(length).fill(0).map(() => Math.round(Math.random() * max));
