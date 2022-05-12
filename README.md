@@ -23,18 +23,18 @@ Clone this repository and install dependencies by using `yarn` command
 # Navigation
 
 ## Uncategorized algorithms
-+ [memoization](src/utils.ts)
-+ [matrix-transpose](src/utils.ts)
-+ [binary-search](src/algorithms/binary-search.ts) [[ unit tests ](test/binary-search.test.ts)]
-+ [factorial](src/algorithms/factorial.ts) [[ unit tests ](test/factorial.test.ts)]
-+ [fibonacci](src/algorithms/fibonacci.ts) [[ unit tests ](test/fibonacci.test.ts)]
++ [memoize](src/algorithms/memoize.ts)
++ [binary-search](src/algorithms/binary-search.ts) [[ unit tests ](test/unit/algorithms/binary-search.test.ts)]
++ [factorial](src/algorithms/factorial.ts) [[ unit tests ](test/unit/algorithms/factorial.test.ts)]
++ [fibonacci](src/algorithms/fibonacci.ts) [[ unit tests ](test/unit/algorithms/fibonacci.test.ts)]
++ [transpose-matrix](src/algorithms/transpose-matrix.ts)
 
 ## Sorting algorithms
-+ [bubble-sort](src/algorithms/sorts/bubble-sort.ts) [[ unit tests ](test/sorts.test.ts)]
-+ [selection-sort](src/algorithms/sorts/select-sort.ts) [[ unit tests ](test/sorts.test.ts)]
-+ [insertion-sort](src/algorithms/sorts/insertion-sort.ts) [[ unit tests ](test/sorts.test.ts)]
-+ [merge-sort](src/algorithms/sorts/merge-sort.ts) [[ unit tests ](test/sorts.test.ts)]
-+ [quick-sort](src/algorithms/sorts/quick-sort.ts) [[ unit tests ](test/sorts.test.ts)]
++ [bubble-sort](src/algorithms/sorts/bubble-sort.ts) [[ unit tests ](test/unit/algorithms/sorts.test.ts)]
++ [selection-sort](src/algorithms/sorts/select-sort.ts) [[ unit tests ](test/unit/algorithms/sorts.test.ts)]
++ [insertion-sort](src/algorithms/sorts/insertion-sort.ts) [[ unit tests ](test/unit/algorithms/sorts.test.ts)]
++ [merge-sort](src/algorithms/sorts/merge-sort.ts) [[ unit tests ](test/unit/algorithms/sorts.test.ts)]
++ [quick-sort](src/algorithms/sorts/quick-sort.ts) [[ unit tests ](test/unit/algorithms/sorts.test.ts)]
 
 
 
@@ -82,7 +82,7 @@ Clone this repository and install dependencies by using `yarn` command
   + Extends abstract linked list with implementation of two-way linking
   + Implements [IBiDirectIterable](src/types/IBiDirectIterable.ts) interface
 #### Tests
-  + [ Unit tests ](test/linked-list.test.ts)
+  + [ Unit tests ](test/unit/data-structures/linked-list/linked-list.test.ts)
 
 
 ### Looped Array
@@ -95,17 +95,17 @@ Clone this repository and install dependencies by using `yarn` command
 + [LoopedArray](src/data-structures/LoopedArray/LoopedArray.ts) 
   + Overwrites data on capacity overflow
 #### Tests
-+ [ Unit tests ](test/looped-array.test.ts)
++ [ Unit tests ](test/unit/data-structures/looped-array/looped-array.test.ts)
 
 
 ### Stack
-+ [Stack](src/data-structures/Stack/Stack.ts) [[ tests ](test/stack.test.ts)]
++ [Stack](src/data-structures/Stack/Stack.ts) [[ tests ](test/unit/data-structures/stack/stack.test.ts)]
   + LIFO data structure
   + Implements [ILinearStorage](src/types/ILinearStorage.ts) interface
 
 
 ### Queue
-+ [Queue](src/data-structures/Queue/Queue.ts) [[ tests ](test/queue.test.ts)]
++ [Queue](src/data-structures/Queue/Queue.ts) [[ tests ](test/unit/data-structures/queue/queue.test.ts)]
   + FIFO data structure
   + Implements [ILinearStorage](src/types/ILinearStorage.ts) interface
   
@@ -126,12 +126,14 @@ Clone this repository and install dependencies by using `yarn` command
   + Contains from/to links and edge weight
 + [AbstractGraph](src/data-structures/Graph/AbstractGraph.ts)
   + Common logic for both directed and undirected graphs
+
+
 + [DirectedGraph](src/data-structures/Graph/DirectedGraph.ts) 
   + In case of directed graph A->B and B->A edges are not the same
 + [UndirectedGraph](src/data-structures/Graph/UndirectedGraph.ts) 
   + In case of undirected graph A->B and B->A are equal
 #### Tests
-  + [ Unit tests ](test/graph.test.ts)
+  + [ Unit tests ](test/unit/data-structures/graph/graph.test.ts)
 
 
 #### Graph Iterators
@@ -145,23 +147,51 @@ Clone this repository and install dependencies by using `yarn` command
 
 
 #### Graph Presenter
-+ [presenter-adjacency-lists](src/data-structures/Graph/presenter/presenterAdjacencyLists.ts)  [[ tests ](test/graph.presenter.lists.test.ts)]
++ [presenter-adjacency-lists](src/data-structures/Graph/presenter/presenterAdjacencyLists.ts)  [[ tests ](test/unit/data-structures/graph/graph.presenter.lists.test.ts)]
   + Representation of graph as an adjacency list (using Map)
-+ [presenter-adjacency-matrix](src/data-structures/Graph/presenter/presenterAdjacencyMatrix.ts)  [[ tests ](test/graph.presenter.matrix.test.ts)]
++ [presenter-adjacency-matrix](src/data-structures/Graph/presenter/presenterAdjacencyMatrix.ts)  [[ tests ](test/unit/data-structures/graph/graph.presenter.matrix.test.ts)]
   + Representation of graph as an adjacency matrix (using Array N*N)
 
 
 #### Graph Searching
-+ [has-path (BFS/DFS)](src/data-structures/Graph/searching/hasPath.ts)  [[ tests ](test/graph.has-path.test.ts)]
++ [has-path (BFS/DFS)](src/data-structures/Graph/searching/hasPath.ts)  [[ tests ](test/unit/data-structures/graph/graph.has-path.test.ts)]
     + Search for the existence of a path between two vertices
-+ [shortest-path (BFS/Dijkstra)](src/data-structures/Graph/searching/shortestPath.ts)  [[ tests ](test/graph.shortest-path.test.ts)]
++ [shortest-path (BFS/Dijkstra)](src/data-structures/Graph/searching/shortestPath.ts)  [[ tests ](test/unit/data-structures/graph/graph.shortest-path.test.ts)]
   + Search for one of several shortest paths between two vertices
 
 #### Graph Creators
-+ [create-graph-from-matrix](src/helpers/createGraphFromMatrix.ts)  [[ tests ](test/graph.create-from-matrix.test.ts)]
++ [create-graph-from-matrix](src/helpers/createGraphFromMatrix.ts)  [[ tests ](test/unit/data-structures/graph/graph.create-from-matrix.test.ts)]
   + Convert a matrix N*N into a graph instance
 
 
 #### Graph Transposing
-+ [transpose-directed-graph](src/data-structures/Graph/transposing/transposeDirectedGraph.ts)  [ [ tests ](test/graph.transpose.test.ts)]
++ [transpose-directed-graph](src/data-structures/Graph/transposing/transposeDirectedGraph.ts)  [ [ tests ](test/unit/data-structures/graph/graph.transpose.test.ts)]
   + Transpose a directed graph (undirected graphs are symmetrical already)
+
+
+
+### Binary trees
++ [IBinaryTree](src/types/IBinaryTree.ts)
+  + Contains basic binary tree operations
+#### Implementation
++ [AbstractBinaryNode](src/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryNode.ts)
+  + Contains left/right/parent links and node data
++ [AbstractBinaryTree](src/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryTree.ts)
+  + Common logic for all types of binary trees
+
+  
++ [BinarySearchNode](src/data-structures/BinaryTree/BSTree/BinarySearchNode.ts)
+  + Same as abstract binary node
++ [BinarySearchTree](src/data-structures/BinaryTree/BSTree/BinarySearchTree.ts)
+  + Implementation of unbalanced binary search tree
+  + Each node in left subtree is smaller and each node in right subtree is larger than the node data
+  + Extends [BinarySearchTree](src/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryTree.ts)
+
+
+
++ [RandBinarySearchNode](src/data-structures/BinaryTree/RandBSTree/RandBinarySearchNode.ts)
+  + Have a rank attribute
++ [RandBinarySearchTree](src/data-structures/BinaryTree/RandBSTree/RandBinarySearchTree.ts)
+  + Implementation of randomized binary search tree, which gives expected log(N) height
+  + Insertion have a 1/N+1 probability of inserting into root
+  + Extends [BinarySearchTree](src/data-structures/BinaryTree/BSTree/BinarySearchTree.ts)
