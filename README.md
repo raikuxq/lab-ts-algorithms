@@ -21,6 +21,20 @@ Clone this repository and install dependencies by using `yarn` command.
 
 
 # Navigation
++ [Alrotihms](#Algorithms)
+  + [Sorting algorithms](#Sorting algorithms)
++ [Iterators](#Iterators)
++ [Linear data structures](#Linear data structures)
+  + [Linked list](#Linked List)
+  + [Looped array](#Looped array)
+  + [Stack](#Stack)
+  + [Queue](#Queue)
++ [Non-linear data structures](#Non linear data structures)
+  + [Graph](#Graph)
+  + [Binary tree](#Binary trees)
+
+
+# Algorithms
 
 ## Uncategorized algorithms
 [memoize](src/algorithms/memoize.ts) — Memoization util function.
@@ -48,9 +62,9 @@ Clone this repository and install dependencies by using `yarn` command.
 
 
 
-## Common of data structures
+# Iterators
 
-#### Interfaces
+### Interfaces
 [IIterable](src/types/IIterable.ts) — Allows to create an iterator instance.
 
 [IBiDirectIterable](src/types/IBiDirectIterable.ts) — Allows to create a bi-direct iterator instance. 
@@ -62,9 +76,9 @@ Extends [IIterable](src/types/IIterable.ts) interface.
 Extends [IIterator](src/types/IIterator.ts) interface.
 
 
-## Linear data structures
+# Linear data structures
 
-#### Interfaces
+### Interfaces
 [ILinearStorage](src/types/ILinearStorage.ts) — Contains common methods of linear data structures.
 
 [ILinearStorageRA](src/types/ILinearStorageRA.ts) — Allows random access (from end, from start, by index). 
@@ -73,13 +87,13 @@ Extends [ILinearStorage](src/types/ILinearStorage.ts) interface.
 [IConvertableToArray](src/types/IConvertableToArray.ts) — Contain methods for converting from/into array.
 
 
-### Linked List
+## Linked List
 
-#### Interfaces
+### Interfaces
 [ILinkedList](src/types/ILinkedList.ts) — Contains basic linked lists operations.
 Extends [ILinearStorageRA](src/types/ILinearStorageRA.ts) and [IConvertableToArray](src/types/IConvertableToArray.ts) interface.
 
-#### Implementation
+### Implementation
 [AbstractLinkedList](src/data-structures/LinkedList/AbstractLinkedList.ts) — Common logic for both single and double linked lists.
 Implements [ILinearStorageRA](src/types/ILinearStorageRA.ts) interface.
 
@@ -94,42 +108,42 @@ Implements [IIterable](src/types/IIterable.ts) interface.
 Implements [IBiDirectIterable](src/types/IBiDirectIterable.ts) interface.
 
 
-### Looped Array
+## Looped Array
 
-#### Interfaces
+### Interfaces
 [IArrayFacade](src/types/IArrayFacade.ts) — Contains basic array operations. 
 Extends [ILinearStorageRA](src/types/ILinearStorageRA.ts) interface. 
 Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface.
 
-#### Implementation
+### Implementation
 [LoopedArray](src/data-structures/LoopedArray/LoopedArray.ts)[ [ tests ]](test/unit/data-structures/looped-array/looped-array.test.ts)
 — Overwrites data on capacity overflow.
 
-### Stack
+## Stack
 
-#### Implementation
+### Implementation
 [Stack](src/data-structures/Stack/Stack.ts) [[ tests ](test/unit/data-structures/stack/stack.test.ts)] 
 — LIFO data structure. Implements [ILinearStorage](src/types/ILinearStorage.ts) interface.
 
-### Queue
+## Queue
 
-#### Implementation
+### Implementation
 [Queue](src/data-structures/Queue/Queue.ts) [[ tests ](test/unit/data-structures/queue/queue.test.ts)] 
 — FIFO data structure. Implements [ILinearStorage](src/types/ILinearStorage.ts) interface.
   
 
 
-## Non-linear data structures
+# Non linear data structures
 
-### Graph
-#### Interfaces
+## Graph
+### Interfaces
 [IGraph](src/types/IGraph.ts) — Contains basic graph operations.
 
 [IGraphIterator](src/types/IGraphIterator.ts) — Extends default iterator with init and getPath methods.
 
 [IGraphIterationStrategy](src/types/IGraphIterationStrategy.ts) — Iteration strategies which are used in shortest-path, has-path.
 
-#### Implementation
+### Implementation
 [GraphEdge](src/data-structures/Graph/GraphEdge.ts) — Contains from/to links and edge weight.
 
 [AbstractGraph](src/data-structures/Graph/AbstractGraph.ts) — Common logic for both directed and undirected graphs.
@@ -142,7 +156,7 @@ Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface.
 — In case of undirected graph A->B and B->A are equal.
 
 
-#### Graph Iterators
+### Graph Iterators
 
 [BreadthFirstSearchIterator](src/data-structures/Graph/iterator/GraphIteratorBFS.ts) 
 — Traversal method for unweighted graphs, built on queue.
@@ -154,7 +168,7 @@ Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface.
 — Traversal method for weighted graphs, built on finding the minimal cost.
 
 
-#### Graph Presenter
+### Graph Presenter
 [presenter-adjacency-lists](src/data-structures/Graph/presenter/presenterAdjacencyLists.ts)  [[ tests ](test/unit/data-structures/graph/graph.presenter.lists.test.ts)] 
 — Representation of graph as an adjacency list (using Map).
 
@@ -162,28 +176,28 @@ Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface.
 — Representation of graph as an adjacency matrix (using Array N*N).
 
 
-#### Graph Searching
+### Graph Searching
 [has-path (BFS/DFS)](src/data-structures/Graph/searching/hasPath.ts)  [[ tests ](test/unit/data-structures/graph/graph.has-path.test.ts)] 
 — Search for the existence of a path between two vertices.
 
 [shortest-path (BFS/Dijkstra)](src/data-structures/Graph/searching/shortestPath.ts)  [[ tests ](test/unit/data-structures/graph/graph.shortest-path.test.ts)] 
 — Search for one of several shortest paths between two vertices.
 
-#### Graph Creators
+### Graph Creators
 [create-graph-from-matrix](src/helpers/createGraphFromMatrix.ts)  [[ tests ](test/unit/data-structures/graph/graph.create-from-matrix.test.ts)] 
 — Convert a matrix N*N into a graph instance.
 
 
-#### Graph Transposing
+### Graph Transposing
 [transpose-directed-graph](src/data-structures/Graph/transposing/transposeDirectedGraph.ts)  [ [ tests ](test/unit/data-structures/graph/graph.transpose.test.ts)]
 — Transpose a directed graph (undirected graphs are symmetrical already).
 
 
 
-### Binary trees
+## Binary trees
 [IBinaryTree](src/types/IBinaryTree.ts) — Contains basic binary tree operations.
 
-#### Implementation
+### Implementation
 
 [AbstractBinaryNode](src/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryNode.ts) — Contains left/right/parent links and node data.
 
