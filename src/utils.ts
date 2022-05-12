@@ -1,5 +1,3 @@
-import { FnToMemoize } from "./types/FnToMemoize";
-import { ArrayMatrix } from "./types/ArrayMatrix";
 import { performance } from "perf_hooks";
 
 /**
@@ -35,36 +33,6 @@ export const swapArrayItems = <T>(
     arr[leftIndex] = arr[rightIndex];
     arr[rightIndex] = temp;
   }
-};
-
-/**
- * Wrapper function that storing the results of calls and returning the cached result when the same inputs occur again
- */
-export const memoize = <Key, Value>(
-  fn: FnToMemoize<Key, Value>
-): FnToMemoize<Key, Value> => {
-  const cache = new Map<string, Value>();
-
-  return (...args: Array<Key>): Value => {
-    const jsonArgs = JSON.stringify(args);
-
-    if (!cache.has(jsonArgs)) {
-      const result = fn(...args);
-      cache.set(jsonArgs, result);
-    }
-
-    return <Value>cache.get(jsonArgs);
-  };
-};
-
-/**
- * Will flips a matrix over its diagonal
- */
-export const transposeMatrix = (matrix: ArrayMatrix): ArrayMatrix => {
-  return matrix.reduce((acc, current, currentIndex) => {
-    acc[currentIndex] = matrix.map((rowArr) => rowArr[currentIndex]);
-    return acc;
-  }, new Array(matrix.length));
 };
 
 /**
