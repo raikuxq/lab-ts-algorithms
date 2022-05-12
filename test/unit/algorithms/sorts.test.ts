@@ -1,10 +1,10 @@
-import { quickSort } from "../src/algorithms/sorts/quick-sort";
-import { mergeSort } from "../src/algorithms/sorts/merge-sort";
-import { selectSort } from "../src/algorithms/sorts/select-sort";
-import { bubbleSort } from "../src/algorithms/sorts/bubble-sort";
-import { insertionSort } from "../src/algorithms/sorts/insertion-sort";
-import { randomizeArray } from "../src/performance/sort-compare";
-import { EnumSortType } from "../src/types/EnumSortType";
+import { quickSort } from "../../../src/algorithms/sorts/quick-sort";
+import { mergeSort } from "../../../src/algorithms/sorts/merge-sort";
+import { selectSort } from "../../../src/algorithms/sorts/select-sort";
+import { bubbleSort } from "../../../src/algorithms/sorts/bubble-sort";
+import { insertionSort } from "../../../src/algorithms/sorts/insertion-sort";
+import { randomizeArray } from "../../../src/demo/performance/sort-compare";
+import { EnumSortType } from "../../../src/types/EnumSortType";
 
 const createSortFunction = (
   sortType: string

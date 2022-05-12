@@ -1,12 +1,12 @@
-import AbstractGraph from "../src/data-structures/Graph/AbstractGraph";
-import UndirectedGraph from "../src/data-structures/Graph/UndirectedGraph";
-import DirectedGraph from "../src/data-structures/Graph/DirectedGraph";
-import IGraphIterationStrategy from "../src/types/IGraphIterationStrategy";
-import BFSIterationStrategy from "../src/data-structures/Graph/strategy/BFSIterationStrategy";
-import DijkstraIterationStrategy from "../src/data-structures/Graph/strategy/DijkstraIterationStrategy";
+import AbstractGraph from "../../../../src/data-structures/Graph/AbstractGraph";
+import UndirectedGraph from "../../../../src/data-structures/Graph/UndirectedGraph";
+import DirectedGraph from "../../../../src/data-structures/Graph/DirectedGraph";
+import IGraphIterationStrategy from "../../../../src/types/IGraphIterationStrategy";
+import BFSIterationStrategy from "../../../../src/data-structures/Graph/strategy/BFSIterationStrategy";
+import DijkstraIterationStrategy from "../../../../src/data-structures/Graph/strategy/DijkstraIterationStrategy";
 
-import { shortestPath } from "../src/data-structures/Graph/searching/shortestPath";
-import { EnumGraphTraversalType } from "../src/types/EnumGraphTraversalType";
+import { shortestPath } from "../../../../src/data-structures/Graph/searching/shortestPath";
+import { EnumGraphTraversalType } from "../../../../src/types/EnumGraphTraversalType";
 
 describe("Any graph type", () => {
   const strategy: IGraphIterationStrategy<string> = new BFSIterationStrategy();
@@ -165,12 +165,11 @@ describe.each([EnumGraphTraversalType.BFS])(
         .addEdge("Aaron", "Anna");
 
       test("should find correct path between multiple nodes", () => {
-        // expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
-        //   "Mike",
-        //   "Lisa",
-        //   "James",
-        //   "Anna",
-        // ]);
+        /**
+         * Mike -> Aaron -> Lisa -> James -> Anna
+         * Mike -> Aaron -> Anna
+         * Mike -> Lisa -> James -> Anna
+         */
         expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
           "Mike",
           "Aaron",

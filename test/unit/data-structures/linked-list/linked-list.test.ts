@@ -1,8 +1,8 @@
-import ILinkedList from "../src/types/ILinkedList";
-import SingleLinkedList from "../src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
-import DoubleLinkedList from "../src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
-import { EnumLinkedListType } from "../src/types/EnumLinkedListType";
-import { createLinkedList } from "../src/helpers/createLinkedList";
+import ILinkedList from "../../../../src/types/ILinkedList";
+import SingleLinkedList from "../../../../src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
+import DoubleLinkedList from "../../../../src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
+import { EnumLinkedListType } from "../../../../src/types/EnumLinkedListType";
+import { createLinkedList } from "../../../../src/helpers/createLinkedList";
 
 describe("Linked list collection", () => {
   describe("polymorphism should work correctly", () => {

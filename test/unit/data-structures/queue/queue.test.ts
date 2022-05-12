@@ -1,5 +1,5 @@
-import Queue from "../src/data-structures/Queue/Queue";
-import ILinearStorage from "../src/types/ILinearStorage";
+import Queue from "../../../../src/data-structures/Queue/Queue";
+import ILinearStorage from "../../../../src/types/ILinearStorage";
 
 describe("queue", () => {
   describe("method peek", () => {

@@ -1,4 +1,4 @@
-import { memoize } from "../utils";
+import { memoize } from "./memoize";
 import { FnToMemoize } from "../types/FnToMemoize";
 
 /**

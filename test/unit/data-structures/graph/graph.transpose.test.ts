@@ -1,6 +1,6 @@
-import { createGraph } from "../src/helpers/createGraph";
-import { EnumGraphType } from "../src/types/EnumGraphType";
-import { transposeDirectedGraph } from "../src/data-structures/Graph/transposing/transposeDirectedGraph";
+import { createGraph } from "../../../../src/helpers/createGraph";
+import { EnumGraphType } from "../../../../src/types/EnumGraphType";
+import { transposeDirectedGraph } from "../../../../src/data-structures/Graph/transposing/transposeDirectedGraph";
 
 describe("Directed graph transpose", () => {
   const sourceGraph = createGraph<string>(EnumGraphType.Directed);

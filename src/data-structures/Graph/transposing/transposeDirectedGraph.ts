@@ -1,8 +1,8 @@
 import IGraph from "../../../types/IGraph";
-import { transposeMatrix } from "../../../utils";
 import { createGraphFromMatrix } from "../../../helpers/createGraphFromMatrix";
 import { EnumGraphType } from "../../../types/EnumGraphType";
 import { presenterAdjacencyMatrix } from "../presenter/presenterAdjacencyMatrix";
+import { transposeMatrix } from "../../../algorithms/transpose-matrix";
 
 export const transposeDirectedGraph = <T>(
   sourceGraph: IGraph<T>

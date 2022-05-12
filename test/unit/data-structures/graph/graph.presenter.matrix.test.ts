@@ -1,9 +1,9 @@
-import IGraph from "../src/types/IGraph";
-import UndirectedGraph from "../src/data-structures/Graph/UndirectedGraph";
-import DirectedGraph from "../src/data-structures/Graph/DirectedGraph";
-import { createGraph } from "../src/helpers/createGraph";
-import { EnumGraphType } from "../src/types/EnumGraphType";
-import { presenterAdjacencyMatrix } from "../src/data-structures/Graph/presenter/presenterAdjacencyMatrix";
+import IGraph from "../../../../src/types/IGraph";
+import UndirectedGraph from "../../../../src/data-structures/Graph/UndirectedGraph";
+import DirectedGraph from "../../../../src/data-structures/Graph/DirectedGraph";
+import { createGraph } from "../../../../src/helpers/createGraph";
+import { EnumGraphType } from "../../../../src/types/EnumGraphType";
+import { presenterAdjacencyMatrix } from "../../../../src/data-structures/Graph/presenter/presenterAdjacencyMatrix";
 
 describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
   "%s graph",

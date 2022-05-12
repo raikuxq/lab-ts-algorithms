@@ -1,5 +1,5 @@
-import Stack from "../src/data-structures/Stack/Stack";
-import ILinearStorage from "../src/types/ILinearStorage";
+import Stack from "../../../../src/data-structures/Stack/Stack";
+import ILinearStorage from "../../../../src/types/ILinearStorage";
 
 describe("stack", () => {
   describe("method peek", () => {

@@ -1,13 +1,13 @@
-import AbstractGraph from "../src/data-structures/Graph/AbstractGraph";
-import UndirectedGraph from "../src/data-structures/Graph/UndirectedGraph";
-import DirectedGraph from "../src/data-structures/Graph/DirectedGraph";
-import IGraphIterationStrategy from "../src/types/IGraphIterationStrategy";
-import BFSIterationStrategy from "../src/data-structures/Graph/strategy/BFSIterationStrategy";
-import DFSIterationStrategy from "../src/data-structures/Graph/strategy/DFSIterationStrategy";
+import AbstractGraph from "../../../../src/data-structures/Graph/AbstractGraph";
+import UndirectedGraph from "../../../../src/data-structures/Graph/UndirectedGraph";
+import DirectedGraph from "../../../../src/data-structures/Graph/DirectedGraph";
+import IGraphIterationStrategy from "../../../../src/types/IGraphIterationStrategy";
+import BFSIterationStrategy from "../../../../src/data-structures/Graph/strategy/BFSIterationStrategy";
+import DFSIterationStrategy from "../../../../src/data-structures/Graph/strategy/DFSIterationStrategy";
 
-import { hasPath } from "../src/data-structures/Graph/searching/hasPath";
-import { shortestPath } from "../src/data-structures/Graph/searching/shortestPath";
-import { EnumGraphTraversalType } from "../src/types/EnumGraphTraversalType";
+import { hasPath } from "../../../../src/data-structures/Graph/searching/hasPath";
+import { shortestPath } from "../../../../src/data-structures/Graph/searching/shortestPath";
+import { EnumGraphTraversalType } from "../../../../src/types/EnumGraphTraversalType";
 
 describe("Any graph type", () => {
   const strategy: IGraphIterationStrategy<string> = new BFSIterationStrategy();

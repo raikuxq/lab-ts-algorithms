@@ -1,7 +1,7 @@
-import { EnumGraphType } from "../src/types/EnumGraphType";
-import { createGraphFromMatrix } from "../src/helpers/createGraphFromMatrix";
-import { ArrayMatrix } from "../src/types/ArrayMatrix";
-import IGraph from "../src/types/IGraph";
+import { EnumGraphType } from "../../../../src/types/EnumGraphType";
+import { createGraphFromMatrix } from "../../../../src/helpers/createGraphFromMatrix";
+import { ArrayMatrix } from "../../../../src/types/ArrayMatrix";
+import IGraph from "../../../../src/types/IGraph";
 
 describe("in Directed graph", () => {
   /**

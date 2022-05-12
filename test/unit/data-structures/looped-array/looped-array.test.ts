@@ -1,5 +1,5 @@
-import LoopedArray from "../src/data-structures/LoopedArray/LoopedArray";
-import IArrayFacade from "../src/types/IArrayFacade";
+import LoopedArray from "../../../../src/data-structures/LoopedArray/LoopedArray";
+import IArrayFacade from "../../../../src/types/IArrayFacade";
 
 describe("Looped Array", () => {
   describe("constructor", () => {
