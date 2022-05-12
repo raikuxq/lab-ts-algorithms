@@ -21,7 +21,7 @@ Clone this repository and install dependencies by using `yarn` command.
 
 
 # Navigation
-+ [Alrotihms](#algorithms)
++ [Algorithms](#algorithms)
   + [Sorting algorithms](#sorting-algorithms)
 + [Iterators](#iterators)
 + [Linear data structures](#linear-data-structures)
@@ -208,11 +208,12 @@ Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface.
 
 [BinarySearchTree](src/data-structures/BinaryTree/BSTree/BinarySearchTree.ts) — Implementation of unbalanced binary search tree. 
 Each node in left subtree is smaller and each node in right subtree is larger than the node data. 
-Extends [BinarySearchTree](src/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryTree.ts).
+Extends [AbstractSearchTree](src/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryTree.ts).
 
 
 
-[RandBinarySearchNode](src/data-structures/BinaryTree/RandBSTree/RandBinarySearchNode.ts) — Have a rank attribute.
+[RandBinarySearchNode](src/data-structures/BinaryTree/RandBSTree/RandBinarySearchNode.ts) — Have a rank attribute. 
+Extends [BinarySearchNode](src/data-structures/BinaryTree/BSTree/BinarySearchNode.ts).
 
 [RandBinarySearchTree](src/data-structures/BinaryTree/RandBSTree/RandBinarySearchTree.ts) 
 — Implementation of randomized binary search tree, which gives expected log(N) height. 
