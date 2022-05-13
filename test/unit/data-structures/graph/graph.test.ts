@@ -18,7 +18,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         .addEdge("Bob", "Lisa", 10)
         .addEdge("Mike", "Lisa", 20);
 
-      test("should return correct weight value", () => {
+      it("should return correct weight value", () => {
         const weight = graph.weight();
         const expectedWeight = 35;
 
@@ -30,7 +30,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
       describe("in empty graph", () => {
         const graph: IGraph<string> = createGraph(graphType);
 
-        test("should return correct vertices count", () => {
+        it("should return correct vertices count", () => {
           expect(graph.verticesCount()).toBe(0);
         });
       });
@@ -38,7 +38,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         const graph: IGraph<string> = createGraph(graphType);
         graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
 
-        test("should return correct vertices count", () => {
+        it("should return correct vertices count", () => {
           expect(graph.verticesCount()).toBe(3);
         });
       });
@@ -48,7 +48,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
       describe("in empty graph", () => {
         const graph: IGraph<string> = createGraph(graphType);
 
-        test("should return correct vertices count", () => {
+        it("should return correct vertices count", () => {
           expect(graph.edgesCount()).toBe(0);
         });
       });
@@ -58,7 +58,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
       describe("in empty graph", () => {
         const graph: IGraph<string> = createGraph(graphType);
 
-        test("should return empty array of vertices", () => {
+        it("should return empty array of vertices", () => {
           expect(graph.vertices()).toEqual([]);
         });
       });
@@ -66,14 +66,14 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         const graph: IGraph<string> = createGraph(graphType);
         graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
 
-        test("should return correct array of vertices", () => {
+        it("should return correct array of vertices", () => {
           expect(graph.vertices()).toEqual(["Mike", "Bob", "Lisa"]);
         });
       });
     });
 
     describe("method addVertex", () => {
-      test("should correct add vertex", () => {
+      it("should correct add vertex", () => {
         const graph: IGraph<string> = createGraph(graphType);
         graph.addVertex("Mike").addVertex("Bob").addVertex("Lisa");
 
@@ -82,7 +82,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
 
         expect(vertices).toEqual(expectedVertices);
       });
-      test("should throw when try to add an existed vertex", () => {
+      it("should throw when try to add an existed vertex", () => {
         const graph: IGraph<string> = createGraph(graphType);
         graph.addVertex("Mike");
 
@@ -98,12 +98,12 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
           const graph: IGraph<string> = createGraph(graphType);
           graph.addVertex("Mike").addVertex("Bob");
 
-          test("when first node does not exist", () => {
+          it("when first node does not exist", () => {
             expect(() => {
               graph.addEdge("NOT_EXISTED_NODE", "Bob");
             }).toThrowError();
           });
-          test("when second node does not exist", () => {
+          it("when second node does not exist", () => {
             expect(() => {
               graph.addEdge("Mike", "NOT_EXISTED_NODE");
             }).toThrowError();
@@ -113,7 +113,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
     });
 
     describe("method removeVertex", () => {
-      test("should throw when try to delete not existed vertex", () => {
+      it("should throw when try to delete not existed vertex", () => {
         const graph: IGraph<string> = createGraph(graphType);
 
         expect(() => {
@@ -123,7 +123,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
     });
 
     describe("method removeEdge", () => {
-      test("should throw when try to delete not existed edge", () => {
+      it("should throw when try to delete not existed edge", () => {
         const graph: IGraph<string> = createGraph(graphType);
 
         expect(() => {
@@ -133,7 +133,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
     });
 
     describe("method getVertexNeighbors", () => {
-      test("should throw when vertex does not exist", () => {
+      it("should throw when vertex does not exist", () => {
         const graph: IGraph<number> = createGraph(graphType);
         graph.addVertex(1).addVertex(2).addEdge(1, 2);
 
@@ -157,7 +157,7 @@ describe("Any type of graph", () => {
         .addEdge("Mike", "Lisa")
         .addEdge("Bob", "Lisa");
 
-      test("should return correct vertices count", () => {
+      it("should return correct vertices count", () => {
         expect(graph.edgesCount()).toBe(3);
       });
     });
@@ -171,7 +171,7 @@ describe("Any type of graph", () => {
         .addEdge("Mike", "Lisa")
         .addEdge("Lisa", "Mike");
 
-      test("should return correct vertices count", () => {
+      it("should return correct vertices count", () => {
         expect(graph.edgesCount()).toBe(3);
       });
     });
@@ -183,10 +183,10 @@ describe("Any type of graph", () => {
         const graph: IGraph<string> = new UndirectedGraph();
         graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
 
-        test("should add second node to first node neighbors", () => {
+        it("should add second node to first node neighbors", () => {
           expect(graph.getVertexNeighbors("Mike")).toContain("Bob");
         });
-        test("should add first node to second node neighbors", () => {
+        it("should add first node to second node neighbors", () => {
           expect(graph.getVertexNeighbors("Bob")).toContain("Mike");
         });
       });
@@ -200,15 +200,15 @@ describe("Any type of graph", () => {
           .addEdge("Mike", "Bob", 10);
 
         describe("should not multiple edges", () => {
-          test("should not add vertex to first edge", () => {
+          it("should not add vertex to first edge", () => {
             expect(graph.getVertexNeighbors("Mike")).toEqual(["Bob"]);
           });
-          test("should not add vertex to second edge", () => {
+          it("should not add vertex to second edge", () => {
             expect(graph.getVertexNeighbors("Bob")).toEqual(["Mike"]);
           });
         });
 
-        test("should override edge weight", () => {
+        it("should override edge weight", () => {
           expect(graph.getEdgeWeight("Mike", "Bob")).toBe(10);
         });
       });
@@ -219,10 +219,10 @@ describe("Any type of graph", () => {
         const graph: IGraph<string> = new DirectedGraph();
         graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
 
-        test("should add second node to first node neighbors", () => {
+        it("should add second node to first node neighbors", () => {
           expect(graph.getVertexNeighbors("Mike")).toContain("Bob");
         });
-        test("should not add first node to second node neighbors", () => {
+        it("should not add first node to second node neighbors", () => {
           expect(graph.getVertexNeighbors("Bob")).not.toContain("Mike");
         });
       });
@@ -237,19 +237,19 @@ describe("Any type of graph", () => {
           .addEdge("Mike", "Bob", 10);
 
         describe("should not multiple edges", () => {
-          test("should not add vertex to first edge", () => {
+          it("should not add vertex to first edge", () => {
             expect(graph.getVertexNeighbors("Mike")).toEqual(["Bob"]);
           });
-          test("should not add vertex to second edge", () => {
+          it("should not add vertex to second edge", () => {
             expect(graph.getVertexNeighbors("Bob")).toEqual(["Mike"]);
           });
         });
 
-        test("should override edge weight", () => {
+        it("should override edge weight", () => {
           expect(graph.getEdgeWeight("Mike", "Bob")).toBe(10);
         });
 
-        test("should not override back edge weight", () => {
+        it("should not override back edge weight", () => {
           expect(graph.getEdgeWeight("Bob", "Mike")).toBe(15);
         });
       });
@@ -270,7 +270,7 @@ describe("Any type of graph", () => {
 
       graph.removeEdge("Mike", "Lisa");
 
-      test("should delete correct", () => {
+      it("should delete correct", () => {
         expect(graph.hasEdge("Mike", "Lisa")).toBe(false);
       });
     });
@@ -289,10 +289,10 @@ describe("Any type of graph", () => {
       graph.removeEdge("Mike", "Lisa");
 
       describe("should delete correct", () => {
-        test("should delete edge from-to", () => {
+        it("should delete edge from-to", () => {
           expect(graph.hasEdge("Mike", "Lisa")).toBe(false);
         });
-        test("should not delete edge to-from", () => {
+        it("should not delete edge to-from", () => {
           expect(graph.hasEdge("Lisa", "Mike")).toBe(true);
         });
       });
@@ -301,7 +301,7 @@ describe("Any type of graph", () => {
 
   describe("method getVertexNeighbors", () => {
     describe("in undirected graph", () => {
-      test("should return correct neighbors", () => {
+      it("should return correct neighbors", () => {
         const graph: IGraph<number> = new UndirectedGraph();
         graph
           .addVertex(1)
@@ -315,7 +315,7 @@ describe("Any type of graph", () => {
     });
 
     describe("in directed graph", () => {
-      test("should return correct neighbors", () => {
+      it("should return correct neighbors", () => {
         const graph: IGraph<number> = new DirectedGraph();
         graph
           .addVertex(1)
@@ -346,12 +346,12 @@ describe("Any type of graph", () => {
 
         graph.removeVertex("Bob");
 
-        test("should remove edges", () => {
+        it("should remove edges", () => {
           const hasEdge = graph.hasEdge("Mike", "Bob");
 
           expect(hasEdge).toBe(false);
         });
-        test("should remove related vertexes neighbors", () => {
+        it("should remove related vertexes neighbors", () => {
           const mikeNeighbors = graph.getVertexNeighbors("Mike");
           const lisaNeighbors = graph.getVertexNeighbors("Lisa");
           const johnNeighbors = graph.getVertexNeighbors("John");
@@ -379,12 +379,12 @@ describe("Any type of graph", () => {
 
         graph.removeVertex("Bob");
 
-        test("should remove edges", () => {
+        it("should remove edges", () => {
           const hasEdge = graph.hasEdge("Mike", "Bob");
           expect(hasEdge).toBe(false);
         });
 
-        test("should remove related vertices neighbors", () => {
+        it("should remove related vertices neighbors", () => {
           const mikeNeighbors = graph.getVertexNeighbors("Mike");
           const lisaNeighbors = graph.getVertexNeighbors("Lisa");
           const johnNeighbors = graph.getVertexNeighbors("John");

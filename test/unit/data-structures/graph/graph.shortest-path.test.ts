@@ -14,7 +14,7 @@ describe("Any graph type", () => {
   describe("in empty graph", () => {
     const graph: AbstractGraph<string> = new UndirectedGraph();
 
-    test("should throw when graph is empty", () => {
+    it("should throw when graph is empty", () => {
       expect(() => {
         shortestPath(graph, "-", "-", strategy);
       }).toThrowError();
@@ -26,19 +26,19 @@ describe("Any graph type", () => {
 
     graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
 
-    test("should throw when first node does not exist", () => {
+    it("should throw when first node does not exist", () => {
       expect(() => {
         shortestPath(graph, "Mike", "NOT_EXISTED_NODE", strategy);
       }).toThrowError();
     });
 
-    test("should throw when second node does not exist", () => {
+    it("should throw when second node does not exist", () => {
       expect(() => {
         shortestPath(graph, "NOT_EXISTED_NODE", "Bob", strategy);
       }).toThrowError();
     });
 
-    test("should find correct path between neighbor nodes", () => {
+    it("should find correct path between neighbor nodes", () => {
       expect(shortestPath(graph, "Mike", "Bob", strategy)).toEqual([
         "Mike",
         "Bob",
@@ -80,7 +80,7 @@ describe.each([EnumGraphTraversalType.DIJKSTRA])(
         .addEdge("James", "Anna", 6)
         .addEdge("Bob", "Anna", 15);
 
-      test("should find correct path between multiple nodes", () => {
+      it("should find correct path between multiple nodes", () => {
         /**
          * Bob -> Mike (5) -> Anna (15) = 20
          * Mike -> Lisa (3) -> James (3) -> Anna (6) = 12
@@ -113,7 +113,7 @@ describe.each([EnumGraphTraversalType.DIJKSTRA])(
         .addEdge("James", "Anna", 6)
         .addEdge("Bob", "Anna", 15);
 
-      test("should find correct path between multiple nodes", () => {
+      it("should find correct path between multiple nodes", () => {
         /**
          * Bob -> Mike (5) -> Anna (15) = 20
          * Mike -> Lisa (3) -> Aaron (3) -> James (3) -> Anna (6) = 15
@@ -164,7 +164,7 @@ describe.each([EnumGraphTraversalType.BFS])(
         .addEdge("James", "Anna")
         .addEdge("Aaron", "Anna");
 
-      test("should find correct path between multiple nodes", () => {
+      it("should find correct path between multiple nodes", () => {
         /**
          * Mike -> Aaron -> Lisa -> James -> Anna
          * Mike -> Aaron -> Anna
@@ -195,7 +195,7 @@ describe.each([EnumGraphTraversalType.BFS])(
         .addEdge("Aaron", "Anna")
         .addEdge("Lisa", "Anna");
 
-      test("should find correct path between multiple nodes", () => {
+      it("should find correct path between multiple nodes", () => {
         expect(shortestPath(graph, "Mike", "Anna", strategy)).toEqual([
           "Mike",
           "Lisa",

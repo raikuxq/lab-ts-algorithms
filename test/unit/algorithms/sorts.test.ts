@@ -34,7 +34,7 @@ describe.each([
 ])("%s sort", (sortStrategyType: EnumSortType) => {
   const sort = createSortFunction(sortStrategyType);
 
-  test("should correct sort with random numbers", () => {
+  it("should correct sort with random numbers", () => {
     const notSortedArr: Array<number> = randomizeArray(100, 500);
 
     const sortedArr = [...notSortedArr].sort((a: number, b: number) => {
@@ -46,26 +46,26 @@ describe.each([
     expect(sort(notSortedArr)).toEqual(sortedArr);
   });
 
-  test("should correct sort an empty array", () => {
+  it("should correct sort an empty array", () => {
     const emptyArr: Array<number> = [];
 
     expect(sort(emptyArr)).toEqual(emptyArr);
   });
 
-  test("should correct sort already sorted array", () => {
+  it("should correct sort already sorted array", () => {
     const sortedArr = [-5, 0, 5];
 
     expect(sort(sortedArr)).toEqual(sortedArr);
   });
 
-  test("should correct sort an array with repeated numbers", () => {
+  it("should correct sort an array with repeated numbers", () => {
     const notSortedArr = [7, 2, 1, 2, 7];
     const sortedArr = [1, 2, 2, 7, 7];
 
     expect(sort(notSortedArr)).toEqual(sortedArr);
   });
 
-  test("should correct sort an array with float numbers", () => {
+  it("should correct sort an array with float numbers", () => {
     const notSortedArr = [2.5, -2.5, 0, 5.5, -5.5];
     const sortedArr = [-5.5, -2.5, 0, 2.5, 5.5];
 

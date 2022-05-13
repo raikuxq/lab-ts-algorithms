@@ -34,17 +34,17 @@ describe("Directed graph transpose", () => {
    */
   const transposedGraph = transposeDirectedGraph(sourceGraph);
 
-  test("should have the same vertices as source graph", () => {
+  it("should have the same vertices as source graph", () => {
     expect(transposedGraph.vertices()).toEqual(sourceGraph.vertices());
   });
 
-  test("should have all reverted edges", () => {
+  it("should have all reverted edges", () => {
     expect(transposedGraph.hasEdge("Vertex_2", "Vertex_1")).toBe(true);
     expect(transposedGraph.hasEdge("Vertex_4", "Vertex_1")).toBe(true);
     expect(transposedGraph.hasEdge("Vertex_4", "Vertex_3")).toBe(true);
   });
 
-  test("should not have edges from source graph", () => {
+  it("should not have edges from source graph", () => {
     expect(transposedGraph.hasEdge("Vertex_1", "Vertex_2")).toBe(false);
     expect(transposedGraph.hasEdge("Vertex_1", "Vertex_4")).toBe(false);
     expect(transposedGraph.hasEdge("Vertex_3", "Vertex_4")).toBe(false);

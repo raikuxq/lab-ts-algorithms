@@ -3,7 +3,7 @@ import IArrayFacade from "../../../../src/types/IArrayFacade";
 
 describe("Looped Array", () => {
   describe("constructor", () => {
-    test("should throw when capacity is less than 1", () => {
+    it("should throw when capacity is less than 1", () => {
       expect(() => {
         new LoopedArray(-5);
       }).toThrowError();
@@ -21,11 +21,11 @@ describe("Looped Array", () => {
     loopedArray.push("r");
     loopedArray.push("t");
 
-    test("should collect correct elements before overwriting", () => {
+    it("should collect correct elements before overwriting", () => {
       expect(loopedArray.getAsArray()).toEqual(["q", "w", "e", "r", "t"]);
     });
 
-    test("should correctly overwrite ", () => {
+    it("should correctly overwrite ", () => {
       loopedArray.push("y");
       loopedArray.push("u");
       loopedArray.push("i");
@@ -33,13 +33,13 @@ describe("Looped Array", () => {
       expect(loopedArray.getAsArray()).toEqual(["y", "u", "i"]);
     });
 
-    test("should add elements to array's end", () => {
+    it("should add elements to array's end", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       array.push(1);
       expect(array.peek()).toBe(1);
     });
-    test("should overwrite when array is full", () => {
+    it("should overwrite when array is full", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(2);
 
       array.push(1);
@@ -59,11 +59,11 @@ describe("Looped Array", () => {
     loopedArray.unshift("r");
     loopedArray.unshift("t");
 
-    test("should collect correct elements before overwriting", () => {
+    it("should collect correct elements before overwriting", () => {
       expect(loopedArray.getAsArray()).toEqual(["t", "r", "e", "w", "q"]);
     });
 
-    test("should correctly overwrite ", () => {
+    it("should correctly overwrite ", () => {
       loopedArray.unshift("y");
       loopedArray.unshift("u");
       loopedArray.unshift("i");
@@ -71,14 +71,14 @@ describe("Looped Array", () => {
       expect(loopedArray.getAsArray()).toEqual(["i", "u", "y"]);
     });
 
-    test("should add elements to array's start", () => {
+    it("should add elements to array's start", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       array.unshift(1);
       array.unshift(0);
       expect(array.peekFromStart()).toBe(0);
     });
-    test("should overwrite when array is full", () => {
+    it("should overwrite when array is full", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(2);
       array.unshift(1);
       array.unshift(2);
@@ -89,14 +89,14 @@ describe("Looped Array", () => {
   });
 
   describe("method pushFromIndex", () => {
-    test("should overwrite elements by index", () => {
+    it("should overwrite elements by index", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       array.pushFromArray([10, 30, 40, 50]);
       array.pushFromIndex(20, 1);
       expect(array.getAsArray()).toEqual([10, 20, 40, 50]);
     });
-    test("should add elements to array from start", () => {
+    it("should add elements to array from start", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       const expectedArr: Array<number> = [0, 10];
@@ -104,14 +104,14 @@ describe("Looped Array", () => {
       array.pushFromIndex(10, 1);
       expect(array.getAsArray()).toEqual(expectedArr);
     });
-    test("should add elements to empty array", () => {
+    it("should add elements to empty array", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       const expectedArr: Array<number> = [10];
       array.pushFromIndex(10, 0);
       expect(array.getAsArray()).toEqual(expectedArr);
     });
-    test("should add elements to array from end", () => {
+    it("should add elements to array from end", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       array.pushFromArray([0, 10, 30]);
@@ -121,13 +121,13 @@ describe("Looped Array", () => {
   });
 
   describe("method pushFromArray", () => {
-    test("should add elements to array's end", () => {
+    it("should add elements to array's end", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
       const arr = [1, 2, 3, 4, 5];
       array.pushFromArray(arr);
       expect(array.getAsArray()).toEqual(arr);
     });
-    test("should overwrite when array is full", () => {
+    it("should overwrite when array is full", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(2);
       array.pushFromArray([1]);
       array.pushFromArray([2, 3]);
@@ -136,7 +136,7 @@ describe("Looped Array", () => {
   });
 
   describe("method peekFromStart", () => {
-    test("should return first element of array", () => {
+    it("should return first element of array", () => {
       const loopedArray: IArrayFacade<string> = new LoopedArray(5);
 
       loopedArray.push("q");
@@ -145,16 +145,16 @@ describe("Looped Array", () => {
 
       expect(loopedArray.peekFromStart()).toEqual("q");
     });
-    test("should return undefined when array is empty", () => {
+    it("should return undefined when array is empty", () => {
       const loopedArray: IArrayFacade<number> = new LoopedArray(5);
 
       expect(loopedArray.peekFromStart()).toEqual(undefined);
     });
-    test("should return undefined when array is empty", () => {
+    it("should return undefined when array is empty", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
       expect(array.peekFromStart()).toBeUndefined();
     });
-    test("should return first element from array", () => {
+    it("should return first element from array", () => {
       const array: IArrayFacade<number> = new LoopedArray(5);
       array.pushFromArray([10, 20, 30, 40, 50]);
 
@@ -163,7 +163,7 @@ describe("Looped Array", () => {
   });
 
   describe("method peek", () => {
-    test("should return last element of array", () => {
+    it("should return last element of array", () => {
       const loopedArray: IArrayFacade<string> = new LoopedArray(5);
 
       loopedArray.push("q");
@@ -172,16 +172,16 @@ describe("Looped Array", () => {
 
       expect(loopedArray.peek()).toEqual("e");
     });
-    test("should return undefined when array is empty", () => {
+    it("should return undefined when array is empty", () => {
       const loopedArray: IArrayFacade<number> = new LoopedArray(5);
 
       expect(loopedArray.peek()).toEqual(undefined);
     });
-    test("should return undefined when array is empty", () => {
+    it("should return undefined when array is empty", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
       expect(array.peek()).toBeUndefined();
     });
-    test("should return first element from array", () => {
+    it("should return first element from array", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
       array.pushFromArray([10, 20, 30, 40, 50]);
 
@@ -190,17 +190,17 @@ describe("Looped Array", () => {
   });
 
   describe("method peekByIndex", () => {
-    test("should throw when array is empty", () => {
+    it("should throw when array is empty", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
       expect(array.peekByIndex(0)).toBeUndefined();
     });
-    test("should return element by its index from array", () => {
+    it("should return element by its index from array", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
       array.pushFromArray([10, 20, 30, 40, 50]);
 
       expect(array.peekByIndex(2)).toBe(30);
     });
-    test("should return undefined when index exceed array length", () => {
+    it("should return undefined when index exceed array length", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       expect(array.peekByIndex(1000)).toBeUndefined();
@@ -213,15 +213,15 @@ describe("Looped Array", () => {
       array.pushFromArray([10, 20]);
       const shifted = array.shift();
 
-      test("should delete correct", () => {
+      it("should delete correct", () => {
         expect(array.getAsArray()).toEqual([20]);
       });
-      test("should return correct value", () => {
+      it("should return correct value", () => {
         expect(shifted).toBe(10);
       });
     });
 
-    test("should throw when array is empty", () => {
+    it("should throw when array is empty", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
       expect(() => {
         array.shift();
@@ -235,16 +235,16 @@ describe("Looped Array", () => {
       array.pushFromArray([10, 40]);
       const shifted = array.pop();
 
-      test("should delete correct", () => {
+      it("should delete correct", () => {
         expect(array.getAsArray()).toEqual([10]);
       });
 
-      test("should return correct value", () => {
+      it("should return correct value", () => {
         expect(shifted).toBe(40);
       });
     });
 
-    test("should throw when array is empty", () => {
+    it("should throw when array is empty", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       expect(() => {
@@ -259,15 +259,15 @@ describe("Looped Array", () => {
       array.pushFromArray([10, 20, 30]);
       const shifted = array.deleteFromIndex(1);
 
-      test("should delete correct", () => {
+      it("should delete correct", () => {
         expect(array.getAsArray()).toEqual([10, undefined, 30]);
       });
-      test("should return correct value", () => {
+      it("should return correct value", () => {
         expect(shifted).toBe(20);
       });
     });
 
-    test("should throw when array is empty", () => {
+    it("should throw when array is empty", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       expect(() => {
@@ -277,7 +277,7 @@ describe("Looped Array", () => {
   });
 
   describe("method reverse", () => {
-    test("should correct reverse array", () => {
+    it("should correct reverse array", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(12);
 
       const arraySource = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110];
@@ -290,7 +290,7 @@ describe("Looped Array", () => {
   });
 
   describe("method clear", () => {
-    test("should correct clear array", () => {
+    it("should correct clear array", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
 
       const testArray: Array<number> = [10, 20, 30, 40, 50, 60, 70, 80, 90];

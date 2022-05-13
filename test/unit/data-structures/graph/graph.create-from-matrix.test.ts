@@ -34,11 +34,11 @@ describe("in Directed graph", () => {
       EnumGraphType.Directed
     );
 
-    test("should contain all vertices", () => {
+    it("should contain all vertices", () => {
       expect(graph.vertices()).toEqual(fieldsList);
     });
 
-    test("should contain all edges", () => {
+    it("should contain all edges", () => {
       expect(graph.hasEdge("Bob", "Bob")).toBe(false);
       expect(graph.hasEdge("Bob", "Maria")).toBe(true);
       expect(graph.hasEdge("Bob", "John")).toBe(false);
@@ -85,11 +85,11 @@ describe("in Undirected graph", () => {
       EnumGraphType.Undirected
     );
 
-    test("should contain all vertices", () => {
+    it("should contain all vertices", () => {
       expect(graph.vertices()).toEqual(fieldsList);
     });
 
-    test("should contain all edges", () => {
+    it("should contain all edges", () => {
       expect(graph.hasEdge("Bob", "Bob")).toBe(false);
       expect(graph.hasEdge("Bob", "Maria")).toBe(true);
       expect(graph.hasEdge("Bob", "John")).toBe(false);

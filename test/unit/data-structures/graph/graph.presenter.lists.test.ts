@@ -11,7 +11,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
     describe("in empty graph", () => {
       const graph: IGraph<number> = createGraph(graphType);
 
-      test("should return empty list", () => {
+      it("should return empty list", () => {
         const map = presenterAdjacencyLists(graph);
         const emptyMap = new Map<number, number>();
         expect(map).toEqual(emptyMap);
@@ -32,7 +32,7 @@ describe("Any type of graph", () => {
       .addEdge(1, 3)
       .addEdge(3, 4);
 
-    test("should return correct list", () => {
+    it("should return correct list", () => {
       const list = presenterAdjacencyLists(graph);
       const expectedList = new Map<number, Array<number>>();
 
@@ -58,7 +58,7 @@ describe("Any type of graph", () => {
       .addEdge(1, 3)
       .addEdge(3, 4);
 
-    test("should return correct list", () => {
+    it("should return correct list", () => {
       const list = presenterAdjacencyLists(graph);
       const expectedList = new Map<number, Array<number>>();
 
