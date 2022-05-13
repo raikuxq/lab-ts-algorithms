@@ -45,7 +45,7 @@ Clone this repository and install dependencies by using `yarn` command.
 
 [fibonacci](src/algorithms/fibonacci.ts) [[ tests ](test/unit/algorithms/fibonacci.test.ts)] — Recursive O(n!) and memoized O(n) factorial implementation.
 
-[transpose-matrix](src/algorithms/transpose-matrix.ts) — Transpose N*N matrix util function.
+[transpose-matrix](src/algorithms/transpose-matrix.ts) [[ tests ](test/unit/algorithms/transpose-matrix.test.ts)]  — Transpose N*N matrix util function.
 
 
 ## Sorting algorithms
