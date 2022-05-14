@@ -1,4 +1,4 @@
 export enum EnumBinarySearchTreeType {
-  BST = "BST",
-  RANDOMIZED_BST = "Randomized BST",
+  BST = "Binary Search Tree",
+  RANDOMIZED_BST = "Randomized Binary Search Tree",
 }
