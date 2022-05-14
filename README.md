@@ -94,7 +94,7 @@ Extends [ILinearStorage](src/types/ILinearStorage.ts) interface.
 Extends [ILinearStorageRA](src/types/ILinearStorageRA.ts) and [IConvertableToArray](src/types/IConvertableToArray.ts) interface.
 
 ### Implementation
-[AbstractLinkedList](src/data-structures/LinkedList/AbstractLinkedList.ts) — Common logic for both single and double linked lists.
+[AbstractLinkedList](src/data-structures/LinkedList/AbstractLinkedList/AbstractLinkedList.ts) — Common logic for both single and double linked lists.
 Implements [ILinearStorageRA](src/types/ILinearStorageRA.ts) interface.
 
 [SingleLinkedList](src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList.ts) 

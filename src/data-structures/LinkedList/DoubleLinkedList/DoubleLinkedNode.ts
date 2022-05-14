@@ -1,4 +1,4 @@
-import AbstractLinkedNode from "../AbstractLinkedNode";
+import AbstractLinkedNode from "../AbstractLinkedList/AbstractLinkedNode";
 
 export default class DoubleLinkedNode<T> extends AbstractLinkedNode<T> {
   protected _prev: DoubleLinkedNode<T> | null;

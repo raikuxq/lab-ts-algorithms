@@ -1,5 +1,5 @@
 import AbstractLinkedNode from "./AbstractLinkedNode";
-import ILinkedList from "../../types/ILinkedList";
+import ILinkedList from "../../../types/ILinkedList";
 
 export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
   protected readonly _capacity: number;

@@ -1,4 +1,4 @@
-import AbstractLinkedNode from "../AbstractLinkedNode";
+import AbstractLinkedNode from "../AbstractLinkedList/AbstractLinkedNode";
 
 export default class SingleLinkedNode<T> extends AbstractLinkedNode<T> {
   /**

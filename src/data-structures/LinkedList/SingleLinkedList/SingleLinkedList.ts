@@ -1,6 +1,6 @@
 import IIterator from "../../../types/IIterator";
 import IIterable from "../../../types/IIterable";
-import AbstractLinkedList from "../AbstractLinkedList";
+import AbstractLinkedList from "../AbstractLinkedList/AbstractLinkedList";
 import SingleLinkedNode from "./SingleLinkedNode";
 
 /**

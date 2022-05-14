@@ -1,6 +1,6 @@
 import IBiDirectIterator from "../../../types/IBiDirectIterator";
 import IBiDirectIterable from "../../../types/IBiDirectIterable";
-import AbstractLinkedList from "../AbstractLinkedList";
+import AbstractLinkedList from "../AbstractLinkedList/AbstractLinkedList";
 import DoubleLinkedNode from "./DoubleLinkedNode";
 
 /**
