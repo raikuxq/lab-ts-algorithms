@@ -1,5 +1,5 @@
 {
-  "name": "algorythmes",
+  "name": "ts-algorithms-data-structures",
   "scripts": {
     "test": "jest",
     "dev": "nodemon",
