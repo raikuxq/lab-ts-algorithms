@@ -116,7 +116,7 @@ export default class SingleLinkedList<T>
     const head = this._head;
     let activeNode: SingleLinkedNode<T> = this.getNodeByIndex(fromIndex);
 
-    return {
+    const iterator: IIterator<T> = {
       /**
        * @inheritDoc
        */
@@ -133,13 +133,15 @@ export default class SingleLinkedList<T>
        * @inheritDoc
        * @throws when next element does not exist
        */
-      next: () => {
-        if (!activeNode.next) {
+      next: (): T => {
+        if (!iterator.hasNext()) {
           throw new Error("Next element does not exist");
         }
-        activeNode = activeNode.next;
+        activeNode = activeNode.next!;
         return activeNode.data;
       },
     };
+
+    return iterator;
   }
 }

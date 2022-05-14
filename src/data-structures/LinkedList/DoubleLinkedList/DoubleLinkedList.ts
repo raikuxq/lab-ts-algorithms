@@ -105,9 +105,10 @@ export default class DoubleLinkedList<T>
    */
   public iterator(fromIndex = 0): IBiDirectIterator<T> {
     const head = this._head;
+    const tail = this._tail;
     let activeNode = this.getNodeByIndex(fromIndex) as DoubleLinkedNode<T>;
 
-    return {
+    const iterator: IBiDirectIterator<T> = {
       /**
        * @inheritDoc
        */
@@ -122,13 +123,19 @@ export default class DoubleLinkedList<T>
       },
       /**
        * @inheritDoc
+       */
+      hasPrev(): boolean {
+        return Boolean(activeNode.prev) && activeNode !== tail;
+      },
+      /**
+       * @inheritDoc
        * @throws when next element does not exist
        */
       next: (): T => {
-        if (!activeNode.next) {
+        if (!iterator.hasNext()) {
           throw new Error("Next element does not exist");
         }
-        activeNode = activeNode.next;
+        activeNode = activeNode.next!;
         return activeNode.data;
       },
       /**
@@ -136,12 +143,14 @@ export default class DoubleLinkedList<T>
        * @throws when prev element does not exists
        */
       prev: (): T => {
-        if (!activeNode.prev) {
+        if (!iterator.hasPrev()) {
           throw new Error("Prev element does not exist");
         }
-        activeNode = activeNode.prev;
+        activeNode = activeNode.prev!;
         return activeNode.data;
       },
     };
+
+    return iterator;
   }
 }
