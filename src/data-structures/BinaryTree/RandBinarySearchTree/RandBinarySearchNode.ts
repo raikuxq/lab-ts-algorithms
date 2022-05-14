@@ -1,4 +1,4 @@
-import BinarySearchNode from "../BSTree/BinarySearchNode";
+import BinarySearchNode from "../BinarySearchTree/BinarySearchNode";
 
 export default class RandBinarySearchNode<T> extends BinarySearchNode<T> {
   private _rank: number;

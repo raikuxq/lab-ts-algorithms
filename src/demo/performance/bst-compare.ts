@@ -1,10 +1,11 @@
-import RandBinarySearchTree from "../../data-structures/BinaryTree/RandBSTree/RandBinarySearchTree";
-import BinarySearchTree from "../../data-structures/BinaryTree/BSTree/BinarySearchTree";
+import RandBinarySearchTree from "../../data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchTree";
+import BinarySearchTree from "../../data-structures/BinaryTree/BinarySearchTree/BinarySearchTree";
 import { EnumTreeTraversalType } from "../../types/EnumTreeTraversalType";
+import IBinaryTree from "../../types/IBinaryTree";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const util = require("util");
 
-const logTree = <T>(tree: BinarySearchTree<T>) => {
+const logTree = <T>(tree: IBinaryTree<T>) => {
   console.log("HEIGHT");
   console.log(tree.height());
   console.log("LENGTH");
@@ -29,9 +30,9 @@ export const bstCompare = (): void => {
   console.log(
     "***************************LEAF TREE*****************************"
   );
-  logTree(bstLeaf);
+  logTree<number>(bstLeaf);
   console.log(
     "\n\n\n***************************RAND TREE*****************************"
   );
-  logTree(bstRand);
+  logTree<number>(bstRand);
 };

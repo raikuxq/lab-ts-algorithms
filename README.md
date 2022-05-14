@@ -204,18 +204,18 @@ Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface.
 [AbstractBinaryTree](src/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryTree.ts) — Common logic for all types of binary trees.
 
   
-[BinarySearchNode](src/data-structures/BinaryTree/BSTree/BinarySearchNode.ts) — Same as abstract binary node.
+[BinarySearchNode](src/data-structures/BinaryTree/BinarySearchTree/BinarySearchNode.ts) — Same as abstract binary node.
 
-[BinarySearchTree](src/data-structures/BinaryTree/BSTree/BinarySearchTree.ts) — Implementation of unbalanced binary search tree. 
+[BinarySearchTree](src/data-structures/BinaryTree/BinarySearchTree/BinarySearchTree.ts) — Implementation of unbalanced binary search tree. 
 Each node in left subtree is smaller and each node in right subtree is larger than the node data. 
 Extends [AbstractSearchTree](src/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryTree.ts).
 
 
 
-[RandBinarySearchNode](src/data-structures/BinaryTree/RandBSTree/RandBinarySearchNode.ts) — Have a rank attribute. 
-Extends [BinarySearchNode](src/data-structures/BinaryTree/BSTree/BinarySearchNode.ts).
+[RandBinarySearchNode](src/data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchNode.ts) — Have a rank attribute. 
+Extends [BinarySearchNode](src/data-structures/BinaryTree/BinarySearchTree/BinarySearchNode.ts).
 
-[RandBinarySearchTree](src/data-structures/BinaryTree/RandBSTree/RandBinarySearchTree.ts) 
+[RandBinarySearchTree](src/data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchTree.ts) 
 — Implementation of randomized binary search tree, which gives expected log(N) height. 
 Insertion have a 1/N+1 probability of inserting into root. 
-Extends [BinarySearchTree](src/data-structures/BinaryTree/BSTree/BinarySearchTree.ts).
+Extends [BinarySearchTree](src/data-structures/BinaryTree/BinarySearchTree/BinarySearchTree.ts).

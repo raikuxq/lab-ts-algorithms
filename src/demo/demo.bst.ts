@@ -1,4 +1,4 @@
-import BinarySearchTree from "../data-structures/BinaryTree/BSTree/BinarySearchTree";
+import BinarySearchTree from "../data-structures/BinaryTree/BinarySearchTree/BinarySearchTree";
 import { EnumTreeTraversalType } from "../types/EnumTreeTraversalType";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const util = require("util");

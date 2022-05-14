@@ -1,6 +1,6 @@
 import { FnCompareTwo } from "../../../types/FnCompareTwo";
 import RandBinarySearchNode from "./RandBinarySearchNode";
-import BinarySearchTree from "../BSTree/BinarySearchTree";
+import BinarySearchTree from "../BinarySearchTree/BinarySearchTree";
 
 /**
  * Randomized binary search tree implementation

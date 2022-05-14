@@ -1,6 +1,6 @@
 import { EnumBinarySearchTreeType } from "../types/EnumBinarySearchTreeType";
-import BinarySearchTree from "../data-structures/BinaryTree/BSTree/BinarySearchTree";
-import RandBinarySearchTree from "../data-structures/BinaryTree/RandBSTree/RandBinarySearchTree";
+import BinarySearchTree from "../data-structures/BinaryTree/BinarySearchTree/BinarySearchTree";
+import RandBinarySearchTree from "../data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchTree";
 import IBinaryTree from "../types/IBinaryTree";
 
 /**
