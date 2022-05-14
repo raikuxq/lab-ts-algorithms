@@ -1,5 +1,6 @@
 import LoopedArray from "../../../../src/data-structures/LoopedArray/LoopedArray";
 import IArrayFacade from "../../../../src/types/IArrayFacade";
+import ILinearStorage from "../../../../src/types/ILinearStorage";
 
 describe("Looped Array", () => {
   describe("constructor", () => {
@@ -311,6 +312,76 @@ describe("Looped Array", () => {
       array.clear();
 
       expect(array.isEmpty()).toBe(true);
+    });
+  });
+
+  describe("method has", function () {
+    const array = new LoopedArray<number>(10);
+    array.push(5);
+
+    it("should return true when value exists", () => {
+      expect(array.has(5)).toBe(true);
+    });
+
+    it("should return false when value does not exist", () => {
+      expect(array.has(10)).toBe(false);
+    });
+  });
+
+  describe("method length", function () {
+    describe("when array is non empty", () => {
+      describe("after adding", () => {
+        it("should return updated length value", () => {
+          const array = new LoopedArray<number>(10);
+          array.push(5);
+          array.push(15);
+          array.push(10);
+
+          expect(array.length()).toBe(3);
+        });
+      });
+
+      describe("after deleting", () => {
+        it("should return updated length value", () => {
+          const array = new LoopedArray<number>(10);
+          array.push(5);
+          array.push(15);
+          array.push(10);
+          array.pop();
+
+          expect(array.length()).toBe(2);
+        });
+      });
+    });
+
+    describe("when array is empty", () => {
+      it("should return zero value", () => {
+        const array = new LoopedArray<number>(10);
+
+        expect(array.length()).toBe(0);
+      });
+    });
+  });
+
+  describe("method isEmpty", () => {
+    it("should return true when array is empty", () => {
+      const array: ILinearStorage<number> = new LoopedArray<number>(10);
+      expect(array.isEmpty()).toBe(true);
+    });
+  });
+
+  describe("method isFull", () => {
+    it("should return false when array elements length lower than its capacity", () => {
+      const array: ILinearStorage<number> = new LoopedArray<number>(100);
+      array.push(10);
+
+      expect(array.isFull()).toBe(false);
+    });
+    it("should return true when array elements length same as its capacity", () => {
+      const array: ILinearStorage<number> = new LoopedArray<number>(1);
+      array.push(10);
+
+      expect(array.isFull()).toBe(true);
     });
   });
 });

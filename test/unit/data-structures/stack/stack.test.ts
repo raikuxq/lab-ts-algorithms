@@ -60,6 +60,54 @@ describe("stack", () => {
     });
   });
 
+  describe("method has", function () {
+    const stack = new Stack();
+    stack.push(5);
+
+    it("should return true when value exists", () => {
+      expect(stack.has(5)).toBe(true);
+    });
+
+    it("should return false when value does not exist", () => {
+      expect(stack.has(10)).toBe(false);
+    });
+  });
+
+  describe("method length", function () {
+    describe("when stack is non empty", () => {
+      describe("after adding", () => {
+        it("should return updated length value", () => {
+          const stack = new Stack();
+          stack.push(5);
+          stack.push(15);
+          stack.push(10);
+
+          expect(stack.length()).toBe(3);
+        });
+      });
+
+      describe("after deleting", () => {
+        it("should return updated length value", () => {
+          const stack = new Stack();
+          stack.push(5);
+          stack.push(15);
+          stack.push(10);
+          stack.pop();
+
+          expect(stack.length()).toBe(2);
+        });
+      });
+    });
+
+    describe("when stack is empty", () => {
+      it("should return zero value", () => {
+        const stack = new Stack();
+
+        expect(stack.length()).toBe(0);
+      });
+    });
+  });
+
   describe("method isEmpty", () => {
     it("should return true when stack is empty", () => {
       const stack: ILinearStorage<number> = new Stack(100);
@@ -79,6 +127,17 @@ describe("stack", () => {
       stack.push(10);
 
       expect(stack.isFull()).toBe(true);
+    });
+  });
+
+  describe("method clear", () => {
+    it("should correctly clear stack", () => {
+      const stack = new Stack();
+      stack.push(10);
+      stack.push(20);
+      stack.clear();
+
+      expect(stack.isEmpty()).toBe(true);
     });
   });
 

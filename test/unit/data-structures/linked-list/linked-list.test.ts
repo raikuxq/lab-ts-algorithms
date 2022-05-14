@@ -2,6 +2,7 @@ import SingleLinkedList from "../../../../src/data-structures/LinkedList/SingleL
 import DoubleLinkedList from "../../../../src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
 import { EnumLinkedListType } from "../../../../src/types/EnumLinkedListType";
 import { createLinkedList } from "../../../../src/helpers/createLinkedList";
+import ILinearStorage from "../../../../src/types/ILinearStorage";
 
 describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
   "%s linked list",
@@ -273,6 +274,82 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
         list.clear();
 
         expect(list.isEmpty()).toBe(true);
+      });
+    });
+
+    describe("method has", function () {
+      const list = createLinkedList<number>(listType);
+      list.push(5);
+
+      it("should return true when value exists", () => {
+        expect(list.has(5)).toBe(true);
+      });
+
+      it("should return false when value does not exist", () => {
+        expect(list.has(10)).toBe(false);
+      });
+    });
+
+    describe("method length", function () {
+      describe("when list is non empty", () => {
+        describe("after adding", () => {
+          it("should return updated length value", () => {
+            const list = createLinkedList<number>(listType);
+            list.push(5);
+            list.push(15);
+            list.push(10);
+
+            expect(list.length()).toBe(3);
+          });
+        });
+
+        describe("after deleting", () => {
+          it("should return updated length value", () => {
+            const list = createLinkedList<number>(listType);
+            list.push(5);
+            list.push(15);
+            list.push(10);
+            list.pop();
+
+            expect(list.length()).toBe(2);
+          });
+        });
+      });
+
+      describe("when list is empty", () => {
+        it("should return zero value", () => {
+          const list = createLinkedList<number>(listType);
+
+          expect(list.length()).toBe(0);
+        });
+      });
+    });
+
+    describe("method isEmpty", () => {
+      it("should return true when list is empty", () => {
+        const list: ILinearStorage<number> = createLinkedList<number>(listType);
+        expect(list.isEmpty()).toBe(true);
+      });
+    });
+
+    describe("method isFull", () => {
+      it("should return false when list elements length lower than its capacity", () => {
+        const list: ILinearStorage<number> = createLinkedList<number>(
+          listType,
+          100
+        );
+        list.push(10);
+
+        expect(list.isFull()).toBe(false);
+      });
+      it("should return true when list elements length same as its capacity", () => {
+        const list: ILinearStorage<number> = createLinkedList<number>(
+          listType,
+          1
+        );
+        list.push(10);
+
+        expect(list.isFull()).toBe(true);
       });
     });
 
