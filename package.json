@@ -8,15 +8,6 @@
     "lint": "yarn eslint . --ext .ts",
     "lint:fix": "yarn eslint --fix .  --ext .ts"
   },
-  "exports": {
-    ".": "./src/exports/main.ts",
-    "algorithms": "./src/exports/algorithms.ts",
-    "sorts": "./src/exports/algorithms/sorts.ts",
-    "types": "./src/exports/types.ts",
-    "utils": "./src/exports/utils.ts",
-    "constants": "./src/exports/constants.ts",
-    "helpers": "./src/exports/helpers.ts"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/raikuxq/lab-ts-algorithms"
