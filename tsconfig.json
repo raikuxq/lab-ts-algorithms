@@ -13,6 +13,14 @@
     "resolveJsonModule": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    ".build"
+  ],
+  "exclude": [
+    "test/**/*",
+    ".eslintrc.js",
+    "jest.config.js",
+    "tsconfig.json",
+    "nodemon.json"
   ]
 }
