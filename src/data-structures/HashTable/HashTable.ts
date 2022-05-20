@@ -1,6 +1,9 @@
 import IKeyValueStorage from "../../types/IKeyValueStorage";
 import HashTableNode from "./HashTableNode";
 
+/**
+ * Implementation of open addressing hash table using quadratic probing
+ */
 export default class HashTable<T> implements IKeyValueStorage<T> {
   /**
    Constants
@@ -28,7 +31,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
   }
 
   /**
-   * Main hash function
+   * Main-hash function
    */
   private hashFn(key: string, number: number): number {
     return (
@@ -38,7 +41,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
   }
 
   /**
-   * Double-hash function
+   * Helper-hash function
    */
   private innerHashFn(key: string): number {
     const length: number = key.length;
@@ -53,7 +56,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
   }
 
   /**
-   * Max capacity will be increased
+   * Max capacity will be increased and storage will be overwritten
    */
   private resizeStorage(): Array<HashTableNode<T>> {
     this.maxCapacity *= 2;
@@ -80,6 +83,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
   }
 
   /**
+   * Will find node instance by its key
    * @throws when element does not exist
    */
   private findNode(key: string): HashTableNode<T> {
@@ -143,7 +147,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
   }
 
   /**
-   * Will insert item to hash table
+   * Will update item property isDeleted to false
    * @throws when element does not exist
    */
   public delete(key: string): void {
@@ -190,7 +194,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
   }
 
   /**
-   * Clear all elements
+   * Will overwrite storage with array of null elements
    */
   public clear(): void {
     this.storage = new Array(HashTable.DEFAULT_MAX_CAPACITY).fill(null);
