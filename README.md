@@ -30,6 +30,7 @@ Clone this repository and install dependencies by using `yarn` command.
   + [Stack](#stack)
   + [Queue](#queue)
 + [Non-linear data structures](#non-linear-data-structures)
+  + [Hash table](#hash-table)
   + [Graph](#graph)
   + [Binary tree](#binary-trees)
 
@@ -134,6 +135,17 @@ Extends [IConvertableToArray](src/types/IConvertableToArray.ts) interface.
 
 
 # Non linear data structures
+
+## Hash Table
+### Interfaces
+[IKeyValueStorage](src/types/IKeyValueStorage.ts) — Contains basic key-value storages operations.
+
+### Implementation
+[HashTableNode](src/data-structures/HashTable/HashTableNode.ts) — Contains key, data and isDeleted properties.
+
+[HashTable](src/data-structures/HashTable/HashTable.ts)  [ [ tests ] ](test/unit/data-structures/hash-table/hash-table.test.ts) — Implementation of open addressing hash table using quadratic probing
+
+
 
 ## Graph
 ### Interfaces
