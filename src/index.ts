@@ -1,6 +1,7 @@
 /**
  * Write your code here
  */
+// import { demoHashtable } from "./demo/demo.hashtable";
 // import { demoBst, demoBstObjects } from "./demo/demo.bst";
 // import { bstCompare } from "./demo/performance/bst-compare";
 // import { demoStack } from "./demo/demo.stack";
@@ -38,3 +39,4 @@
 // demoBst();
 // // console.log("===========================================================");
 // bstCompare();
+// demoHashtable();
