@@ -1,26 +1,31 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
     "lib": ["es6"],
     "allowJs": true,
     "outDir": ".build",
     "declaration": true,
-    "rootDir": "src",
     "strict": true,
     "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "module": "ES2020",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "target": "ES2020",
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": false,
+    "inlineSourceMap": true
   },
-  "include": [
-    "src/**/*",
-    ".build"
-  ],
   "exclude": [
+    "lib/**/*",
     "test/**/*",
-    ".eslintrc.js",
-    "jest.config.js",
+    ".eslintrc.cjs",
+    "jest.config.cjs",
     "tsconfig.json",
     "nodemon.json"
-  ]
+  ],
+  "ts-node": {
+    "esm": true
+  },
+  "lib": ["esnext"]
 }
