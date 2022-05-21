@@ -2,7 +2,32 @@ Common algorithms and data structures.
 
 Written in TypeScript, tested with Jest.
 
-# Getting started
+
+# Usage as package
+Install by using any of these commands:
++ `yarn add @raikuxq/alg-ds`
++ `npm install @raikuxq/alg-ds --save`
+
+## Import from root
+`import { <anything> } from '@raikuxq/alg-ds'`
+
+## Import from sub-paths
+### Data structures
+`import {Stack, Queue, SingleLinkedList, DoubleLinkedList, RandBinarySearchTree, BinarySearchTree, DirectedGraph, UndirectedGraph, LoopedArray, HashTable, } from '@raikuxq/alg-ds/lib/exports/data-structures'`
+### Sorting algorithms
+`import {bubbleSort, insertionSort, mergeSort, selectSort, quickSort} from '@raikuxq/alg-ds/lib/exports/data-structures `
+### Other algorithms
+`import {binarySearch, factorial, memoizedFactorial, memoizedFibonacci, fibonacci, transposeMatrix, GraphIteratorDFS, presenterAdjacencyLists, presenterAdjacencyMatrix, hasPath, shortestPath, DijkstraIterationStrategy, DFSIterationStrategy, BFSIterationStrategy, GraphIteratorBFS, GraphIteratorDijkstra, transposeDirectedGraph} from '@raikuxq/alg-ds/lib/exports/algorithms'`
+### Helpers
+`import {createGraph, createGraphFromMatrix, createBinaryTree, createLinkedList, generateRandomGraph} from '@raikuxq/alg-ds/lib/exports/helpers`
+### Utils
+`import {perf, getMinIndex, getMinIndexFromIndex, memoize, perfAsync, roundNumber, randomizeNumberInRange, swapArrayItems} from '@raikuxq/alg-ds/lib/exports/utils'`
+### Constants
+`import {EDGE_NOT_EXISTS_STATE, EDGE_EXISTS_STATE} from '@raikuxq/alg-ds/lib/exports/constants'`
+
+
+
+# Usage as repository
 
 Clone this repository and install dependencies by using `yarn` command.
 
@@ -17,7 +42,6 @@ Clone this repository and install dependencies by using `yarn` command.
 + `yarn lint` - lint check via eslint
 
 + `yarn lint:fix` - fix source files via eslint
-
 
 
 # Navigation
