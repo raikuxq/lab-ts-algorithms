@@ -77,7 +77,7 @@ describe.each([
         const arrayShuffled = arraySrc
           .map((item) => item)
           .sort(() => Math.random() - 0.5);
-        arrayShuffled.forEach((num, index) => {
+        arrayShuffled.forEach((num) => {
           tree.insert(num);
         });
         const height = tree.height();
