@@ -16,7 +16,8 @@
   "types": "./src/exports.d.ts",
   "files": [
     "lib",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "devDependencies": {
     "@types/jest": "^26.0.14",
@@ -37,5 +38,5 @@
     "typescript": "^4.0.3"
   },
   "dependencies": {},
-  "version": "1.1.2"
+  "version": "1.1.3"
 }
