@@ -1,3 +1,0 @@
-import { EDGE_EXISTS_STATE, EDGE_NOT_EXISTS_STATE } from "../src/constants";
-
-export { EDGE_NOT_EXISTS_STATE, EDGE_EXISTS_STATE };

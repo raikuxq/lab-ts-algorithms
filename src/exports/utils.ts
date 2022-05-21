@@ -1,4 +1,4 @@
-import { memoize } from "../src/algorithms/memoize";
+import { memoize } from "../algorithms/memoize";
 import {
   getMinIndex,
   getMinIndexFromIndex,
@@ -7,7 +7,7 @@ import {
   roundNumber,
   swapArrayItems,
   perfAsync,
-} from "../src/utils";
+} from "../utils";
 
 export {
   perf,
