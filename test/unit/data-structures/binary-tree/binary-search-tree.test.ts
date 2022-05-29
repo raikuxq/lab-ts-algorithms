@@ -1,6 +1,9 @@
 import { EnumBinarySearchTreeType } from "../../../../src/types/EnumBinarySearchTreeType";
 import { createBinaryTree } from "../../../../src/helpers/createBinaryTree";
 import { EnumTreeTraversalType } from "../../../../src/types/EnumTreeTraversalType";
+import IsAlreadyExistsException from "../../../../src/exceptions/IsAlreadyExistsException";
+import IsNotFoundException from "../../../../src/exceptions/IsNotFoundException";
+import IsEmptyException from "../../../../src/exceptions/IsEmptyException";
 
 describe.each([
   EnumBinarySearchTreeType.BST,
@@ -30,6 +33,15 @@ describe.each([
         15,
         20,
       ]);
+    });
+
+    it("should throw when element already exists", () => {
+      const tree = createBinaryTree(treeType);
+      tree.insert(5);
+
+      expect(() => {
+        tree.insert(5);
+      }).toThrowError(IsAlreadyExistsException);
     });
   });
 
@@ -130,6 +142,16 @@ describe.each([
     it("should restructure the tree correctly", () => {
       expect(tree.traverse(EnumTreeTraversalType.InOrder)).toEqual([5, 7, 20]);
     });
+
+    it("should throw when element not found", () => {
+      const tree = createBinaryTree(treeType);
+      tree.insert(5);
+      tree.insert(12);
+
+      expect(() => {
+        tree.delete(10);
+      }).toThrowError(IsNotFoundException);
+    });
   });
 
   describe("method max", function () {
@@ -141,6 +163,14 @@ describe.each([
 
     it("should be in order", () => {
       expect(tree.max()).toBe(20);
+    });
+
+    it("should throw when list is empty", () => {
+      const tree = createBinaryTree(treeType);
+
+      expect(() => {
+        tree.max();
+      }).toThrowError(IsEmptyException);
     });
   });
 
@@ -154,6 +184,14 @@ describe.each([
 
     it("should be in order", () => {
       expect(tree.min()).toBe(2);
+    });
+
+    it("should throw when list is empty", () => {
+      const tree = createBinaryTree(treeType);
+
+      expect(() => {
+        tree.min();
+      }).toThrowError(IsEmptyException);
     });
   });
 
@@ -224,6 +262,14 @@ describe.each([
           23,
           22,
         ]);
+      });
+
+      it("should throw when list is empty", () => {
+        const tree = createBinaryTree(treeType);
+
+        expect(() => {
+          tree.traverse(EnumTreeTraversalType.InOrder);
+        }).toThrowError(IsEmptyException);
       });
     });
   }

@@ -1,5 +1,9 @@
 import AbstractLinkedNode from "./AbstractLinkedNode";
 import ILinkedList from "../../../types/ILinkedList";
+import IllegalCapacityException from "../../../exceptions/IllegalCapacityException";
+import IsFullException from "../../../exceptions/IsFullException";
+import IsEmptyException from "../../../exceptions/IsEmptyException";
+import IndexOutOfBoundsException from "../../../exceptions/IndexOutOfBoundsException";
 
 export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
   protected readonly _capacity: number;
@@ -26,7 +30,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
       return Number.MAX_VALUE;
     }
     if (capacity <= 0) {
-      throw new Error("Capacity must be larger than 0");
+      throw new IllegalCapacityException("Capacity must be larger than 0");
     }
 
     return capacity;
@@ -42,7 +46,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
     rightNode: AbstractLinkedNode<T> | null
   ): void {
     if (this.isFull()) {
-      throw new Error("List is full, no more space available");
+      throw new IsFullException("List is full, no more space available");
     }
     if (this._head === null) {
       this._head = targetNode;
@@ -65,12 +69,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * Will remove the node from its neighbors nodes links
    * @throws when node does not exist
    */
-  private deleteNode(
-    node: AbstractLinkedNode<T> | null
-  ): AbstractLinkedNode<T> {
-    if (node === null) {
-      throw new Error("Node should be existed");
-    }
+  private deleteNode(node: AbstractLinkedNode<T>): AbstractLinkedNode<T> {
     this.deleteNodeImpl(node);
     this._length--;
 
@@ -85,11 +84,13 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * @throws when node was not found
    */
   protected getNodeByIndex(index: number): AbstractLinkedNode<T> {
+    const isIndexNotInRange = index < 0 || index > this._length;
+
     if (this.isEmpty()) {
-      throw new Error("List is empty");
+      throw new IsEmptyException("List is empty");
     }
-    if (this._length < index) {
-      throw new Error("Index exceed list length");
+    if (isIndexNotInRange) {
+      throw new IndexOutOfBoundsException("Index exceed list length");
     }
 
     let currentNode = this._tail;
@@ -100,11 +101,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
       counter++;
     }
 
-    if (currentNode === null) {
-      throw new Error("Node does not exist");
-    }
-
-    return currentNode;
+    return currentNode!;
   }
 
   /**
@@ -162,7 +159,9 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
     const shouldPushAsFirst = this.isEmpty() && fromIndex === 0;
 
     if (isIndexNotInRange) {
-      throw new Error("index must be in range between 0 and list length");
+      throw new IndexOutOfBoundsException(
+        "index must be in range between 0 and list length"
+      );
     }
     if (shouldPushAsFirst) {
       this.push(value);
@@ -178,6 +177,9 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * Delete node from list's end
    */
   public pop(): T {
+    if (this.isEmpty() || this._head === null) {
+      throw new IsEmptyException("cannot delete because list is empty");
+    }
     const deletedNode = this.deleteNode(this._head);
     this.popImpl();
     return deletedNode.data;
@@ -187,6 +189,9 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * Delete node from list's start and get its data
    */
   public shift(): T {
+    if (this.isEmpty() || this._tail === null) {
+      throw new IsEmptyException("cannot delete because list is empty");
+    }
     const deletedNode = this.deleteNode(this._tail);
     this.shiftImpl();
     return deletedNode.data;
@@ -231,11 +236,11 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Get head element data
-   * @throws Error when head does not exist
+   * @throws when head does not exist
    */
   public peek(): T {
-    if (!this._head) {
-      throw new Error("Head does not exist");
+    if (this.isEmpty() || !this._head) {
+      throw new IsEmptyException("head does not exist");
     }
 
     return this._head.data;
@@ -243,11 +248,11 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Get tail element data
-   * @throws Error when tail does not exists
+   * @throws when tail does not exists
    */
   public peekFromStart(): T {
-    if (!this._tail) {
-      throw new Error("Tail does not exist");
+    if (this.isEmpty() || !this._tail) {
+      throw new IsEmptyException("tail does not exist");
     }
 
     return this._tail.data;
@@ -296,7 +301,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
   public pushFromArray(elements: Array<T>): void {
     elements.forEach((element: T) => {
       if (this.isFull()) {
-        throw new Error("List is full, no more space available");
+        throw new IsFullException("List is full, no more space available");
       }
       this.push(element);
     });

@@ -1,6 +1,7 @@
 import { FnCompareTwo } from "../../../types/FnCompareTwo";
 import RandBinarySearchNode from "./RandBinarySearchNode";
 import BinarySearchTree from "../BinarySearchTree/BinarySearchTree";
+import IsAlreadyExistsException from "../../../exceptions/IsAlreadyExistsException";
 
 /**
  * Randomized binary search tree implementation
@@ -208,7 +209,7 @@ export default class RandBinarySearchTree<T> extends BinarySearchTree<T> {
    */
   public insert(value: T): void {
     if (this.has(value)) {
-      throw new Error("Node already exists");
+      throw new IsAlreadyExistsException("Node already exists");
     }
     const createdNode = new RandBinarySearchNode(value);
     this.insertRandomly(createdNode);

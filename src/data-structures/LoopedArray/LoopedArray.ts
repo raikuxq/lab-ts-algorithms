@@ -1,4 +1,7 @@
 import IArrayFacade from "../../types/IArrayFacade";
+import IllegalCapacityException from "../../exceptions/IllegalCapacityException";
+import IsNotFoundException from "../../exceptions/IsNotFoundException";
+import IsEmptyException from "../../exceptions/IsEmptyException";
 
 /**
  * Linear data structure
@@ -15,7 +18,7 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
    */
   constructor(capacity: number) {
     if (capacity <= 0) {
-      throw new Error("Capacity must be larger than 0");
+      throw new IllegalCapacityException("Capacity must be larger than 0");
     }
     this._capacity = capacity;
     this._array = new Array<T>(0);
@@ -60,12 +63,17 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
    * Delete node from array's end
    */
   public pop(): T {
+    if (this.isEmpty()) {
+      throw new IsEmptyException("cannot delete because array is empty");
+    }
     this._realLength--;
     const deletedItem = this._array.pop();
-    if (deletedItem === undefined)
-      throw new Error(
+
+    if (deletedItem === undefined) {
+      throw new IsNotFoundException(
         "cannot delete last element because of it does not exists"
       );
+    }
     return deletedItem;
   }
 
@@ -73,18 +81,21 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
    * Delete node from array's start
    */
   public shift(): T {
+    if (this.isEmpty()) {
+      throw new IsEmptyException("cannot delete because array is empty");
+    }
     this._realLength--;
     const deletedItem = this._array.shift();
-    if (deletedItem === undefined)
-      throw new Error(
+    if (deletedItem === undefined) {
+      throw new IsNotFoundException(
         "cannot delete first element because of it does not exists"
       );
+    }
     return deletedItem;
   }
 
   /**
    * Get head element data
-   * @throws Error when head does not exists
    */
   public peek(): T {
     return this._array[this._array.length - 1];
@@ -92,7 +103,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Get tail element data
-   * @throws Error when head does not exists
    */
   public peekFromStart(): T {
     return this._array[0];
@@ -100,7 +110,6 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Get array element by index from start
-   * @throws when element does not exists
    */
   peekByIndex(index: number): T {
     return this._array[index];

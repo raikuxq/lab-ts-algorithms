@@ -1,6 +1,7 @@
 import IGraph from "../../../types/IGraph";
 import IGraphIterator from "../../../types/IGraphIterator";
 import IGraphIterationStrategy from "../../../types/IGraphIterationStrategy";
+import IsNotFoundException from "../../../exceptions/IsNotFoundException";
 
 /**
  * Check if graph has a path between two vertices
@@ -16,10 +17,10 @@ export const hasPath = <T>(
 ): boolean => {
   /* Validate */
   if (!graph.hasVertex(from)) {
-    throw new Error("Start vertex was not found");
+    throw new IsNotFoundException("Start vertex was not found");
   }
   if (!graph.hasVertex(to)) {
-    throw new Error("End vertex was not found");
+    throw new IsNotFoundException("End vertex was not found");
   }
 
   const iterator: IGraphIterator<T> = strategy.createIterator(graph);

@@ -47,7 +47,6 @@ Clone this repository and install dependencies by using `yarn` command.
 # Navigation
 + [Algorithms](#algorithms)
   + [Sorting algorithms](#sorting-algorithms)
-+ [Iterators](#iterators)
 + [Linear data structures](#linear-data-structures)
   + [Linked list](#linked-list)
   + [Looped array](#looped-array)
@@ -86,19 +85,6 @@ Clone this repository and install dependencies by using `yarn` command.
 
 
 
-
-# Iterators
-
-### Interfaces
-[IIterable](src/types/IIterable.ts) — Allows to create an iterator instance.
-
-[IBiDirectIterable](src/types/IBiDirectIterable.ts) — Allows to create a bi-direct iterator instance. 
-Extends [IIterable](src/types/IIterable.ts) interface.
-
-[IIterator](src/types/IIterator.ts) — Allows only next navigation.
-
-[IBiDirectIterator](src/types/IBiDirectIterator.ts) — Allows both next and prev navigation. 
-Extends [IIterator](src/types/IIterator.ts) interface.
 
 
 # Linear data structures

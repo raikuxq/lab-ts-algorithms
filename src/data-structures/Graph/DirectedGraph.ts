@@ -1,5 +1,6 @@
 import AbstractGraph from "./AbstractGraph";
 import GraphEdge from "./GraphEdge";
+import IsNotFoundException from "../../exceptions/IsNotFoundException";
 
 /**
  * Directed graph - data structure where edges with same pair of vertices are not equal
@@ -22,7 +23,7 @@ export default class DirectedGraph<T> extends AbstractGraph<T> {
     );
 
     if (!edge) {
-      throw new Error("Edge not found");
+      throw new IsNotFoundException("Edge not found");
     }
 
     return edge;
@@ -47,7 +48,7 @@ export default class DirectedGraph<T> extends AbstractGraph<T> {
         this._vertices.get(fromVertex)?.push(toVertex);
       }
     } catch {
-      throw new Error(
+      throw new IsNotFoundException(
         "Edge cannot be added because one of vertices was not found"
       );
     }
@@ -74,7 +75,7 @@ export default class DirectedGraph<T> extends AbstractGraph<T> {
         (edge: GraphEdge<T>) => edge !== edgeToRemove
       );
     } catch {
-      throw new Error(
+      throw new IsNotFoundException(
         "Edge cannot be removed because one of vertices was not found"
       );
     }

@@ -6,8 +6,8 @@ import BFSIterationStrategy from "../../../../src/data-structures/Graph/strategy
 import DFSIterationStrategy from "../../../../src/data-structures/Graph/strategy/DFSIterationStrategy";
 
 import { hasPath } from "../../../../src/data-structures/Graph/searching/hasPath";
-import { shortestPath } from "../../../../src/data-structures/Graph/searching/shortestPath";
 import { EnumGraphTraversalType } from "../../../../src/types/EnumGraphTraversalType";
+import IsNotFoundException from "../../../../src/exceptions/IsNotFoundException";
 
 describe("Has Path Algorithm", () => {
   const strategy: IGraphIterationStrategy<string> = new BFSIterationStrategy();
@@ -17,8 +17,8 @@ describe("Has Path Algorithm", () => {
 
     it("should throw when graph is empty", () => {
       expect(() => {
-        shortestPath(graph, "-", "-", strategy);
-      }).toThrowError();
+        hasPath(graph, "-", "-", strategy);
+      }).toThrowError(IsNotFoundException);
     });
   });
 
@@ -29,14 +29,14 @@ describe("Has Path Algorithm", () => {
 
     it("should throw when first node does not exist", () => {
       expect(() => {
-        shortestPath(graph, "Mike", "NOT_EXISTED_NODE", strategy);
-      }).toThrowError();
+        hasPath(graph, "Mike", "NOT_EXISTED_NODE", strategy);
+      }).toThrowError(IsNotFoundException);
     });
 
     it("should throw when second node does not exist", () => {
       expect(() => {
-        shortestPath(graph, "NOT_EXISTED_NODE", "Bob", strategy);
-      }).toThrowError();
+        hasPath(graph, "NOT_EXISTED_NODE", "Bob", strategy);
+      }).toThrowError(IsNotFoundException);
     });
   });
 

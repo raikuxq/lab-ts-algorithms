@@ -2,6 +2,7 @@ import IIterator from "../../../types/IIterator";
 import IIterable from "../../../types/IIterable";
 import AbstractLinkedList from "../AbstractLinkedList/AbstractLinkedList";
 import SingleLinkedNode from "./SingleLinkedNode";
+import IsNotFoundException from "../../../exceptions/IsNotFoundException";
 
 /**
  * Linear data structure
@@ -135,7 +136,7 @@ export default class SingleLinkedList<T>
        */
       next: (): T => {
         if (!iterator.hasNext()) {
-          throw new Error("Next element does not exist");
+          throw new IsNotFoundException("Next element does not exist");
         }
         activeNode = activeNode.next!;
         return activeNode.data;

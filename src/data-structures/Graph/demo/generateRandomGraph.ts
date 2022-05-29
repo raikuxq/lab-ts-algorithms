@@ -22,9 +22,6 @@ const getPossibleEdgesCount = (
       possibleEdgesCount = Math.floor(possibleEdgesCount / 2);
       break;
     }
-    default: {
-      throw new Error("Wrong random generation format");
-    }
   }
 
   return possibleEdgesCount;
@@ -47,9 +44,6 @@ const fillGraphRandomly = (
         graph.addVertex((i + 1).toString());
       }
       break;
-    }
-    default: {
-      throw new Error("Wrong random generation format");
     }
   }
 };

@@ -1,5 +1,7 @@
 import Stack from "../../../../src/data-structures/Stack/Stack";
 import ILinearStorage from "../../../../src/types/ILinearStorage";
+import IsEmptyException from "../../../../src/exceptions/IsEmptyException";
+import IsFullException from "../../../../src/exceptions/IsFullException";
 
 describe("stack", () => {
   describe("method peek", () => {
@@ -15,7 +17,7 @@ describe("stack", () => {
 
       expect(() => {
         stack.peek();
-      }).toThrowError();
+      }).toThrowError(IsEmptyException);
     });
   });
 
@@ -33,7 +35,7 @@ describe("stack", () => {
 
       expect(() => {
         stack.push(20);
-      }).toThrowError();
+      }).toThrowError(IsFullException);
     });
   });
 
@@ -56,7 +58,7 @@ describe("stack", () => {
 
       expect(() => {
         stack.pop();
-      }).toThrowError();
+      }).toThrowError(IsEmptyException);
     });
   });
 

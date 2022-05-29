@@ -2,6 +2,7 @@ import { EnumGraphType } from "../../../../src/types/EnumGraphType";
 import { createGraphFromMatrix } from "../../../../src/helpers/createGraphFromMatrix";
 import { ArrayMatrix } from "../../../../src/types/ArrayMatrix";
 import IGraph from "../../../../src/types/IGraph";
+import IllegalArgumentException from "../../../../src/exceptions/base/IllegalArgumentException";
 
 describe("in Directed graph", () => {
   /**
@@ -51,6 +52,18 @@ describe("in Directed graph", () => {
       expect(graph.hasEdge("John", "Bob")).toBe(false);
       expect(graph.hasEdge("John", "Maria")).toBe(false);
     });
+  });
+
+  it("should throw when given array is not a matrix", () => {
+    const arr = [
+      [1, 1, 0],
+      [1, 0, 1],
+    ];
+    const fieldsList: Array<string> = ["Bob", "Maria", "John"];
+
+    expect(() => {
+      createGraphFromMatrix(arr, fieldsList, EnumGraphType.Directed);
+    }).toThrowError(IllegalArgumentException);
   });
 });
 
@@ -102,5 +115,17 @@ describe("in Undirected graph", () => {
       expect(graph.hasEdge("John", "Bob")).toBe(false);
       expect(graph.hasEdge("John", "Maria")).toBe(true);
     });
+  });
+
+  it("should throw when given array is not a matrix", () => {
+    const arr = [
+      [1, 1, 0],
+      [1, 0, 1],
+    ];
+    const fieldsList: Array<string> = ["Bob", "Maria", "John"];
+
+    expect(() => {
+      createGraphFromMatrix(arr, fieldsList, EnumGraphType.Undirected);
+    }).toThrowError(IllegalArgumentException);
   });
 });

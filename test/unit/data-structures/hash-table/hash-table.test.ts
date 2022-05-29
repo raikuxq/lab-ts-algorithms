@@ -1,12 +1,14 @@
 import IKeyValueStorage from "../../../../src/types/IKeyValueStorage";
 import HashTable from "../../../../src/data-structures/HashTable/HashTable";
+import IllegalCapacityException from "../../../../src/exceptions/IllegalCapacityException";
+import IsNotFoundException from "../../../../src/exceptions/IsNotFoundException";
 
 describe("Hash Table", () => {
   describe("constructor", () => {
     it("should throw when given capacity value is less than 1", () => {
       expect(() => {
         new HashTable(-5);
-      }).toThrowError();
+      }).toThrowError(IllegalCapacityException);
     });
 
     it("should create empty instance", () => {
@@ -95,7 +97,7 @@ describe("Hash Table", () => {
 
       expect(() => {
         hashTable.get("key");
-      }).toThrowError();
+      }).toThrowError(IsNotFoundException);
     });
 
     it("should return true when property is exists", () => {
@@ -112,7 +114,7 @@ describe("Hash Table", () => {
 
       expect(() => {
         hashTable.get("key");
-      }).toThrowError();
+      }).toThrowError(IsNotFoundException);
     });
   });
 
@@ -130,7 +132,7 @@ describe("Hash Table", () => {
 
       expect(() => {
         hashTable.delete("NOT_EXISTED_PROP");
-      }).toThrowError();
+      }).toThrowError(IsNotFoundException);
     });
   });
 

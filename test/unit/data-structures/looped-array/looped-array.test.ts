@@ -1,17 +1,19 @@
 import LoopedArray from "../../../../src/data-structures/LoopedArray/LoopedArray";
 import IArrayFacade from "../../../../src/types/IArrayFacade";
 import ILinearStorage from "../../../../src/types/ILinearStorage";
+import IllegalCapacityException from "../../../../src/exceptions/IllegalCapacityException";
+import IsEmptyException from "../../../../src/exceptions/IsEmptyException";
 
 describe("Looped Array", () => {
   describe("constructor", () => {
     it("should throw when capacity is less than 1", () => {
       expect(() => {
         new LoopedArray(-5);
-      }).toThrowError();
+      }).toThrowError(IllegalCapacityException);
 
       expect(() => {
         new LoopedArray(0);
-      }).toThrowError();
+      }).toThrowError(IllegalCapacityException);
     });
   });
 
@@ -240,7 +242,7 @@ describe("Looped Array", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
       expect(() => {
         array.shift();
-      }).toThrowError();
+      }).toThrowError(IsEmptyException);
     });
   });
 
@@ -264,7 +266,7 @@ describe("Looped Array", () => {
 
       expect(() => {
         array.pop();
-      }).toThrowError();
+      }).toThrowError(IsEmptyException);
     });
   });
 
@@ -288,7 +290,7 @@ describe("Looped Array", () => {
 
       expect(() => {
         array.shift();
-      }).toThrowError();
+      }).toThrowError(IsEmptyException);
     });
   });
 

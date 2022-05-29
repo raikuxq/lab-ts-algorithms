@@ -1,5 +1,7 @@
 import IKeyValueStorage from "../../types/IKeyValueStorage";
 import HashTableNode from "./HashTableNode";
+import IllegalCapacityException from "../../exceptions/IllegalCapacityException";
+import IsNotFoundException from "../../exceptions/IsNotFoundException";
 
 /**
  * Implementation of open addressing hash table using quadratic probing
@@ -24,7 +26,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
    */
   public constructor(initialCapacity: number = HashTable.DEFAULT_MAX_CAPACITY) {
     if (initialCapacity <= 0) {
-      throw new Error("Size must be larger than 0");
+      throw new IllegalCapacityException("Size must be larger than 0");
     }
     this.maxCapacity = initialCapacity;
     this.storage = new Array(this.maxCapacity).fill(null);
@@ -99,7 +101,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
       }
     }
 
-    throw new Error("Element does not exist");
+    throw new IsNotFoundException("Element does not exist");
   }
 
   /**
@@ -160,7 +162,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
       }
     }
 
-    throw new Error("Element does not exist");
+    throw new IsNotFoundException("Element does not exist");
   }
 
   /**

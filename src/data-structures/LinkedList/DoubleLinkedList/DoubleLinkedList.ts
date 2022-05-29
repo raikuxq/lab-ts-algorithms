@@ -2,6 +2,7 @@ import IBiDirectIterator from "../../../types/IBiDirectIterator";
 import IBiDirectIterable from "../../../types/IBiDirectIterable";
 import AbstractLinkedList from "../AbstractLinkedList/AbstractLinkedList";
 import DoubleLinkedNode from "./DoubleLinkedNode";
+import IsNotFoundException from "../../../exceptions/IsNotFoundException";
 
 /**
  * Linear data structure
@@ -133,7 +134,7 @@ export default class DoubleLinkedList<T>
        */
       next: (): T => {
         if (!iterator.hasNext()) {
-          throw new Error("Next element does not exist");
+          throw new IsNotFoundException("Next element does not exist");
         }
         activeNode = activeNode.next!;
         return activeNode.data;
@@ -144,7 +145,7 @@ export default class DoubleLinkedList<T>
        */
       prev: (): T => {
         if (!iterator.hasPrev()) {
-          throw new Error("Prev element does not exist");
+          throw new IsNotFoundException("Prev element does not exist");
         }
         activeNode = activeNode.prev!;
         return activeNode.data;

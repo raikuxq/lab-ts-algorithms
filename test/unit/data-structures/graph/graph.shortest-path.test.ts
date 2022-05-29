@@ -7,6 +7,7 @@ import DijkstraIterationStrategy from "../../../../src/data-structures/Graph/str
 
 import { shortestPath } from "../../../../src/data-structures/Graph/searching/shortestPath";
 import { EnumGraphTraversalType } from "../../../../src/types/EnumGraphTraversalType";
+import IsNotFoundException from "../../../../src/exceptions/IsNotFoundException";
 
 describe("Shortest path algorithm", () => {
   const strategy: IGraphIterationStrategy<string> = new BFSIterationStrategy();
@@ -17,7 +18,7 @@ describe("Shortest path algorithm", () => {
     it("should throw when graph is empty", () => {
       expect(() => {
         shortestPath(graph, "-", "-", strategy);
-      }).toThrowError();
+      }).toThrowError(IsNotFoundException);
     });
   });
 
@@ -29,13 +30,13 @@ describe("Shortest path algorithm", () => {
     it("should throw when first node does not exist", () => {
       expect(() => {
         shortestPath(graph, "Mike", "NOT_EXISTED_NODE", strategy);
-      }).toThrowError();
+      }).toThrowError(IsNotFoundException);
     });
 
     it("should throw when second node does not exist", () => {
       expect(() => {
         shortestPath(graph, "NOT_EXISTED_NODE", "Bob", strategy);
-      }).toThrowError();
+      }).toThrowError(IsNotFoundException);
     });
 
     it("should find correct path between neighbor nodes", () => {

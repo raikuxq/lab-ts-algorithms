@@ -1,5 +1,6 @@
 import AbstractGraph from "./AbstractGraph";
 import GraphEdge from "./GraphEdge";
+import IsNotFoundException from "../../exceptions/IsNotFoundException";
 
 /**
  * Undirected graph - data structure where edges with same pair of vertices are equal
@@ -24,7 +25,7 @@ export default class UndirectedGraph<T> extends AbstractGraph<T> {
     );
 
     if (!edge) {
-      throw new Error("Edge not found");
+      throw new IsNotFoundException("Edge not found");
     }
 
     return edge;
@@ -65,7 +66,7 @@ export default class UndirectedGraph<T> extends AbstractGraph<T> {
         this._vertices.get(toVertex)?.push(fromVertex);
       }
     } catch {
-      throw new Error(
+      throw new IsNotFoundException(
         "Edge cannot be added because one of vertices was not found"
       );
     }
@@ -98,7 +99,7 @@ export default class UndirectedGraph<T> extends AbstractGraph<T> {
         (edge: GraphEdge<T>) => edge !== edgeToRemove
       );
     } catch {
-      throw new Error(
+      throw new IsNotFoundException(
         "Edge cannot be removed because one of vertices was not found"
       );
     }

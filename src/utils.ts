@@ -1,4 +1,5 @@
 import { performance } from "perf_hooks";
+import IllegalArgumentException from "./exceptions/base/IllegalArgumentException";
 
 /**
  * Will find min value in the whole array and return its index
@@ -62,4 +63,18 @@ export const perf = (fn: () => void): number => {
  */
 export const perfAsync = async (fn: () => void): Promise<number> => {
   return Promise.resolve(perf(fn));
+};
+
+/**
+ * Check is given array a matrix N*N
+ */
+export const checkIsArrayMatrix = <T>(array: Array<Array<T>>): boolean => {
+  for (let i = 0; i < array.length; i++) {
+    const subArray = array[i];
+    const checkIsSameLength = subArray.length === array.length;
+    if (!checkIsSameLength) {
+      return false;
+    }
+  }
+  return true;
 };

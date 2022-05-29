@@ -1,4 +1,5 @@
 import { transposeMatrix } from "../../../src/algorithms/transpose-matrix";
+import IllegalArgumentException from "../../../src/exceptions/base/IllegalArgumentException";
 
 describe("transpose matrix", () => {
   it("should throw when array is not a matrix", () => {
@@ -10,7 +11,7 @@ describe("transpose matrix", () => {
 
     expect(() => {
       transposeMatrix(srcMatrix);
-    }).toThrowError();
+    }).toThrowError(IllegalArgumentException);
   });
 
   it("should transpose matrix correctly", () => {

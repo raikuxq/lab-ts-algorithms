@@ -4,6 +4,9 @@ import IBinaryTree from "../../../types/IBinaryTree";
 import AbstractBinaryTree from "../AbstractBinaryTree/AbstractBinaryTree";
 import BinarySearchNode from "./BinarySearchNode";
 import Queue from "../../Queue/Queue";
+import IsAlreadyExistsException from "../../../exceptions/IsAlreadyExistsException";
+import IsNotFoundException from "../../../exceptions/IsNotFoundException";
+import IsEmptyException from "../../../exceptions/IsEmptyException";
 
 /**
  * Unbalanced binary search tree implementation
@@ -28,7 +31,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
    */
   protected checkIsEmpty(): void {
     if (this._head === null) {
-      throw new Error("Tree is empty");
+      throw new IsEmptyException("Tree is empty");
     }
   }
 
@@ -137,7 +140,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
    */
   public insert(value: T): void {
     if (this.has(value)) {
-      throw new Error("Node already exists");
+      throw new IsAlreadyExistsException("Node already exists");
     }
     const createdNode = new BinarySearchNode(value);
     this.insertToLeaf(createdNode);
@@ -156,7 +159,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
    */
   public delete(value: T): void {
     if (!this.has(value)) {
-      throw new Error("Value does not exist in the tree");
+      throw new IsNotFoundException("Value does not exist in the tree");
     }
 
     const recursiveDelete = (node: BinarySearchNode<T> | null, value: T) => {

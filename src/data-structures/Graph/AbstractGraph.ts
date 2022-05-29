@@ -1,4 +1,6 @@
 import GraphEdge from "./GraphEdge";
+import IsNotFoundException from "../../exceptions/IsNotFoundException";
+import IsAlreadyExistsException from "../../exceptions/IsAlreadyExistsException";
 
 export default abstract class AbstractGraph<T> {
   protected _vertices: Map<T, Array<T>>;
@@ -32,7 +34,7 @@ export default abstract class AbstractGraph<T> {
     const isExists = this._vertices.has(data);
 
     if (!isExists) {
-      throw new Error("Vertex not found");
+      throw new IsNotFoundException("Vertex not found");
     }
 
     return data;
@@ -113,7 +115,7 @@ export default abstract class AbstractGraph<T> {
    */
   public addVertex(data: T): this {
     if (this.hasVertex(data)) {
-      throw new Error("Vertex is already exist");
+      throw new IsAlreadyExistsException("Vertex is already exist");
     }
 
     this._vertices.set(data, new Array<T>());
@@ -133,7 +135,7 @@ export default abstract class AbstractGraph<T> {
       this.cascadeRemoveVertexRelations(vertexToRemove);
       this._vertices.delete(vertexToRemove);
     } catch (e) {
-      throw new Error("Vertex does not exist already");
+      throw new IsNotFoundException("Vertex does not exist already");
     }
 
     return this;

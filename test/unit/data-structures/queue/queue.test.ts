@@ -1,5 +1,7 @@
 import Queue from "../../../../src/data-structures/Queue/Queue";
 import ILinearStorage from "../../../../src/types/ILinearStorage";
+import IsEmptyException from "../../../../src/exceptions/IsEmptyException";
+import IsFullException from "../../../../src/exceptions/IsFullException";
 
 describe("queue", () => {
   describe("method peek", () => {
@@ -10,12 +12,13 @@ describe("queue", () => {
 
       expect(queue.peek()).toBe(5);
     });
+
     it("should throw when queue is empty", () => {
       const queue: ILinearStorage<number> = new Queue();
 
       expect(() => {
         queue.peek();
-      }).toThrowError();
+      }).toThrowError(IsEmptyException);
     });
   });
 
@@ -26,6 +29,16 @@ describe("queue", () => {
       queue.push(10);
 
       expect(queue.peek()).toBe(5);
+    });
+
+    it("should throw when list is full", () => {
+      const queue: ILinearStorage<number> = new Queue(2);
+      queue.push(5);
+      queue.push(10);
+
+      expect(() => {
+        queue.push(3);
+      }).toThrowError(IsFullException);
     });
   });
 
@@ -39,16 +52,18 @@ describe("queue", () => {
       it("should delete correct", () => {
         expect(queue.peek()).toBe(10);
       });
+
       it("should return correct value", () => {
         expect(popd).toBe(5);
       });
     });
+
     it("should throw when queue is empty", () => {
       const queue: ILinearStorage<number> = new Queue();
 
       expect(() => {
         queue.pop();
-      }).toThrowError();
+      }).toThrowError(IsEmptyException);
     });
   });
 
@@ -114,6 +129,7 @@ describe("queue", () => {
 
       expect(queue.isFull()).toBe(false);
     });
+
     it("should return true when queue elements length same as its capacity", () => {
       const queue: ILinearStorage<number> = new Queue(1);
       queue.push(10);

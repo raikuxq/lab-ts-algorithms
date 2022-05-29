@@ -1,6 +1,8 @@
 import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
 import ILinearStorage from "../../types/ILinearStorage";
 import ILinearStorageRA from "../../types/ILinearStorageRA";
+import IsEmptyException from "../../exceptions/IsEmptyException";
+import IsFullException from "../../exceptions/IsFullException";
 
 /**
  * FIFO data structure
@@ -21,7 +23,7 @@ export default class Queue<T> implements ILinearStorage<T> {
    */
   public peek(): T {
     if (this.isEmpty()) {
-      throw new Error("Cannot peek when list is empty");
+      throw new IsEmptyException("Cannot peek when list is empty");
     }
     return this._list.peek();
   }
@@ -32,7 +34,7 @@ export default class Queue<T> implements ILinearStorage<T> {
    */
   public push(item: T): void {
     if (this._list.isFull()) {
-      throw new Error("Cannot push when queue is full");
+      throw new IsFullException("Cannot push when queue is full");
     }
     this._list.unshift(item);
   }
@@ -43,7 +45,7 @@ export default class Queue<T> implements ILinearStorage<T> {
    */
   public pop(): T {
     if (this.isEmpty()) {
-      throw new Error("Cannot pop when list is empty");
+      throw new IsEmptyException("Cannot pop when list is empty");
     }
     return this._list.pop();
   }
