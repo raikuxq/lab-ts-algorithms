@@ -29,6 +29,13 @@ import DoubleLinkedList from "./data-structures/LinkedList/DoubleLinkedList/Doub
 import SingleLinkedList from "./data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
 import LoopedArray from "./data-structures/LoopedArray/LoopedArray";
 import HashTable from "./data-structures/HashTable/HashTable";
+import IsNotFoundException from "./exceptions/IsNotFoundException";
+import IsAlreadyExistsException from "./exceptions/IsAlreadyExistsException";
+import IllegalCapacityException from "./exceptions/IllegalCapacityException";
+import IllegalArgumentException from "./exceptions/base/IllegalArgumentException";
+import IllegalStateException from "./exceptions/base/IllegalStateException";
+import IndexOutOfBoundsException from "./exceptions/IndexOutOfBoundsException";
+import IsEmptyException from "./exceptions/IsEmptyException";
 import { bubbleSort } from "./algorithms/sorts/bubble-sort";
 import { selectSort } from "./algorithms/sorts/select-sort";
 import { mergeSort } from "./algorithms/sorts/merge-sort";
@@ -99,4 +106,14 @@ export {
   GraphIteratorBFS,
   GraphIteratorDijkstra,
   transposeDirectedGraph,
+};
+
+export {
+  IsEmptyException,
+  IsNotFoundException,
+  IsAlreadyExistsException,
+  IllegalCapacityException,
+  IllegalArgumentException,
+  IllegalStateException,
+  IndexOutOfBoundsException,
 };
