@@ -1,14 +1,14 @@
-import IKeyValueStorage from "../../../../src/types/IKeyValueStorage";
-import HashTable from "../../../../src/data-structures/HashTable/HashTable";
-import IllegalCapacityException from "../../../../src/exceptions/IllegalCapacityException";
-import IsNotFoundException from "../../../../src/exceptions/IsNotFoundException";
+import IKeyValueStorage from "../../../../src/app/types/IKeyValueStorage";
+import HashTable from "../../../../src/app/data-structures/HashTable/HashTable";
+import ValueOutOfRangeException from "../../../../src/app/exceptions/ValueOutOfRangeException";
+import IsNotFoundException from "../../../../src/app/exceptions/IsNotFoundException";
 
 describe("Hash Table", () => {
   describe("constructor", () => {
     it("should throw when given capacity value is less than 1", () => {
       expect(() => {
         new HashTable(-5);
-      }).toThrowError(IllegalCapacityException);
+      }).toThrowError(ValueOutOfRangeException);
     });
 
     it("should create empty instance", () => {

@@ -1,4 +1,4 @@
-import { binarySearch } from "../../../src/algorithms/binary-search";
+import { binarySearch } from "../../../src/app/algorithms/binary-search";
 
 describe("Binary search", () => {
   it("should find in positive 100 elements", () => {

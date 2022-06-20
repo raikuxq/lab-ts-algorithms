@@ -1,13 +1,13 @@
-import SingleLinkedList from "../../../../src/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
-import DoubleLinkedList from "../../../../src/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
-import { EnumLinkedListType } from "../../../../src/types/EnumLinkedListType";
-import { createLinkedList } from "../../../../src/helpers/createLinkedList";
-import ILinearStorage from "../../../../src/types/ILinearStorage";
-import IllegalCapacityException from "../../../../src/exceptions/IllegalCapacityException";
-import IsFullException from "../../../../src/exceptions/IsFullException";
-import IndexOutOfBoundsException from "../../../../src/exceptions/IndexOutOfBoundsException";
-import IsEmptyException from "../../../../src/exceptions/IsEmptyException";
-import IsNotFoundException from "../../../../src/exceptions/IsNotFoundException";
+import SingleLinkedList from "../../../../src/app/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
+import DoubleLinkedList from "../../../../src/app/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
+import { EnumLinkedListType } from "../../../../src/app/types/EnumLinkedListType";
+import { createLinkedList } from "../../../../src/app/data-structures/LinkedList/_helpers/createLinkedList";
+import ILinearStorage from "../../../../src/app/types/ILinearStorage";
+import ValueOutOfRangeException from "../../../../src/app/exceptions/ValueOutOfRangeException";
+import CollectionIsFullException from "../../../../src/app/exceptions/CollectionIsFullException";
+import IndexOutOfBoundsException from "../../../../src/app/exceptions/IndexOutOfBoundsException";
+import CollectionIsEmptyException from "../../../../src/app/exceptions/CollectionIsEmptyException";
+import IsNotFoundException from "../../../../src/app/exceptions/IsNotFoundException";
 
 describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
   "%s linked list",
@@ -16,7 +16,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       it("should throw when capacity is less than 1", () => {
         expect(() => {
           createLinkedList<number>(listType, -5);
-        }).toThrowError(IllegalCapacityException);
+        }).toThrowError(ValueOutOfRangeException);
       });
     });
 
@@ -34,7 +34,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           list.push(3);
-        }).toThrowError(IsFullException);
+        }).toThrowError(CollectionIsFullException);
       });
     });
 
@@ -105,7 +105,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           list.unshift(3);
-        }).toThrowError(IsFullException);
+        }).toThrowError(CollectionIsFullException);
       });
     });
 
@@ -124,7 +124,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           list.pushFromArray([2, 3]);
-        }).toThrowError(IsFullException);
+        }).toThrowError(CollectionIsFullException);
       });
     });
 
@@ -134,7 +134,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.peekFromStart();
-        }).toThrowError(IsEmptyException);
+        }).toThrowError(CollectionIsEmptyException);
       });
 
       it("should return first element from list", () => {
@@ -151,7 +151,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.peek();
-        }).toThrowError(IsEmptyException);
+        }).toThrowError(CollectionIsEmptyException);
       });
 
       it("should return first element from list", () => {
@@ -168,7 +168,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.peekByIndex(0);
-        }).toThrowError(IsEmptyException);
+        }).toThrowError(CollectionIsEmptyException);
       });
 
       it("should return element by its index from list", () => {
@@ -208,7 +208,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.shift();
-        }).toThrowError(IsEmptyException);
+        }).toThrowError(CollectionIsEmptyException);
       });
     });
 
@@ -232,7 +232,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.pop();
-        }).toThrowError(IsEmptyException);
+        }).toThrowError(CollectionIsEmptyException);
       });
     });
 
@@ -256,7 +256,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.deleteFromIndex(0);
-        }).toThrowError(IsEmptyException);
+        }).toThrowError(CollectionIsEmptyException);
       });
     });
 
@@ -368,7 +368,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
           expect(() => {
             linkedList.iterator(0);
-          }).toThrowError(IsEmptyException);
+          }).toThrowError(CollectionIsEmptyException);
         });
       });
 

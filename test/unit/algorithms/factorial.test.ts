@@ -1,7 +1,7 @@
 import {
   factorial,
   memoizedFactorial,
-} from "../../../src/algorithms/factorial";
+} from "../../../src/app/algorithms/factorial";
 
 describe("Factorial", () => {
   const results = new Map<number, number>();

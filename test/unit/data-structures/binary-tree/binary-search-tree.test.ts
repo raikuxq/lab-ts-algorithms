@@ -1,9 +1,9 @@
-import { EnumBinarySearchTreeType } from "../../../../src/types/EnumBinarySearchTreeType";
-import { createBinaryTree } from "../../../../src/helpers/createBinaryTree";
-import { EnumTreeTraversalType } from "../../../../src/types/EnumTreeTraversalType";
-import IsAlreadyExistsException from "../../../../src/exceptions/IsAlreadyExistsException";
-import IsNotFoundException from "../../../../src/exceptions/IsNotFoundException";
-import IsEmptyException from "../../../../src/exceptions/IsEmptyException";
+import { EnumBinarySearchTreeType } from "../../../../src/app/types/EnumBinarySearchTreeType";
+import { createBinaryTree } from "../../../../src/app/data-structures/BinaryTree/_helpers/createBinaryTree";
+import { EnumTreeTraversalType } from "../../../../src/app/types/EnumTreeTraversalType";
+import IsAlreadyExistsException from "../../../../src/app/exceptions/IsAlreadyExistsException";
+import IsNotFoundException from "../../../../src/app/exceptions/IsNotFoundException";
+import CollectionIsEmptyException from "../../../../src/app/exceptions/CollectionIsEmptyException";
 
 describe.each([
   EnumBinarySearchTreeType.BST,
@@ -170,7 +170,7 @@ describe.each([
 
       expect(() => {
         tree.max();
-      }).toThrowError(IsEmptyException);
+      }).toThrowError(CollectionIsEmptyException);
     });
   });
 
@@ -191,7 +191,7 @@ describe.each([
 
       expect(() => {
         tree.min();
-      }).toThrowError(IsEmptyException);
+      }).toThrowError(CollectionIsEmptyException);
     });
   });
 
@@ -269,7 +269,7 @@ describe.each([
 
         expect(() => {
           tree.traverse(EnumTreeTraversalType.InOrder);
-        }).toThrowError(IsEmptyException);
+        }).toThrowError(CollectionIsEmptyException);
       });
     });
   }

@@ -1,19 +1,19 @@
-import LoopedArray from "../../../../src/data-structures/LoopedArray/LoopedArray";
-import IArrayFacade from "../../../../src/types/IArrayFacade";
-import ILinearStorage from "../../../../src/types/ILinearStorage";
-import IllegalCapacityException from "../../../../src/exceptions/IllegalCapacityException";
-import IsEmptyException from "../../../../src/exceptions/IsEmptyException";
+import LoopedArray from "../../../../src/app/data-structures/LoopedArray/LoopedArray";
+import IArrayFacade from "../../../../src/app/types/IArrayFacade";
+import ILinearStorage from "../../../../src/app/types/ILinearStorage";
+import ValueOutOfRangeException from "../../../../src/app/exceptions/ValueOutOfRangeException";
+import CollectionIsEmptyException from "../../../../src/app/exceptions/CollectionIsEmptyException";
 
 describe("Looped Array", () => {
   describe("constructor", () => {
     it("should throw when capacity is less than 1", () => {
       expect(() => {
         new LoopedArray(-5);
-      }).toThrowError(IllegalCapacityException);
+      }).toThrowError(ValueOutOfRangeException);
 
       expect(() => {
         new LoopedArray(0);
-      }).toThrowError(IllegalCapacityException);
+      }).toThrowError(ValueOutOfRangeException);
     });
   });
 
@@ -242,7 +242,7 @@ describe("Looped Array", () => {
       const array: IArrayFacade<number> = new LoopedArray<number>(10);
       expect(() => {
         array.shift();
-      }).toThrowError(IsEmptyException);
+      }).toThrowError(CollectionIsEmptyException);
     });
   });
 
@@ -266,7 +266,7 @@ describe("Looped Array", () => {
 
       expect(() => {
         array.pop();
-      }).toThrowError(IsEmptyException);
+      }).toThrowError(CollectionIsEmptyException);
     });
   });
 
@@ -290,7 +290,7 @@ describe("Looped Array", () => {
 
       expect(() => {
         array.shift();
-      }).toThrowError(IsEmptyException);
+      }).toThrowError(CollectionIsEmptyException);
     });
   });
 

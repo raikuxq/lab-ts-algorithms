@@ -1,47 +1,48 @@
-import { factorial, memoizedFactorial } from "./algorithms/factorial";
-import { fibonacci, memoizedFibonacci } from "./algorithms/fibonacci";
-import { binarySearch } from "./algorithms/binary-search";
-import { transposeMatrix } from "./algorithms/transpose-matrix";
-import { transposeDirectedGraph } from "./data-structures/Graph/transposing/transposeDirectedGraph";
-import BFSIterationStrategy from "./data-structures/Graph/strategy/BFSIterationStrategy";
-import DFSIterationStrategy from "./data-structures/Graph/strategy/DFSIterationStrategy";
-import DijkstraIterationStrategy from "./data-structures/Graph/strategy/DijkstraIterationStrategy";
-import GraphIteratorBFS from "./data-structures/Graph/iterator/GraphIteratorBFS";
-import GraphIteratorDFS from "./data-structures/Graph/iterator/GraphIteratorDFS";
-import GraphIteratorDijkstra from "./data-structures/Graph/iterator/GraphIteratorDijkstra";
-import { hasPath } from "./data-structures/Graph/searching/hasPath";
-import { shortestPath } from "./data-structures/Graph/searching/shortestPath";
-import { presenterAdjacencyMatrix } from "./data-structures/Graph/presenter/presenterAdjacencyMatrix";
-import { presenterAdjacencyLists } from "./data-structures/Graph/presenter/presenterAdjacencyLists";
-import { generateRandomGraph } from "./data-structures/Graph/demo/generateRandomGraph";
-import { createLinkedList } from "./helpers/createLinkedList";
-import { createBinaryTree } from "./helpers/createBinaryTree";
-import { createGraph } from "./helpers/createGraph";
-import { createGraphFromMatrix } from "./helpers/createGraphFromMatrix";
-import { EDGE_EXISTS_STATE, EDGE_NOT_EXISTS_STATE } from "./constants";
-import Queue from "./data-structures/Queue/Queue";
-import Stack from "./data-structures/Stack/Stack";
-import UndirectedGraph from "./data-structures/Graph/UndirectedGraph";
-import DirectedGraph from "./data-structures/Graph/DirectedGraph";
-import BinarySearchTree from "./data-structures/BinaryTree/BinarySearchTree/BinarySearchTree";
-import RandBinarySearchTree from "./data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchTree";
-import DoubleLinkedList from "./data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
-import SingleLinkedList from "./data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
-import LoopedArray from "./data-structures/LoopedArray/LoopedArray";
-import HashTable from "./data-structures/HashTable/HashTable";
-import IsNotFoundException from "./exceptions/IsNotFoundException";
-import IsAlreadyExistsException from "./exceptions/IsAlreadyExistsException";
-import IllegalCapacityException from "./exceptions/IllegalCapacityException";
-import IllegalArgumentException from "./exceptions/base/IllegalArgumentException";
-import IllegalStateException from "./exceptions/base/IllegalStateException";
-import IndexOutOfBoundsException from "./exceptions/IndexOutOfBoundsException";
-import IsEmptyException from "./exceptions/IsEmptyException";
-import { bubbleSort } from "./algorithms/sorts/bubble-sort";
-import { selectSort } from "./algorithms/sorts/select-sort";
-import { mergeSort } from "./algorithms/sorts/merge-sort";
-import { insertionSort } from "./algorithms/sorts/insertion-sort";
-import { quickSort } from "./algorithms/sorts/quick-sort";
-import { memoize } from "./algorithms/memoize";
+import { factorial, memoizedFactorial } from "./app/algorithms/factorial";
+import { fibonacci, memoizedFibonacci } from "./app/algorithms/fibonacci";
+import { binarySearch } from "./app/algorithms/binary-search";
+import { transposeMatrix } from "./app/algorithms/transpose-matrix";
+import { transposeDirectedGraph } from "./app/algorithms/graph/transposing/transposeDirectedGraph";
+import BFSIterationStrategy from "./app/algorithms/graph/iterator-strategy/BFSIterationStrategy";
+import DFSIterationStrategy from "./app/algorithms/graph/iterator-strategy/DFSIterationStrategy";
+import DijkstraIterationStrategy from "./app/algorithms/graph/iterator-strategy/DijkstraIterationStrategy";
+import GraphIteratorBFS from "./app/algorithms/graph/iterator/GraphIteratorBFS";
+import GraphIteratorDFS from "./app/algorithms/graph/iterator/GraphIteratorDFS";
+import GraphIteratorDijkstra from "./app/algorithms/graph/iterator/GraphIteratorDijkstra";
+import { hasPath } from "./app/algorithms/graph/searching/hasPath";
+import { shortestPath } from "./app/algorithms/graph/searching/shortestPath";
+import { presenterAdjacencyMatrix } from "./app/algorithms/graph/presenter/presenterAdjacencyMatrix";
+import { presenterAdjacencyLists } from "./app/algorithms/graph/presenter/presenterAdjacencyLists";
+import { generateRandomGraph } from "./app/data-structures/Graph/_helpers/generateRandomGraph";
+import { createLinkedList } from "./app/data-structures/LinkedList/_helpers/createLinkedList";
+import { createBinaryTree } from "./app/data-structures/BinaryTree/_helpers/createBinaryTree";
+import { createGraph } from "./app/data-structures/Graph/_helpers/createGraph";
+import { createGraphFromMatrix } from "./app/data-structures/Graph/_helpers/createGraphFromMatrix";
+import { EDGE_EXISTS_STATE, EDGE_NOT_EXISTS_STATE } from "./app/constants";
+import Queue from "./app/data-structures/Queue/Queue";
+import Stack from "./app/data-structures/Stack/Stack";
+import UndirectedGraph from "./app/data-structures/Graph/UndirectedGraph";
+import DirectedGraph from "./app/data-structures/Graph/DirectedGraph";
+import BinarySearchTree from "./app/data-structures/BinaryTree/BinarySearchTree/BinarySearchTree";
+import RandBinarySearchTree from "./app/data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchTree";
+import DoubleLinkedList from "./app/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
+import SingleLinkedList from "./app/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
+import LoopedArray from "./app/data-structures/LoopedArray/LoopedArray";
+import HashTable from "./app/data-structures/HashTable/HashTable";
+import IsNotFoundException from "./app/exceptions/IsNotFoundException";
+import IsAlreadyExistsException from "./app/exceptions/IsAlreadyExistsException";
+import ValueOutOfRangeException from "./app/exceptions/ValueOutOfRangeException";
+import IllegalArgumentException from "./app/exceptions/base/IllegalArgumentException";
+import IllegalStateException from "./app/exceptions/base/IllegalStateException";
+import IndexOutOfBoundsException from "./app/exceptions/IndexOutOfBoundsException";
+import CollectionIsEmptyException from "./app/exceptions/CollectionIsEmptyException";
+import CollectionIsFullException from "./app/exceptions/CollectionIsFullException";
+import { bubbleSort } from "./app/algorithms/sorts/bubble-sort";
+import { selectSort } from "./app/algorithms/sorts/select-sort";
+import { mergeSort } from "./app/algorithms/sorts/merge-sort";
+import { insertionSort } from "./app/algorithms/sorts/insertion-sort";
+import { quickSort } from "./app/algorithms/sorts/quick-sort";
+import { memoize } from "./app/algorithms/memoize";
 import {
   getMinIndex,
   getMinIndexFromIndex,
@@ -50,7 +51,7 @@ import {
   roundNumber,
   swapArrayItems,
   perfAsync,
-} from "./utils";
+} from "./app/utils";
 
 export {
   perf,
@@ -109,10 +110,11 @@ export {
 };
 
 export {
-  IsEmptyException,
+  CollectionIsEmptyException,
+  CollectionIsFullException,
   IsNotFoundException,
   IsAlreadyExistsException,
-  IllegalCapacityException,
+  ValueOutOfRangeException,
   IllegalArgumentException,
   IllegalStateException,
   IndexOutOfBoundsException,

@@ -1,7 +1,7 @@
-import Queue from "../../../../src/data-structures/Queue/Queue";
-import ILinearStorage from "../../../../src/types/ILinearStorage";
-import IsEmptyException from "../../../../src/exceptions/IsEmptyException";
-import IsFullException from "../../../../src/exceptions/IsFullException";
+import Queue from "../../../../src/app/data-structures/Queue/Queue";
+import ILinearStorage from "../../../../src/app/types/ILinearStorage";
+import CollectionIsEmptyException from "../../../../src/app/exceptions/CollectionIsEmptyException";
+import CollectionIsFullException from "../../../../src/app/exceptions/CollectionIsFullException";
 
 describe("queue", () => {
   describe("method peek", () => {
@@ -18,7 +18,7 @@ describe("queue", () => {
 
       expect(() => {
         queue.peek();
-      }).toThrowError(IsEmptyException);
+      }).toThrowError(CollectionIsEmptyException);
     });
   });
 
@@ -38,7 +38,7 @@ describe("queue", () => {
 
       expect(() => {
         queue.push(3);
-      }).toThrowError(IsFullException);
+      }).toThrowError(CollectionIsFullException);
     });
   });
 
@@ -63,7 +63,7 @@ describe("queue", () => {
 
       expect(() => {
         queue.pop();
-      }).toThrowError(IsEmptyException);
+      }).toThrowError(CollectionIsEmptyException);
     });
   });
 

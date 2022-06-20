@@ -9,25 +9,26 @@
     "resolveJsonModule": true,
     "module": "commonjs",
     "target": "es5",
+    "rootDir": "src",
     "inlineSourceMap": true
   },
   "exclude": [
-    "lib/**/*",
+    "docs/**/*",
     "test/**/*",
+    "demo/**/*",
     ".eslintrc.cjs",
     "jest.config.cjs",
     "tsconfig.json",
     "nodemon.json",
-    "src/types",
-    "src/demo"
+    "src/app/types"
   ],
   "include": [
     "src/exports",
-    "src/algorithms",
-    "src/data-structures",
-    "src/helpers",
-    "src/constants.ts",
-    "src/utils.ts",
+    "src/app/algorithms",
+    "src/app/data-structures",
+    "src/app/exceptions",
+    "src/app/constants.ts",
+    "src/app/utils.ts",
     "src/exports.ts",
     "src/index.ts"
   ],

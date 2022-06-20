@@ -1,7 +1,7 @@
 import {
   fibonacci,
   memoizedFibonacci,
-} from "../../../src/algorithms/fibonacci";
+} from "../../../src/app/algorithms/fibonacci";
 
 describe("Fibonacci", () => {
   const results = new Map<number, number>();

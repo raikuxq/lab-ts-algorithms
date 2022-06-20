@@ -1,5 +1,5 @@
-import { transposeMatrix } from "../../../src/algorithms/transpose-matrix";
-import IllegalArgumentException from "../../../src/exceptions/base/IllegalArgumentException";
+import { transposeMatrix } from "../../../src/app/algorithms/transpose-matrix";
+import IllegalArgumentException from "../../../src/app/exceptions/base/IllegalArgumentException";
 
 describe("transpose matrix", () => {
   it("should throw when array is not a matrix", () => {

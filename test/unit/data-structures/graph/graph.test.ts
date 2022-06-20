@@ -1,10 +1,10 @@
-import IGraph from "../../../../src/types/IGraph";
-import UndirectedGraph from "../../../../src/data-structures/Graph/UndirectedGraph";
-import DirectedGraph from "../../../../src/data-structures/Graph/DirectedGraph";
-import { createGraph } from "../../../../src/helpers/createGraph";
-import { EnumGraphType } from "../../../../src/types/EnumGraphType";
-import IsAlreadyExistsException from "../../../../src/exceptions/IsAlreadyExistsException";
-import IsNotFoundException from "../../../../src/exceptions/IsNotFoundException";
+import IGraph from "../../../../src/app/types/IGraph";
+import UndirectedGraph from "../../../../src/app/data-structures/Graph/UndirectedGraph";
+import DirectedGraph from "../../../../src/app/data-structures/Graph/DirectedGraph";
+import { createGraph } from "../../../../src/app/data-structures/Graph/_helpers/createGraph";
+import { EnumGraphType } from "../../../../src/app/types/EnumGraphType";
+import IsAlreadyExistsException from "../../../../src/app/exceptions/IsAlreadyExistsException";
+import IsNotFoundException from "../../../../src/app/exceptions/IsNotFoundException";
 
 describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
   "%s graph",

@@ -1,18 +1,18 @@
-import { factorial, memoizedFactorial } from "../algorithms/factorial";
-import { fibonacci, memoizedFibonacci } from "../algorithms/fibonacci";
-import { binarySearch } from "../algorithms/binary-search";
-import { transposeMatrix } from "../algorithms/transpose-matrix";
-import { transposeDirectedGraph } from "../data-structures/Graph/transposing/transposeDirectedGraph";
-import BFSIterationStrategy from "../data-structures/Graph/strategy/BFSIterationStrategy";
-import DFSIterationStrategy from "../data-structures/Graph/strategy/DFSIterationStrategy";
-import DijkstraIterationStrategy from "../data-structures/Graph/strategy/DijkstraIterationStrategy";
-import GraphIteratorBFS from "../data-structures/Graph/iterator/GraphIteratorBFS";
-import GraphIteratorDFS from "../data-structures/Graph/iterator/GraphIteratorDFS";
-import GraphIteratorDijkstra from "../data-structures/Graph/iterator/GraphIteratorDijkstra";
-import { hasPath } from "../data-structures/Graph/searching/hasPath";
-import { shortestPath } from "../data-structures/Graph/searching/shortestPath";
-import { presenterAdjacencyMatrix } from "../data-structures/Graph/presenter/presenterAdjacencyMatrix";
-import { presenterAdjacencyLists } from "../data-structures/Graph/presenter/presenterAdjacencyLists";
+import { factorial, memoizedFactorial } from "../app/algorithms/factorial";
+import { fibonacci, memoizedFibonacci } from "../app/algorithms/fibonacci";
+import { binarySearch } from "../app/algorithms/binary-search";
+import { transposeMatrix } from "../app/algorithms/transpose-matrix";
+import { transposeDirectedGraph } from "../app/algorithms/graph/transposing/transposeDirectedGraph";
+import BFSIterationStrategy from "../app/algorithms/graph/iterator-strategy/BFSIterationStrategy";
+import DFSIterationStrategy from "../app/algorithms/graph/iterator-strategy/DFSIterationStrategy";
+import DijkstraIterationStrategy from "../app/algorithms/graph/iterator-strategy/DijkstraIterationStrategy";
+import GraphIteratorBFS from "../app/algorithms/graph/iterator/GraphIteratorBFS";
+import GraphIteratorDFS from "../app/algorithms/graph/iterator/GraphIteratorDFS";
+import GraphIteratorDijkstra from "../app/algorithms/graph/iterator/GraphIteratorDijkstra";
+import { hasPath } from "../app/algorithms/graph/searching/hasPath";
+import { shortestPath } from "../app/algorithms/graph/searching/shortestPath";
+import { presenterAdjacencyMatrix } from "../app/algorithms/graph/presenter/presenterAdjacencyMatrix";
+import { presenterAdjacencyLists } from "../app/algorithms/graph/presenter/presenterAdjacencyLists";
 
 export {
   binarySearch,

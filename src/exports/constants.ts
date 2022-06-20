@@ -1,3 +1,3 @@
-import { EDGE_EXISTS_STATE, EDGE_NOT_EXISTS_STATE } from "../constants";
+import { EDGE_EXISTS_STATE, EDGE_NOT_EXISTS_STATE } from "../app/constants";
 
 export { EDGE_NOT_EXISTS_STATE, EDGE_EXISTS_STATE };
