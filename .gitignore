@@ -151,3 +151,6 @@ sftp-config.json
 .idea/
 
 lib/
+/docs/.vuepress/.cache
+/docs/.vuepress/.temp
+/docs/.vuepress/dist

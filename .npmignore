@@ -1,4 +1,5 @@
 /test
+/docs
 .eslintrc.cjs
 jest.config.cjs
 nodemon.json
