@@ -25,7 +25,6 @@ export default abstract class AbstractBinaryTree<T> implements IBinaryTree<T> {
   protected constructor(fnCompare?: FnCompareTwo<T>) {
     if (fnCompare) {
       this.compare = fnCompare;
-      console.log(this.compare);
     }
     this._head = null;
     this._length = 0;
