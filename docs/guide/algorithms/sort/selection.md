@@ -1,30 +1,33 @@
-# selection-sort
+# Selection sorting algorithm
 
-::: tip Time complexity
-Best O(n^2)  
-Avg O(n^2)  
-Worst O(n^2)
-:::
+In computer science, selection sort is an in-place comparison sorting algorithm. It has an O(n2) time complexity, which
+makes it inefficient on large lists, and generally performs worse than the similar insertion sort. SELECTION sort is
+noted for its simplicity and has performance advantages over more complicated algorithms in certain situations,
+particularly where auxiliary memory is limited.
 
-::: tip Memory complexity
-Worst case: O(1)
-:::
+Read full: [wiki/selection_sort](https://en.wikipedia.org/wiki/Selection_sort)
+
+### Time complexity
+
+Best: `O(n^2)  `
+
+Avg: `O(n^2)  `
+
+Worst: `O(n^2)`
+
+### Memory complexity
+
+Worst case: `O(1)`
 
 ### Import
 
 ```ts
 import {selectionSort} from "@raikuxq/alg-ds/algorithms";
-
-selectionSort(array);
 ```
 
-### Params:
+### API reference
 
-| Name  | Type            | Required | Default | Description      |
-|-------|-----------------|----------|---------|------------------|
-| array | `Array<number>` | +        |         | array is mutable |
-
-### Returns: `number`
+Sort API: [/api/algorithms/sort/selection](/api/algorithms/sort/selection)
 
 ### Example usage
 

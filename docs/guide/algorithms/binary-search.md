@@ -1,31 +1,22 @@
-# binary-search
+# Binary Search
 
-::: tip Binary search algorithm
-\- is a search algorithm that finds the position of a target value within a sorted array.
+Binary search algorithm is a search algorithm that finds the position of a target value within a sorted array.
 
-[wiki/binary_search_algorithm](https://en.wikipedia.org/wiki/Binary_search_algorithm)
-:::
+Read full: [wiki/binary_search_algorithm](https://en.wikipedia.org/wiki/Binary_search_algorithm)
 
-::: tip Time complexity
+### Time complexity
+
 O(log(n))
-:::
 
 ### Import
 
 ```ts
 import {binarySearch} from "@raikuxq/alg-ds/algorithms";
-
-binarySearch(elements, searchElement);
 ```
 
-### Params:
+### API reference:
 
-| Name          | Type            | Required | Default | Description |
-|---------------|-----------------|----------|---------|-------------|
-| elements      | `Array<number>` | +        |         |             |
-| searchElement | `number`        | +        |         |             |
-
-### Returns: `number | null` - index of found element
+Binary search API: [/api/algorithms/binary-search](/api/algorithms/binary-search)
 
 ### Example usage
 

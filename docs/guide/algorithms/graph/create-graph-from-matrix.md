@@ -1,24 +1,20 @@
-# create-graph-from-matrix
+# Create Graph From Matrix
 
-Creates a graph from N*N adjacency matrix that contains 1 in case of edge exists or 0 in case it does not
+Creates a graph from N*N adjacency matrix
+
+::: tip Adjacency matrix
+Is a matrix that contains 1 in case of edge exists or 0 in case it does not
+:::
 
 ### Import
 
 ```ts
 import {createGraphFromMatrix} from "@raikuxq/alg-ds/algorithms";
-
-createGraphFromMatrix(matrix, fieldsList, type);
 ```
 
-### Params:
+### API reference
 
-| Name       | Type            | Required | Default | Description                    |
-|------------|-----------------|----------|---------|--------------------------------|
-| matrix     | `ArrayMatrix`   | +        |         | Adjacency matrix N*N           |
-| fieldsList | `Array<T>`      | +        |         | Ordered list of all vertices   |
-| type       | `EnumGraphType` | +        |         | `'Undirected'` or `'Directed'` |
-
-### Returns: `IGraph<T>`
+API: [/api/algorithms/graph/create-graph-from-matrix](/api/algorithms/graph/create-graph-from-matrix)
 
 ### Example usage
 
@@ -28,7 +24,7 @@ import {DirectedGraph} from "@raikuxq/alg-ds/data-structures";
 import {EnumGraphType} from "@raikuxq/alg-ds/types"
 
 /**
- * Directed graph:
+ * DIRECTED graph:
  * - Bob [Maria]
  * - Maria [Bob, John]
  * - John []
@@ -50,6 +46,6 @@ const matrix: ArrayMatrix = [
 const graph: IGraph<string> = createGraphFromMatrix<string>(
     matrix,
     fieldsList,
-    EnumGraphType.Directed
+    EnumGraphType.DIRECTED
 );
 ```

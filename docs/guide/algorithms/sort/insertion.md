@@ -1,30 +1,30 @@
-# insertion-sort
+# Insertion sorting algorithm
 
-::: tip Time complexity
-Best O(n)  
-Avg O(n^2)  
-Worst O(n^2)
-:::
+Insertion sort is a simple sorting algorithm that builds the final sorted array (or list) one item at a time.
 
-::: tip Memory complexity
-Worst case: O(1)
-:::
+Read full: [wiki/insertion_sort](https://en.wikipedia.org/wiki/insertion_sort)
+
+### Time complexity
+
+Best: `O(n)  `
+
+Avg: `O(n^2)  `
+
+Worst: `O(n^2)`
+
+### Memory complexity
+
+Worst : `O(1)`
 
 ### Import
 
 ```ts
 import {insertionSort} from "@raikuxq/alg-ds/algorithms";
-
-insertionSort(array);
 ```
 
-### Params:
+### API reference
 
-| Name  | Type            | Required | Default | Description      |
-|-------|-----------------|----------|---------|------------------|
-| array | `Array<number>` | +        |         | array is mutable |
-
-### Returns: `number`
+Sort API: [/api/algorithms/sort/insertion](/api/algorithms/sort/insertion)
 
 ### Example usage
 

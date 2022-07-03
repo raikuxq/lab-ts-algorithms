@@ -1,27 +1,20 @@
-# presenter-adjacency-lists
+# Presenter adjacency lists
 
-::: tip Adjacency list
-\- is a collection of unordered lists used to represent a finite graph. Each unordered list within an adjacency list
+Adjacency list is a collection of unordered lists used to represent a finite graph. Each unordered list within an
+adjacency list
 describes the set of neighbors of a particular vertex in the graph.
 
 [wiki/adjacency_list](https://en.wikipedia.org/wiki/Adjacency_list)
-:::
 
 ### Import
 
 ```ts
 import {presenterAdjacencyLists} from "@raikuxq/alg-ds/algorithms";
-
-presenterAdjacencyLists(graph);
 ```
 
-### Params:
+### API reference
 
-| Name  | Type               | Required | Default | Description |
-|-------|--------------------|----------|---------|-------------|
-| graph | `DirectedGraph<T>` | +        |         |             |
-
-### Returns: `DirectedGraph<T>`
+API: [/api/algorithms/graph/presenter-adjacency-lists](/api/algorithms/graph/presenter-adjacency-lists)
 
 ### Example usage
 

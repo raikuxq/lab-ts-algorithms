@@ -1,33 +1,24 @@
-# factorial
+# Factorial
 
-::: tip Factorial
 In mathematics, the factorial of a non-negative integer n, denoted by n!, is the product of all positive integers less
 than or equal to n.
 
-[wiki/factorial](https://en.wikipedia.org/wiki/Factorial)
-:::
+Read full: [wiki/factorial](https://en.wikipedia.org/wiki/Factorial)
 
-::: tip Time complexity
+### Time complexity
+
 `factorial`: O(n!)  
 `memoizedFactorial`: O(n)
-:::
 
 ### Import
 
 ```ts
 import {factorial, memoizedFactorial} from "@raikuxq/alg-ds/algorithms";
-
-factorial(x);
-memoizedFactorial(x);
 ```
 
-### Params:
+### API reference
 
-| Name | Type     | Required | Default | Description |
-|------|----------|----------|---------|-------------|
-| x    | `number` | +        |         |             |
-
-### Returns: `number`
+Factorial API: [/api/algorithms/factorial](/api/algorithms/factorial)
 
 ### Example usage
 

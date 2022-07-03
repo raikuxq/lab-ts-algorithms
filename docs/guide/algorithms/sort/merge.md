@@ -1,30 +1,34 @@
-# merge-sort
+# Merge sorting algorithm
 
-::: tip Time complexity
-Best O(n * log(n))   
-Avg O(n * log(n))    
-Worst O(n * log(n))    
-:::
+In computer science, merge sort (also commonly spelled as mergesort) is an efficient, general-purpose, and
+comparison-based sorting algorithm.
+Most implementations produce a stable sort, which means that the order of equal elements is the same in the input and
+output.
+Merge sort is a divide-and-conquer algorithm
 
-::: tip Memory complexity
-Worst case: O(n)
-:::
+Read full: [wiki/merge_sort](https://en.wikipedia.org/wiki/Merge_sort)
+
+### Time complexity
+
+Best: `O(n * log(n))   `
+
+Avg: `O(n * log(n))    `
+
+Worst: `O(n * log(n))   `
+
+### Memory complexity
+
+Worst: `O(n)`
 
 ### Import
 
 ```ts
 import {mergeSort} from "@raikuxq/alg-ds/algorithms";
-
-mergeSort(array);
 ```
 
-### Params:
+### API reference
 
-| Name  | Type            | Required | Default | Description      |
-|-------|-----------------|----------|---------|------------------|
-| array | `Array<number>` | +        |         | array is mutable |
-
-### Returns: `number`
+Sort API: [/api/algorithms/sort/merge](/api/algorithms/sort/merge)
 
 ### Example usage
 

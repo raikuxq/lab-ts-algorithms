@@ -1,38 +1,21 @@
-# shortest-path
+# Shortest path algorithm
 
 Find the shortest path between two vertices
 
-::: tip The shortest path problem
-\- is the problem of finding a path between two vertices (or nodes) in a graph such that the sum of the weights of its
-constituent edges is minimized.
+The shortest path problem is the problem of finding a path between two vertices (or nodes) in a graph such that the sum
+of the weights of its constituent edges is minimized.
 
 [wiki/shortest_path_problem](https://en.wikipedia.org/wiki/Shortest_path_problem)
-:::
 
 ### Import
 
 ```ts
 import {shortestPath} from "@raikuxq/alg-ds/algorithms";
-
-shortestPath(graph, from, to, strategy);
 ```
 
-### Params:
+### API reference
 
-| Name     | Type                         | Required | Default | Description   |
-|----------|------------------------------|----------|---------|---------------|
-| graph    | `IGraph<T>`                  | +        |         | Given graph   |
-| from     | `T`                          | +        |         | Start of path |
-| to       | `T`                          | +        |         | End of path   |
-| strategy | `IGraphIterationStrategy<T>` | +        |         | BFS/Dijkstra  |
-
-### Returns: `Array<T>`
-
-### Throws:
-
-- when start vertex does not exist
-- when end vertex does not exist
-- when there is no path at all between two vertices
+API: [/api/algorithms/graph/shortest-path](/api/algorithms/graph/shortest-path)
 
 ### Example usage in weighted graph (Dijkstra)
 

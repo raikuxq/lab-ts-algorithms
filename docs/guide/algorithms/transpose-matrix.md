@@ -1,37 +1,25 @@
-# transpose-matrix
+# Matrix transpose
 
-::: tip Matrix transpose
-\- In linear algebra, the transpose of a matrix is an operator which flips a matrix over its diagonal; that is, it
+In linear algebra, the transpose of a matrix is an operator which flips a matrix over its diagonal; that is, it
 switches the row and column indices of the matrix
 
-[wiki/transpose](https://en.wikipedia.org/wiki/Transpose)
-:::
+Read full: [wiki/transpose](https://en.wikipedia.org/wiki/Transpose)
 
-::: tip Time complexity
+## Time complexity
+
 O(n^2)
-:::
 
-### Import
+## Import
 
 ```ts
 import {transposeMatrix} from "@raikuxq/alg-ds/algorithms";
-
-transposeMatrix(matrix);
 ```
 
-### Params:
+## API reference
 
-| Name   | Type          | Required | Default | Description                        |
-|--------|---------------|----------|---------|------------------------------------|
-| matrix | `ArrayMatrix` | +        |         | Must be matrix N*N, throws instead |
+Transpose matrix API: [/api/algorithms/transpose-matrix](/api/algorithms/transpose-matrix)
 
-### Returns: `ArrayMatrix`
-
-### Throws:
-
-+ when given array is not a matrix
-
-### Example usage
+## Example usage
 
 ```ts
 import {transposeMatrix} from "@raikuxq/alg-ds/algorithms";

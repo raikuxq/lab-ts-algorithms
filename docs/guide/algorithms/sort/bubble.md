@@ -1,30 +1,31 @@
-# bubble-sort
+# Bubble sorting algorithm
 
-::: tip Time complexity
-Best O(n)  
-Avg O(n^2)  
-Worst O(n^2)
-:::
+Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps
+them if they are in the wrong order. The pass through the list is repeated until the list is sorted.
 
-::: tip Memory complexity
-Worst case: O(1)
-:::
+Read full: [wiki/bubble_sort](https://en.wikipedia.org/wiki/Bubble_sort)
+
+### Time complexity
+
+Best: `O(n) `
+
+Avg: `O(n^2)  `
+
+Worst: `O(n^2)`
+
+### Memory complexity
+
+Worst: `O(1)`
 
 ### Import
 
 ```ts
 import {bubbleSort} from "@raikuxq/alg-ds/algorithms";
-
-bubbleSort(array);
 ```
 
-### Params:
+### API reference
 
-| Name  | Type            | Required | Default | Description      |
-|-------|-----------------|----------|---------|------------------|
-| array | `Array<number>` | +        |         | array is mutable |
-
-### Returns: `number`
+Sort API: [/api/algorithms/sort/bubble](/api/algorithms/sort/bubble)
 
 ### Example usage
 

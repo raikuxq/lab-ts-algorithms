@@ -1,27 +1,19 @@
-# transpose-directed-graph
+# Transpose directed graph
 
-::: tip Transposed graph
-\- is another directed graph on the same set of vertices with all of the edges reversed compared to the orientation of
-the corresponding edges in G
+Transposed graph is another directed graph on the same set of vertices with all of the edges reversed compared to the
+orientation of the corresponding edges in G
 
 [wiki/transpose_graph](https://en.wikipedia.org/wiki/Transpose_graph)
-:::
 
 ### Import
 
 ```ts
 import {transposeDirectedGraph} from "@raikuxq/alg-ds/algorithms";
-
-transposeDirectedGraph(graph);
 ```
 
-### Params:
+### API reference
 
-| Name  | Type               | Required | Default | Description |
-|-------|--------------------|----------|---------|-------------|
-| graph | `DirectedGraph<T>` | +        |         |             |
-
-### Returns: `DirectedGraph<T>`
+API: [/api/algorithms/graph/transpose-directed-graph](/api/algorithms/graph/transpose-directed-graph)
 
 ### Example usage
 
