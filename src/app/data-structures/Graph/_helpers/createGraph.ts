@@ -10,10 +10,10 @@ export const createGraph = <T>(type: EnumGraphType): IGraph<T> => {
   let graph: IGraph<T>;
 
   switch (type) {
-    case EnumGraphType.Directed:
+    case EnumGraphType.DIRECTED:
       graph = new DirectedGraph();
       break;
-    case EnumGraphType.Undirected:
+    case EnumGraphType.UNDIRECTED:
       graph = new UndirectedGraph();
       break;
   }

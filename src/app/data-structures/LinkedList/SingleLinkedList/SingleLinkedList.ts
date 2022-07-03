@@ -112,6 +112,8 @@ export default class SingleLinkedList<T>
 
   /**
    * List iterator
+   * @throws {CollectionIsEmptyException} when list is empty
+   * @throws {IndexOutOfBoundsException} when given index is out of range
    */
   public iterator(fromIndex = 0): IIterator<T> {
     const head = this._head;
@@ -132,7 +134,7 @@ export default class SingleLinkedList<T>
       },
       /**
        * @inheritDoc
-       * @throws when next element does not exist
+       * @throws {IsNotFoundException} when next element does not exist
        */
       next: (): T => {
         if (!iterator.hasNext()) {

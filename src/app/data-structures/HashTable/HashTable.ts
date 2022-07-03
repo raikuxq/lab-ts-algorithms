@@ -11,7 +11,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
    Constants
    */
   private static DEFAULT_MAX_CAPACITY = 100;
-  private static MAX_LOAD_FACTOR = 0.5;
+  private static MAX_LOAD_FACTOR = 0.75;
 
   /**
    * State
@@ -22,7 +22,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
 
   /**
    * Given init capacity size will be used
-   * @throws when initial capacity value is not larger than 0
+   * @throws {ValueOutOfRangeException} when initial capacity value is not larger than 0
    */
   public constructor(initialCapacity: number = HashTable.DEFAULT_MAX_CAPACITY) {
     if (initialCapacity <= 0) {
@@ -86,7 +86,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
 
   /**
    * Will find node instance by its key
-   * @throws when element does not exist
+   * @throws {IsNotFoundException} when element does not exist
    */
   private findNode(key: string): HashTableNode<T> {
     for (let i = 0; i < this.maxCapacity; i++) {
@@ -150,7 +150,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
 
   /**
    * Will update item property isDeleted to false
-   * @throws when element does not exist
+   * @throws {IsNotFoundException} when element does not exist
    */
   public delete(key: string): void {
     for (let i = 0; i < this.maxCapacity; i++) {

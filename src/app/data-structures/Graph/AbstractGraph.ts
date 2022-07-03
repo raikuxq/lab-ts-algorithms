@@ -28,7 +28,7 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Find vertex in vertices list by its data
-   * @throws when vertex was not found
+   * @throws {IsNotFoundException} when vertex was not found
    */
   protected tryFindVertex(data: T): T {
     const isExists = this._vertices.has(data);
@@ -111,7 +111,7 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Add vertex
-   * @throws when vertex is already exists
+   * @throws {IsAlreadyExistsException} when vertex is already exists
    */
   public addVertex(data: T): this {
     if (this.hasVertex(data)) {
@@ -125,7 +125,7 @@ export default abstract class AbstractGraph<T> {
 
   /**
    * Remove vertex
-   * @throws when vertex is already does not exist
+   * @throws {IsNotFoundException} when vertex is already does not exist
    */
   public removeVertex(data: T): this {
     try {

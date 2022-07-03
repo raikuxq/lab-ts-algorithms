@@ -27,7 +27,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
 
   /**
    *
-   * @throws when head is empty
+   * @throws {CollectionIsEmptyException} when head is empty
    */
   protected checkIsEmpty(): void {
     if (this._head === null) {
@@ -137,6 +137,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
 
   /**
    * @inheritDoc
+   * @throws {IsAlreadyExistsException} when node already exists
    */
   public insert(value: T): void {
     if (this.has(value)) {
@@ -156,6 +157,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
 
   /**
    * @inheritDoc
+   * @throws {IsNotFoundException} when node was not found
    */
   public delete(value: T): void {
     if (!this.has(value)) {
@@ -254,13 +256,13 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
     };
 
     switch (type) {
-      case EnumTreeTraversalType.InOrder:
+      case EnumTreeTraversalType.IN_ORDER:
         storeInOrder(root);
         break;
-      case EnumTreeTraversalType.PostOrder:
+      case EnumTreeTraversalType.POST_ORDER:
         storePostOrder(root);
         break;
-      case EnumTreeTraversalType.PreOrder:
+      case EnumTreeTraversalType.PRE_ORDER:
         storePreOrder(root);
         break;
     }

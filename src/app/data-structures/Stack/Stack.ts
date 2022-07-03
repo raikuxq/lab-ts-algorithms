@@ -19,7 +19,7 @@ export default class Stack<T> implements ILinearStorage<T> {
 
   /**
    * Get stack top element
-   * @throws when list is empty
+   * @throws {CollectionIsEmptyException} when list is empty
    */
   public peek(): T {
     if (this.isEmpty()) {
@@ -30,7 +30,7 @@ export default class Stack<T> implements ILinearStorage<T> {
 
   /**
    * Add element to stack head
-   * @throws when list is full
+   * @throws {CollectionIsFullException} when list is full
    */
   public push(item: T): void {
     if (this.isFull()) {
@@ -41,7 +41,7 @@ export default class Stack<T> implements ILinearStorage<T> {
 
   /**
    * Remove element from stack head
-   * @throws when list is empty
+   * @throws {CollectionIsEmptyException} when list is empty
    */
   public pop(): T {
     if (this.isEmpty()) {

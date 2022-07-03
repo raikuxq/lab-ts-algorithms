@@ -5,9 +5,9 @@ import IsNotFoundException from "../../../exceptions/IsNotFoundException";
 
 /**
  * Find the shortest path between two vertices
- * @throws when start vertex was not found
- * @throws when end vertex was not found
- * @throws when there is no path between two vertices
+ * @throws {IsNotFoundException} when start vertex was not found
+ * @throws {IsNotFoundException} when end vertex was not found
+ * @throws {IllegalStateException} when there is no path between two vertices
  */
 export const shortestPath = <T>(
   graph: IGraph<T>,

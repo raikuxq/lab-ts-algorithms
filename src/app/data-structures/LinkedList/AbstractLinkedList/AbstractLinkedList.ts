@@ -23,7 +23,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Will calculate real capacity value
-   * @throws when capacity <= 0
+   * @throws {ValueOutOfRangeException} when capacity is out of range
    */
   private static calculateCapacity(capacity?: number) {
     if (capacity === undefined) {
@@ -38,7 +38,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Will insert node between nodeLeft and nodeRight
-   * @throws when list is full
+   * @throws {CollectionIsFullException} when list is full
    */
   private insertNodeBetweenTwoNodes(
     targetNode: AbstractLinkedNode<T>,
@@ -69,7 +69,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Will remove the node from its neighbors nodes links
-   * @throws when node does not exist
+   * @throws {} when node does not exist
    */
   private deleteNode(node: AbstractLinkedNode<T>): AbstractLinkedNode<T> {
     this.deleteNodeImpl(node);
@@ -83,7 +83,8 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Will find node by its index
-   * @throws when node was not found
+   * @throws {CollectionIsEmptyException} when list is empty
+   * @throws {IndexOutOfBoundsException} when given index is out of range
    */
   protected getNodeByIndex(index: number): AbstractLinkedNode<T> {
     const isIndexNotInRange = index < 0 || index > this._length;
@@ -155,6 +156,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Push from index
+   * @throws {IndexOutOfBoundsException} when given index is out of range
    */
   public pushFromIndex(value: T, fromIndex: number): void {
     const isIndexNotInRange = fromIndex < 0 || fromIndex > this._length;
@@ -177,6 +179,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Delete node from list's end
+   * @throws {CollectionIsEmptyException} when list is empty
    */
   public pop(): T {
     if (this.isEmpty() || this._head === null) {
@@ -191,6 +194,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Delete node from list's start and get its data
+   * @throws {CollectionIsEmptyException} when list is empty
    */
   public shift(): T {
     if (this.isEmpty() || this._tail === null) {
@@ -242,7 +246,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Get head element data
-   * @throws when head does not exist
+   * @throws {CollectionIsEmptyException} when head does not exist
    */
   public peek(): T {
     if (this.isEmpty() || !this._head) {
@@ -254,7 +258,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Get tail element data
-   * @throws when tail does not exists
+   * @throws {CollectionIsEmptyException} when tail does not exists
    */
   public peekFromStart(): T {
     if (this.isEmpty() || !this._tail) {
@@ -266,7 +270,8 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Get list element by index from start
-   * @throws when element does not exist
+   * @throws {CollectionIsEmptyException} when list is empty
+   * @throws {IndexOutOfBoundsException} when given index is out of range
    */
   public peekByIndex(index: number): T {
     const node = this.getNodeByIndex(index);
@@ -302,7 +307,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Add elements to list from array
-   * @throws when list is full
+   * @throws {CollectionIsFullException} when list is full
    * */
   public pushFromArray(elements: Array<T>): void {
     elements.forEach((element: T) => {

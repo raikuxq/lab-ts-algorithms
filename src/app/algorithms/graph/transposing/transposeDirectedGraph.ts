@@ -14,6 +14,6 @@ export const transposeDirectedGraph = <T>(
   return createGraphFromMatrix(
     transposedMatrix,
     verticesList,
-    EnumGraphType.Directed
+    EnumGraphType.DIRECTED
   );
 };

@@ -19,7 +19,7 @@ export default class Queue<T> implements ILinearStorage<T> {
 
   /**
    * Get first element in queue (without deleting)
-   * @throws when list is empty
+   * @throws {CollectionIsEmptyException} when list is empty
    */
   public peek(): T {
     if (this.isEmpty()) {
@@ -30,7 +30,7 @@ export default class Queue<T> implements ILinearStorage<T> {
 
   /**
    * Add element to queue
-   * @throws when list is full
+   * @throws {CollectionIsFullException} when list is full
    */
   public push(item: T): void {
     if (this._list.isFull()) {
@@ -41,7 +41,7 @@ export default class Queue<T> implements ILinearStorage<T> {
 
   /**
    * Delete first element in queue
-   * @throws when list is empty
+   * @throws {CollectionIsEmptyException} when list is empty
    */
   public pop(): T {
     if (this.isEmpty()) {

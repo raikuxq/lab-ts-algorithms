@@ -25,6 +25,7 @@ export default abstract class AbstractGraphIterator<T>
 
   /**
    * @inheritDoc
+   * @throws {IsNotFoundException} when start vertex was not found
    */
   public initIterator(from: T): void {
     if (!this.graph.hasVertex(from)) {
@@ -42,6 +43,7 @@ export default abstract class AbstractGraphIterator<T>
 
   /**
    * @inheritDoc
+   * @throws {IllegalStateException} when next element does not exist
    */
   public next(): T {
     if (!this.hasNext()) {
@@ -53,6 +55,7 @@ export default abstract class AbstractGraphIterator<T>
 
   /**
    * @inheritDoc
+   * @throws {IllegalStateException} when current element does not exist
    */
   public current(): T {
     try {
@@ -64,6 +67,7 @@ export default abstract class AbstractGraphIterator<T>
 
   /**
    * @inheritDoc
+   * @throws {IllegalStateException} when there is no path between given vertices
    */
   public getPath(from: T, to: T): Array<T> {
     const path: Array<T> = new Array<T>();

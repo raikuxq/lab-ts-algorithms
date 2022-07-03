@@ -15,6 +15,7 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Create empty instance
+   * @throws {ValueOutOfRangeException} when given capacity is not valid
    */
   constructor(capacity: number) {
     if (capacity <= 0) {
@@ -61,6 +62,7 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
 
   /**
    * Delete node from array's end
+   * @throws {CollectionIsEmptyException} when array is empty
    */
   public pop(): T {
     if (this.isEmpty()) {
@@ -71,16 +73,12 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
     this._realLength--;
     const deletedItem = this._array.pop();
 
-    if (deletedItem === undefined) {
-      throw new IsNotFoundException(
-        "cannot delete last element because of it does not exists"
-      );
-    }
-    return deletedItem;
+    return deletedItem!;
   }
 
   /**
    * Delete node from array's start
+   * @throws {CollectionIsEmptyException} when array is empty
    */
   public shift(): T {
     if (this.isEmpty()) {
@@ -90,12 +88,8 @@ export default class LoopedArray<T> implements IArrayFacade<T> {
     }
     this._realLength--;
     const deletedItem = this._array.shift();
-    if (deletedItem === undefined) {
-      throw new IsNotFoundException(
-        "cannot delete first element because of it does not exists"
-      );
-    }
-    return deletedItem;
+
+    return deletedItem!;
   }
 
   /**

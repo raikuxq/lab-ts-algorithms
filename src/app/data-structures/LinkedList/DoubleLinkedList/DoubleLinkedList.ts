@@ -103,6 +103,8 @@ export default class DoubleLinkedList<T>
 
   /**
    * List iterator
+   * @throws {CollectionIsEmptyException} when list is empty
+   * @throws {IndexOutOfBoundsException} when given index is out of range
    */
   public iterator(fromIndex = 0): IBiDirectIterator<T> {
     const head = this._head;
@@ -130,7 +132,7 @@ export default class DoubleLinkedList<T>
       },
       /**
        * @inheritDoc
-       * @throws when next element does not exist
+       * @throws {IsNotFoundException} when next element does not exist
        */
       next: (): T => {
         if (!iterator.hasNext()) {
@@ -141,7 +143,7 @@ export default class DoubleLinkedList<T>
       },
       /**
        * @inheritDoc
-       * @throws when prev element does not exists
+       * @throws {IsNotFoundException} when prev element does not exists
        */
       prev: (): T => {
         if (!iterator.hasPrev()) {

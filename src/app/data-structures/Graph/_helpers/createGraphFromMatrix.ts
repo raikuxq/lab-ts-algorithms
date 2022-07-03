@@ -28,7 +28,7 @@ export const createGraphFromMatrix = <T>(
       const rowColState = matrix[rowIndex][colIndex];
       const colRowState = matrix[colIndex][rowIndex];
 
-      if (type === EnumGraphType.Undirected) {
+      if (type === EnumGraphType.UNDIRECTED) {
         if (
           rowColState === EDGE_EXISTS_STATE &&
           colRowState === EDGE_EXISTS_STATE
@@ -37,7 +37,7 @@ export const createGraphFromMatrix = <T>(
         }
       }
 
-      if (type === EnumGraphType.Directed) {
+      if (type === EnumGraphType.DIRECTED) {
         if (rowColState === EDGE_EXISTS_STATE) {
           graph.addEdge(fieldsList[rowIndex], fieldsList[colIndex]);
         }

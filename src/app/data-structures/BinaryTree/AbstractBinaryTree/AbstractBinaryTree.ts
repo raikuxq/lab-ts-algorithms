@@ -1,6 +1,6 @@
 import IBinaryTree from "../../../types/IBinaryTree";
-import { FnCompareTwo } from "../../../types/FnCompareTwo";
 import AbstractBinaryNode from "./AbstractBinaryNode";
+import { FnCompareTwo } from "../../../types/FnCompareTwo";
 import { EnumTreeTraversalType } from "../../../types/EnumTreeTraversalType";
 
 /**

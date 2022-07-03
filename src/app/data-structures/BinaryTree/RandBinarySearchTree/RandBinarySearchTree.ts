@@ -206,6 +206,7 @@ export default class RandBinarySearchTree<T> extends BinarySearchTree<T> {
 
   /**
    * @inheritDoc
+   * @throws {IsAlreadyExistsException} when node already exists
    */
   public insert(value: T): void {
     if (this.has(value)) {

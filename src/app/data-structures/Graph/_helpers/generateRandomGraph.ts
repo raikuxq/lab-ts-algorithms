@@ -16,10 +16,10 @@ const getPossibleEdgesCount = (
   let possibleEdgesCount = verticesCount * (verticesCount - 1);
 
   switch (type) {
-    case EnumGraphType.Directed: {
+    case EnumGraphType.DIRECTED: {
       break;
     }
-    case EnumGraphType.Undirected: {
+    case EnumGraphType.UNDIRECTED: {
       possibleEdgesCount = Math.floor(possibleEdgesCount / 2);
       break;
     }
@@ -34,13 +34,13 @@ const fillGraphRandomly = (
   verticesCount: number
 ): void => {
   switch (format) {
-    case EnumRandomGenerationFormat.Hash: {
+    case EnumRandomGenerationFormat.HASH: {
       for (let i = 0; i < verticesCount; i++) {
         graph.addVertex(getRandomVertex());
       }
       break;
     }
-    case EnumRandomGenerationFormat.Numbers: {
+    case EnumRandomGenerationFormat.NUMBERS: {
       for (let i = 0; i < verticesCount; i++) {
         graph.addVertex((i + 1).toString());
       }
@@ -52,8 +52,8 @@ const fillGraphRandomly = (
 export const generateRandomGraph = (
   verticesCount: number,
   edgesCount: number,
-  type: EnumGraphType = EnumGraphType.Undirected,
-  format: EnumRandomGenerationFormat = EnumRandomGenerationFormat.Numbers
+  type: EnumGraphType = EnumGraphType.UNDIRECTED,
+  format: EnumRandomGenerationFormat = EnumRandomGenerationFormat.NUMBERS
 ): IGraph<string> => {
   const graph = createGraph<string>(type);
   const possibleEdgesCount = getPossibleEdgesCount(type, verticesCount);

@@ -16,6 +16,7 @@ export default class UndirectedGraph<T> extends AbstractGraph<T> {
 
   /**
    * @inheritDoc
+   * @throws {IsNotFoundException} when vertex was not found
    */
   protected getEdgeByValue(from: T, to: T): GraphEdge<T> {
     const edge = this._edges.find(
@@ -47,6 +48,7 @@ export default class UndirectedGraph<T> extends AbstractGraph<T> {
 
   /**
    * @inheritDoc
+   * @throws {IsNotFoundException} when vertex was not found
    */
   public addEdge(from: T, to: T, weight?: number): this {
     try {
@@ -76,6 +78,7 @@ export default class UndirectedGraph<T> extends AbstractGraph<T> {
 
   /**
    * @inheritDoc
+   * @throws {IsNotFoundException} when vertex was not found
    */
   public removeEdge(from: T, to: T): this {
     try {

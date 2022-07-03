@@ -4,6 +4,7 @@ import { checkIsArrayMatrix } from "../utils";
 
 /**
  * Will flips a matrix over its diagonal
+ * @throws {IllegalArgumentException} when array is not a matrix
  */
 export const transposeMatrix = (matrix: TypeArrayMatrix): TypeArrayMatrix => {
   if (!checkIsArrayMatrix(matrix)) {
