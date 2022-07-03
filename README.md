@@ -3,7 +3,7 @@ Common algorithms and data structures.
 Written in TypeScript, tested with Jest.
 
 # Documentation
-Documentation app available here: [https://raikuxq-algorithms.netlify.app/guide](https://raikuxq-algorithms.netlify.app/guide)
+Documentation app: [raikuxq-algorithms.netlify.app/guide](https://raikuxq-algorithms.netlify.app/guide)
 
 
 # Usage as package
@@ -15,17 +15,11 @@ Install by using any of these commands:
 # Usage as repository
 
 Clone this repository and install dependencies by using `yarn` command.
-
-+ `yarn test` - run all tests via jest  
-
++ `yarn test` - run all tests via jest
 + `yarn dev` - run in dev mode via nodemon (src/index.ts is an entrypoint)
-
 + `yarn build` - compile ts sources into js files
-
 + `yarn start` - build and run in production mode
-
 + `yarn lint` - lint check via eslint
-
 + `yarn lint:fix` - fix source files via eslint
 
 
@@ -40,7 +34,7 @@ Clone this repository and install dependencies by using `yarn` command.
   + [Stack](#stack)
   + [Queue](#queue)
 + [Non-linear data structures](#non-linear-data-structures)
-  + [Hash table](#hash-table)
+  + [HASH table](#hash-table)
   + [Graph](#graph)
   + [Binary tree](#binary-trees)
 
@@ -135,7 +129,7 @@ Extends [IConvertableToArray](src/app/types/IConvertableToArray.ts) interface.
 
 # Non linear data structures
 
-## Hash Table
+## HASH Table
 ### Interfaces
 [IKeyValueStorage](src/app/types/IKeyValueStorage.ts) — Contains basic key-value storages operations.
 
@@ -228,5 +222,5 @@ Extends [BinarySearchNode](src/app/data-structures/BinaryTree/BinarySearchTree/B
 
 [RandBinarySearchTree](src/app/data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchTree.ts) 
 — Implementation of randomized binary search tree, which gives expected log(N) height. 
-Insertion have a 1/N+1 probability of inserting into root. 
+INSERTION have a 1/N+1 probability of inserting into root. 
 Extends [BinarySearchTree](src/app/data-structures/BinaryTree/BinarySearchTree/BinarySearchTree.ts).
