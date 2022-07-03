@@ -11,15 +11,15 @@ const createSortFunction = (
   sortType: string
 ): ((arr: Array<number>) => Array<number>) => {
   switch (sortType) {
-    case EnumSortType.Quick:
+    case EnumSortType.QUICK:
       return quickSort;
-    case EnumSortType.Merge:
+    case EnumSortType.MERGE:
       return mergeSort;
-    case EnumSortType.Selection:
+    case EnumSortType.SELECTION:
       return selectSort;
-    case EnumSortType.Bubble:
+    case EnumSortType.BUBBLE:
       return bubbleSort;
-    case EnumSortType.Insertion:
+    case EnumSortType.INSERTION:
       return insertionSort;
     default:
       throw new IllegalArgumentException("Wrong sort type");
@@ -27,11 +27,11 @@ const createSortFunction = (
 };
 
 describe.each([
-  EnumSortType.Merge,
-  EnumSortType.Quick,
-  EnumSortType.Bubble,
-  EnumSortType.Insertion,
-  EnumSortType.Selection,
+  EnumSortType.MERGE,
+  EnumSortType.QUICK,
+  EnumSortType.BUBBLE,
+  EnumSortType.INSERTION,
+  EnumSortType.SELECTION,
 ])("%s sort", (sortStrategyType: EnumSortType) => {
   const sort = createSortFunction(sortStrategyType);
 

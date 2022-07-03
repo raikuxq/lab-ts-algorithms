@@ -9,11 +9,11 @@ const logTree = <T>(tree: BinarySearchTree<T>) => {
   );
 
   console.log("IN ORDER TRAVERSE");
-  console.log(tree.traverse(EnumTreeTraversalType.InOrder));
+  console.log(tree.traverse(EnumTreeTraversalType.IN_ORDER));
   console.log("PRE ORDER TRAVERSE");
-  console.log(tree.traverse(EnumTreeTraversalType.PreOrder));
+  console.log(tree.traverse(EnumTreeTraversalType.PRE_ORDER));
   console.log("POST ORDER TRAVERSE");
-  console.log(tree.traverse(EnumTreeTraversalType.PostOrder));
+  console.log(tree.traverse(EnumTreeTraversalType.POST_ORDER));
   console.log("HEIGHT");
   console.log(tree.height());
   console.log("LENGTH");

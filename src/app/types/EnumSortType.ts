@@ -1,7 +1,7 @@
 export enum EnumSortType {
-  Quick = "Quick",
-  Merge = "Merge",
-  Selection = "Selection",
-  Bubble = "Bubble",
-  Insertion = "Insertion",
+  QUICK = "QUICK",
+  MERGE = "MERGE",
+  SELECTION = "SELECTION",
+  BUBBLE = "BUBBLE",
+  INSERTION = "INSERTION",
 }

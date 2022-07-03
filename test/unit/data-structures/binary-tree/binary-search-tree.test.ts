@@ -26,7 +26,7 @@ describe.each([
       tree.insert(0);
       tree.insert(20);
 
-      expect(tree.traverse(EnumTreeTraversalType.InOrder)).toEqual([
+      expect(tree.traverse(EnumTreeTraversalType.IN_ORDER)).toEqual([
         0,
         5,
         10,
@@ -140,7 +140,7 @@ describe.each([
     });
 
     it("should restructure the tree correctly", () => {
-      expect(tree.traverse(EnumTreeTraversalType.InOrder)).toEqual([5, 7, 20]);
+      expect(tree.traverse(EnumTreeTraversalType.IN_ORDER)).toEqual([5, 7, 20]);
     });
 
     it("should throw when element not found", () => {
@@ -208,7 +208,7 @@ describe.each([
       const subtree = bst.subtree(16);
 
       it("should correctly create subtree", () => {
-        expect(subtree.traverse(EnumTreeTraversalType.InOrder)).toEqual([
+        expect(subtree.traverse(EnumTreeTraversalType.IN_ORDER)).toEqual([
           8,
           15,
           16,
@@ -229,7 +229,7 @@ describe.each([
       bst.insert(23);
 
       it("should correctly convert in-order type", () => {
-        expect(bst.traverse(EnumTreeTraversalType.InOrder)).toEqual([
+        expect(bst.traverse(EnumTreeTraversalType.IN_ORDER)).toEqual([
           4,
           8,
           15,
@@ -241,7 +241,7 @@ describe.each([
       });
 
       it("should correctly convert pre-order type", () => {
-        expect(bst.traverse(EnumTreeTraversalType.PreOrder)).toEqual([
+        expect(bst.traverse(EnumTreeTraversalType.PRE_ORDER)).toEqual([
           22,
           4,
           8,
@@ -253,7 +253,7 @@ describe.each([
       });
 
       it("should correctly convert post-order type", () => {
-        expect(bst.traverse(EnumTreeTraversalType.PostOrder)).toEqual([
+        expect(bst.traverse(EnumTreeTraversalType.POST_ORDER)).toEqual([
           4,
           8,
           15,
@@ -268,7 +268,7 @@ describe.each([
         const tree = createBinaryTree(treeType);
 
         expect(() => {
-          tree.traverse(EnumTreeTraversalType.InOrder);
+          tree.traverse(EnumTreeTraversalType.IN_ORDER);
         }).toThrowError(CollectionIsEmptyException);
       });
     });

@@ -6,7 +6,7 @@ import { EnumGraphType } from "../../../../src/app/types/EnumGraphType";
 import IsAlreadyExistsException from "../../../../src/app/exceptions/IsAlreadyExistsException";
 import IsNotFoundException from "../../../../src/app/exceptions/IsNotFoundException";
 
-describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
+describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
   "%s graph",
   (graphType: EnumGraphType) => {
     describe("method weight", () => {
@@ -55,7 +55,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         });
       });
 
-      if (graphType === EnumGraphType.Undirected) {
+      if (graphType === EnumGraphType.UNDIRECTED) {
         describe("in non-empty graph", () => {
           const graph: IGraph<string> = new UndirectedGraph();
           graph
@@ -72,7 +72,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         });
       }
 
-      if (graphType === EnumGraphType.Directed) {
+      if (graphType === EnumGraphType.DIRECTED) {
         describe("in non-empty graph", () => {
           const graph: IGraph<string> = new DirectedGraph();
           graph
@@ -145,7 +145,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         });
       });
 
-      if (graphType === EnumGraphType.Undirected) {
+      if (graphType === EnumGraphType.UNDIRECTED) {
         describe("should correct add edge between two existed vertices", () => {
           const graph: IGraph<string> = new UndirectedGraph();
           graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
@@ -181,7 +181,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         });
       }
 
-      if (graphType === EnumGraphType.Directed) {
+      if (graphType === EnumGraphType.DIRECTED) {
         describe("should correct add edge between two existed vertices", () => {
           const graph: IGraph<string> = new DirectedGraph();
           graph.addVertex("Mike").addVertex("Bob").addEdge("Mike", "Bob");
@@ -232,7 +232,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         }).toThrowError(IsNotFoundException);
       });
 
-      if (graphType === EnumGraphType.Undirected) {
+      if (graphType === EnumGraphType.UNDIRECTED) {
         describe("should cascade remove", () => {
           const graph: IGraph<string> = new UndirectedGraph();
 
@@ -265,7 +265,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         });
       }
 
-      if (graphType === EnumGraphType.Directed) {
+      if (graphType === EnumGraphType.DIRECTED) {
         describe("should cascade remove", () => {
           const graph: IGraph<string> = new DirectedGraph();
 
@@ -308,7 +308,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         }).toThrowError(IsNotFoundException);
       });
 
-      if (graphType === EnumGraphType.Undirected) {
+      if (graphType === EnumGraphType.UNDIRECTED) {
         describe("should delete correct", () => {
           const graph: IGraph<string> = new UndirectedGraph();
 
@@ -328,7 +328,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         });
       }
 
-      if (graphType === EnumGraphType.Directed) {
+      if (graphType === EnumGraphType.DIRECTED) {
         describe("should delete correct", () => {
           const graph: IGraph<string> = new DirectedGraph();
 
@@ -364,7 +364,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         }).toThrowError();
       });
 
-      if (graphType === EnumGraphType.Undirected) {
+      if (graphType === EnumGraphType.UNDIRECTED) {
         it("should return correct neighbors", () => {
           const graph: IGraph<number> = new UndirectedGraph();
           graph
@@ -378,7 +378,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         });
       }
 
-      if (graphType === EnumGraphType.Directed) {
+      if (graphType === EnumGraphType.DIRECTED) {
         it("should return correct neighbors", () => {
           const graph: IGraph<number> = new DirectedGraph();
           graph

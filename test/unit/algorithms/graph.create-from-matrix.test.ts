@@ -32,7 +32,7 @@ describe("in Directed graph", () => {
     const graph: IGraph<string> = createGraphFromMatrix<string>(
       matrix,
       fieldsList,
-      EnumGraphType.Directed
+      EnumGraphType.DIRECTED
     );
 
     it("should contain all vertices", () => {
@@ -62,7 +62,7 @@ describe("in Directed graph", () => {
     const fieldsList: Array<string> = ["Bob", "Maria", "John"];
 
     expect(() => {
-      createGraphFromMatrix(arr, fieldsList, EnumGraphType.Directed);
+      createGraphFromMatrix(arr, fieldsList, EnumGraphType.DIRECTED);
     }).toThrowError(IllegalArgumentException);
   });
 });
@@ -95,7 +95,7 @@ describe("in Undirected graph", () => {
     const graph: IGraph<string> = createGraphFromMatrix<string>(
       matrix,
       fieldsList,
-      EnumGraphType.Undirected
+      EnumGraphType.UNDIRECTED
     );
 
     it("should contain all vertices", () => {
@@ -125,7 +125,7 @@ describe("in Undirected graph", () => {
     const fieldsList: Array<string> = ["Bob", "Maria", "John"];
 
     expect(() => {
-      createGraphFromMatrix(arr, fieldsList, EnumGraphType.Undirected);
+      createGraphFromMatrix(arr, fieldsList, EnumGraphType.UNDIRECTED);
     }).toThrowError(IllegalArgumentException);
   });
 });

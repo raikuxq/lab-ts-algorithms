@@ -1,4 +1,4 @@
 export enum EnumGraphType {
-  Directed = "Directed",
-  Undirected = "Undirected",
+  DIRECTED = "DIRECTED",
+  UNDIRECTED = "UNDIRECTED",
 }

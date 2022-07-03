@@ -1,4 +1,4 @@
 export enum EnumRandomGenerationFormat {
-  Numbers = "NUMBERS",
-  Hash = "HASH",
+  NUMBERS = "NUMBERS",
+  HASH = "HASH",
 }

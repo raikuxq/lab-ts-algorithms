@@ -5,7 +5,7 @@ import { createGraph } from "../../../src/app/data-structures/Graph/_helpers/cre
 import { EnumGraphType } from "../../../src/app/types/EnumGraphType";
 import { presenterAdjacencyLists } from "../../../src/app/algorithms/graph/presenter/presenterAdjacencyLists";
 
-describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
+describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
   "%s graph",
   (graphType: EnumGraphType) => {
     describe("in empty graph", () => {
@@ -18,7 +18,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
       });
     });
 
-    if (graphType === EnumGraphType.Undirected) {
+    if (graphType === EnumGraphType.UNDIRECTED) {
       describe("in non-empty graph", () => {
         const graph: IGraph<number> = new UndirectedGraph();
         graph
@@ -45,7 +45,7 @@ describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
         });
       });
     }
-    if (graphType === EnumGraphType.Directed) {
+    if (graphType === EnumGraphType.DIRECTED) {
       describe("in non-empty graph", () => {
         const graph: IGraph<number> = new DirectedGraph();
         graph

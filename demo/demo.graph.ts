@@ -7,7 +7,7 @@ import BFSIterationStrategy from "../src/app/algorithms/graph/iterator-strategy/
 
 export const demoUndirectedGraph = (): void => {
   console.log("\nEmpty undirected graph created");
-  const graph: IGraph<string> = createGraph(EnumGraphType.Undirected);
+  const graph: IGraph<string> = createGraph(EnumGraphType.UNDIRECTED);
 
   graph.addVertex("John");
   graph.addVertex("Mary");
@@ -106,7 +106,7 @@ export const demoUndirectedGraph = (): void => {
 
 export const demoDirectedGraph = (): void => {
   console.log("\nEmpty directed graph created");
-  const graph: IGraph<string> = createGraph(EnumGraphType.Directed);
+  const graph: IGraph<string> = createGraph(EnumGraphType.DIRECTED);
 
   graph.addVertex("John");
   graph.addVertex("Mary");
@@ -241,6 +241,6 @@ export const demoGraphGeneratedByType = (
 export const demoGraphGenerated = (): void => {
   const verticesCount = 6;
   const edgesCount = 6;
-  demoGraphGeneratedByType(EnumGraphType.Directed, verticesCount, edgesCount);
-  demoGraphGeneratedByType(EnumGraphType.Undirected, verticesCount, edgesCount);
+  demoGraphGeneratedByType(EnumGraphType.DIRECTED, verticesCount, edgesCount);
+  demoGraphGeneratedByType(EnumGraphType.UNDIRECTED, verticesCount, edgesCount);
 };

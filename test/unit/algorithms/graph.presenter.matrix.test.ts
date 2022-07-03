@@ -6,7 +6,7 @@ import { EnumGraphType } from "../../../src/app/types/EnumGraphType";
 import { presenterAdjacencyMatrix } from "../../../src/app/algorithms/graph/presenter/presenterAdjacencyMatrix";
 
 describe("Graph Presenter Matrix", () => {
-  describe.each([EnumGraphType.Directed, EnumGraphType.Undirected])(
+  describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
     "%s graph",
     (graphType: EnumGraphType) => {
       describe("in empty graph", () => {
@@ -19,7 +19,7 @@ describe("Graph Presenter Matrix", () => {
         });
       });
 
-      if (graphType === EnumGraphType.Undirected) {
+      if (graphType === EnumGraphType.UNDIRECTED) {
         describe("in non-empty graph", () => {
           const graph: IGraph<number> = new UndirectedGraph();
           graph
@@ -44,7 +44,7 @@ describe("Graph Presenter Matrix", () => {
         });
       }
 
-      if (graphType === EnumGraphType.Directed) {
+      if (graphType === EnumGraphType.DIRECTED) {
         describe("in non-empty graph", () => {
           const graph: IGraph<number> = new DirectedGraph();
           graph

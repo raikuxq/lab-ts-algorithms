@@ -3,7 +3,7 @@ import { EnumGraphType } from "../../../src/app/types/EnumGraphType";
 import { transposeDirectedGraph } from "../../../src/app/algorithms/graph/transposing/transposeDirectedGraph";
 
 describe("Directed graph transpose", () => {
-  const sourceGraph = createGraph<string>(EnumGraphType.Directed);
+  const sourceGraph = createGraph<string>(EnumGraphType.DIRECTED);
 
   /**
    * Source matrix
