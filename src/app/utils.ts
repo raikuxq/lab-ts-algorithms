@@ -42,10 +42,10 @@ export const randomizeNumberInRange = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min)) + min;
 
 /**
- * Round number to 3 digits after
+ * Round number to given digits after
  */
-export const roundNumber = (num: number): number =>
-  Math.round(num * 1000) / 1000;
+export const roundNumber = (num: number, digits = 3): number =>
+  Math.round(num * 10 ** digits) / 10 ** digits;
 
 /**
  * Get time execution of function
