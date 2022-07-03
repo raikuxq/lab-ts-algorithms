@@ -167,7 +167,7 @@ export default class HashTable<T> implements IKeyValueStorage<T> {
 
   /**
    * Will find item in hash table
-   * @throws when element does not exist
+   * @throws {IsNotFoundException} when element does not exist
    */
   public get(key: string): T {
     return this.findNode(key).data;

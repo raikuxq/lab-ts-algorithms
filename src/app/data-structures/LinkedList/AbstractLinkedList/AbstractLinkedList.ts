@@ -69,9 +69,15 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Will remove the node from its neighbors nodes links
-   * @throws {} when node does not exist
+   * @throws {CollectionIsEmptyException} when list is empty
    */
   private deleteNode(node: AbstractLinkedNode<T>): AbstractLinkedNode<T> {
+    if (this.isEmpty()) {
+      throw new CollectionIsEmptyException(
+        "cannot delete because list is empty"
+      );
+    }
+
     this.deleteNodeImpl(node);
     this._length--;
 
@@ -138,6 +144,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Push into start
+   * @throws {CollectionIsFullException} when there is no space available
    */
   public unshift(value: T): void {
     const node = this.createNode(value);
@@ -147,6 +154,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
 
   /**
    * Push into end
+   * @throws {CollectionIsFullException} when there is no space available
    */
   public push(value: T): void {
     const node = this.createNode(value);
@@ -157,6 +165,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
   /**
    * Push from index
    * @throws {IndexOutOfBoundsException} when given index is out of range
+   * @throws {CollectionIsFullException} when there is no space available
    */
   public pushFromIndex(value: T, fromIndex: number): void {
     const isIndexNotInRange = fromIndex < 0 || fromIndex > this._length;
@@ -182,12 +191,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * @throws {CollectionIsEmptyException} when list is empty
    */
   public pop(): T {
-    if (this.isEmpty() || this._head === null) {
-      throw new CollectionIsEmptyException(
-        "cannot delete because list is empty"
-      );
-    }
-    const deletedNode = this.deleteNode(this._head);
+    const deletedNode = this.deleteNode(this._head!);
     this.popImpl();
     return deletedNode.data;
   }
@@ -197,18 +201,14 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * @throws {CollectionIsEmptyException} when list is empty
    */
   public shift(): T {
-    if (this.isEmpty() || this._tail === null) {
-      throw new CollectionIsEmptyException(
-        "cannot delete because list is empty"
-      );
-    }
-    const deletedNode = this.deleteNode(this._tail);
+    const deletedNode = this.deleteNode(this._tail!);
     this.shiftImpl();
     return deletedNode.data;
   }
 
   /**
    * Delete node from list by index from start
+   * @throws {CollectionIsEmptyException} when list is empty
    */
   public deleteFromIndex(fromIndex: number): T {
     const nodeToDelete = this.getNodeByIndex(fromIndex);
@@ -227,7 +227,7 @@ export default abstract class AbstractLinkedList<T> implements ILinkedList<T> {
    * Is list empty
    */
   public isEmpty(): boolean {
-    return this._length === 0;
+    return this._length === 0 || this._head === null || this._tail === null;
   }
 
   /**

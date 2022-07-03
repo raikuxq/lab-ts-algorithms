@@ -27,7 +27,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
 
   /**
    *
-   * @throws {CollectionIsEmptyException} when head is empty
+   * @throws {CollectionIsEmptyException} when tree is empty
    */
   protected checkIsEmpty(): void {
     if (this._head === null) {
@@ -113,6 +113,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
 
   /**
    * @inheritDoc
+   * @throws {CollectionIsEmptyException} when tree is empty
    */
   public max(): T {
     this.checkIsEmpty();
@@ -125,6 +126,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
 
   /**
    * @inheritDoc
+   * @throws {CollectionIsEmptyException} when tree is empty
    */
   public min(): T {
     this.checkIsEmpty();
@@ -221,6 +223,7 @@ export default class BinarySearchTree<T> extends AbstractBinaryTree<T> {
 
   /**
    * @inheritDoc
+   * @throws {CollectionIsEmptyException} when tree is empty
    */
   public traverse(type: EnumTreeTraversalType, from?: T): Array<T> {
     this.checkIsEmpty();
