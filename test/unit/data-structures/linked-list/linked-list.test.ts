@@ -1,4 +1,3 @@
-import SingleLinkedList from "../../../../src/app/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
 import DoubleLinkedList from "../../../../src/app/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
 import { EnumLinkedListType } from "../../../../src/app/types/EnumLinkedListType";
 import { createLinkedList } from "../../../../src/app/data-structures/LinkedList/_helpers/createLinkedList";
@@ -7,7 +6,6 @@ import ValueOutOfRangeException from "../../../../src/app/exceptions/ValueOutOfR
 import CollectionIsFullException from "../../../../src/app/exceptions/CollectionIsFullException";
 import IndexOutOfBoundsException from "../../../../src/app/exceptions/IndexOutOfBoundsException";
 import CollectionIsEmptyException from "../../../../src/app/exceptions/CollectionIsEmptyException";
-import IsNotFoundException from "../../../../src/app/exceptions/IsNotFoundException";
 
 describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
   "%s linked list",
@@ -15,7 +13,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
     describe("constructor", () => {
       it("should throw when capacity is less than 1", () => {
         expect(() => {
-          createLinkedList<number>(listType, -5);
+          createLinkedList<number>(listType, false, -5);
         }).toThrowError(ValueOutOfRangeException);
       });
     });
@@ -28,7 +26,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
         expect(list.peek()).toBe(1);
       });
       it("should throw when list is full", () => {
-        const list = createLinkedList<number>(listType, 2);
+        const list = createLinkedList<number>(listType, false, 2);
         list.push(1);
         list.push(2);
 
@@ -99,7 +97,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       });
 
       it("should throw when list is full", () => {
-        const list = createLinkedList<number>(listType, 2);
+        const list = createLinkedList<number>(listType, false, 2);
         list.unshift(1);
         list.unshift(2);
 
@@ -119,7 +117,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       });
 
       it("should throw when list is full", () => {
-        const list = createLinkedList<number>(listType, 2);
+        const list = createLinkedList<number>(listType, false, 2);
         list.pushFromArray([1]);
 
         expect(() => {
@@ -179,7 +177,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       });
 
       it("should throw when index exceed list length", () => {
-        const list = createLinkedList<number>(listType, 5);
+        const list = createLinkedList<number>(listType, false, 5);
         list.push(1);
 
         expect(() => {
@@ -342,6 +340,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       it("should return false when list elements length lower than its capacity", () => {
         const list: ILinearStorage<number> = createLinkedList<number>(
           listType,
+          false,
           100
         );
         list.push(10);
@@ -351,133 +350,13 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       it("should return true when list elements length same as its capacity", () => {
         const list: ILinearStorage<number> = createLinkedList<number>(
           listType,
+          false,
           1
         );
         list.push(10);
 
         expect(list.isFull()).toBe(true);
       });
-    });
-
-    describe("method iterator", () => {
-      describe("constructor", () => {
-        it("should throw when list is empty", () => {
-          const linkedList = createLinkedList<number>(listType) as
-            | SingleLinkedList<number>
-            | DoubleLinkedList<number>;
-
-          expect(() => {
-            linkedList.iterator(0);
-          }).toThrowError(CollectionIsEmptyException);
-        });
-      });
-
-      describe("method hasNext", () => {
-        it("should return false when there is no next element available", () => {
-          const linkedList = createLinkedList<number>(listType) as
-            | SingleLinkedList<number>
-            | DoubleLinkedList<number>;
-          linkedList.pushFromArray([10, 20, 30]);
-          const iterator = linkedList.iterator(0);
-          iterator.next();
-          iterator.next();
-
-          expect(iterator.hasNext()).toBe(false);
-        });
-
-        it("should return true when next element is available", () => {
-          const linkedList = createLinkedList<number>(listType) as
-            | SingleLinkedList<number>
-            | DoubleLinkedList<number>;
-          linkedList.pushFromArray([10, 20, 30]);
-          const iterator = linkedList.iterator(0);
-
-          expect(iterator.hasNext()).toBe(true);
-        });
-      });
-
-      describe("method next", () => {
-        it("should iterate to next", () => {
-          const linkedList = createLinkedList<number>(listType) as
-            | SingleLinkedList<number>
-            | DoubleLinkedList<number>;
-          linkedList.pushFromArray([10, 20, 30]);
-          const iterator = linkedList.iterator(0);
-
-          expect(iterator.next()).toBe(20);
-        });
-
-        it("should throw when next element is not available", () => {
-          const linkedList = createLinkedList<number>(listType) as
-            | SingleLinkedList<number>
-            | DoubleLinkedList<number>;
-          linkedList.pushFromArray([10, 20, 30]);
-          const iterator = linkedList.iterator(0);
-          iterator.next();
-          iterator.next();
-
-          expect(() => {
-            iterator.next();
-          }).toThrowError(IsNotFoundException);
-        });
-      });
-
-      describe("method current", () => {
-        it("should return current value", () => {
-          const linkedList = createLinkedList<number>(listType) as
-            | SingleLinkedList<number>
-            | DoubleLinkedList<number>;
-          linkedList.pushFromArray([10, 20, 30]);
-          const iterator = linkedList.iterator(0);
-
-          expect(iterator.current()).toBe(10);
-        });
-      });
-
-      if (listType === EnumLinkedListType.DOUBLE) {
-        describe("method hasPrev", () => {
-          it("should return false when there is no prev element available", () => {
-            const list = new DoubleLinkedList<number>();
-            list.pushFromArray([10, 20, 30]);
-            const iterator = list.iterator(0);
-
-            expect(iterator.hasPrev()).toBe(false);
-          });
-
-          it("should return true when prev element is available", () => {
-            const list = new DoubleLinkedList<number>();
-            list.pushFromArray([10, 20, 30]);
-            const iterator = list.iterator(0);
-            iterator.next();
-            iterator.next();
-
-            expect(iterator.hasPrev()).toBe(true);
-          });
-        });
-
-        describe("method prev", () => {
-          const list = new DoubleLinkedList<number>();
-          list.pushFromArray([10, 20, 30]);
-          const iterator = list.iterator(0);
-          iterator.next();
-
-          it("should iterate to prev", () => {
-            expect(iterator.prev()).toBe(10);
-          });
-
-          it("should throw when prev element is not available", () => {
-            const list = new DoubleLinkedList<number>();
-            list.pushFromArray([10, 20]);
-            const iterator = list.iterator(0);
-            iterator.next();
-            iterator.prev();
-
-            expect(() => {
-              iterator.prev();
-            }).toThrowError(IsNotFoundException);
-          });
-        });
-      }
     });
   }
 );

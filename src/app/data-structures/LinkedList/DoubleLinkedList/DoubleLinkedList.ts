@@ -1,17 +1,12 @@
-import IBiDirectIterator from "../../../types/IBiDirectIterator";
-import IBiDirectIterable from "../../../types/IBiDirectIterable";
 import AbstractLinkedList from "../AbstractLinkedList/AbstractLinkedList";
 import DoubleLinkedNode from "./DoubleLinkedNode";
-import IsNotFoundException from "../../../exceptions/IsNotFoundException";
 
 /**
  * Linear data structure
  * Each node has next and prev sibling
  * Head and tail are linked to each other
  */
-export default class DoubleLinkedList<T>
-  extends AbstractLinkedList<T>
-  implements IBiDirectIterable<T> {
+export default class DoubleLinkedList<T> extends AbstractLinkedList<T> {
   /**
    * Override types
    */
@@ -99,61 +94,5 @@ export default class DoubleLinkedList<T>
       this._tail = currentNode.next;
       this._head = currentNode;
     }
-  }
-
-  /**
-   * List iterator
-   * @throws {CollectionIsEmptyException} when list is empty
-   * @throws {IndexOutOfBoundsException} when given index is out of range
-   */
-  public iterator(fromIndex = 0): IBiDirectIterator<T> {
-    const head = this._head;
-    const tail = this._tail;
-    let activeNode = this.getNodeByIndex(fromIndex) as DoubleLinkedNode<T>;
-
-    const iterator: IBiDirectIterator<T> = {
-      /**
-       * @inheritDoc
-       */
-      current: () => {
-        return activeNode.data;
-      },
-      /**
-       * @inheritDoc
-       */
-      hasNext(): boolean {
-        return Boolean(activeNode.next) && activeNode !== head;
-      },
-      /**
-       * @inheritDoc
-       */
-      hasPrev(): boolean {
-        return Boolean(activeNode.prev) && activeNode !== tail;
-      },
-      /**
-       * @inheritDoc
-       * @throws {IsNotFoundException} when next element does not exist
-       */
-      next: (): T => {
-        if (!iterator.hasNext()) {
-          throw new IsNotFoundException("Next element does not exist");
-        }
-        activeNode = activeNode.next!;
-        return activeNode.data;
-      },
-      /**
-       * @inheritDoc
-       * @throws {IsNotFoundException} when prev element does not exists
-       */
-      prev: (): T => {
-        if (!iterator.hasPrev()) {
-          throw new IsNotFoundException("Prev element does not exist");
-        }
-        activeNode = activeNode.prev!;
-        return activeNode.data;
-      },
-    };
-
-    return iterator;
   }
 }

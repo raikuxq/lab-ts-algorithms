@@ -1,17 +1,12 @@
-import IIterator from "../../../types/IIterator";
-import IIterable from "../../../types/IIterable";
 import AbstractLinkedList from "../AbstractLinkedList/AbstractLinkedList";
 import SingleLinkedNode from "./SingleLinkedNode";
-import IsNotFoundException from "../../../exceptions/IsNotFoundException";
 
 /**
  * Linear data structure
  * Each node has next
  * Head's next node is tail
  */
-export default class SingleLinkedList<T>
-  extends AbstractLinkedList<T>
-  implements IIterable<T> {
+export default class SingleLinkedList<T> extends AbstractLinkedList<T> {
   /**
    * Override types
    */
@@ -108,43 +103,5 @@ export default class SingleLinkedList<T>
       this._head = currentNode;
       this._tail = currentNode.next;
     }
-  }
-
-  /**
-   * List iterator
-   * @throws {CollectionIsEmptyException} when list is empty
-   * @throws {IndexOutOfBoundsException} when given index is out of range
-   */
-  public iterator(fromIndex = 0): IIterator<T> {
-    const head = this._head;
-    let activeNode: SingleLinkedNode<T> = this.getNodeByIndex(fromIndex);
-
-    const iterator: IIterator<T> = {
-      /**
-       * @inheritDoc
-       */
-      current: () => {
-        return activeNode.data;
-      },
-      /**
-       * @inheritDoc
-       */
-      hasNext(): boolean {
-        return Boolean(activeNode.next) && activeNode !== head;
-      },
-      /**
-       * @inheritDoc
-       * @throws {IsNotFoundException} when next element does not exist
-       */
-      next: (): T => {
-        if (!iterator.hasNext()) {
-          throw new IsNotFoundException("Next element does not exist");
-        }
-        activeNode = activeNode.next!;
-        return activeNode.data;
-      },
-    };
-
-    return iterator;
   }
 }

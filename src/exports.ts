@@ -26,6 +26,8 @@ import DirectedGraph from "./app/data-structures/Graph/DirectedGraph";
 import BinarySearchTree from "./app/data-structures/BinaryTree/BinarySearchTree/BinarySearchTree";
 import RandBinarySearchTree from "./app/data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchTree";
 import DoubleLinkedList from "./app/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
+import IterableSingleLinkedList from "./app/data-structures/LinkedList/SingleLinkedList/IterableSingleLinkedList";
+import IterableDoubleLinkedList from "./app/data-structures/LinkedList/DoubleLinkedList/IterableDoubleLinkedList";
 import SingleLinkedList from "./app/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
 import LoopedArray from "./app/data-structures/LoopedArray/LoopedArray";
 import HashTable from "./app/data-structures/HashTable/HashTable";
@@ -70,7 +72,9 @@ export {
   Stack,
   Queue,
   SingleLinkedList,
+  IterableSingleLinkedList,
   DoubleLinkedList,
+  IterableDoubleLinkedList,
   RandBinarySearchTree,
   BinarySearchTree,
   DirectedGraph,
