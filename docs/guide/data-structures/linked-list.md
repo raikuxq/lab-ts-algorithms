@@ -51,9 +51,9 @@ list.has("John"); // false
 ## Example iterator usage
 
 ```ts
-import {DoubleLinkedList} from "@raikuxq/alg-ds/data-structures";
+import {IterableDoubleLinkedList} from "@raikuxq/alg-ds/data-structures";
 
-const list = new DoubleLinkedList<number>();
+const list = new IterableDoubleLinkedList<number>();
 linkedList.pushFromArray([10, 20, 30]);
 
 const iterator = linkedList.iterator(0);

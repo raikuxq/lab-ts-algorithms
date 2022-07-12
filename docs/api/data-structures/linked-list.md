@@ -1,4 +1,4 @@
-# ILinkedList\<T>
+# SingleLinkedList\<T> and DoubleLinkedList\<T>
 
 Guide: [/guide/data-structures/linked-list](/guide/data-structures/linked-list)
 
@@ -13,10 +13,6 @@ Guide: [/guide/data-structures/linked-list](/guide/data-structures/linked-list)
 ### [`ILinearStorage`](/api/types/interfaces#ILinearStorage)
 
 ### [`ILinearStorageRA`](/api/types/interfaces#ILinearStorageRA)
-
-### [`IIterable`](/api/types/interfaces#IIterable)
-
-### [`IBiDirectIterable`](/api/types/interfaces#IBiDirectIterable)
 
 ## Methods
 
@@ -203,7 +199,52 @@ Get list size
 
 <br><br>
 
-## Iterator methods (Single Linked List)
+
+
+
+
+
+
+
+
+
+
+
+
+# IterableSingleLinkedList\<T>
+
+Guide: [/guide/data-structures/linked-list](/guide/data-structures/linked-list)
+
+## Generic Types
+
+`T` - type of collection elements
+
+## Extends
+#### Extends `SingleLinkedList`
+
+## Implements interfaces
+
+### [`ILinkedList`](/api/types/interfaces#ILinkedList)
+
+### [`ILinearStorage`](/api/types/interfaces#ILinearStorage)
+
+### [`ILinearStorageRA`](/api/types/interfaces#ILinearStorageRA)
+
+### [`IIterable`](/api/types/interfaces#IIterable)
+
+## Methods
+
+### `constructor(capacity?: number): IlinkedList<T>`
+
+Creates empty instance
+
+###### Params:
+
+| Name     | Type     | Required | Default          | Description                                                |
+|----------|----------|----------|------------------|------------------------------------------------------------|
+| capacity | `number` | -        | Number.MAX_VALUE | Max capacity of list <br>(0 < capacity < Number.MAX_VALUE) |
+
+<br><br>
 
 ### `iterator(fromIndex?: number): IIterator<T>`
 
@@ -240,7 +281,48 @@ Check is there next element available
 
 <br><br>
 
-## Iterator methods (Double Linked List)
+
+
+
+
+
+
+# IterableDoubleLinkedList\<T>
+
+Guide: [/guide/data-structures/linked-list](/guide/data-structures/linked-list)
+
+## Generic Types
+
+`T` - type of collection elements
+
+## Extends
+#### Extends `DoubleLinkedList`
+
+## Implements interfaces
+
+### [`ILinkedList`](/api/types/interfaces#ILinkedList)
+
+### [`ILinearStorage`](/api/types/interfaces#ILinearStorage)
+
+### [`ILinearStorageRA`](/api/types/interfaces#ILinearStorageRA)
+
+### [`IIterable`](/api/types/interfaces#IIterable)
+
+### [`IBiDirectIterable`](/api/types/interfaces#IBiDirectIterable)
+
+## Methods
+
+### `constructor(capacity?: number): IlinkedList<T>`
+
+Creates empty instance
+
+###### Params:
+
+| Name     | Type     | Required | Default          | Description                                                |
+|----------|----------|----------|------------------|------------------------------------------------------------|
+| capacity | `number` | -        | Number.MAX_VALUE | Max capacity of list <br>(0 < capacity < Number.MAX_VALUE) |
+
+<br><br>
 
 ### `iterator(fromIndex?: number): IBiDirectIterator<T>`
 
