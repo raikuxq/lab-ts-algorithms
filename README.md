@@ -94,11 +94,19 @@ Implements [ILinearStorageRA](src/app/types/ILinearStorageRA.ts) interface.
 [SingleLinkedList](src/app/data-structures/LinkedList/SingleLinkedList/SingleLinkedList.ts) 
 [ [ tests ] ](test/unit/data-structures/linked-list/linked-list.test.ts)
 — Extends abstract linked list with implementation of one-way linking. 
-Implements [IIterable](src/app/types/IIterable.ts) interface.
 
 [DoubleLinkedList](src/app/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList.ts) 
 [ [ tests ] ](test/unit/data-structures/linked-list/linked-list.test.ts)
 — Extends abstract linked list with implementation of two-way linking.
+
+[IterableSingleLinkedList](src/app/data-structures/LinkedList/SingleLinkedList/IterableSingleLinkedList.ts)
+[ [ tests ] ](test/unit/data-structures/linked-list/linked-list-iterable.test.ts)
+— Extends single linked list with iterator implementation.
+Implements [IIterable](src/app/types/IIterable.ts) interface.
+
+[IterableDoubleLinkedList](src/app/data-structures/LinkedList/DoubleLinkedList/IterableDoubleLinkedList.ts)
+[ [ tests ] ](test/unit/data-structures/linked-list/linked-list-iterable.test.ts)
+— Extends double linked list with implementation of two-way linking.
 Implements [IBiDirectIterable](src/app/types/IBiDirectIterable.ts) interface.
 
 
