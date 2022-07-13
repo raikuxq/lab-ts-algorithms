@@ -13,7 +13,7 @@ Read full: [wiki/factorial](https://en.wikipedia.org/wiki/Factorial)
 ### Import
 
 ```ts
-import {factorial, memoizedFactorial} from "@raikuxq/alg-ds/algorithms";
+import {factorial, memoizedFactorial} from "@raikuxq/alg-ds/lib/exports/algorithms";
 ```
 
 ### API reference
@@ -23,7 +23,7 @@ Factorial API: [/api/algorithms/factorial](/api/algorithms/factorial)
 ### Example usage
 
 ```ts
-import {memoizedFactorial} from "@raikuxq/alg-ds/algorithms";
+import {memoizedFactorial} from "@raikuxq/alg-ds/lib/exports/algorithms";
 
 memoizedFactorial(6); // 720
 memoizedFactorial(10); // 3628800

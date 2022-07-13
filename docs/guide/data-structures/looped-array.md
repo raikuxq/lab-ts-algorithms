@@ -6,7 +6,7 @@ After reaching full array new pushed elements will be overwritten over old eleme
 ## Import
 
 ```ts
-import {LoopedArray} from "@raikuxq/alg-ds/data-structures";
+import {LoopedArray} from "@raikuxq/alg-ds/lib/exports/data-structures";
 ```
 
 ## API reference
@@ -16,7 +16,7 @@ Looped array API: [/api/data-structures/looped-array](/api/data-structures/loope
 ## Example looped array usage
 
 ```ts
-import {LoopedArray} from "@raikuxq/alg-ds/data-structures";
+import {LoopedArray} from "@raikuxq/alg-ds/lib/exports/data-structures";
 
 const array = new LoopedArray<string>();
 

@@ -12,7 +12,7 @@ This hash-table impl is based on open addressing method using quadratic probing
 ## Import
 
 ```ts
-import {HashTable} from "@raikuxq/alg-ds/data-structures";
+import {HashTable} from "@raikuxq/alg-ds/lib/exports/data-structures";
 ```
 
 ## API reference
@@ -22,7 +22,7 @@ HASH Table API: [/api/data-structures/hash-table](/api/data-structures/hash-tabl
 ## Example usage
 
 ```ts
-import {HashTable} from "@raikuxq/alg-ds/data-structures";
+import {HashTable} from "@raikuxq/alg-ds/lib/exports/data-structures";
 
 const hashTable: IKeyValueStorage<number> = new HashTable();
 hashTable.set("key1", 1);

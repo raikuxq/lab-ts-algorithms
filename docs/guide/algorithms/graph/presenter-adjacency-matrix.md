@@ -8,7 +8,7 @@ of vertices are adjacent or not in the graph.
 ### Import
 
 ```ts
-import {presenterAdjacencyMatrix} from "@raikuxq/alg-ds/algorithms";
+import {presenterAdjacencyMatrix} from "@raikuxq/alg-ds/lib/exports/algorithms";
 ```
 
 ### API reference
@@ -18,8 +18,8 @@ API: [/api/algorithms/graph/presenter-adjacency-matrix](/api/algorithms/graph/pr
 ### Example usage
 
 ```ts
-import {presenterAdjacencyMatrix} from "@raikuxq/alg-ds/algorithms";
-import {DirectedGraph} from "@raikuxq/alg-ds/data-structures";
+import {presenterAdjacencyMatrix} from "@raikuxq/alg-ds/lib/exports/algorithms";
+import {DirectedGraph} from "@raikuxq/alg-ds/lib/exports/data-structures";
 
 const graph: IGraph<number> = new UndirectedGraph();
 
