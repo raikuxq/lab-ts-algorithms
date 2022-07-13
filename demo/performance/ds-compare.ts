@@ -1,7 +1,8 @@
 import Queue from "../../src/app/data-structures/Queue/Queue";
 import Stack from "../../src/app/data-structures/Stack/Stack";
 import ILinearStorage from "../../src/app/types/ILinearStorage";
-import { perf, roundNumber } from "../../src/app/utils";
+import { roundNumber } from "../../src/app/utils";
+import { perf } from "../../src/app/performance";
 
 export const pushToLinearDS = (
   linearDS: ILinearStorage<string>,

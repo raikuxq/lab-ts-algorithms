@@ -1,6 +1,7 @@
-import { perf, roundNumber } from "../../src/app/utils";
+import { roundNumber } from "../../src/app/utils";
 import IKeyValueStorage from "../../src/app/types/IKeyValueStorage";
 import HashTable from "../../src/app/data-structures/HashTable/HashTable";
+import { perf } from "../../src/app/performance";
 
 export const pushToStorage = (
   linearDS: IKeyValueStorage<number>,

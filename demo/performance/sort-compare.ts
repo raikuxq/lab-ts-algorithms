@@ -4,7 +4,8 @@ import { insertionSort } from "../../src/app/algorithms/sorts/insertion-sort";
 import { bubbleSort } from "../../src/app/algorithms/sorts/bubble-sort";
 import { quickSort } from "../../src/app/algorithms/sorts/quick-sort";
 import { selectSort } from "../../src/app/algorithms/sorts/select-sort";
-import { perf, randomizeArray } from "../../src/app/utils";
+import { randomizeArray } from "../../src/app/utils";
+import { perf } from "../../src/app/performance";
 
 export const sortCompare = (
   sortFn: FnSort,

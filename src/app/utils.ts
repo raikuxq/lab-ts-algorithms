@@ -1,5 +1,3 @@
-import { performance } from "perf_hooks";
-
 /**
  * Will find min value in the whole array and return its index
  */
@@ -46,23 +44,6 @@ export const randomizeNumberInRange = (min: number, max: number): number =>
  */
 export const roundNumber = (num: number, digits = 3): number =>
   Math.round(num * 10 ** digits) / 10 ** digits;
-
-/**
- * Get time execution of function
- */
-export const perf = (fn: () => void): number => {
-  const perfStart = performance.now();
-  fn();
-  const perfEnd = performance.now();
-  return perfEnd - perfStart;
-};
-
-/**
- * Get time execution of function
- */
-export const perfAsync = async (fn: () => void): Promise<number> => {
-  return Promise.resolve(perf(fn));
-};
 
 /**
  * Check is given array a matrix N*N
