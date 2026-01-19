@@ -3,15 +3,17 @@
     "lib": ["esnext"],
     "allowJs": true,
     "outDir": "lib",
-    "declaration": true,
+    "declaration": false,
     "strict": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "module": "ESNext",
-    "target": "ES6",
+    "target": "ESNext",
     "rootDir": "src",
-    "inlineSourceMap": false
+    "inlineSourceMap": false,
+    "isolatedModules": true
   },
   "exclude": [
     "docs/**/*",
@@ -24,7 +26,6 @@
     "src/app/types"
   ],
   "include": [
-    "src/exports",
     "src/app/algorithms",
     "src/app/data-structures",
     "src/app/exceptions",

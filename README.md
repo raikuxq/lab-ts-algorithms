@@ -30,11 +30,9 @@ Clone this repository and install dependencies by using `yarn` command.
   + [Sorting algorithms](#sorting-algorithms)
 + [Linear data structures](#linear-data-structures)
   + [Linked list](#linked-list)
-  + [Looped array](#looped-array)
   + [Stack](#stack)
   + [Queue](#queue)
 + [Non-linear data structures](#non-linear-data-structures)
-  + [HASH table](#hash-table)
   + [Graph](#graph)
   + [Binary tree](#binary-trees)
 
@@ -109,18 +107,6 @@ Implements [IIterable](src/app/types/IIterable.ts) interface.
 — Extends double linked list with implementation of two-way linking.
 Implements [IBiDirectIterable](src/app/types/IBiDirectIterable.ts) interface.
 
-
-## Looped Array
-
-### Interfaces
-[IArrayFacade](src/app/types/IArrayFacade.ts) — Contains basic array operations. 
-Extends [ILinearStorageRA](src/app/types/ILinearStorageRA.ts) interface. 
-Extends [IConvertableToArray](src/app/types/IConvertableToArray.ts) interface.
-
-### Implementation
-[LoopedArray](src/app/data-structures/LoopedArray/LoopedArray.ts)[ [ tests ]](test/unit/data-structures/looped-array/looped-array.test.ts)
-— Overwrites data on capacity overflow.
-
 ## Stack
 
 ### Implementation
@@ -136,17 +122,6 @@ Extends [IConvertableToArray](src/app/types/IConvertableToArray.ts) interface.
 
 
 # Non linear data structures
-
-## HASH Table
-### Interfaces
-[IKeyValueStorage](src/app/types/IKeyValueStorage.ts) — Contains basic key-value storages operations.
-
-### Implementation
-[HashTableNode](src/app/data-structures/HashTable/HashTableNode.ts) — Contains key, data and isDeleted properties.
-
-[HashTable](src/app/data-structures/HashTable/HashTable.ts)  [ [ tests ] ](test/unit/data-structures/hash-table/hash-table.test.ts) — Implementation of open addressing hash table using quadratic probing
-
-
 
 ## Graph
 ### Interfaces
