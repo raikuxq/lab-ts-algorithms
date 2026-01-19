@@ -8,8 +8,6 @@ import DoubleLinkedList from "../app/data-structures/LinkedList/DoubleLinkedList
 import IterableDoubleLinkedList from "../app/data-structures/LinkedList/DoubleLinkedList/IterableDoubleLinkedList";
 import IterableSingleLinkedList from "../app/data-structures/LinkedList/SingleLinkedList/IterableSingleLinkedList";
 import SingleLinkedList from "../app/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
-import LoopedArray from "../app/data-structures/LoopedArray/LoopedArray";
-import HashTable from "../app/data-structures/HashTable/HashTable";
 
 export {
   Stack,
@@ -22,6 +20,4 @@ export {
   BinarySearchTree,
   DirectedGraph,
   UndirectedGraph,
-  LoopedArray,
-  HashTable,
 };

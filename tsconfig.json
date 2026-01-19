@@ -7,10 +7,11 @@
     "strict": true,
     "noImplicitAny": true,
     "resolveJsonModule": true,
-    "module": "commonjs",
-    "target": "es5",
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "target": "ES6",
     "rootDir": "src",
-    "inlineSourceMap": true
+    "inlineSourceMap": false
   },
   "exclude": [
     "docs/**/*",

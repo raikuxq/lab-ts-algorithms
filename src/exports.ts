@@ -29,8 +29,6 @@ import DoubleLinkedList from "./app/data-structures/LinkedList/DoubleLinkedList/
 import IterableSingleLinkedList from "./app/data-structures/LinkedList/SingleLinkedList/IterableSingleLinkedList";
 import IterableDoubleLinkedList from "./app/data-structures/LinkedList/DoubleLinkedList/IterableDoubleLinkedList";
 import SingleLinkedList from "./app/data-structures/LinkedList/SingleLinkedList/SingleLinkedList";
-import LoopedArray from "./app/data-structures/LoopedArray/LoopedArray";
-import HashTable from "./app/data-structures/HashTable/HashTable";
 import IsNotFoundException from "./app/exceptions/IsNotFoundException";
 import IsAlreadyExistsException from "./app/exceptions/IsAlreadyExistsException";
 import ValueOutOfRangeException from "./app/exceptions/ValueOutOfRangeException";
@@ -75,8 +73,6 @@ export {
   BinarySearchTree,
   DirectedGraph,
   UndirectedGraph,
-  LoopedArray,
-  HashTable,
 };
 
 export { EDGE_NOT_EXISTS_STATE, EDGE_EXISTS_STATE };

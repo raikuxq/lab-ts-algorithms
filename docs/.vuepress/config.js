@@ -54,14 +54,6 @@ module.exports = {
                             link: '/guide/data-structures/linked-list',
                         },
                         {
-                            text: 'Looped array',
-                            link: '/guide/data-structures/looped-array',
-                        },
-                        {
-                            text: 'Hash Table',
-                            link: '/guide/data-structures/hash-table',
-                        },
-                        {
                             text: 'Binary Search Tree',
                             link: '/guide/data-structures/binary-tree',
                         },
@@ -244,14 +236,6 @@ module.exports = {
                         {
                             text: 'LinkedList',
                             link: '/api/data-structures/linked-list',
-                        },
-                        {
-                            text: 'LoopedArray',
-                            link: '/api/data-structures/looped-array',
-                        },
-                        {
-                            text: 'HashTable',
-                            link: '/api/data-structures/hash-table',
                         },
                         {
                             text: 'BinarySearchTree',
