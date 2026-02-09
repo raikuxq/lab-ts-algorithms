@@ -19,4 +19,9 @@ export default defineConfig({
     },
     outDir: "lib",
   },
+  resolve: {
+    alias: {
+      'src': path.resolve(__dirname, './src'),
+    },
+  },
 });
