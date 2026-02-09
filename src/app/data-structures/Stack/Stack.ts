@@ -1,94 +1,63 @@
-import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
-import ILinearStorage from "../../types/ILinearStorage";
-import ILinearStorageRA from "../../types/ILinearStorageRA";
-import CollectionIsEmptyException from "../../exceptions/CollectionIsEmptyException";
-import CollectionIsFullException from "../../exceptions/CollectionIsFullException";
+import ILinearStorage from "src/app/types/ILinearStorage";
+import CollectionIsEmptyException from "src/app/exceptions/CollectionIsEmptyException";
+import CollectionIsFullException from "src/app/exceptions/CollectionIsFullException";
 
-/**
- * LIFO data structure
- */
-export default class Stack<T> implements ILinearStorage<T> {
-  private readonly _list: ILinearStorageRA<T>;
+export default class Stack<T> implements ILinearStorage<T>, Iterable<T> {
+  private readonly _items: T[] = [];
+  private readonly _capacity: number | undefined;
 
-  /**
-   * Create a stack instance
-   */
   public constructor(capacity?: number) {
-    this._list = new DoubleLinkedList(capacity);
+    this._capacity = capacity;
   }
 
-  /**
-   * Get stack top element
-   * @throws {CollectionIsEmptyException} when list is empty
-   */
+  public length(): number {
+    return this._items.length;
+  }
+
+  public isEmpty(): boolean {
+    return this._items.length === 0;
+  }
+
+  public isFull(): boolean {
+    return (
+      this._capacity !== undefined && this._items.length === this._capacity
+    );
+  }
+
   public peek(): T {
     if (this.isEmpty()) {
       throw new CollectionIsEmptyException("Cannot peek when list is empty");
     }
-    return this._list.peek();
+    return this._items[this._items.length - 1];
   }
 
-  /**
-   * Add element to stack head
-   * @throws {CollectionIsFullException} when list is full
-   */
   public push(item: T): void {
     if (this.isFull()) {
       throw new CollectionIsFullException("Stack is full");
     }
-    this._list.push(item);
+    this._items.push(item);
   }
 
-  /**
-   * Remove element from stack head
-   * @throws {CollectionIsEmptyException} when list is empty
-   */
   public pop(): T {
     if (this.isEmpty()) {
       throw new CollectionIsEmptyException("Cannot pop when stack is empty");
     }
-    return this._list.pop();
+    return this._items.pop()!;
   }
 
-  /**
-   * Check if element exists in list
-   */
   public has(item: T): boolean {
-    return this._list.has(item);
+    return this._items.includes(item);
   }
 
-  /**
-   * Is stack empty
-   */
-  public isEmpty(): boolean {
-    return this._list.isEmpty();
-  }
-
-  /**
-   * Is stack full
-   */
-  public isFull(): boolean {
-    return this._list.isFull();
-  }
-
-  /**
-   * Remove all elements in stack
-   */
   public clear(): void {
-    this._list.clear();
+    this._items.length = 0;
   }
 
-  /**
-   * Queue length
-   */
-  public length(): number {
-    return this._list.length();
-  }
-
-  /**
-   * Reverse stack
-   */
   public reverse(): void {
-    this._list.reverse();
+    this._items.reverse();
+  }
+
+  public *[Symbol.iterator](): Iterator<T> {
+    yield* this._items;
   }
 }

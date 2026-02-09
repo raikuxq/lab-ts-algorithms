@@ -13,26 +13,21 @@
     "target": "ESNext",
     "rootDir": "src",
     "inlineSourceMap": false,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "types": ["jest", "node"]
   },
   "exclude": [
     "docs/**/*",
-    "test/**/*",
-    "demo/**/*",
     ".eslintrc.cjs",
     "jest.config.cjs",
     "tsconfig.json",
     "nodemon.json",
-    "src/app/types"
   ],
   "include": [
-    "src/app/algorithms",
-    "src/app/data-structures",
-    "src/app/exceptions",
-    "src/app/constants.ts",
-    "src/app/utils.ts",
-    "src/exports.ts",
-    "src/index.ts"
+    "src/**/*",
+    "test/**/*",
+    "demo/**/*"
   ],
   "lib": ["esnext"]
 }

@@ -1,11 +1,11 @@
-import DoubleLinkedList from "../../../../src/app/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
-import { EnumLinkedListType } from "../../../../src/app/types/EnumLinkedListType";
-import { createLinkedList } from "../../../../src/app/data-structures/LinkedList/_helpers/createLinkedList";
-import ILinearStorage from "../../../../src/app/types/ILinearStorage";
-import ValueOutOfRangeException from "../../../../src/app/exceptions/ValueOutOfRangeException";
-import CollectionIsFullException from "../../../../src/app/exceptions/CollectionIsFullException";
-import IndexOutOfBoundsException from "../../../../src/app/exceptions/IndexOutOfBoundsException";
-import CollectionIsEmptyException from "../../../../src/app/exceptions/CollectionIsEmptyException";
+import DoubleLinkedList from "src/app/data-structures/LinkedList/core/DoubleLinkedList/DoubleLinkedList";
+import { EnumLinkedListType } from "src/app/types/EnumLinkedListType";
+import { createLinkedList } from "src/app/data-structures/LinkedList/factories/createLinkedList";
+import ILinearStorage from "src/app/types/ILinearStorage";
+import ValueOutOfRangeException from "src/app/exceptions/ValueOutOfRangeException";
+import CollectionIsFullException from "src/app/exceptions/CollectionIsFullException";
+import IndexOutOfBoundsException from "src/app/exceptions/IndexOutOfBoundsException";
+import CollectionIsEmptyException from "src/app/exceptions/CollectionIsEmptyException";
 
 describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
   "%s linked list",
@@ -14,7 +14,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       it("should throw when capacity is less than 1", () => {
         expect(() => {
           createLinkedList<number>(listType, false, -5);
-        }).toThrowError(ValueOutOfRangeException);
+        }).toThrow(ValueOutOfRangeException);
       });
     });
 
@@ -32,7 +32,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           list.push(3);
-        }).toThrowError(CollectionIsFullException);
+        }).toThrow(CollectionIsFullException);
       });
     });
 
@@ -74,7 +74,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           list.pushFromIndex(10, 1000);
-        }).toThrowError(IndexOutOfBoundsException);
+        }).toThrow(IndexOutOfBoundsException);
       });
 
       it("should throw when index less than 0 ", () => {
@@ -83,7 +83,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           list.pushFromIndex(10, -20);
-        }).toThrowError(IndexOutOfBoundsException);
+        }).toThrow(IndexOutOfBoundsException);
       });
     });
 
@@ -103,7 +103,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           list.unshift(3);
-        }).toThrowError(CollectionIsFullException);
+        }).toThrow(CollectionIsFullException);
       });
     });
 
@@ -122,7 +122,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           list.pushFromArray([2, 3]);
-        }).toThrowError(CollectionIsFullException);
+        }).toThrow(CollectionIsFullException);
       });
     });
 
@@ -132,11 +132,11 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.peekFromStart();
-        }).toThrowError(CollectionIsEmptyException);
+        }).toThrow(CollectionIsEmptyException);
       });
 
       it("should return first element from list", () => {
-        const list = new DoubleLinkedList();
+        const list = createLinkedList<number>(listType);
         list.pushFromArray([10, 20, 30, 40, 50]);
 
         expect(list.peekFromStart()).toBe(10);
@@ -149,7 +149,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.peek();
-        }).toThrowError(CollectionIsEmptyException);
+        }).toThrow(CollectionIsEmptyException);
       });
 
       it("should return first element from list", () => {
@@ -166,7 +166,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.peekByIndex(0);
-        }).toThrowError(CollectionIsEmptyException);
+        }).toThrow(CollectionIsEmptyException);
       });
 
       it("should return element by its index from list", () => {
@@ -182,7 +182,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           list.peekByIndex(1000);
-        }).toThrowError(IndexOutOfBoundsException);
+        }).toThrow(IndexOutOfBoundsException);
       });
     });
 
@@ -206,7 +206,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.shift();
-        }).toThrowError(CollectionIsEmptyException);
+        }).toThrow(CollectionIsEmptyException);
       });
     });
 
@@ -230,7 +230,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.pop();
-        }).toThrowError(CollectionIsEmptyException);
+        }).toThrow(CollectionIsEmptyException);
       });
     });
 
@@ -254,7 +254,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
         expect(() => {
           emptyList.deleteFromIndex(0);
-        }).toThrowError(CollectionIsEmptyException);
+        }).toThrow(CollectionIsEmptyException);
       });
     });
 
@@ -341,7 +341,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
         const list: ILinearStorage<number> = createLinkedList<number>(
           listType,
           false,
-          100
+          100,
         );
         list.push(10);
 
@@ -351,12 +351,12 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
         const list: ILinearStorage<number> = createLinkedList<number>(
           listType,
           false,
-          1
+          1,
         );
         list.push(10);
 
         expect(list.isFull()).toBe(true);
       });
     });
-  }
+  },
 );

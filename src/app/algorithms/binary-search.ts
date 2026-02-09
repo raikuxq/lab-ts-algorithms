@@ -4,22 +4,24 @@
  */
 export const binarySearch = (
   elements: Array<number>,
-  searchElement: number
+  searchElement: number,
 ): number | null => {
-  const length: number = elements.length;
-
   let leftIndex = 0;
-  let rightIndex: number = length - 1;
+  let rightIndex: number = elements.length - 1;
 
   while (leftIndex <= rightIndex) {
-    const midIndex: number = Math.ceil((leftIndex + rightIndex) / 2);
+    const midIndex: number = Math.floor(
+      leftIndex + (rightIndex - leftIndex) / 2,
+    );
     const midEl: number = elements[midIndex];
 
-    if (searchElement == midEl) {
+    if (searchElement === midEl) {
       return midIndex;
-    } else if (midEl > searchElement) {
+    }
+
+    if (midEl > searchElement) {
       rightIndex = midIndex - 1;
-    } else if (midEl < searchElement) {
+    } else {
       leftIndex = midIndex + 1;
     }
   }

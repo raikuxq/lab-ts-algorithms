@@ -1,4 +1,4 @@
-import { swapArrayItems } from "../../utils";
+import { swapArrayItems } from "src/app/utils/swapArrayItems";
 
 /**
  * Bubble sorting algorithm

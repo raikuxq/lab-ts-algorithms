@@ -1,10 +1,10 @@
-import IGraph from "../../../../src/app/types/IGraph";
-import UndirectedGraph from "../../../../src/app/data-structures/Graph/UndirectedGraph";
-import DirectedGraph from "../../../../src/app/data-structures/Graph/DirectedGraph";
-import { createGraph } from "../../../../src/app/data-structures/Graph/_helpers/createGraph";
-import { EnumGraphType } from "../../../../src/app/types/EnumGraphType";
-import IsAlreadyExistsException from "../../../../src/app/exceptions/IsAlreadyExistsException";
-import IsNotFoundException from "../../../../src/app/exceptions/IsNotFoundException";
+import IGraph from "src/app/types/IGraph";
+import UndirectedGraph from "src/app/data-structures/Graph/core/UndirectedGraph";
+import DirectedGraph from "src/app/data-structures/Graph/core/DirectedGraph";
+import { createGraph } from "src/app/data-structures/Graph/factories/createGraph";
+import { EnumGraphType } from "src/app/types/EnumGraphType";
+import IsAlreadyExistsException from "src/app/exceptions/IsAlreadyExistsException";
+import IsNotFoundException from "src/app/exceptions/IsNotFoundException";
 
 describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
   "%s graph",
@@ -124,7 +124,7 @@ describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
 
         expect(() => {
           graph.addVertex("Mike");
-        }).toThrowError(IsAlreadyExistsException);
+        }).toThrow(IsAlreadyExistsException);
       });
     });
 
@@ -136,12 +136,12 @@ describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
         it("when first node does not exist", () => {
           expect(() => {
             graph.addEdge("NOT_EXISTED_NODE", "Bob");
-          }).toThrowError(IsNotFoundException);
+          }).toThrow(IsNotFoundException);
         });
         it("when second node does not exist", () => {
           expect(() => {
             graph.addEdge("Mike", "NOT_EXISTED_NODE");
-          }).toThrowError(IsNotFoundException);
+          }).toThrow(IsNotFoundException);
         });
       });
 
@@ -229,7 +229,7 @@ describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
 
         expect(() => {
           graph.removeVertex("NOT_EXISTED_VERTEX");
-        }).toThrowError(IsNotFoundException);
+        }).toThrow(IsNotFoundException);
       });
 
       if (graphType === EnumGraphType.UNDIRECTED) {
@@ -305,7 +305,7 @@ describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
 
         expect(() => {
           graph.removeEdge("NOT_EXISTED_VERTEX", "NOT_EXISTED_VERTEX");
-        }).toThrowError(IsNotFoundException);
+        }).toThrow(IsNotFoundException);
       });
 
       if (graphType === EnumGraphType.UNDIRECTED) {
@@ -361,7 +361,7 @@ describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
 
         expect(() => {
           graph.getVertexNeighbors(0);
-        }).toThrowError();
+        }).toThrow();
       });
 
       if (graphType === EnumGraphType.UNDIRECTED) {
@@ -392,5 +392,5 @@ describe.each([EnumGraphType.DIRECTED, EnumGraphType.UNDIRECTED])(
         });
       }
     });
-  }
+  },
 );

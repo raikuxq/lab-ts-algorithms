@@ -86,23 +86,23 @@ Extends [ILinearStorage](src/app/types/ILinearStorage.ts) interface.
 Extends [ILinearStorageRA](src/app/types/ILinearStorageRA.ts) and [IConvertableToArray](src/app/types/IConvertableToArray.ts) interface.
 
 ### Implementation
-[AbstractLinkedList](src/app/data-structures/LinkedList/AbstractLinkedList/AbstractLinkedList.ts) — Common logic for both single and double linked lists.
+[AbstractLinkedList](src/app/data-structures/LinkedList/core/AbstractLinkedList/AbstractLinkedList.ts) — Common logic for both single and double linked lists.
 Implements [ILinearStorageRA](src/app/types/ILinearStorageRA.ts) interface.
 
-[SingleLinkedList](src/app/data-structures/LinkedList/SingleLinkedList/SingleLinkedList.ts) 
+[SingleLinkedList](src/app/data-structures/LinkedList/core/SingleLinkedList/SingleLinkedList.ts) 
 [ [ tests ] ](test/unit/data-structures/linked-list/linked-list.test.ts)
 — Extends abstract linked list with implementation of one-way linking. 
 
-[DoubleLinkedList](src/app/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList.ts) 
+[DoubleLinkedList](src/app/data-structures/LinkedList/core/DoubleLinkedList/DoubleLinkedList.ts) 
 [ [ tests ] ](test/unit/data-structures/linked-list/linked-list.test.ts)
 — Extends abstract linked list with implementation of two-way linking.
 
-[IterableSingleLinkedList](src/app/data-structures/LinkedList/SingleLinkedList/IterableSingleLinkedList.ts)
+[IterableSingleLinkedList](src/app/data-structures/LinkedList/core/SingleLinkedList/IterableSingleLinkedList.ts)
 [ [ tests ] ](test/unit/data-structures/linked-list/linked-list-iterable.test.ts)
 — Extends single linked list with iterator implementation.
 Implements [IIterable](src/app/types/IIterable.ts) interface.
 
-[IterableDoubleLinkedList](src/app/data-structures/LinkedList/DoubleLinkedList/IterableDoubleLinkedList.ts)
+[IterableDoubleLinkedList](src/app/data-structures/LinkedList/core/DoubleLinkedList/IterableDoubleLinkedList.ts)
 [ [ tests ] ](test/unit/data-structures/linked-list/linked-list-iterable.test.ts)
 — Extends double linked list with implementation of two-way linking.
 Implements [IBiDirectIterable](src/app/types/IBiDirectIterable.ts) interface.
@@ -132,52 +132,52 @@ Implements [IBiDirectIterable](src/app/types/IBiDirectIterable.ts) interface.
 [IGraphIterationStrategy](src/app/types/IGraphIterationStrategy.ts) — Iteration strategies which are used in shortest-path, has-path.
 
 ### Implementation
-[GraphEdge](src/app/data-structures/Graph/GraphEdge.ts) — Contains from/to links and edge weight.
+[GraphEdge](src/app/data-structures/Graph/core/GraphEdge.ts) — Contains from/to links and edge weight.
 
-[AbstractGraph](src/app/data-structures/Graph/AbstractGraph.ts) — Common logic for both directed and undirected graphs.
+[AbstractGraph](src/app/data-structures/Graph/core/AbstractGraph.ts) — Common logic for both directed and undirected graphs.
 
 
-[DirectedGraph](src/app/data-structures/Graph/DirectedGraph.ts) [ [ tests ] ](test/unit/data-structures/graph/graph.test.ts) 
+[DirectedGraph](src/app/data-structures/Graph/core/DirectedGraph.ts) [ [ tests ] ](test/unit/data-structures/graph/graph.test.ts) 
 — In case of directed graph A->B and B->A edges are not the same.
 
-[UndirectedGraph](src/app/data-structures/Graph/UndirectedGraph.ts) [ [ tests ] ](test/unit/data-structures/graph/graph.test.ts) 
+[UndirectedGraph](src/app/data-structures/Graph/core/UndirectedGraph.ts) [ [ tests ] ](test/unit/data-structures/graph/graph.test.ts) 
 — In case of undirected graph A->B and B->A are equal.
 
 
 ### Graph Iterators
 
-[BreadthFirstSearchIterator](src/app/algorithms/graph/iterator/GraphIteratorBFS.ts) 
+[BreadthFirstSearchIterator](src/app/data-structures/Graph/iterator/GraphIteratorBFS.ts) 
 — Traversal method for unweighted graphs, built on queue.
 
-[DepthFirstSearchIterator](src/app/algorithms/graph/iterator/GraphIteratorDFS.ts)
+[DepthFirstSearchIterator](src/app/data-structures/Graph/iterator/GraphIteratorDFS.ts)
 — Traversal method for unweighted graphs, built on stack.
 
-[DijkstraMethodIterator](src/app/algorithms/graph/iterator/GraphIteratorDijkstra.ts)
+[DijkstraMethodIterator](src/app/data-structures/Graph/iterator/GraphIteratorDijkstra.ts)
 — Traversal method for weighted graphs, built on finding the minimal cost.
 
 
 ### Graph Presenter
-[presenter-adjacency-lists](src/app/algorithms/graph/presenter/presenterAdjacencyLists.ts)  [[ tests ](test/unit/data-structures/graph/graph.presenter.lists.test.ts)] 
+[presenter-adjacency-lists](src/app/data-structures/Graph/presenter/presenterAdjacencyLists.ts)  [[ tests ](test/unit/data-structures/graph/graph.presenter.lists.test.ts)] 
 — Representation of graph as an adjacency list (using Map).
 
-[presenter-adjacency-matrix](src/app/algorithms/graph/presenter/presenterAdjacencyMatrix.ts)  [[ tests ](test/unit/data-structures/graph/graph.presenter.matrix.test.ts)]
+[presenter-adjacency-matrix](src/app/data-structures/Graph/presenter/presenterAdjacencyMatrix.ts)  [[ tests ](test/unit/data-structures/graph/graph.presenter.matrix.test.ts)]
 — Representation of graph as an adjacency matrix (using Array N*N).
 
 
 ### Graph Searching
-[has-path (BFS/DFS)](src/app/algorithms/graph/searching/hasPath.ts)  [[ tests ](test/unit/data-structures/graph/graph.has-path.test.ts)] 
+[has-path (BFS/DFS)](src/app/data-structures/Graph/searching/hasPath.ts)  [[ tests ](test/unit/data-structures/graph/graph.has-path.test.ts)] 
 — Search for the existence of a path between two vertices.
 
-[shortest-path (BFS/Dijkstra)](src/app/algorithms/graph/searching/shortestPath.ts)  [[ tests ](test/unit/data-structures/graph/graph.shortest-path.test.ts)] 
+[shortest-path (BFS/Dijkstra)](src/app/data-structures/Graph/searching/shortestPath.ts)  [[ tests ](test/unit/data-structures/graph/graph.shortest-path.test.ts)] 
 — Search for one of several shortest paths between two vertices.
 
 ### Graph Creators
-[create-graph-from-matrix](src/app/data-structures/Graph/_helpers/createGraphFromMatrix.ts)  [[ tests ](test/unit/data-structures/graph/graph.create-from-matrix.test.ts)] 
+[create-graph-from-matrix](src/app/data-structures/Graph/factories/createGraphFromMatrix.ts)  [[ tests ](test/unit/data-structures/graph/graph.create-from-matrix.test.ts)] 
 — Convert a matrix N*N into a graph instance.
 
 
 ### Graph Transposing
-[transpose-directed-graph](src/app/algorithms/graph/transposing/transposeDirectedGraph.ts)  [ [ tests ](test/unit/data-structures/graph/graph.transpose.test.ts)]
+[transpose-directed-graph](src/app/data-structures/Graph/transposing/transposeDirectedGraph.ts)  [ [ tests ](test/unit/data-structures/graph/graph.transpose.test.ts)]
 — Transpose a directed graph (undirected graphs are symmetrical already).
 
 
@@ -187,23 +187,23 @@ Implements [IBiDirectIterable](src/app/types/IBiDirectIterable.ts) interface.
 
 ### Implementation
 
-[AbstractBinaryNode](src/app/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryNode.ts) — Contains left/right/parent links and node data.
+[AbstractBinaryNode](src/app/data-structures/BinaryTree/core/AbstractBinaryTree/AbstractBinaryNode.ts) — Contains left/right/parent links and node data.
 
-[AbstractBinaryTree](src/app/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryTree.ts) — Common logic for all types of binary trees.
+[AbstractBinaryTree](src/app/data-structures/BinaryTree/core/AbstractBinaryTree/AbstractBinaryTree.ts) — Common logic for all types of binary trees.
 
   
-[BinarySearchNode](src/app/data-structures/BinaryTree/BinarySearchTree/BinarySearchNode.ts) — Same as abstract binary node.
+[BinarySearchNode](src/app/data-structures/BinaryTree/core/BinarySearchTree/BinarySearchNode.ts) — Same as abstract binary node.
 
-[BinarySearchTree](src/app/data-structures/BinaryTree/BinarySearchTree/BinarySearchTree.ts) — Implementation of unbalanced binary search tree. 
+[BinarySearchTree](src/app/data-structures/BinaryTree/core/BinarySearchTree/BinarySearchTree.ts) — Implementation of unbalanced binary search tree. 
 Each node in left subtree is smaller and each node in right subtree is larger than the node data. 
-Extends [AbstractSearchTree](src/app/data-structures/BinaryTree/AbstractBinaryTree/AbstractBinaryTree.ts).
+Extends [AbstractSearchTree](src/app/data-structures/BinaryTree/core/AbstractBinaryTree/AbstractBinaryTree.ts).
 
 
 
-[RandBinarySearchNode](src/app/data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchNode.ts) — Have a rank attribute. 
-Extends [BinarySearchNode](src/app/data-structures/BinaryTree/BinarySearchTree/BinarySearchNode.ts).
+[RandBinarySearchNode](src/app/data-structures/BinaryTree/core/RandBinarySearchTree/RandBinarySearchNode.ts) — Have a rank attribute. 
+Extends [BinarySearchNode](src/app/data-structures/BinaryTree/core/BinarySearchTree/BinarySearchNode.ts).
 
-[RandBinarySearchTree](src/app/data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchTree.ts) 
+[RandBinarySearchTree](src/app/data-structures/BinaryTree/core/RandBinarySearchTree/RandBinarySearchTree.ts) 
 — Implementation of randomized binary search tree, which gives expected log(N) height. 
 INSERTION have a 1/N+1 probability of inserting into root. 
-Extends [BinarySearchTree](src/app/data-structures/BinaryTree/BinarySearchTree/BinarySearchTree.ts).
+Extends [BinarySearchTree](src/app/data-structures/BinaryTree/core/BinarySearchTree/BinarySearchTree.ts).

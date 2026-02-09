@@ -1,4 +1,5 @@
-import { swapArrayItems, getMinIndexFromIndex } from "../../utils";
+import { swapArrayItems } from "src/app/utils/swapArrayItems";
+import { getMinIndexFromIndex } from "src/app/utils/getMinIndex";
 
 /**
  * Selection sorting algorithm

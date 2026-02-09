@@ -1,9 +1,9 @@
-import IGraph from "../src/app/types/IGraph";
-import { createGraph } from "../src/app/data-structures/Graph/_helpers/createGraph";
-import { EnumGraphType } from "../src/app/types/EnumGraphType";
-import { generateRandomGraph } from "../src/app/data-structures/Graph/_helpers/generateRandomGraph";
-import { shortestPath } from "../src/app/algorithms/graph/searching/shortestPath";
-import BFSIterationStrategy from "../src/app/algorithms/graph/iterator-strategy/BFSIterationStrategy";
+import IGraph from "src/app/types/IGraph";
+import { createGraph } from "src/app/data-structures/Graph/factories/createGraph";
+import { EnumGraphType } from "src/app/types/EnumGraphType";
+import { generateRandomGraph } from "src/app/data-structures/Graph/utils/generateRandomGraph";
+import { shortestPath } from "src/app/data-structures/Graph/searching/shortestPath";
+import { EnumGraphTraversalType } from "src/app/types/EnumGraphTraversalType";
 
 export const demoUndirectedGraph = (): void => {
   console.log("\nEmpty undirected graph created");
@@ -201,16 +201,16 @@ export const demoDirectedGraph = (): void => {
 export const demoGraphGeneratedByType = (
   type: EnumGraphType,
   verticesCount: number,
-  edgesCount: number
+  edgesCount: number,
 ): void => {
-  const bfsIteration = new BFSIterationStrategy<string>();
+  const traversalType = EnumGraphTraversalType.BFS;
   const graph: IGraph<string> = generateRandomGraph(
     verticesCount,
     edgesCount,
-    type
+    type,
   );
   console.log(
-    `\nGenerated ${type.toLocaleLowerCase()} graph (N = ${verticesCount}, K = ${edgesCount}): \n`
+    `\nGenerated ${type.toLocaleLowerCase()} graph (N = ${verticesCount}, K = ${edgesCount}): \n`,
   );
   console.log(graph);
 
@@ -219,14 +219,14 @@ export const demoGraphGeneratedByType = (
     graph.vertices().forEach((vertexTo: string) => {
       const getPath = () => {
         try {
-          return shortestPath<string>(
+          return shortestPath<string>({
             graph,
-            vertexFrom,
-            vertexTo,
-            bfsIteration
-          );
+            from: vertexFrom,
+            to: vertexTo,
+            traversalType,
+          });
         } catch (e) {
-          return `[-- ${e.message} --]`;
+          return `[-- ${e} --]`;
         }
       };
 

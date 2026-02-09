@@ -1,8 +1,8 @@
-import DoubleLinkedList from "../LinkedList/DoubleLinkedList/DoubleLinkedList";
-import ILinearStorage from "../../types/ILinearStorage";
-import ILinearStorageRA from "../../types/ILinearStorageRA";
-import CollectionIsEmptyException from "../../exceptions/CollectionIsEmptyException";
-import CollectionIsFullException from "../../exceptions/CollectionIsFullException";
+import DoubleLinkedList from "src/app/data-structures/LinkedList/core/DoubleLinkedList/DoubleLinkedList";
+import ILinearStorage from "src/app/types/ILinearStorage";
+import ILinearStorageRA from "src/app/types/ILinearStorageRA";
+import CollectionIsEmptyException from "src/app/exceptions/CollectionIsEmptyException";
+import CollectionIsFullException from "src/app/exceptions/CollectionIsFullException";
 
 /**
  * FIFO data structure

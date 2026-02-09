@@ -1,4 +1,4 @@
-import { swapArrayItems } from "../../utils";
+import { swapArrayItems } from "src/app/utils/swapArrayItems";
 
 /**
  * Quick sort algorithm
@@ -12,7 +12,7 @@ export const quickSort = (arr: Array<number>): Array<number> => {
   const partition = (
     arr: Array<number>,
     leftIndex: number,
-    rightIndex: number
+    rightIndex: number,
   ): number => {
     const pivot = arr[leftIndex];
 
@@ -39,7 +39,7 @@ export const quickSort = (arr: Array<number>): Array<number> => {
   const sort = (
     arr: Array<number>,
     leftIndex = 0,
-    rightIndex: number = arr.length - 1
+    rightIndex: number = arr.length - 1,
   ): Array<number> => {
     if (leftIndex < rightIndex) {
       const pivot = partition(arr, leftIndex, rightIndex);

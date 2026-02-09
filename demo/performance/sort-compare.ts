@@ -1,16 +1,16 @@
-import { FnSort } from "../../src/app/types/FnSort";
-import { mergeSort } from "../../src/app/algorithms/sorts/merge-sort";
-import { insertionSort } from "../../src/app/algorithms/sorts/insertion-sort";
-import { bubbleSort } from "../../src/app/algorithms/sorts/bubble-sort";
-import { quickSort } from "../../src/app/algorithms/sorts/quick-sort";
-import { selectSort } from "../../src/app/algorithms/sorts/select-sort";
-import { randomizeArray } from "../../src/app/utils";
-import { perf } from "../../src/app/performance";
+import { FnSort } from "src/app/types/FnSort";
+import { mergeSort } from "src/app/algorithms/sorts/merge-sort";
+import { insertionSort } from "src/app/algorithms/sorts/insertion-sort";
+import { bubbleSort } from "src/app/algorithms/sorts/bubble-sort";
+import { quickSort } from "src/app/algorithms/sorts/quick-sort";
+import { selectSort } from "src/app/algorithms/sorts/select-sort";
+import { randomizeArray } from "src/app/utils/randomizeArray";
+import { perf } from "src/app/performance";
 
 export const sortCompare = (
   sortFn: FnSort,
   n: number,
-  callsNumber: number
+  callsNumber: number,
 ): void => {
   let totalTime = 0;
 
@@ -29,7 +29,7 @@ export const sortCompare = (
 
 export const sortCompareRunner = (
   sortFn: FnSort,
-  callsNumber: number
+  callsNumber: number,
 ): void => {
   sortCompare(sortFn, 5, callsNumber);
   sortCompare(sortFn, 50, callsNumber);

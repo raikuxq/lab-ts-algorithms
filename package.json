@@ -2,7 +2,7 @@
   "name": "@raikuxq/alg-ds",
   "scripts": {
     "test": "jest",
-    "dev": "nodemon",
+    "dev": "nodemon --exec tsx src/index.ts",
     "build:lib": "rimraf ./lib && vite build",
     "build:dts": "dts-bundle-generator -o lib/index.d.ts src/index.ts --no-check --inline-declare-externals false --external-inlines @babel/types",
     "build:full": "yarn build:lib && yarn build:dts",
@@ -69,6 +69,7 @@
     "ts-node": "^10.9.2",
     "ts-node-esm": "^0.0.6",
     "typescript": "5.8.2",
+    "typescript-eslint": "^8.54.0",
     "vite": "^7.3.1",
     "vuepress": "^2.0.0-beta.48"
   },

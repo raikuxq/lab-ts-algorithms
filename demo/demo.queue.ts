@@ -1,5 +1,5 @@
-import Queue from "../src/app/data-structures/Queue/Queue";
-import ILinearStorage from "../src/app/types/ILinearStorage";
+import Queue from "src/app/data-structures/Queue/Queue";
+import ILinearStorage from "src/app/types/ILinearStorage";
 
 export const demoQueue = (): void => {
   console.log("\nEmpty queue created");

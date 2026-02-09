@@ -1,14 +1,14 @@
-import IterableSingleLinkedList from "../../../../src/app/data-structures/LinkedList/SingleLinkedList/IterableSingleLinkedList";
-import IterableDoubleLinkedList from "../../../../src/app/data-structures/LinkedList/DoubleLinkedList/IterableDoubleLinkedList";
-import { EnumLinkedListType } from "../../../../src/app/types/EnumLinkedListType";
-import { createLinkedList } from "../../../../src/app/data-structures/LinkedList/_helpers/createLinkedList";
-import ValueOutOfRangeException from "../../../../src/app/exceptions/ValueOutOfRangeException";
-import CollectionIsEmptyException from "../../../../src/app/exceptions/CollectionIsEmptyException";
-import IsNotFoundException from "../../../../src/app/exceptions/IsNotFoundException";
+import IterableSingleLinkedList from "src/app/data-structures/LinkedList/core/SingleLinkedList/IterableSingleLinkedList";
+import IterableDoubleLinkedList from "src/app/data-structures/LinkedList/core/DoubleLinkedList/IterableDoubleLinkedList";
+import { EnumLinkedListType } from "src/app/types/EnumLinkedListType";
+import { createLinkedList } from "src/app/data-structures/LinkedList/factories/createLinkedList";
+import ValueOutOfRangeException from "src/app/exceptions/ValueOutOfRangeException";
+import CollectionIsEmptyException from "src/app/exceptions/CollectionIsEmptyException";
+import IsNotFoundException from "src/app/exceptions/IsNotFoundException";
 
 const createTypedLinkedList = (
   listType: EnumLinkedListType,
-  capacity?: number
+  capacity?: number,
 ) => {
   return createLinkedList<number>(listType, true, capacity) as
     | IterableSingleLinkedList<number>
@@ -22,7 +22,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
       it("should throw when capacity is less than 1", () => {
         expect(() => {
           createTypedLinkedList(listType, -5);
-        }).toThrowError(ValueOutOfRangeException);
+        }).toThrow(ValueOutOfRangeException);
       });
     });
 
@@ -33,7 +33,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
           expect(() => {
             linkedList.iterator(0);
-          }).toThrowError(CollectionIsEmptyException);
+          }).toThrow(CollectionIsEmptyException);
         });
       });
 
@@ -79,7 +79,7 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
           expect(() => {
             iterator.next();
-          }).toThrowError(IsNotFoundException);
+          }).toThrow(IsNotFoundException);
         });
       });
 
@@ -134,10 +134,10 @@ describe.each([EnumLinkedListType.SINGLE, EnumLinkedListType.DOUBLE])(
 
             expect(() => {
               iterator.prev();
-            }).toThrowError(IsNotFoundException);
+            }).toThrow(IsNotFoundException);
           });
         });
       }
     });
-  }
+  },
 );

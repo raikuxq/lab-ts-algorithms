@@ -1,6 +1,6 @@
-import RandBinarySearchTree from "../../src/app/data-structures/BinaryTree/RandBinarySearchTree/RandBinarySearchTree";
-import BinarySearchTree from "../../src/app/data-structures/BinaryTree/BinarySearchTree/BinarySearchTree";
-import IBinaryTree from "../../src/app/types/IBinaryTree";
+import RandBinarySearchTree from "src/app/data-structures/BinaryTree/core/RandBinarySearchTree/RandBinarySearchTree";
+import BinarySearchTree from "src/app/data-structures/BinaryTree/core/BinarySearchTree/BinarySearchTree";
+import IBinaryTree from "src/app/types/IBinaryTree";
 
 const logTree = <T>(tree: IBinaryTree<T>) => {
   console.log("HEIGHT");
@@ -25,11 +25,11 @@ export const bstCompare = (): void => {
   });
 
   console.log(
-    "***************************LEAF TREE*****************************"
+    "***************************LEAF TREE*****************************",
   );
   logTree<number>(bstLeaf);
   console.log(
-    "\n\n\n***************************RAND TREE*****************************"
+    "\n\n\n***************************RAND TREE*****************************",
   );
   logTree<number>(bstRand);
 };

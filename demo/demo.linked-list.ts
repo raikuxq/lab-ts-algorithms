@@ -1,5 +1,5 @@
-import DoubleLinkedList from "../src/app/data-structures/LinkedList/DoubleLinkedList/DoubleLinkedList";
-import ILinkedList from "../src/app/types/ILinkedList";
+import DoubleLinkedList from "src/app/data-structures/LinkedList/core/DoubleLinkedList/DoubleLinkedList";
+import ILinkedList from "src/app/types/ILinkedList";
 
 export const demoLinkedList = (): void => {
   console.log("\nEmpty linked list created");

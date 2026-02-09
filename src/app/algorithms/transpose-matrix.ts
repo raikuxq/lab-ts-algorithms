@@ -1,6 +1,6 @@
-import { TypeArrayMatrix } from "../types/TypeArrayMatrix";
-import IllegalArgumentException from "../exceptions/base/IllegalArgumentException";
-import { checkIsArrayMatrix } from "../utils";
+import { TypeArrayMatrix } from "src/app/types/TypeArrayMatrix";
+import IllegalArgumentException from "src/app/exceptions/base/IllegalArgumentException";
+import { checkIsArrayMatrix } from "src/app/utils/checkIsArrayMatrix";
 
 /**
  * Will flips a matrix over its diagonal
@@ -11,8 +11,16 @@ export const transposeMatrix = (matrix: TypeArrayMatrix): TypeArrayMatrix => {
     throw new IllegalArgumentException("Given array is not a matrix");
   }
 
-  return matrix.reduce((acc, current, currentIndex) => {
-    acc[currentIndex] = matrix.map((rowArr) => rowArr[currentIndex]);
-    return acc;
-  }, new Array(matrix.length));
+  const rows = matrix.length;
+  const cols = matrix[0]?.length || 0;
+
+  const result: TypeArrayMatrix = [];
+  for (let i = 0; i < cols; i++) {
+    result[i] = [];
+    for (let j = 0; j < rows; j++) {
+      result[i][j] = matrix[j][i];
+    }
+  }
+
+  return result;
 };

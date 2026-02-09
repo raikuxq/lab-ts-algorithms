@@ -5,7 +5,7 @@ const merge = (
   arr: Array<number>,
   leftIndex: number,
   midIndex: number,
-  rightIndex: number
+  rightIndex: number,
 ) => {
   const container = arr.slice(leftIndex, rightIndex + 1);
 
@@ -47,7 +47,7 @@ const merge = (
 const sortRange = (
   arr: Array<number>,
   leftIndex: number,
-  rightIndex: number
+  rightIndex: number,
 ) => {
   if (rightIndex > leftIndex) {
     const midIndex = Math.floor(leftIndex + (rightIndex - leftIndex) / 2);

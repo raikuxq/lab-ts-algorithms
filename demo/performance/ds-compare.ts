@@ -1,13 +1,13 @@
-import Queue from "../../src/app/data-structures/Queue/Queue";
-import Stack from "../../src/app/data-structures/Stack/Stack";
-import ILinearStorage from "../../src/app/types/ILinearStorage";
-import { roundNumber } from "../../src/app/utils";
-import { perf } from "../../src/app/performance";
+import Queue from "src/app/data-structures/Queue/Queue";
+import Stack from "src/app/data-structures/Stack/Stack";
+import ILinearStorage from "src/app/types/ILinearStorage";
+import { roundNumber } from "src/app/utils/roundNumber";
+import { perf } from "src/app/performance";
 
 export const pushToLinearDS = (
   linearDS: ILinearStorage<string>,
   elementsCount: number,
-  item: string
+  item: string,
 ): void => {
   for (let i = 0; i < elementsCount; i++) {
     linearDS.push(`${item}_${i}`);

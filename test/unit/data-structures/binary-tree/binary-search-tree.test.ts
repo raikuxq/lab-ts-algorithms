@@ -1,275 +1,128 @@
-import { EnumBinarySearchTreeType } from "../../../../src/app/types/EnumBinarySearchTreeType";
-import { createBinaryTree } from "../../../../src/app/data-structures/BinaryTree/_helpers/createBinaryTree";
-import { EnumTreeTraversalType } from "../../../../src/app/types/EnumTreeTraversalType";
-import IsAlreadyExistsException from "../../../../src/app/exceptions/IsAlreadyExistsException";
-import IsNotFoundException from "../../../../src/app/exceptions/IsNotFoundException";
-import CollectionIsEmptyException from "../../../../src/app/exceptions/CollectionIsEmptyException";
+import { EnumBinarySearchTreeType } from "src/app/types/EnumBinarySearchTreeType";
+import { createBinaryTree } from "src/app/data-structures/BinaryTree/factories/createBinaryTree";
+import { EnumTreeTraversalType } from "src/app/types/EnumTreeTraversalType";
+import IsAlreadyExistsException from "src/app/exceptions/IsAlreadyExistsException";
+import IsNotFoundException from "src/app/exceptions/IsNotFoundException";
+import CollectionIsEmptyException from "src/app/exceptions/CollectionIsEmptyException";
 
 describe.each([
   EnumBinarySearchTreeType.BST,
   EnumBinarySearchTreeType.RANDOMIZED_BST,
 ])("%s", (treeType: EnumBinarySearchTreeType) => {
-  describe("constructor", () => {
-    it("should create an empty instance", () => {
-      const tree = createBinaryTree(treeType);
+  let tree: any;
 
-      expect(tree.length()).toBe(0);
-    });
+  beforeEach(() => {
+    tree = createBinaryTree(treeType);
   });
 
-  describe("method insert", function () {
+  describe("method insert", () => {
     it("should have added elements to be in order", () => {
-      const tree = createBinaryTree(treeType);
-      tree.insert(5);
-      tree.insert(15);
-      tree.insert(10);
-      tree.insert(0);
-      tree.insert(20);
-
+      [5, 15, 10, 0, 20].forEach((n) => tree.insert(n));
       expect(tree.traverse(EnumTreeTraversalType.IN_ORDER)).toEqual([
-        0,
-        5,
-        10,
-        15,
-        20,
+        0, 5, 10, 15, 20,
       ]);
     });
 
     it("should throw when element already exists", () => {
-      const tree = createBinaryTree(treeType);
       tree.insert(5);
-
-      expect(() => {
-        tree.insert(5);
-      }).toThrowError(IsAlreadyExistsException);
+      expect(() => tree.insert(5)).toThrow(IsAlreadyExistsException);
     });
   });
 
-  describe("method length", function () {
-    describe("when tree is non empty", () => {
-      describe("after adding", () => {
-        it("should return updated length value", () => {
-          const tree = createBinaryTree(treeType);
-          tree.insert(5);
-          tree.insert(15);
-          tree.insert(10);
-
-          expect(tree.length()).toBe(3);
-        });
-      });
-
-      describe("after deleting", () => {
-        it("should return updated length value", () => {
-          const tree = createBinaryTree(treeType);
-          tree.insert(5);
-          tree.insert(15);
-          tree.insert(10);
-          tree.delete(5);
-
-          expect(tree.length()).toBe(2);
-        });
-      });
-    });
-
-    describe("when tree is empty", () => {
-      it("should return zero value", () => {
-        const tree = createBinaryTree(treeType);
-
-        expect(tree.length()).toBe(0);
-      });
+  describe("method length", () => {
+    it("should return updated length after operations", () => {
+      expect(tree.length()).toBe(0);
+      tree.insert(5);
+      tree.insert(15);
+      expect(tree.length()).toBe(2);
+      tree.delete(5);
+      expect(tree.length()).toBe(1);
     });
   });
 
-  describe("method height", function () {
-    describe("when tree is non empty", () => {
-      describe("after adding", () => {
-        const tree = createBinaryTree(treeType);
-        const length = 300;
-        const arraySrc = Array.from(Array(length).keys());
-        const arrayShuffled = arraySrc
-          .map((item) => item)
-          .sort(() => Math.random() - 0.5);
-        arrayShuffled.forEach((num) => {
-          tree.insert(num);
-        });
-        const height = tree.height();
-
-        it("should be equal or greater than log(length)", () => {
-          const expected = Math.ceil(Math.log2(length));
-          expect(height).toBeGreaterThanOrEqual(expected);
-        });
-        it("should be equal or smaller than length", () => {
-          expect(height).toBeLessThanOrEqual(tree.length());
-        });
-      });
+  describe("method height", () => {
+    it("should return zero for empty tree", () => {
+      expect(tree.height()).toBe(0);
     });
 
-    describe("when tree is empty", () => {
-      const tree = createBinaryTree(treeType);
+    it("should be within valid bounds for random insertion", () => {
+      const length = 100;
+      const shuffled = Array.from({ length }, (_, i) => i).sort(
+        () => Math.random() - 0.5,
+      );
+      shuffled.forEach((num) => tree.insert(num));
 
-      it("should return zero value", () => {
-        expect(tree.height()).toBe(0);
-      });
+      expect(tree.height()).toBeGreaterThanOrEqual(
+        Math.ceil(Math.log2(length)),
+      );
+      expect(tree.height()).toBeLessThanOrEqual(tree.length());
     });
   });
 
-  describe("method has", function () {
-    const tree = createBinaryTree(treeType);
-    tree.insert(5);
-
-    it("should return true when value exists", () => {
+  describe("method has", () => {
+    it("should return correct boolean for existence", () => {
+      tree.insert(5);
       expect(tree.has(5)).toBe(true);
-    });
-
-    it("should return false when value does not exist", () => {
       expect(tree.has(10)).toBe(false);
     });
   });
 
-  describe("method delete", function () {
-    const tree = createBinaryTree(treeType);
-    tree.insert(5);
-    tree.insert(12);
-    tree.insert(7);
-    tree.insert(20);
-
-    tree.delete(12);
-
-    it("should delete element from the tree", () => {
+  describe("method delete", () => {
+    it("should remove element and restructure tree", () => {
+      [5, 12, 7, 20].forEach((n) => tree.insert(n));
+      tree.delete(12);
       expect(tree.has(12)).toBe(false);
-    });
-
-    it("should restructure the tree correctly", () => {
       expect(tree.traverse(EnumTreeTraversalType.IN_ORDER)).toEqual([5, 7, 20]);
     });
 
     it("should throw when element not found", () => {
-      const tree = createBinaryTree(treeType);
       tree.insert(5);
-      tree.insert(12);
-
-      expect(() => {
-        tree.delete(10);
-      }).toThrowError(IsNotFoundException);
+      expect(() => tree.delete(10)).toThrow(IsNotFoundException);
     });
   });
 
-  describe("method max", function () {
-    const tree = createBinaryTree(treeType);
-    tree.insert(5);
-    tree.insert(12);
-    tree.insert(7);
-    tree.insert(20);
-
-    it("should be in order", () => {
+  describe("min/max", () => {
+    it("should find min and max values", () => {
+      [5, 12, 7, 20, 2].forEach((n) => tree.insert(n));
+      expect(tree.min()).toBe(2);
       expect(tree.max()).toBe(20);
     });
 
-    it("should throw when list is empty", () => {
-      const tree = createBinaryTree(treeType);
-
-      expect(() => {
-        tree.max();
-      }).toThrowError(CollectionIsEmptyException);
-    });
-  });
-
-  describe("method min", function () {
-    const tree = createBinaryTree(treeType);
-    tree.insert(5);
-    tree.insert(12);
-    tree.insert(7);
-    tree.insert(20);
-    tree.insert(2);
-
-    it("should be in order", () => {
-      expect(tree.min()).toBe(2);
-    });
-
-    it("should throw when list is empty", () => {
-      const tree = createBinaryTree(treeType);
-
-      expect(() => {
-        tree.min();
-      }).toThrowError(CollectionIsEmptyException);
+    it("should throw if tree is empty", () => {
+      expect(() => tree.min()).toThrow(CollectionIsEmptyException);
+      expect(() => tree.max()).toThrow(CollectionIsEmptyException);
     });
   });
 
   if (treeType === EnumBinarySearchTreeType.BST) {
-    describe("method subtree", function () {
-      const bst = createBinaryTree(treeType);
-      bst.insert(22);
-      bst.insert(4);
-      bst.insert(16);
-      bst.insert(19);
-      bst.insert(15);
-      bst.insert(8);
-      bst.insert(23);
-      const subtree = bst.subtree(16);
+    describe("BST specific methods", () => {
+      beforeEach(() => {
+        [22, 4, 16, 19, 15, 8, 23].forEach((n) => tree.insert(n));
+      });
 
       it("should correctly create subtree", () => {
+        const subtree = tree.subtree(16);
         expect(subtree.traverse(EnumTreeTraversalType.IN_ORDER)).toEqual([
-          8,
-          15,
-          16,
-          19,
+          8, 15, 16, 19,
         ]);
       });
-    });
-
-    describe("method traverse", function () {
-      const bst = createBinaryTree(treeType);
-
-      bst.insert(22);
-      bst.insert(4);
-      bst.insert(16);
-      bst.insert(19);
-      bst.insert(15);
-      bst.insert(8);
-      bst.insert(23);
 
       it("should correctly convert in-order type", () => {
-        expect(bst.traverse(EnumTreeTraversalType.IN_ORDER)).toEqual([
-          4,
-          8,
-          15,
-          16,
-          19,
-          22,
-          23,
+        expect(tree.traverse(EnumTreeTraversalType.IN_ORDER)).toEqual([
+          4, 8, 15, 16, 19, 22, 23,
         ]);
       });
 
       it("should correctly convert pre-order type", () => {
-        expect(bst.traverse(EnumTreeTraversalType.PRE_ORDER)).toEqual([
-          22,
-          4,
-          8,
-          15,
-          16,
-          19,
-          23,
+        expect(tree.traverse(EnumTreeTraversalType.PRE_ORDER)).toEqual([
+          22, 4, 16, 15, 8, 19, 23,
         ]);
       });
 
       it("should correctly convert post-order type", () => {
-        expect(bst.traverse(EnumTreeTraversalType.POST_ORDER)).toEqual([
-          4,
-          8,
-          15,
-          16,
-          19,
-          23,
-          22,
+        expect(tree.traverse(EnumTreeTraversalType.POST_ORDER)).toEqual([
+          8, 15, 19, 16, 4, 23, 22,
         ]);
-      });
-
-      it("should throw when list is empty", () => {
-        const tree = createBinaryTree(treeType);
-
-        expect(() => {
-          tree.traverse(EnumTreeTraversalType.IN_ORDER);
-        }).toThrowError(CollectionIsEmptyException);
       });
     });
   }

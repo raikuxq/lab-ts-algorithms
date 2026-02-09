@@ -1,4 +1,4 @@
-export default interface IGraph<T> {
+export default interface IGraph<T> extends Iterable<T> {
   weight(): number;
   vertices(): Array<T>;
   verticesCount(): number;

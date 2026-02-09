@@ -1,11 +1,11 @@
-import BinarySearchTree from "../src/app/data-structures/BinaryTree/BinarySearchTree/BinarySearchTree";
-import { EnumTreeTraversalType } from "../src/app/types/EnumTreeTraversalType";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+import BinarySearchTree from "src/app/data-structures/BinaryTree/core/BinarySearchTree/BinarySearchTree";
+import { EnumTreeTraversalType } from "src/app/types/EnumTreeTraversalType";
+
 const util = require("util");
 
 const logTree = <T>(tree: BinarySearchTree<T>) => {
   console.log(
-    util.inspect(tree, { showHidden: false, depth: null, colors: true })
+    util.inspect(tree, { showHidden: false, depth: null, colors: true }),
   );
 
   console.log("IN ORDER TRAVERSE");
