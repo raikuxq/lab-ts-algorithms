@@ -1,26 +1,23 @@
-Common algorithms and data structures.
+# @raikuxq/alg-ds
 
-Written in TypeScript, tested with Jest.
+Common algorithms and data structures written in **TypeScript**, tested with **Jest**.
 
-# Documentation
-Documentation app: [raikuxq-algorithms.netlify.app/guide](https://raikuxq-algorithms.netlify.app/guide)
+[![NPM version](https://img.shields.io)](https://www.npmjs.com)
+[![bundle size (gzip)](https://img.shields.io)](https://bundlephobia.com)
+[![Build Status](https://img.shields.io)](https://github.com)
+---
 
+## Documentation
 
-# Usage as package
+Detailed documentation is available at:
+[raikuxq-algorithms.netlify.app/guide](https://raikuxq-algorithms.netlify.app)
+
+---
+
+# Installing
 Install by using any of these commands:
 + `yarn add @raikuxq/alg-ds`
 + `npm install @raikuxq/alg-ds --save`
-
-
-# Usage as repository
-
-Clone this repository and install dependencies by using `yarn` command.
-+ `yarn test` - run all tests via jest
-+ `yarn dev` - run in dev mode via nodemon (src/index.ts is an entrypoint)
-+ `yarn build` - compile ts sources into js files
-+ `yarn start` - build and run in production mode
-+ `yarn lint` - lint check via eslint
-+ `yarn lint:fix` - fix source files via eslint
 
 
 # Navigation
