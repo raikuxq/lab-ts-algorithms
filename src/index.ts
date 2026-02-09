@@ -51,6 +51,24 @@ import { roundNumber } from "src/app/utils/roundNumber";
 import { randomizeNumberInRange } from "src/app/utils/randomizeNumberInRange";
 import { swapArrayItems } from "src/app/utils/swapArrayItems";
 
+import { EnumGraphType } from "src/app/types/EnumGraphType";
+import { EnumGraphTraversalType } from "src/app/types/EnumGraphTraversalType";
+import { EnumBinarySearchTreeType } from "src/app/types/EnumBinarySearchTreeType";
+import { EnumSortType } from "src/app/types/EnumSortType";
+import { EnumLinkedListType } from "src/app/types/EnumLinkedListType";
+import { EnumRandomGenerationFormat } from "src/app/types/EnumRandomGenerationFormat";
+import { EnumTreeTraversalType } from "src/app/types/EnumTreeTraversalType";
+
+export {
+  EnumGraphTraversalType,
+  EnumGraphType,
+  EnumRandomGenerationFormat,
+  EnumTreeTraversalType,
+  EnumSortType,
+  EnumBinarySearchTreeType,
+  EnumLinkedListType,
+};
+
 export {
   getMinIndex,
   getMinIndexFromIndex,
