@@ -2,9 +2,9 @@
 
 Common algorithms and data structures written in **TypeScript**, tested with **Jest**.
 
-[![NPM version](https://img.shields.io)](https://www.npmjs.com)
-[![bundle size (gzip)](https://img.shields.io)](https://bundlephobia.com)
-[![Build Status](https://img.shields.io)](https://github.com)
+[![npm version](https://img.shields.io/npm/v/@raikuxq/alg-ds.svg)](https://www.npmjs.com/package/@raikuxq/alg-ds)
+[![minzip](https://img.shields.io/bundlephobia/minzip/@raikuxq/alg-ds)](https://bundlephobia.com/package/@raikuxq/alg-ds)
+[![gzip size](https://img.shields.io/bundlejs/size/gzip/@raikuxq/alg-ds)](https://bundlejs.com/?q=@raikuxq/alg-ds)
 ---
 
 ## Documentation
