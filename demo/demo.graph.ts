@@ -1,13 +1,14 @@
 import IGraph from "src/app/types/IGraph";
-import { createGraph } from "src/app/data-structures/Graph/factories/createGraph";
 import { EnumGraphType } from "src/app/types/EnumGraphType";
 import { generateRandomGraph } from "src/app/data-structures/Graph/utils/generateRandomGraph";
 import { shortestPath } from "src/app/data-structures/Graph/searching/shortestPath";
 import { EnumGraphTraversalType } from "src/app/types/EnumGraphTraversalType";
+import UndirectedGraph from "src/app/data-structures/Graph/core/UndirectedGraph";
+import DirectedGraph from "src/app/data-structures/Graph/core/DirectedGraph";
 
-export const demoUndirectedGraph = (): void => {
+export const demoUndirectedGraph = (): UndirectedGraph<string> => {
   console.log("\nEmpty undirected graph created");
-  const graph: IGraph<string> = createGraph(EnumGraphType.UNDIRECTED);
+  const graph = new UndirectedGraph<string>();
 
   graph.addVertex("John");
   graph.addVertex("Mary");
@@ -102,11 +103,13 @@ export const demoUndirectedGraph = (): void => {
   graph.removeVertex("Kate");
   console.log("\nRemove vertex Kate and cascade all related edges: ");
   console.log(graph);
+
+  return graph;
 };
 
-export const demoDirectedGraph = (): void => {
+export const demoDirectedGraph = (): DirectedGraph<string> => {
   console.log("\nEmpty directed graph created");
-  const graph: IGraph<string> = createGraph(EnumGraphType.DIRECTED);
+  const graph = new DirectedGraph<string>();
 
   graph.addVertex("John");
   graph.addVertex("Mary");
@@ -196,6 +199,8 @@ export const demoDirectedGraph = (): void => {
   graph.removeVertex("Kate");
   console.log("\nRemove vertex Kate and cascade all related edges: ");
   console.log(graph);
+
+  return graph;
 };
 
 export const demoGraphGeneratedByType = (
@@ -243,4 +248,91 @@ export const demoGraphGenerated = (): void => {
   const edgesCount = 6;
   demoGraphGeneratedByType(EnumGraphType.DIRECTED, verticesCount, edgesCount);
   demoGraphGeneratedByType(EnumGraphType.UNDIRECTED, verticesCount, edgesCount);
+};
+
+export const demoRichDirectedGraph = (): DirectedGraph<string> => {
+  const graph = new DirectedGraph<string>();
+
+  const cities = [
+    "Moscow",
+    "London",
+    "Paris",
+    "Berlin",
+    "Tokyo",
+    "New York",
+    "Dubai",
+    "Singapore",
+    "Rome",
+    "Istanbul",
+  ];
+  cities.forEach((city) => graph.addVertex(city));
+
+  graph.addEdge("Moscow", "Dubai", 300);
+  graph.addEdge("Moscow", "Istanbul", 150);
+  graph.addEdge("Moscow", "Berlin", 400);
+
+  graph.addEdge("Dubai", "Singapore", 500);
+  graph.addEdge("Dubai", "Tokyo", 800);
+
+  graph.addEdge("Istanbul", "Rome", 200);
+  graph.addEdge("Istanbul", "Paris", 350);
+
+  graph.addEdge("Berlin", "London", 100);
+  graph.addEdge("Berlin", "Paris", 120);
+
+  graph.addEdge("Paris", "London", 80);
+  graph.addEdge("Paris", "New York", 600);
+  graph.addEdge("Paris", "Rome", 150);
+
+  graph.addEdge("Rome", "Istanbul", 180);
+  graph.addEdge("London", "New York", 550);
+
+  graph.addEdge("Singapore", "Tokyo", 400);
+  graph.addEdge("Tokyo", "New York", 1100);
+
+  graph.addEdge("New York", "London", 550);
+  graph.addEdge("Singapore", "Dubai", 520);
+
+  return graph;
+};
+
+export const demoRichUndirectedGraph = (): UndirectedGraph<string> => {
+  const graph = new UndirectedGraph<string>();
+
+  const zones = [
+    "Entrance",
+    "Reception",
+    "Open Space",
+    "Meeting Room",
+    "Kitchen",
+    "Server Room",
+    "CEO Office",
+    "Rest Zone",
+    "Storage",
+    "Workshop",
+  ];
+  zones.forEach((zone) => graph.addVertex(zone));
+
+  graph.addEdge("Entrance", "Reception", 5);
+  graph.addEdge("Reception", "Open Space", 15);
+  graph.addEdge("Reception", "Meeting Room", 10);
+
+  graph.addEdge("Open Space", "Kitchen", 20);
+  graph.addEdge("Open Space", "Rest Zone", 12);
+  graph.addEdge("Open Space", "Server Room", 25);
+
+  graph.addEdge("Meeting Room", "CEO Office", 8);
+  graph.addEdge("Meeting Room", "Open Space", 18);
+
+  graph.addEdge("Kitchen", "Rest Zone", 5);
+  graph.addEdge("Kitchen", "Workshop", 30);
+
+  graph.addEdge("Server Room", "Storage", 10);
+  graph.addEdge("Server Room", "CEO Office", 15);
+
+  graph.addEdge("Rest Zone", "Workshop", 22);
+  graph.addEdge("Storage", "Workshop", 14);
+
+  graph.addEdge("CEO Office", "Entrance", 40);
+  return graph;
 };
